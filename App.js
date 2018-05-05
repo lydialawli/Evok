@@ -1,47 +1,48 @@
 
-import React from 'react';
-import { StyleSheet, Text, View, Button, Alert } from 'react-native';
-import { Camera, Permissions } from 'expo'
-import { StackNavigator } from 'react-navigation'; 
+import React from 'react'
+import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native'
+import { StackNavigator } from 'react-navigation'
+import Camera from '../Evok/src/Camera.js'
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null,
-    title: 'Login',
-  };
+    title: 'Home',
+  }
   render() {
     const { navigate } = this.props.navigation;
     console.log("homescreen mode")
     return (
       <View style = {styles.container}>
-        <Text onPress= { ()=> navigate('Profile') }>
-          Navigate to profile
-        </Text>
+        <Button
+          title="Navigate to Profile"
+          onPress= { ()=> navigate('Profile') }
+        />
       </View>
-    );
+    )
   }
 }
 
 class ProfileScreen extends React.Component {
   static navigationOptions = {
     header: null,
-    title: 'Login',
-  };
-
-
+    title: 'Profile',
+  }
 
   render() {
-    const { navigate } = this.props.navigation;
+    const { navigate } = this.props.navigation
+    console.log("Profile mode")
     return (
       <View style = {styles.container}>
-        <Button
-          title="Navigate to Home"
-          onPress= { ()=> navigate('Home') }
-        />
+          <Camera/>
+          <Text onPress= { ()=> navigate('Home') }>
+             Navigate to Home
+          </Text>
       </View>
-    );
+    )
   }
 }
+
 
 const NavigationApp = StackNavigator({
   Home: { screen: HomeScreen},
@@ -51,11 +52,11 @@ const NavigationApp = StackNavigator({
     headerMode: 'null',
   },
   navigationOptions: ({navigation}) => ({ header: false }),
-});
+})
 
 export default class App extends React.Component{
   render(){
-    return <NavigationApp />;
+    return <NavigationApp />
   }
 }
 
@@ -65,4 +66,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-});
+})
