@@ -1,63 +1,67 @@
-import React from 'react'
-import { StyleSheet, Text, View, Button, Alert } from 'react-native'
-import { StackNavigator } from 'react-navigation'
 
+import React from 'react';
+import { StyleSheet, Text, View, Button, Alert } from 'react-native';
+import { Camera, Permissions } from 'expo'
+import { StackNavigator } from 'react-navigation'; 
 
 class HomeScreen extends React.Component {
-  _handleButtonPress = () => {
-    Alert.alert(
-      'Button pressed!',
-      'Camera should pop-up here',
-    )
+  static navigationOptions = {
+    header: null,
+    title: 'Login',
+  };
+  render() {
+    const { navigate } = this.props.navigation;
+    console.log("homescreen mode")
+    return (
+      <View style = {styles.container}>
+        <Text onPress= { ()=> navigate('Profile') }>
+          Navigate to profile
+        </Text>
+      </View>
+    );
   }
+}
+
+class ProfileScreen extends React.Component {
+  static navigationOptions = {
+    header: null,
+    title: 'Login',
+  };
+
+
 
   render() {
+    const { navigate } = this.props.navigation;
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Home Screen</Text>
+      <View style = {styles.container}>
         <Button
-          title="Take a pic"
-          onPress={this._handleButtonPress}
+          title="Navigate to Home"
+          onPress= { ()=> navigate('Home') }
         />
       </View>
     );
   }
 }
 
-class DetailsScreen extends React.Component {
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Details Screen</Text>
-      </View>
-    );
-  }
-}
-
-const RootStack = StackNavigator(
-  {
-    Home: {
-      screen: HomeScreen,
-    },
-    Details: {
-      screen: DetailsScreen,
-    },
+const NavigationApp = StackNavigator({
+  Home: { screen: HomeScreen},
+  Profile: { screen: ProfileScreen },
+  }, {
+  navigationOptions: {
+    headerMode: 'null',
   },
-  {
-    initialRouteName: 'Home',
-  }
-)
+  navigationOptions: ({navigation}) => ({ header: false }),
+});
 
 export default class App extends React.Component{
-  render() {
-    return <RootStack />
+  render(){
+    return <NavigationApp />;
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  container:{
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
