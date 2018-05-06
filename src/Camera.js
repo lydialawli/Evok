@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import { Text, View, TouchableOpacity, StyleSheet, Dimensions } from 'react-native'
 import { Camera, Permissions, Constants, FileSystem } from 'expo'
+import GalleryScreen from '../src/GalleryScreen.js'
 
 export default class extends React.Component {
   state = {
@@ -15,8 +16,7 @@ export default class extends React.Component {
     photoId: 1,
     photos: [],
     showGallery: 'false',
-    permissionsGranted: false,
-
+    permissionsGranted: true
   }
 
   async componentWillMount() {
@@ -48,7 +48,21 @@ export default class extends React.Component {
     }
   }
 
-  render() {
+  renderNoPermissions() {
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', padding: 10 }}>
+        <Text style={{ color: 'white' }}>
+          Camera permissions not granted - No access to camera
+        </Text>
+      </View>
+    )
+  }
+
+  renderGallery() {
+    return <GalleryScreen onPress={this.toggleView.bind(this)} />
+  }
+
+  renderCamera() {
     const { hasCameraPermission } = this.state
     if (hasCameraPermission === null) {
       return <View />
@@ -78,7 +92,16 @@ export default class extends React.Component {
       )
     }
   }
+
+  render() {
+    const cameraScreenContent = this.state.permissionsGranted
+      ? this.renderCamera()
+      : this.renderNoPermissions()
+    return <View style={styles.container}>{cameraScreenContent}</View>
+  }
 }
+
+  
 
 
 const styles = StyleSheet.create({
