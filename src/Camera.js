@@ -21,14 +21,30 @@ export default class extends React.Component {
 
   async componentWillMount() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA)
-    this.setState({ hasCameraPermission: status === 'granted' })
+    this.setState({hasCameraPermission: status === 'granted'})
   }
 
+  componentDidMount() {
+    FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + 'photos').catch(e => {
+      console.log(e, 'Directory exists');
+    });
+  }
 
 
   takePicture = async () => {
     if (this.camera) {
-      let photo = await this.camera.takePictureAsync();
+      this.camera.takePictureAsync().then(data => {
+          FileSystem.moveAsync({
+            from: data.uri,
+            to: `${FileSystem.documentDirectory}photos/Photo_${this.state.photoId}.jpg`,
+          }).then(() => {
+            this.setState({
+              photoId: this.state.photoId + 1,
+            })
+            .then(data => console.log(data))
+            .catch(err => console.error(err))
+         })
+      })
     }
   }
 
@@ -50,10 +66,8 @@ export default class extends React.Component {
               style={{
                 flex: 0.3,
                 alignSelf: 'flex-end' ,
-                backgroundColor: 'transparent',
-                
+                backgroundColor: 'transparent'  
               }}>
-
               <Text style={styles.snapButton} onPress={this.takePicture.bind(this)}>
               Snap!
               </Text>
@@ -72,7 +86,6 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#ffcccc',
       },
-    
     preview: {
         flex: 1,
         justifyContent: 'flex-end',
