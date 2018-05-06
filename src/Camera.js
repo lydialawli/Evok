@@ -48,6 +48,12 @@ export default class extends React.Component {
     }
   }
 
+  toggleView() {
+    this.setState({
+      showGallery: !this.state.showGallery,
+    })
+  }
+
   renderNoPermissions() {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', padding: 10 }}>
@@ -85,7 +91,11 @@ export default class extends React.Component {
               <Text style={styles.snapButton} onPress={this.takePicture.bind(this)}>
               Snap!
               </Text>
-
+              <TouchableOpacity
+                  style={[styles.snapButton, { flex: 0.25, alignSelf: 'flex-end' }]}
+                  onPress={this.toggleView.bind(this)}>
+                  <Text> Gallery </Text>
+              </TouchableOpacity>
             </View>
           </Camera>
         </View>
@@ -97,6 +107,7 @@ export default class extends React.Component {
     const cameraScreenContent = this.state.permissionsGranted
       ? this.renderCamera()
       : this.renderNoPermissions()
+      const content = this.state.showGallery ? this.renderGallery() : cameraScreenContent
     return <View style={styles.container}>{cameraScreenContent}</View>
   }
 }
@@ -130,6 +141,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         fontSize: 20
-     }
+     },
+
+
     
 })
