@@ -13,9 +13,12 @@ class HomeScreen extends React.Component {
     const { navigate } = this.props.navigation;
     console.log("homescreen mode")
     return (
-      <View style = {styles.container}>
+      <View style = {styles.container} >
+        <Text style={styles.evokText} >
+          Evok
+        </Text>
         <Button
-          color= '#ffcc00'
+          color= '#ffcc00' 
           title="Go take a Pic"
           onPress= { ()=> navigate('Profile') }
         />
@@ -37,7 +40,7 @@ class ProfileScreen extends React.Component {
       <View style = {styles.container}>
           <Camera/>
           <Button 
-            color= '#ffcc00'
+            color= '#ffcc00' 
             title="Go back home"
             onPress= { ()=> navigate('Home') }>
             
@@ -68,7 +71,16 @@ const styles = StyleSheet.create({
   container:{
     backgroundColor: '#ff6666',
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: 'center', 
+    justifyContent: 'space-evenly',
   },
+
+  evokText:{
+    flex: 0.5,
+    color: '#009999',
+    fontSize: 30,
+    fontWeight: 'bold',
+    alignItems: 'flex-start' 
+  },
+
 })
