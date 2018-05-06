@@ -1,5 +1,5 @@
-import React from 'react'
-import { Text, View, TouchableOpacity } from 'react-native'
+import React, {Component} from 'react'
+import { Text, View, TouchableOpacity, StyleSheet, Dimensions } from 'react-native'
 import { Camera, Permissions, Constants, FileSystem } from 'expo'
 
 export default class extends React.Component {
@@ -11,6 +11,7 @@ export default class extends React.Component {
     whiteBalance: 'auto',
     zoom: 0,
     autofocus:'on',
+    ratios: [],
     photoId: 1,
     photos: [],
     showGallery: 'false',
@@ -23,29 +24,13 @@ export default class extends React.Component {
     this.setState({ hasCameraPermission: status === 'granted' })
   }
 
-  componentDidMount() {
-    FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + 'photos').catch(e => {
-      console.log(e, 'Directory exists')
-    })
-  }
 
 
-  takePicture = async function() {
+  takePicture = async () => {
     if (this.camera) {
-      this.camera.takePictureAsync().then(data => {
-        FileSystem.moveAsync({
-          from: data.uri,
-          to: `${FileSystem.documentDirectory}photos/Photo_${this.state.photoId}.jpg`,
-        }).then(() => {
-          this.setState({
-            photoId: this.state.photoId + 1,
-          })
-       
-        })
-      })
+      let photo = await this.camera.takePictureAsync();
     }
   }
-
 
   render() {
     const { hasCameraPermission } = this.state
@@ -58,39 +43,22 @@ export default class extends React.Component {
         <View style={{ flex: 1 }}>
           <Camera 
                  ref={ref => { this.camera = ref }} 
-                 style={{ flex: 1 }} 
-                 type={this.state.type} 
-                 flashMode={this.state.flashMode}
+                 style={styles.preview} 
                  ratio={this.state.ratio}
-                 whiteBalance={this.state.whiteBalance}
-                 zoom={this.state.zoom}
-                 autofocus={this.state.autofocus}
                 >
            
             <View
               style={{
                 flex: 1,
                 backgroundColor: 'transparent',
-                flexDirection: 'row',
+                
+              
               }}>
-              <TouchableOpacity
-                style={{
-                  flex: 0.1,
-                  alignSelf: 'flex-end',
-                  alignItems: 'center',
-                }}
-                onPress={() => {
-                  this.setState({
-                    type: this.state.type === 'back'
-                      ? Camera.Constants.Type.front
-                      : Camera.Constants.Type.back,
-                  })
-                }}>
-                <Text
-                  style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
-                  {' '}Flip{' '}
-                </Text>
-              </TouchableOpacity>
+
+              <Text style={styles.capture} onPress={this.takePicture.bind(this)}>
+              Snap!
+              </Text>
+
             </View>
           </Camera>
         </View>
@@ -98,3 +66,42 @@ export default class extends React.Component {
     }
   }
 }
+
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#ffcccc',
+      },
+    flipButton: {
+        flex: 0.3,
+        height: 40,
+        marginHorizontal: 2,
+        marginBottom: 10,
+        marginTop: 20,
+        borderRadius: 8,
+        borderColor: 'white',
+        borderWidth: 1,
+        padding: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+
+    preview: {
+        flex: 1,
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        height: Dimensions.get('window').height,
+        width: Dimensions.get('window').width
+     },
+
+    capture: {
+        flex: 0,
+        backgroundColor: '#ff6666',
+        borderRadius: 5,
+        color: '#ffffff',
+        padding: 10,
+        margin: 40
+     }
+    
+})

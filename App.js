@@ -15,7 +15,8 @@ class HomeScreen extends React.Component {
     return (
       <View style = {styles.container}>
         <Button
-          title="Navigate to Profile"
+          color= '#ffcc00'
+          title="Go take a Pic"
           onPress= { ()=> navigate('Profile') }
         />
       </View>
@@ -35,9 +36,12 @@ class ProfileScreen extends React.Component {
     return (
       <View style = {styles.container}>
           <Camera/>
-          <Text onPress= { ()=> navigate('Home') }>
-             Navigate to Home
-          </Text>
+          <Button 
+            color= '#ffcc00'
+            title="Go back home"
+            onPress= { ()=> navigate('Home') }>
+            
+          </Button>
       </View>
     )
   }
@@ -62,6 +66,7 @@ export default class App extends React.Component{
 
 const styles = StyleSheet.create({
   container:{
+    backgroundColor: '#ff6666',
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
