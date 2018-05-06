@@ -46,16 +46,15 @@ export default class extends React.Component {
                  style={styles.preview} 
                  ratio={this.state.ratio}
                 >
-           
             <View
               style={{
-                flex: 1,
+                flex: 0.3,
+                alignSelf: 'flex-end' ,
                 backgroundColor: 'transparent',
                 
-              
               }}>
 
-              <Text style={styles.capture} onPress={this.takePicture.bind(this)}>
+              <Text style={styles.snapButton} onPress={this.takePicture.bind(this)}>
               Snap!
               </Text>
 
@@ -73,20 +72,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#ffcccc',
       },
-    flipButton: {
-        flex: 0.3,
-        height: 40,
-        marginHorizontal: 2,
-        marginBottom: 10,
-        marginTop: 20,
-        borderRadius: 8,
-        borderColor: 'white',
-        borderWidth: 1,
-        padding: 5,
-        alignItems: 'center',
-        justifyContent: 'center',
-      },
-
+    
     preview: {
         flex: 1,
         justifyContent: 'flex-end',
@@ -95,13 +81,19 @@ const styles = StyleSheet.create({
         width: Dimensions.get('window').width
      },
 
-    capture: {
+    snapButton: {
         flex: 0,
+        height: 40,
         backgroundColor: '#ff6666',
-        borderRadius: 5,
+        borderRadius: 8,
+        marginHorizontal: 2,
         color: '#ffffff',
-        padding: 10,
-        margin: 40
+        padding: 5,
+        marginTop: 20,
+        marginBottom: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontSize: 20
      }
     
 })
