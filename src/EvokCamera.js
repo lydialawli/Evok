@@ -91,7 +91,7 @@ export default class extends React.Component {
     }*/
     
     getPreviewView() {
-        return <Text>I'm a nice picture</Text>
+        return <Text>I'm a nice picture: {this.state.picturePreviewPath}</Text>
     }
     
     getCameraView() {
