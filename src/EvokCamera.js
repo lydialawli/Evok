@@ -5,6 +5,8 @@ import GalleryScreen from '../src/GalleryScreen.js'
 
 export default class extends React.Component {
     state = {
+        isPreviewMode: false,
+        picturePreviewPath: '',
         hasCameraPermission: null,
         type: 'back',
         flashMode: 'off',
@@ -20,38 +22,50 @@ export default class extends React.Component {
     }
 
     async componentWillMount() {
+        console.log("...componentWillMount")
         const { status } = await Permissions.askAsync(Permissions.CAMERA)
         this.setState({ hasCameraPermission: status === 'granted' })
     }
 
     componentDidMount() {
+        console.log("...componentDidMount")
         FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + 'photos').catch(e => {
-            console.log(e, 'Directory exists');
-        });
+            console.log(e, 'Directory exists')
+        })
     }
 
     takePicture = async () => {
-        if (this.camera) {
-            this.camera.takePictureAsync()
-                .then(data => {
-                    FileSystem.moveAsync({
-                        from: data.uri,
-                        to: `${FileSystem.documentDirectory}photos/Photo_${this.state.photoId}.jpg`,
-                    }).then(() => {
-                        console.log('saved!', `${FileSystem.documentDirectory}photos/Photo_${this.state.photoId}.jpg`)
-                        this.setState({
-                            photoId: this.state.photoId + new Date().getTime(),
-                        })
-                        
-                    }).catch(err => console.error(err))
+        console.log("...takePicture")
+
+        if (!this.camera)
+            return
+
+        this.camera.takePictureAsync()
+        .then(data => {
+            this.setState({
+                isPreviewMode: true,
+                picturePreviewPath: data.uri
+            })
+        })
+        .catch(err => console.error(err))
+
+        
+        /*.then(data => {
+            FileSystem.moveAsync({
+                from: data.uri,
+                to: `${FileSystem.documentDirectory}photos/Photo_${this.state.photoId}.jpg`,
+            }).then(() => {
+                console.log('saved!', `${FileSystem.documentDirectory}photos/Photo_${this.state.photoId}.jpg`)
+                this.setState({
+                    photoId: this.state.photoId + new Date().getTime(),
                 })
-                .catch(err => console.error(err))
-        }
+                
+            }).catch(err => console.error(err))
+        })*/
+        //
+
     }
 
-    handleError() {
-
-    }
 
     /*
     toggleView() {
@@ -61,7 +75,7 @@ export default class extends React.Component {
     }
     */
 
-    renderNoPermissions() {
+    /*renderNoPermissions() {
         return (
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', padding: 10 }}>
                 <Text style={{ color: 'white' }}>
@@ -70,49 +84,67 @@ export default class extends React.Component {
             </View>
         )
     }
+    */
 
-    renderGallery() {
+    /*renderGallery() {
         return <GalleryScreen onPress={this.toggleView.bind(this)} />
+    }*/
+    
+    getPreviewView() {
+        return <Text>I'm a nice picture</Text>
+    }
+    
+    getCameraView() {
+        return (
+            <View style={{ flex: 1 }}>
+                <Camera
+                    ref={ref => { this.camera = ref }}
+                    style={styles.preview}
+                    ratio={this.state.ratio}
+                >
+                    <View
+                        style={{
+                            flex: 1,
+                            alignSelf: 'flex-end',
+                            backgroundColor: 'transparent'
+                        }}>
+                        <TouchableOpacity style={styles.snapButton} onPress={this.takePicture.bind(this)}>
+                            <Text style={styles.buttonText}>Snap!</Text>
+                        </TouchableOpacity>
+
+                    </View>
+                </Camera>
+            </View>
+        )
     }
 
     render() {
+        console.log('...render')
         const { hasCameraPermission } = this.state
+        
         if (hasCameraPermission === null) {
             return <Text>Camera permission is null</Text>
-        } else if (hasCameraPermission === false) {
-            return <Text>No access to camera</Text>
-        } else {
-            return (
-                <View style={{ flex: 1 }}>
-                    <Camera
-                        ref={ref => { this.camera = ref }}
-                        style={styles.preview}
-                        ratio={this.state.ratio}
-                    >
-                        <View
-                            style={{
-                                flex: 1,
-                                alignSelf: 'flex-end',
-                                backgroundColor: 'transparent'
-                            }}>
-                            <TouchableOpacity style={styles.snapButton} onPress={this.takePicture.bind(this)}>
-                                <Text style={styles.buttonText}>Snap!</Text>
-                            </TouchableOpacity>
-
-                        </View>
-                    </Camera>
-                </View>
-            )
         }
+        
+        else if (hasCameraPermission === false) {
+            return <Text>No access to camera</Text>
+        }
+        
+        let viewToRender = this.getCameraView()
+        if(this.state.isPreviewMode)
+            viewToRender = this.getPreviewView()
+
+        return viewToRender
     }
 
-    _render() {
-        const cameraScreenContent = this.state.permissionsGranted
-            ? this.renderCamera()
-            : this.renderNoPermissions()
-        const content = this.state.showGallery ? this.renderGallery() : cameraScreenContent
-        return <View style={styles.container}>{cameraScreenContent}</View>
-    }
+    /* _render() {
+         const cameraScreenContent = this.state.permissionsGranted
+             ? this.renderCamera()
+             : this.()
+         const content = this.state.showGallery ? this.renderGallery() : cameraScreenContent
+         return <View style={styles.container}>{cameraScreenContent}</View>
+     }
+     */
 }
 
 
@@ -148,7 +180,4 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 20
     }
-
-
-
 })
