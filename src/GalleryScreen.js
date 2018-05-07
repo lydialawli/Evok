@@ -58,7 +58,7 @@ export default class GalleryScreen extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 0.1,
     paddingTop: 20,
   },
 

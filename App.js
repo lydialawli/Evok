@@ -2,7 +2,7 @@
 import React from 'react'
 import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native'
 import { StackNavigator } from 'react-navigation'
-import Camera from '../Evok/src/Camera.js'
+import EvokCamera from '../Evok/src/EvokCamera.js'
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -38,7 +38,7 @@ class ProfileScreen extends React.Component {
     console.log("Profile mode")
     return (
       <View style = {styles.container}>
-          <Camera/>
+          <EvokCamera/>
           <Button 
             color= '#ffcc00' 
             title="Go back home"
