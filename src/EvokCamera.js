@@ -89,12 +89,27 @@ export default class extends React.Component {
     /*renderGallery() {
         return <GalleryScreen onPress={this.toggleView.bind(this)} />
     }*/
-    
+    goToPreviewMode=()=>{
+        this.setState({isPreviewMode: true})
+    }
+
+    goToCameraMode=()=>{
+        this.setState({isPreviewMode: false})
+    }
+
+
     getPreviewView() {
-        return <Text>I'm a nice picture: {this.state.picturePreviewPath}</Text>
+        return (
+            <View style={{ flex: 0.5, alignItems: 'flex-end',}}>     
+                <Text>I'm a nice picture: {this.state.picturePreviewPath}</Text>
+                <TouchableOpacity style={styles.goToCameraButton} onPress={this.goToCameraMode}>
+                     <Text style={styles.buttonText}>Go back to Camera</Text>
+                </TouchableOpacity>
+            </View> 
+        )
     }
     
-    getCameraView() {
+    getCameraView(){
         return (
             <View style={{ flex: 1 }}>
                 <Camera
@@ -162,10 +177,18 @@ const styles = StyleSheet.create({
         height: Dimensions.get('window').height,
         width: Dimensions.get('window').width
     },
+    goToCameraButton:{
+        flex: 0.1,
+        backgroundColor: '#ffcc00',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 8,
+        marginHorizontal: 2
+    },
 
     snapButton: {
         flex: 0.1,
-        height: 40,
+        height: 10,
         backgroundColor: '#ff6666',
         borderRadius: 8,
         marginHorizontal: 2,
