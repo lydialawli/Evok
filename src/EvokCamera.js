@@ -38,8 +38,9 @@ export default class extends React.Component {
                         from: data.uri,
                         to: `${FileSystem.documentDirectory}photos/Photo_${this.state.photoId}.jpg`,
                     }).then(() => {
+                        console.log('saved!', `${FileSystem.documentDirectory}photos/Photo_${this.state.photoId}.jpg`)
                         this.setState({
-                            photoId: this.state.photoId + 1,
+                            photoId: this.state.photoId + new Date().getTime(),
                         })
                         
                     }).catch(err => console.error(err))
