@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, TouchableOpacity, StyleSheet, Dimensions } from 'react-native'
+import { Text, View, TouchableOpacity, StyleSheet, Dimensions, Image } from 'react-native'
 import { Camera, Permissions, Constants, FileSystem } from 'expo'
 import GalleryScreen from '../src/GalleryScreen.js'
 
@@ -44,7 +44,7 @@ export default class extends React.Component {
         .then(data => {
             this.setState({
                 isPreviewMode: true,
-                picturePreviewPath: data.uri
+                picturePreviewPath : data.uri
             })
         })
         .catch(err => console.error(err))
@@ -97,11 +97,28 @@ export default class extends React.Component {
         this.setState({isPreviewMode: false})
     }
 
+    getPreviewImageView(){
+
+        if(!this.state.picturePreviewPath)
+            return <View/>
+        
+        return (
+            <View style={styles.container}>
+                <Image
+                     style={{height: 500, width: 500}}
+                     source={{uri: this.state.picturePreviewPath}}
+                />
+            </View>
+        )
+    }
 
     getPreviewView() {
+        
+
         return (
             <View style={{ flex: 0.5, alignItems: 'flex-end',}}>     
                 <Text>I'm a nice picture: {this.state.picturePreviewPath}</Text>
+                {this.getPreviewImageView()}
                 <TouchableOpacity style={styles.goToCameraButton} onPress={this.goToCameraMode}>
                      <Text style={styles.buttonText}>Go back to Camera</Text>
                 </TouchableOpacity>
