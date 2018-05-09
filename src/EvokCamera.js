@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Text, View, TouchableOpacity, StyleSheet, Dimensions, Image,Button, Icon} from 'react-native'
 import { Camera, Permissions, Constants, FileSystem } from 'expo'
 import GalleryScreen from '../src/GalleryScreen.js'
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 
 
 export default class extends React.Component {
@@ -137,12 +138,12 @@ export default class extends React.Component {
                 >
                     <View
                         style={{
-                            flex: 1,
+                            flex: 0.5,
                             alignSelf: 'flex-end',
                             backgroundColor: 'transparent'
-                        }}>
+                                               }}>
                         <TouchableOpacity style={styles.snapButton} onPress={this.takePicture.bind(this)}>
-                            <Text style={styles.buttonText}>Snap!</Text>
+                            <Ionicons name="md-aperture" size={40} color="white" />
                         </TouchableOpacity>
 
                     </View>
@@ -205,15 +206,14 @@ const styles = StyleSheet.create({
     },
 
     snapButton: {
-        flex: 0.1,
-        height: 10,
+        flex: 0.5,
         backgroundColor: '#ff6666',
-        borderRadius: 8,
+        borderRadius: 5,
         marginHorizontal: 2,
         padding: 5,
-        marginTop: 20,
+        marginTop: 10,
         marginBottom: 10,
-        alignItems: 'center',
+        alignSelf: 'flex-end',
         justifyContent: 'center',
     },
 

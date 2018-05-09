@@ -3,7 +3,7 @@ import React from 'react'
 import { StyleSheet, Text, View, Button, TouchableOpacity, Icon } from 'react-native'
 import { StackNavigator } from 'react-navigation'
 import EvokCamera from '../Evok/src/EvokCamera.js'
-import { Ionicons } from '@expo/vector-icons'
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -40,14 +40,8 @@ class ProfileScreen extends React.Component {
     return (
       <View style = {styles.container}>
           <EvokCamera/>
-          <Button 
-            color= '#ffcc00' 
-            title="Go back home"
-            onPress= { ()=> navigate('Home') }>
-          </Button>
           <TouchableOpacity   style = {styles.homeButton} onPress= { ()=> navigate('Home') }>
-            <Text style={styles.iconText}>Go back</Text>
-            <Ionicons name="md-checkmark-circle" size={32} color="white" />
+            <Ionicons name="ios-home-outline" size={40} color="white" />
           </TouchableOpacity>  
       </View>
     )
@@ -89,14 +83,19 @@ const styles = StyleSheet.create({
 
   iconText:{
     flex: 0.5,
-    color: '#ffcc00',
-    fontSize: 20,
+    color: 'white',
+    fontSize: 15,
+    fontWeight: 'bold',
   },
 
   homeButton:{
-    flex: 0,
-    flexDirection: 'row',
+    width : 50,
+    height: 50,
+    justifyContent:'center',
     backgroundColor: '#ffcc00',
+    alignItems: 'center',
+    borderRadius: 3,
+    marginHorizontal: 8
     
   }
 })
