@@ -94,6 +94,7 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     backgroundColor: '#ffcc00',
     alignItems: 'center',
+    alignSelf: 'flex-start',
     borderRadius: 3,
     marginHorizontal: 8
     

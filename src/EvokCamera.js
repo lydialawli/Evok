@@ -16,6 +16,7 @@ export default class extends React.Component {
         whiteBalance: 'auto',
         zoom: 0,
         autofocus: 'on',
+        
         ratios: [],
         photoId: 1,
         photos: [],
@@ -107,7 +108,7 @@ export default class extends React.Component {
         return (
             <View style={styles.container}>
                 <Image
-                     style={{height: 500, width: 500}}
+                     style={{height: 1000, width: 500}}
                      source={{uri: this.state.picturePreviewPath}}
                 />
             </View>
@@ -115,15 +116,17 @@ export default class extends React.Component {
     }
 
     getPreviewView() {
-        
-
         return (
-            <View style={{ flex: 1}}>     
+            <View style={{ flex: 1, flexDirection: 'column', justifyContent:'space-around'}}>     
                 {this.getPreviewImageView()}
-                <TouchableOpacity style={styles.goToCameraButton} onPress={this.goToCameraMode}>
-                     <Text style={styles.buttonText}>Go back to Camera</Text>
-                </TouchableOpacity>
-            
+                <View style={{flexDirection: 'row', justifyContent: 'center', alignItems:'flex-end'}}>
+                    <TouchableOpacity style={styles.goToCameraButton} onPress={this.goToCameraMode}>
+                        <Ionicons name="ios-arrow-dropleft" size={40} color="white" />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.goToCameraButton}>
+                        <Ionicons name="md-images" size={40} color="white" />
+                    </TouchableOpacity>
+                </View>
             </View> 
         )
     }
