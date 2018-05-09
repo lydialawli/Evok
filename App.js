@@ -1,8 +1,9 @@
 
 import React from 'react'
-import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, Button, TouchableOpacity, Icon } from 'react-native'
 import { StackNavigator } from 'react-navigation'
 import EvokCamera from '../Evok/src/EvokCamera.js'
+import { Ionicons } from '@expo/vector-icons'
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -43,8 +44,11 @@ class ProfileScreen extends React.Component {
             color= '#ffcc00' 
             title="Go back home"
             onPress= { ()=> navigate('Home') }>
-            
           </Button>
+          <TouchableOpacity   style = {styles.homeButton} onPress= { ()=> navigate('Home') }>
+            <Text style={styles.iconText}>Go back</Text>
+            <Ionicons name="md-checkmark-circle" size={32} color="white" />
+          </TouchableOpacity>  
       </View>
     )
   }
@@ -83,4 +87,16 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start' 
   },
 
+  iconText:{
+    flex: 0.5,
+    color: '#ffcc00',
+    fontSize: 20,
+  },
+
+  homeButton:{
+    flex: 0,
+    flexDirection: 'row',
+    backgroundColor: '#ffcc00',
+    
+  }
 })

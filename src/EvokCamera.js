@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { Text, View, TouchableOpacity, StyleSheet, Dimensions, Image } from 'react-native'
+import { Text, View, TouchableOpacity, StyleSheet, Dimensions, Image,Button, Icon} from 'react-native'
 import { Camera, Permissions, Constants, FileSystem } from 'expo'
 import GalleryScreen from '../src/GalleryScreen.js'
+
 
 export default class extends React.Component {
     state = {
@@ -116,12 +117,12 @@ export default class extends React.Component {
         
 
         return (
-            <View style={{ flex: 0.5, alignItems: 'flex-end',}}>     
-                <Text>I'm a nice picture: {this.state.picturePreviewPath}</Text>
+            <View style={{ flex: 1}}>     
                 {this.getPreviewImageView()}
                 <TouchableOpacity style={styles.goToCameraButton} onPress={this.goToCameraMode}>
                      <Text style={styles.buttonText}>Go back to Camera</Text>
                 </TouchableOpacity>
+            
             </View> 
         )
     }
