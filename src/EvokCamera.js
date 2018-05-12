@@ -215,11 +215,11 @@ const styles = StyleSheet.create({
 
     previewButtonContainer: {
         width: 200,
-        height: 40,
+        height: 1,
         flexDirection: 'row',
         justifyContent: 'space-evenly',
-        alignItems: 'center',
-        marginLeft: 100,
+        alignItems: 'flex-end',
+        marginLeft: 70,
 
     },
 

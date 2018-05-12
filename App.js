@@ -85,8 +85,7 @@ const styles = StyleSheet.create({
 
     bottomBar:{
         height: 100,
-        width: Dimensions.get('window').width,
-        color: '#ff6666',
+        width: 200,
         justifyContent: 'flex-start',
         paddingBottom: 8
 
