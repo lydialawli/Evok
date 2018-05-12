@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, TouchableOpacity, StyleSheet, Dimensions, Image,Button, Icon} from 'react-native'
+import { Text, View, TouchableOpacity, StyleSheet, Dimensions, Image, Button, Icon } from 'react-native'
 import { Camera, Permissions, Constants, FileSystem } from 'expo'
 import GalleryScreen from '../src/GalleryScreen.js'
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
@@ -16,7 +16,7 @@ export default class extends React.Component {
         whiteBalance: 'auto',
         zoom: 0,
         autofocus: 'on',
-        
+
         ratios: [],
         photoId: 1,
         photos: [],
@@ -44,15 +44,15 @@ export default class extends React.Component {
             return
 
         this.camera.takePictureAsync()
-        .then(data => {
-            this.setState({
-                isPreviewMode: true,
-                picturePreviewPath : data.uri
+            .then(data => {
+                this.setState({
+                    isPreviewMode: true,
+                    picturePreviewPath: data.uri
+                })
             })
-        })
-        .catch(err => console.error(err))
+            .catch(err => console.error(err))
 
-        
+
         /*.then(data => {
             FileSystem.moveAsync({
                 from: data.uri,
@@ -92,25 +92,25 @@ export default class extends React.Component {
     /*renderGallery() {
         return <GalleryScreen onPress={this.toggleView.bind(this)} />
     }*/
-    goToPreviewMode=()=>{
-        this.setState({isPreviewMode: true})
+    goToPreviewMode = () => {
+        this.setState({ isPreviewMode: true })
     }
 
-    goToCameraMode=()=>{
-        this.setState({isPreviewMode: false})
+    goToCameraMode = () => {
+        this.setState({ isPreviewMode: false })
     }
 
-    getPreviewImageView(){
+    getPreviewImageView() {
 
-        if(!this.state.picturePreviewPath)
-            return <View/>
-        
+        if (!this.state.picturePreviewPath)
+            return <View />
+
         return (
-            <View style={{flex:1}}>
+            <View style={{ flex: 1 }}>
                 <Image
-                     style={{flex:1}}
-                     source={{uri: this.state.picturePreviewPath}}
-                     resizeMode= "contain"
+                    style={{ flex: 1, marginTop:20 }}
+                    source={{ uri: this.state.picturePreviewPath }}
+                    resizeMode="contain"
                 />
             </View>
         )
@@ -118,8 +118,10 @@ export default class extends React.Component {
 
     getPreviewView() {
         return (
-            <View style={{ width: '100%', height: '100%', flexDirection: 'column', justifyContent:'space-around'}}>     
-                {this.getPreviewImageView()}
+            <View style={{ width: '100%', height: '100%', flexDirection: 'column', justifyContent: 'space-around', paddingTop:30 }}>
+                <View style={{flex:1, justifyContent: 'flex-end'}}>
+                    {this.getPreviewImageView()}
+                </View>
                 <View style={styles.previewButtonContainer}>
                     <TouchableOpacity style={styles.goToCameraButton} onPress={this.goToCameraMode}>
                         <Ionicons name="ios-arrow-dropleft" size={40} color="white" />
@@ -128,13 +130,13 @@ export default class extends React.Component {
                         <Ionicons name="md-images" size={40} color="white" />
                     </TouchableOpacity>
                 </View>
-            </View> 
+            </View>
         )
     }
-    
-    getCameraView(){
+
+    getCameraView() {
         return (
-            <View style={{ flex: 1 }}>
+            <View style={{ width: '100%', height: '100%', alignItems: 'center' }}>
                 <Camera
                     ref={ref => { this.camera = ref }}
                     style={styles.preview}
@@ -145,7 +147,7 @@ export default class extends React.Component {
                             flex: 0.5,
                             alignSelf: 'flex-end',
                             backgroundColor: 'transparent'
-                                               }}>
+                        }}>
                         <TouchableOpacity style={styles.snapButton} onPress={this.takePicture.bind(this)}>
                             <Ionicons name="md-aperture" size={40} color="white" />
                         </TouchableOpacity>
@@ -159,17 +161,17 @@ export default class extends React.Component {
     render() {
         console.log('...render')
         const { hasCameraPermission } = this.state
-        
+
         if (hasCameraPermission === null) {
             return <Text>Camera permission is null</Text>
         }
-        
+
         else if (hasCameraPermission === false) {
             return <Text>No access to camera</Text>
         }
-        
+
         let viewToRender = this.getCameraView()
-        if(this.state.isPreviewMode)
+        if (this.state.isPreviewMode)
             viewToRender = this.getPreviewView()
 
         return viewToRender
@@ -200,25 +202,25 @@ const styles = StyleSheet.create({
         height: Dimensions.get('window').height,
         width: Dimensions.get('window').width
     },
-    goToCameraButton:{
-        width : 50,
+    goToCameraButton: {
+        width: 50,
         height: 50,
         backgroundColor: '#ffcc00',
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 8,
         marginHorizontal: 3
-      
+
     },
 
-    previewButtonContainer:{
+    previewButtonContainer: {
         width: 200,
         height: 40,
-        flexDirection: 'row', 
+        flexDirection: 'row',
         justifyContent: 'space-evenly',
         alignItems: 'center',
         marginLeft: 100,
-       
+
     },
 
     snapButton: {
