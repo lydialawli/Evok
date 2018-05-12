@@ -106,7 +106,7 @@ export default class extends React.Component {
             return <View/>
         
         return (
-            <View style={{width: '100%', height: '100%'}}>
+            <View style={{flex:1}}>
                 <Image
                      style={{flex:1}}
                      source={{uri: this.state.picturePreviewPath}}
@@ -118,7 +118,7 @@ export default class extends React.Component {
 
     getPreviewView() {
         return (
-            <View style={{ width: '100%', height: '100%', flexDirection: 'column'}}>     
+            <View style={{ width: '100%', height: '100%', flexDirection: 'column', justifyContent:'space-around'}}>     
                 {this.getPreviewImageView()}
                 <View style={styles.previewButtonContainer}>
                     <TouchableOpacity style={styles.goToCameraButton} onPress={this.goToCameraMode}>
@@ -201,19 +201,24 @@ const styles = StyleSheet.create({
         width: Dimensions.get('window').width
     },
     goToCameraButton:{
-        flex: 1,
+        width : 50,
+        height: 50,
         backgroundColor: '#ffcc00',
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 8,
+        marginHorizontal: 3
       
     },
 
     previewButtonContainer:{
-        flex: 1,
+        width: 200,
+        height: 40,
         flexDirection: 'row', 
-        justifyContent: 'center',
-        alignItems:'flex-end'
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
+        marginLeft: 100,
+       
     },
 
     snapButton: {

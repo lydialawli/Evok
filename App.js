@@ -38,8 +38,8 @@ class ProfileScreen extends React.Component {
     const { navigate } = this.props.navigation
     console.log("Profile mode")
     return (
-      <View style = {styles.container}>
-          <EvokCamera/>
+      <View style = {styles.profileScreenView}>
+          <EvokCamera />
           <TouchableOpacity   style = {styles.homeButton} onPress= { ()=> navigate('Home') }>
             <Ionicons name="ios-home-outline" size={40} color="white" />
           </TouchableOpacity>  
@@ -73,6 +73,15 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
   },
 
+  profileScreenView:{
+    backgroundColor: '#ff6666',
+    flex: 1,
+    alignItems: 'center', 
+    justifyContent: 'space-around',
+    padding: 8,
+    paddingBottom: 8
+  },
+
   evokText:{
     flex: 0.5,
     color: '#009999',
@@ -95,8 +104,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffcc00',
     alignItems: 'center',
     alignSelf: 'flex-start',
-    borderRadius: 3,
-    marginHorizontal: 8
+    borderRadius: 8,
+    marginHorizontal: 8,
+    marginTop: 2
     
   }
 })
