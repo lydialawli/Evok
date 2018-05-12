@@ -106,10 +106,11 @@ export default class extends React.Component {
             return <View/>
         
         return (
-            <View style={styles.container}>
+            <View style={{width: '100%', height: '100%'}}>
                 <Image
-                     style={{height: 1000, width: 500}}
+                     style={{flex:1}}
                      source={{uri: this.state.picturePreviewPath}}
+                     resizeMode= "contain"
                 />
             </View>
         )
@@ -117,9 +118,9 @@ export default class extends React.Component {
 
     getPreviewView() {
         return (
-            <View style={{ flex: 1, flexDirection: 'column', justifyContent:'space-around'}}>     
+            <View style={{ width: '100%', height: '100%', flexDirection: 'column'}}>     
                 {this.getPreviewImageView()}
-                <View style={{flexDirection: 'row', justifyContent: 'center', alignItems:'flex-end'}}>
+                <View style={styles.previewButtonContainer}>
                     <TouchableOpacity style={styles.goToCameraButton} onPress={this.goToCameraMode}>
                         <Ionicons name="ios-arrow-dropleft" size={40} color="white" />
                     </TouchableOpacity>
@@ -200,12 +201,19 @@ const styles = StyleSheet.create({
         width: Dimensions.get('window').width
     },
     goToCameraButton:{
-        flex: 0.1,
+        flex: 1,
         backgroundColor: '#ffcc00',
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 8,
-        marginHorizontal: 2
+      
+    },
+
+    previewButtonContainer:{
+        flex: 1,
+        flexDirection: 'row', 
+        justifyContent: 'center',
+        alignItems:'flex-end'
     },
 
     snapButton: {

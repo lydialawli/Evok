@@ -41,10 +41,12 @@ getImageDimensions = ({ width, height }) => {
   }
 
   render() {
-        
+        let width=this.getImageDimensions(image.width)
+        let height= this.getImageDimensions(image.height)
+        let imageStyle = {width:width, height:height}
         return (
             <View >    
-                <Image style = {{width:this.getImageDimensions(image.width), height:this.getImageDimensions(image.height)}} source = {this.props.image} />
+                <Image style =  {imageStyle} source = {this.props.image} />
             </View>
         )
     }
