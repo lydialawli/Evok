@@ -30,12 +30,13 @@ export default class extends React.Component {
         this.setState({ hasCameraPermission: status === 'granted' })
     }
 
-    componentDidMount() {
+    /*componentDidMount() {
         console.log("...componentDidMount")
         FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + 'photos').catch(e => {
             console.log(e, 'Directory exists')
         })
     }
+    */
 
     takePicture = async () => {
         console.log("...takePicture")
@@ -45,30 +46,52 @@ export default class extends React.Component {
 
         this.camera.takePictureAsync()
             .then(data => {
+
+                let newFileName='picture.jpg'
+                let newDirectory = this.getPath('newProject', '')
+                console.log(newDirectory)
+
+                this.createDirectoryIfDoesntExist(newDirectory, ()=>{
+
+                    this.moveFile( data.uri, newDirectory, newFileName, this.onMoved)
+                })
+
+                
+
                 this.setState({
                     isPreviewMode: true,
                     picturePreviewPath: data.uri
                 })
             })
             .catch(err => console.error(err))
-
-
-        /*.then(data => {
-            FileSystem.moveAsync({
-                from: data.uri,
-                to: `${FileSystem.documentDirectory}photos/Photo_${this.state.photoId}.jpg`,
-            }).then(() => {
-                console.log('saved!', `${FileSystem.documentDirectory}photos/Photo_${this.state.photoId}.jpg`)
-                this.setState({
-                    photoId: this.state.photoId + new Date().getTime(),
-                })
-                
-            }).catch(err => console.error(err))
-        })*/
-        //
-
     }
 
+    //expoDirectory + projectFolder + fileName.jpg
+    getPath = (projectFolder, fileName) => {
+        let expoDirectory = FileSystem.documentDirectory
+        return expoDirectory + projectFolder + '/' + fileName
+    }
+
+    createDirectoryIfDoesntExist = (directoryPath, callback) => {
+        FileSystem.makeDirectoryAsync(directoryPath)
+            .then(() => {
+                callback()
+            })
+            .catch(e => {
+                callback()
+                console.log(e, 'Directory exists')
+            })
+    }
+
+    moveFile = (originalFile , newDirectory, newFileName, callback) => {
+        FileSystem.moveAsync({ from: originalFile, to: newDirectory + '/'+ newFileName })
+            .then(callback)
+            .catch(err => console.error(err))
+    }
+
+    onMoved = () => {
+        console.log('file moved')
+    }
 
     /*
     toggleView() {
@@ -108,7 +131,7 @@ export default class extends React.Component {
         return (
             <View style={{ flex: 1 }}>
                 <Image
-                    style={{ flex: 1, marginTop:20 }}
+                    style={{ flex: 1, marginTop: 20 }}
                     source={{ uri: this.state.picturePreviewPath }}
                     resizeMode="contain"
                 />
@@ -118,8 +141,8 @@ export default class extends React.Component {
 
     getPreviewView() {
         return (
-            <View style={{ width: '100%', height: '100%', flexDirection: 'column', justifyContent: 'space-around', paddingTop:30 }}>
-                <View style={{flex:1, justifyContent: 'flex-end'}}>
+            <View style={{ width: '100%', height: '100%', flexDirection: 'column', justifyContent: 'space-around', paddingTop: 30 }}>
+                <View style={{ flex: 1, justifyContent: 'flex-end' }}>
                     {this.getPreviewImageView()}
                 </View>
                 <View style={styles.previewButtonContainer}>
