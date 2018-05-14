@@ -50,7 +50,7 @@ export default class extends React.Component {
                 let newFileName = this.state.photoId + '.jpg'
                 let currentFolder = this.getPath('myPro', '')
 
-                this.createDirectoryIfDoesntExist(newFolder, () => {
+                this.createDirectoryIfDoesntExist(currentFolder, () => {
 
                     this.moveFile(data.uri, currentFolder, newFileName, this.onMoved)
                 })
