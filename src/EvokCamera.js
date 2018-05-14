@@ -47,20 +47,18 @@ export default class extends React.Component {
         this.camera.takePictureAsync()
             .then(data => {
 
-                let newFileName='picture.jpg'
-                let newDirectory = this.getPath('newProject', '')
-                console.log(newDirectory)
+                let newFileName= this.state.photoId+'.jpg'
+                let newDirectory = this.getPath('myProject', newFileName)
 
                 this.createDirectoryIfDoesntExist(newDirectory, ()=>{
 
-                    this.moveFile( data.uri, newDirectory, newFileName, this.onMoved)
+                    this.moveFile( data.uri, newDirectory, this.onMoved)
                 })
-
-                
 
                 this.setState({
                     isPreviewMode: true,
-                    picturePreviewPath: data.uri
+                    picturePreviewPath: newDirectory,
+                    photoId: this.state.photoId + 1
                 })
             })
             .catch(err => console.error(err))
@@ -70,6 +68,7 @@ export default class extends React.Component {
     getPath = (projectFolder, fileName) => {
         let expoDirectory = FileSystem.documentDirectory
         return expoDirectory + projectFolder + '/' + fileName
+        console.log('..getPath done')
     }
 
     createDirectoryIfDoesntExist = (directoryPath, callback) => {
@@ -79,18 +78,19 @@ export default class extends React.Component {
             })
             .catch(e => {
                 callback()
-                console.log(e, 'Directory exists')
+                console.log(e,'Directory already exists')
             })
     }
 
-    moveFile = (originalFile , newDirectory, newFileName, callback) => {
-        FileSystem.moveAsync({ from: originalFile, to: newDirectory + '/'+ newFileName })
+    moveFile = (originalFile , newDirectory, callback) => {
+        FileSystem.moveAsync({ from: originalFile, to: newDirectory })
             .then(callback)
             .catch(err => console.error(err))
     }
 
     onMoved = () => {
         console.log('file moved')
+        console.log('new directory is '+ this.getPath())
     }
 
     /*
@@ -182,7 +182,7 @@ export default class extends React.Component {
     }
 
     render() {
-        console.log('...render')
+
         const { hasCameraPermission } = this.state
 
         if (hasCameraPermission === null) {
@@ -194,6 +194,7 @@ export default class extends React.Component {
         }
 
         let viewToRender = this.getCameraView()
+        
         if (this.state.isPreviewMode)
             viewToRender = this.getPreviewView()
 
