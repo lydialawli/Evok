@@ -83,7 +83,7 @@ export default class extends React.Component {
             })
     }
 
-    moveFile = (originalFile, newDirectory, fileName, callback) => {
+    moveFile = (originalFile, currentFolder, fileName, callback) => {
         FileSystem.moveAsync({ from: originalFile, to: currentFolder + '/' + fileName })
             .then(callback)
             .catch(err => console.error(err))
