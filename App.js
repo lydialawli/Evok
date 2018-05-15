@@ -21,28 +21,31 @@ class HomeScreen extends React.Component {
                 <Button
                     color='#ffcc00'
                     title="Go take a Pic"
-                    onPress={() => navigate('Profile')}
+                    onPress={() => navigate('Camera')}
                 />
             </View>
         )
     }
 }
 
-class ProfileScreen extends React.Component {
+class CameraScreen extends React.Component {
     static navigationOptions = {
         header: null,
-        title: 'Profile',
+        title: 'Camera',
     }
 
     render() {
         const { navigate } = this.props.navigation
-        console.log("Profile mode")
+        console.log("Camera mode")
         return (
-            <View style={styles.profileScreenView}>
-                <EvokCamera/>
+            <View style={styles.camScreenView}>
+                <EvokCamera />
                 <View style={styles.bottomBar}>
                     <TouchableOpacity style={styles.homeButton} onPress={() => navigate('Home')}>
                         <Ionicons name="ios-home-outline" size={40} color="white" />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.homeButton} onPress={() => navigate('Gallery')}>
+                        <Ionicons name="md-images" size={40} color="white" />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -50,10 +53,35 @@ class ProfileScreen extends React.Component {
     }
 }
 
+class GalleryScreen extends React.Component {
+    static navigationOptions = {
+        header: null,
+        title: 'Gallery',
+    }
+
+    render() {
+        const { navigate } = this.props.navigation
+        console.log("Gallery mode")
+        return (
+            <View style={styles.galleryView} >
+                <Text> ALOHA!! </Text>
+                <TouchableOpacity style={styles.homeButton} onPress={() => navigate('Home')}>
+                    <Ionicons name="ios-home-outline" size={40} color="white" />
+                </TouchableOpacity>
+            </View>
+        )
+    }
+
+}
+
+
+
+
 
 const NavigationApp = StackNavigator({
     Home: { screen: HomeScreen },
-    Profile: { screen: ProfileScreen },
+    Camera: { screen: CameraScreen },
+    Gallery: { screen: GalleryScreen }
 }, {
         navigationOptions: {
             headerMode: 'null',
@@ -75,7 +103,14 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly',
     },
 
-    profileScreenView: {
+    galleryView: {
+        backgroundColor: '#ff6666',
+        flex: 1,
+        flexDirection: 'column',
+        alignItems: 'flex-end',
+    },
+
+    camScreenView: {
         backgroundColor: '#ff6666',
         flex: 1,
         flexDirection: 'column',
@@ -83,11 +118,12 @@ const styles = StyleSheet.create({
         padding: 8,
     },
 
-    bottomBar:{
+    bottomBar: {
         height: 100,
-        width: 200,
-        justifyContent: 'flex-start',
-        paddingBottom: 8
+        width: 400,
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        paddingBottom: 3
 
     },
 
@@ -109,12 +145,10 @@ const styles = StyleSheet.create({
     homeButton: {
         width: 50,
         height: 50,
-        justifyContent: 'center',
+        justifyContent: 'space-around',
         backgroundColor: '#ffcc00',
         alignItems: 'center',
-        alignSelf: 'flex-start',
         borderRadius: 8,
-        marginHorizontal: 8,
         marginTop: 2
 
     }

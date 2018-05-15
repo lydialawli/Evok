@@ -150,9 +150,6 @@ export default class extends React.Component {
                     <TouchableOpacity style={styles.goToCameraButton} onPress={this.goToCameraMode}>
                         <Ionicons name="ios-arrow-dropleft" size={40} color="white" />
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.goToCameraButton}>
-                        <Ionicons name="md-images" size={40} color="white" />
-                    </TouchableOpacity>
                 </View>
             </View>
         )
