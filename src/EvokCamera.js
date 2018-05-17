@@ -94,6 +94,11 @@ export default class extends React.Component {
 
     }
 
+    showPicture = () => {
+        FileSystem.readDirectoryAsync(filePath)
+    
+    }
+
     /*
     toggleView() {
       this.setState({
@@ -102,16 +107,6 @@ export default class extends React.Component {
     }
     */
 
-    /*renderNoPermissions() {
-        return (
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', padding: 10 }}>
-                <Text style={{ color: 'white' }}>
-                    Camera permissions not granted - No access to camera
-        </Text>
-            </View>
-        )
-    }
-    */
 
     /*renderGallery() {
         return <GalleryScreen onPress={this.toggleView.bind(this)} />
