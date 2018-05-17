@@ -8,10 +8,8 @@ export default class GalleryScreen extends React.Component {
 
     render() {
         return (
-            <View style={styles.container}>
-                <TouchableOpacity style={styles.button} onPress={this.saveToGallery}>
-                    <Text>Save to gallery</Text>
-                </TouchableOpacity>
+            <View style={styles.container} >
+                <Text> ALOHA!! </Text>
             </View>
         )
     }
@@ -20,11 +18,10 @@ export default class GalleryScreen extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 0.1,
-        paddingTop: 20,
+        backgroundColor: '#ff6666',
+        flex: 1,
+        alignItems: 'center',
     },
 
-    button: {
-        padding: 20,
-    }
+
 })
