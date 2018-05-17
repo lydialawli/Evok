@@ -5,8 +5,9 @@ import { StackNavigator } from 'react-navigation'
 import EvokCamera from '../Evok/src/EvokCamera.js'
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 import evokStyles from '../Evok/src/evokStyles.js'
+import GalleryScreen from '../Evok/src/GalleryScreen.js'
 
-class HomeScreen extends React.Component {
+export class HomeScreen extends React.Component {
     static navigationOptions = {
         header: null,
         title: 'Home',
@@ -54,6 +55,7 @@ class CameraScreen extends React.Component {
     }
 }
 
+/*
 class GalleryScreen extends React.Component {
     static navigationOptions = {
         header: null,
@@ -74,21 +76,26 @@ class GalleryScreen extends React.Component {
     }
 
 }
+*/
 
 
 
 
+const NavigationApp = StackNavigator(
+    {
+        Home: { screen: HomeScreen },
+        Camera: { screen: CameraScreen },
+        Gallery: { screen: GalleryScreen }
+    },
 
-const NavigationApp = StackNavigator({
-    Home: { screen: HomeScreen },
-    Camera: { screen: CameraScreen },
-    Gallery: { screen: GalleryScreen }
-}, {
+    {
         navigationOptions: {
             headerMode: 'null',
         },
-        navigationOptions: ({ navigation }) => ({ header: false }),
-    })
+
+        navigationOptions: ({ navigation }) => ({ header: false })
+    }
+)
 
 export default class App extends React.Component {
     render() {

@@ -12,7 +12,7 @@ const evokStyles = StyleSheet.create({
         backgroundColor: '#ff6666',
         flex: 1,
         flexDirection: 'column',
-        alignItems: 'flex-end',
+        alignItems: 'center',
     },
 
     camScreenView: {

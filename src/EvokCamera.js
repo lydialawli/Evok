@@ -3,6 +3,7 @@ import { Text, View, TouchableOpacity, StyleSheet, Dimensions, Image, Button, Ic
 import { Camera, Permissions, Constants, FileSystem } from 'expo'
 import GalleryScreen from '../src/GalleryScreen.js'
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
+import evokFileSystem from '../src/evokFilesystem.js'
 
 
 export default class extends React.Component {
@@ -30,14 +31,6 @@ export default class extends React.Component {
         this.setState({ hasCameraPermission: status === 'granted' })
     }
 
-    /*componentDidMount() {
-        console.log("...componentDidMount")
-        FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + 'photos').catch(e => {
-            console.log(e, 'Directory exists')
-        })
-    }
-    */
-
     takePicture = async () => {
         console.log("...takePicture")
 
@@ -48,44 +41,19 @@ export default class extends React.Component {
             .then(data => {
 
                 let newFileName = this.state.photoId + '.jpg'
-                let currentFolder = this.getPath('myPro', '')
+                let currentFolder = evokFileSystem.getPath('myPro', '')
 
-                this.createDirectoryIfDoesntExist(currentFolder, () => {
+                evokFileSystem.createDirectoryIfDoesntExist(currentFolder, () => {
 
-                    this.moveFile(data.uri, currentFolder, newFileName, this.onMoved)
+                    evokFileSystem.moveFile(data.uri, currentFolder, newFileName, this.onMoved)
                 })
 
                 this.setState({
                     isPreviewMode: true,
-                    picturePreviewPath: this.getPath('myPro', newFileName),
+                    picturePreviewPath: evokFileSystem.getPath('myPro', newFileName),
                     photoId: this.state.photoId + 1
                 })
             })
-            .catch(err => console.error(err))
-    }
-
-    //expoDirectory + projectFolder + fileName.jpg
-    getPath = (projectFolder, fileName) => {
-        let expoDirectory = FileSystem.documentDirectory
-        console.log('..getPath done')
-        return expoDirectory + projectFolder + '/' + fileName
-
-    }
-
-    createDirectoryIfDoesntExist = (directoryPath, callback) => {
-        FileSystem.makeDirectoryAsync(directoryPath)
-            .then(() => {
-                callback()
-            })
-            .catch(e => {
-                callback()
-                console.log(e, 'Directory already exists')
-            })
-    }
-
-    moveFile = (originalFile, currentFolder, fileName, callback) => {
-        FileSystem.moveAsync({ from: originalFile, to: currentFolder + '/' + fileName })
-            .then(callback)
             .catch(err => console.error(err))
     }
 
@@ -94,23 +62,6 @@ export default class extends React.Component {
 
     }
 
-    showPicture = () => {
-        FileSystem.readDirectoryAsync(filePath)
-    
-    }
-
-    /*
-    toggleView() {
-      this.setState({
-        showGallery: !this.state.showGallery,
-      })
-    }
-    */
-
-
-    /*renderGallery() {
-        return <GalleryScreen onPress={this.toggleView.bind(this)} />
-    }*/
     goToPreviewMode = () => {
         this.setState({ isPreviewMode: true })
     }
@@ -171,6 +122,12 @@ export default class extends React.Component {
                     </View>
                 </Camera>
             </View>
+        )
+    }
+
+    getGalleryView(){
+        return (
+             <GalleryScreen image = {this.state.picturePreviewPath}/>
         )
     }
 
