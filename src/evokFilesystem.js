@@ -26,12 +26,22 @@ evokFileSystem.moveFile = (originalFile, currentFolder, fileName, callback) => {
         .catch(err => console.error(err))
 }
 
-evokFileSystem.listAllFilesinSpecificDirectory = (fileUri, callback) => {
-    FileSystem.readDirectoryAsync(fileUri)
-        .then((result) => { 
-            callback(result)
+evokFileSystem.getFilesUriInDirectory = (directoryUri, callback) => {
+
+    FileSystem.readDirectoryAsync(directoryUri)
+        .then((listOfFileNames) => { 
+            let listOfFileUris= []
+
+            for(let i=0; i<listOfFileNames.length;i++){
+               let fileUri =  directoryUri + '/' + listOfFileNames[i]
+               listOfFileUris.push(fileUri)
+            }
+
+            callback(listOfFileUris)
         })
         .catch(err => console.error(err))
+
+        
 }
 
 export default evokFileSystem
