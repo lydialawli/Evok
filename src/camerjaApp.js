@@ -321,6 +321,12 @@ const styles = StyleSheet.create({
   navigation: {
     flex: 1,
   },
+  pictures: {
+    flex: 1,
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+  },
+  
   gallery: {
     flex: 1,
     flexDirection: 'row',

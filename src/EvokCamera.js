@@ -19,7 +19,6 @@ export default class extends React.Component {
         autofocus: 'on',
 
         ratios: [],
-        photoId: 1,
         photos: [],
         showGallery: 'false',
         permissionsGranted: true
@@ -40,7 +39,7 @@ export default class extends React.Component {
         this.camera.takePictureAsync()
             .then(data => {
 
-                let newFileName = this.state.photoId + '.jpg'
+                let newFileName = Date.now() + '.jpg'
                 let currentFolder = evokFileSystem.getPath('myPro', '')
 
                 evokFileSystem.createDirectoryIfDoesntExist(currentFolder, () => {
@@ -51,7 +50,7 @@ export default class extends React.Component {
                 this.setState({
                     isPreviewMode: true,
                     picturePreviewPath: evokFileSystem.getPath('myPro', newFileName),
-                    photoId: this.state.photoId + 1
+                
                 })
             })
             .catch(err => console.error(err))

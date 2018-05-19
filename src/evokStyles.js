@@ -22,6 +22,11 @@ const evokStyles = StyleSheet.create({
         justifyContent: 'center',
         padding: 8,
     },
+    imagesWrapper: {
+        display:'flex',
+        flexWrap: 'wrap',
+        flexDirection: 'row',
+      },
 
     bottomBar: {
         height: 100,

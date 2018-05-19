@@ -20,14 +20,14 @@ export default class GalleryScreen extends React.Component {
     getList = () => {
         let currentFolder = evokFileSystem.getPath('myPro', '')
 
-        evokFileSystem.getFilesUriInDirectory(currentFolder, this.onFilesListed )   
+        evokFileSystem.getFilesUriInDirectory(currentFolder, this.onFilesListed)
     }
 
-    onFilesListed=(result)=>{
+    onFilesListed = (result) => {
         console.log(result)
         this.setState(
             {
-                groupedPhotos : result
+                groupedPhotos: result
             }
         )
     }
@@ -40,9 +40,27 @@ export default class GalleryScreen extends React.Component {
     render() {
         const { navigate } = this.props.navigation
         console.log("Gallery mode")
+
+        let images = this.state.groupedPhotos.map(
+            (fileUri) => {
+                return (
+
+                    <Image
+                        key={fileUri}
+                        style={{ width: 100, height: 100 }}
+                        source={{ uri: fileUri }}
+                    />
+
+                )
+            }
+        )
+
         return (
             <View style={evokStyles.galleryView} >
-                <Text> {this.state.groupedPhotos} </Text>
+                <View style={evokStyles.imagesWrapper}>
+                    {images}
+                </View>
+                <Text> {this.state.groupedPhotos[0]} </Text>
                 <TouchableOpacity style={evokStyles.homeButton} onPress={() => navigate('Home')}>
                     <Ionicons name="ios-home-outline" size={40} color="white" />
                 </TouchableOpacity>
