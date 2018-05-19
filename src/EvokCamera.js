@@ -1,12 +1,43 @@
 import React, { Component } from 'react'
 import { Text, View, TouchableOpacity, StyleSheet, Dimensions, Image, Button, Icon } from 'react-native'
 import { Camera, Permissions, Constants, FileSystem } from 'expo'
+import { StackNavigator } from 'react-navigation'
 import GalleryScreen from '../src/GalleryScreen.js'
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 import evokFileSystem from '../src/evokFilesystem.js'
+import evokStyles from '../src/evokStyles.js'
+import HomeScreen from '../App.js'
 
 
-export default class extends React.Component {
+export default class CameraScreen extends React.Component {
+    static navigationOptions = {
+        header: null,
+        title: 'Camera',
+    }
+
+
+    render() {
+        const { navigate } = this.props.navigation
+        console.log("Camera mode")
+        return (
+            <View style={evokStyles.camScreenView}>
+                <EvokCamera />
+                <View style={evokStyles.bottomBar}>
+                    <TouchableOpacity style={evokStyles.homeButton} onPress={() => navigate('Home')}>
+                        <Ionicons name="ios-home-outline" size={40} color="white" />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={evokStyles.homeButton} onPress={() => navigate('Gallery')}>
+                        <Ionicons name="md-images" size={40} color="white" />
+                    </TouchableOpacity>
+                </View>
+            </View>
+        )
+    }
+}
+
+
+
+class EvokCamera extends React.Component {
     state = {
         isPreviewMode: false,
         picturePreviewPath: '',
@@ -65,7 +96,7 @@ export default class extends React.Component {
         this.setState({ isPreviewMode: true })
     }
 
-    goToCameraMode = () => {
+    goToCameraMode = () => { 
         this.setState({ isPreviewMode: false })
     }
 
@@ -91,8 +122,8 @@ export default class extends React.Component {
                 <View style={{ flex: 1, justifyContent: 'flex-end' }}>
                     {this.getPreviewImageView()}
                 </View>
-                <View style={styles.previewButtonContainer}>
-                    <TouchableOpacity style={styles.goToCameraButton} onPress={this.goToCameraMode}>
+                <View style={evokStyles.previewButtonContainer}>
+                    <TouchableOpacity style={evokStyles.goToCameraButton} onPress={this.goToCameraMode}>
                         <Ionicons name="ios-arrow-dropleft" size={40} color="white" />
                     </TouchableOpacity>
                 </View>
@@ -105,7 +136,7 @@ export default class extends React.Component {
             <View style={{ width: '100%', height: '100%', alignItems: 'center' }}>
                 <Camera
                     ref={ref => { this.camera = ref }}
-                    style={styles.preview}
+                    style={evokStyles.cameraView}
                     ratio={this.state.ratio}
                 >
                     <View
@@ -114,7 +145,7 @@ export default class extends React.Component {
                             alignSelf: 'flex-end',
                             backgroundColor: 'transparent'
                         }}>
-                        <TouchableOpacity style={styles.snapButton} onPress={this.takePicture.bind(this)}>
+                        <TouchableOpacity style={evokStyles.snapCamButton} onPress={this.takePicture.bind(this)}>
                             <Ionicons name="md-aperture" size={40} color="white" />
                         </TouchableOpacity>
 
@@ -149,67 +180,4 @@ export default class extends React.Component {
 
         return viewToRender
     }
-
-    /* _render() {
-         const cameraScreenContent = this.state.permissionsGranted
-             ? this.renderCamera()
-             : this.()
-         const content = this.state.showGallery ? this.renderGallery() : cameraScreenContent
-         return <View style={styles.container}>{cameraScreenContent}</View>
-     }
-     */
 }
-
-
-
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#ffcccc',
-    },
-    preview: {
-        flex: 1,
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-        height: Dimensions.get('window').height,
-        width: Dimensions.get('window').width
-    },
-    goToCameraButton: {
-        width: 50,
-        height: 50,
-        backgroundColor: '#ffcc00',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 8,
-        marginHorizontal: 3
-
-    },
-
-    previewButtonContainer: {
-        width: 200,
-        height: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-evenly',
-        alignItems: 'flex-end',
-        marginLeft: 70,
-
-    },
-
-    snapButton: {
-        flex: 0.5,
-        backgroundColor: '#ff6666',
-        borderRadius: 5,
-        marginHorizontal: 2,
-        padding: 5,
-        marginTop: 10,
-        marginBottom: 10,
-        alignSelf: 'flex-end',
-        justifyContent: 'center',
-    },
-
-    buttonText: {
-        color: 'white',
-        fontSize: 20
-    }
-})
