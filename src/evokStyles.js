@@ -11,8 +11,8 @@ const evokStyles = StyleSheet.create({
     galleryView: {
         backgroundColor: '#ff6666',
         flex: 1,
-        flexDirection: 'column',
-        alignItems: 'center',
+        justifyContent: 'space-around',
+        alignItems: 'center'
     },
 
     camScreenView: {
@@ -26,6 +26,8 @@ const evokStyles = StyleSheet.create({
         display: 'flex',
         flexWrap: 'wrap',
         flexDirection: 'row',
+        justifyContent: 'center',
+
     },
 
     bottomBar: {
@@ -33,15 +35,7 @@ const evokStyles = StyleSheet.create({
         width: 400,
         flexDirection: 'row',
         justifyContent: 'space-around',
-        paddingBottom: 3
-    },
-
-    cameraView: {
-        flex: 1,
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-        height: Dimensions.get('window').height,
-        width: Dimensions.get('window').width
+        alignSelf: 'flex-end'
     },
 
     goToCameraButton: {
@@ -114,43 +108,6 @@ const evokStyles = StyleSheet.create({
         height: Dimensions.get('window').height,
         width: Dimensions.get('window').width
     },
-
-    goToCameraButton: {
-        width: 50,
-        height: 50,
-        backgroundColor: '#ffcc00',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 8,
-        marginHorizontal: 3
-    },
-
-    previewButtonContainer: {
-        width: 200,
-        height: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-evenly',
-        alignItems: 'flex-end',
-        marginLeft: 70,
-
-    },
-
-    snapCamButton: {
-        flex: 0.5,
-        backgroundColor: '#ff6666',
-        borderRadius: 5,
-        marginHorizontal: 2,
-        padding: 5,
-        marginTop: 10,
-        marginBottom: 10,
-        alignSelf: 'flex-end',
-        justifyContent: 'center',
-    },
-
-    buttonText: {
-        color: 'white',
-        fontSize: 20
-    }
 })
 
 export default evokStyles 

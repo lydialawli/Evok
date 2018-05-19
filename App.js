@@ -2,7 +2,7 @@
 import React from 'react'
 import { StyleSheet, Text, View, Button, TouchableOpacity, Icon, Dimensions } from 'react-native'
 import { StackNavigator } from 'react-navigation'
-import CameraScreen from '../Evok/src/EvokCamera.js'
+import CameraScreen from '../Evok/src/CameraScreen.js'
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 import evokStyles from '../Evok/src/evokStyles.js'
 import GalleryScreen from '../Evok/src/GalleryScreen.js'

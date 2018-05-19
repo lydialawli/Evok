@@ -1,7 +1,7 @@
 import React from 'react'
 import { Image, StyleSheet, View, TouchableOpacity, Text } from 'react-native'
 import { StackNavigator } from 'react-navigation'
-import EvokCamera from '../src/EvokCamera.js'
+import EvokCamera from '../src/CameraScreen.js'
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 import evokStyles from '../src/evokStyles.js'
 import HomeScreen from '../App.js'
@@ -47,7 +47,7 @@ export default class GalleryScreen extends React.Component {
 
                     <Image
                         key={fileUri}
-                        style={{ width: 100, height: 100 }}
+                        style={{ width: 100, height: 100, margin: 3 }}
                         source={{ uri: fileUri }}
                     />
 
@@ -57,16 +57,24 @@ export default class GalleryScreen extends React.Component {
 
         return (
             <View style={evokStyles.galleryView} >
+
                 <View style={evokStyles.imagesWrapper}>
                     {images}
                 </View>
+                <TouchableOpacity style={evokStyles.homeButton} onPress={() => navigate('Camera')}>
+                        <Ionicons name="ios-add-circle-outline" size={40} color="white" />
+                </TouchableOpacity>
                 <Text> {this.state.groupedPhotos[0]} </Text>
-                <TouchableOpacity style={evokStyles.homeButton} onPress={() => navigate('Home')}>
-                    <Ionicons name="ios-home-outline" size={40} color="white" />
-                </TouchableOpacity>
-                <TouchableOpacity style={evokStyles.homeButton} onPress={this.getList}>
-                    <Ionicons name="ios-barcode-outline" size={40} color="white" />
-                </TouchableOpacity>
+
+                <View style={evokStyles.bottomBar}>
+                    <TouchableOpacity style={evokStyles.homeButton} onPress={() => navigate('Home')}>
+                        <Ionicons name="ios-home-outline" size={40} color="white" />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={evokStyles.homeButton} onPress={this.getList}>
+                        <Ionicons name="ios-barcode-outline" size={40} color="white" />
+                    </TouchableOpacity>
+                </View>
+
             </View>
         )
     }

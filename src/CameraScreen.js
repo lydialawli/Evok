@@ -81,7 +81,7 @@ class EvokCamera extends React.Component {
                 this.setState({
                     isPreviewMode: true,
                     picturePreviewPath: evokFileSystem.getPath('myPro', newFileName),
-                
+
                 })
             })
             .catch(err => console.error(err))
@@ -96,7 +96,7 @@ class EvokCamera extends React.Component {
         this.setState({ isPreviewMode: true })
     }
 
-    goToCameraMode = () => { 
+    goToCameraMode = () => {
         this.setState({ isPreviewMode: false })
     }
 
@@ -155,9 +155,9 @@ class EvokCamera extends React.Component {
         )
     }
 
-    getGalleryView(){
+    getGalleryView() {
         return (
-             <GalleryScreen image = {this.state.picturePreviewPath}/>
+            <GalleryScreen image={this.state.picturePreviewPath} />
         )
     }
 
