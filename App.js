@@ -7,6 +7,7 @@ import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 import evokStyles from '../Evok/src/evokStyles.js'
 import GalleryScreen from '../Evok/src/GalleryScreen.js'
 
+
 export class HomeScreen extends React.Component {
     static navigationOptions = {
         header: null,
