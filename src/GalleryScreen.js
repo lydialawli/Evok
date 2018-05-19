@@ -17,11 +17,15 @@ export default class GalleryScreen extends React.Component {
         groupedPhotos: []
     }
 
+
     getList = () => {
         let currentFolder = evokFileSystem.getPath('myPro', '')
 
         evokFileSystem.getFilesUriInDirectory(currentFolder, this.onFilesListed)
     }
+
+
+
 
     onFilesListed = (result) => {
         console.log(result)
@@ -30,11 +34,6 @@ export default class GalleryScreen extends React.Component {
                 groupedPhotos: result
             }
         )
-    }
-
-    justPrint = () => {
-        let currentFolder = evokFileSystem.getPath('myPro', '')
-        console.log(this.currentFolder)
     }
 
     render() {
@@ -62,7 +61,7 @@ export default class GalleryScreen extends React.Component {
                     {images}
                 </View>
                 <TouchableOpacity style={evokStyles.homeButton} onPress={() => navigate('Camera')}>
-                        <Ionicons name="ios-add-circle-outline" size={40} color="white" />
+                    <Ionicons name="ios-add-circle-outline" size={40} color="white" />
                 </TouchableOpacity>
                 <Text> {this.state.groupedPhotos[0]} </Text>
 
