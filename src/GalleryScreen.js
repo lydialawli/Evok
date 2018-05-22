@@ -17,15 +17,15 @@ export default class GalleryScreen extends React.Component {
         groupedPhotos: []
     }
 
+    componentWillMount() {
+        this.getList()
+    }
 
     getList = () => {
         let currentFolder = evokFileSystem.getPath('myPro', '')
 
         evokFileSystem.getFilesUriInDirectory(currentFolder, this.onFilesListed)
     }
-
-
-
 
     onFilesListed = (result) => {
         console.log(result)
@@ -35,6 +35,7 @@ export default class GalleryScreen extends React.Component {
             }
         )
     }
+
 
     render() {
         const { navigate } = this.props.navigation
@@ -63,15 +64,12 @@ export default class GalleryScreen extends React.Component {
                 <TouchableOpacity style={evokStyles.homeButton} onPress={() => navigate('Camera')}>
                     <Ionicons name="ios-add-circle-outline" size={40} color="white" />
                 </TouchableOpacity>
-                <Text> {this.state.groupedPhotos[0]} </Text>
 
                 <View style={evokStyles.bottomBar}>
                     <TouchableOpacity style={evokStyles.homeButton} onPress={() => navigate('Home')}>
                         <Ionicons name="ios-home-outline" size={40} color="white" />
                     </TouchableOpacity>
-                    <TouchableOpacity style={evokStyles.homeButton} onPress={this.getList}>
-                        <Ionicons name="ios-barcode-outline" size={40} color="white" />
-                    </TouchableOpacity>
+
                 </View>
 
             </View>
@@ -80,3 +78,10 @@ export default class GalleryScreen extends React.Component {
 
 }
 
+
+
+/* 
+<TouchableOpacity style={evokStyles.homeButton} onPress={this.getList}>                     
+    <Ionicons name="ios-barcode-outline" size={40} color="white" />
+</TouchableOpacity>
+*/
