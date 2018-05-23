@@ -60,14 +60,12 @@ const evokStyles = StyleSheet.create({
     },
 
     snapCamButton: {
-        flex: 0.5,
+        width: 60,
+        height: 60,
         backgroundColor: '#ff6666',
         borderRadius: 5,
-        marginHorizontal: 2,
-        padding: 5,
-        marginTop: 10,
-        marginBottom: 10,
-        alignSelf: 'flex-end',
+        alignSelf: 'center',
+        alignItems: 'center',
         justifyContent: 'center',
     },
 
@@ -103,7 +101,6 @@ const evokStyles = StyleSheet.create({
 
     cameraView: {
         flex: 1,
-      
         alignItems: 'center',
         height: Dimensions.get('window').height,
         width: Dimensions.get('window').width

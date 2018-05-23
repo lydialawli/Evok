@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, TouchableOpacity, StyleSheet, Dimensions, Image, Button, Icon } from 'react-native'
+import { Text, View, TouchableOpacity, StyleSheet, Dimensions, Image, ImageBackground, Button, Icon } from 'react-native'
 import { Camera, Permissions, Constants, FileSystem } from 'expo'
 import { StackNavigator } from 'react-navigation'
 import GalleryScreen from '../src/GalleryScreen.js'
@@ -72,7 +72,6 @@ class EvokCamera extends React.Component {
                 groupedPhotos: result,
             }
         )
-        console.log(this.state.groupedPhotos)
     }
 
     takePicture = async () => {
@@ -159,28 +158,27 @@ class EvokCamera extends React.Component {
                 >
                     <View
                         style={{
-                            flex: 1,
+                            width: '100%', height: '100%',
                             backgroundColor: 'transparent',
-                            justifyContent: 'flex-end'
+
                         }}>
-                        <Image
-                            style={{ width: 150, height: 200 }}
-                            source={{ uri: this.state.groupedPhotos[this.state.groupedPhotos.length-2] }}
-                        />
+                        <ImageBackground
+                            style={{ flex: 1, opacity: .6 }}
+                            resizeMode="contain"
+                            source={{ uri: this.state.groupedPhotos[this.state.groupedPhotos.length - 3] }}>
+
+                            <View
+                                style={{ flex: 1, justifyContent: 'flex-end' }}>
+
+                                <TouchableOpacity style={evokStyles.snapCamButton} onPress={this.takePicture.bind(this)}>
+                                    <Ionicons name="md-aperture" size={50} color="white" />
+                                </TouchableOpacity>
+
+                            </View>
+                        </ImageBackground>
                     </View>
 
-                    <View
-                        style={{
-                            flex: 0.5,
-                            alignSelf: 'flex-end',
-                            backgroundColor: 'transparent'
-                        }}>
-                        
-                        <TouchableOpacity style={evokStyles.snapCamButton} onPress={this.takePicture.bind(this)}>
-                            <Ionicons name="md-aperture" size={40} color="white" />
-                        </TouchableOpacity>
 
-                    </View>
                 </Camera>
             </View >
         )
