@@ -48,17 +48,31 @@ class EvokCamera extends React.Component {
         whiteBalance: 'auto',
         zoom: 0,
         autofocus: 'on',
-
-        ratios: [],
-        photos: [],
         showGallery: 'false',
-        permissionsGranted: true
+        permissionsGranted: true,
+        lastPictureIs: '',
+        groupedPhotos: []
     }
 
     async componentWillMount() {
-        console.log("...componentWillMount")
         const { status } = await Permissions.askAsync(Permissions.CAMERA)
         this.setState({ hasCameraPermission: status === 'granted' })
+        this.getList()
+    }
+
+    getList = () => {
+        let currentFolder = evokFileSystem.getPath('myPro', '')
+
+        evokFileSystem.getFilesUriInDirectory(currentFolder, this.onFilesListed)
+    }
+
+    onFilesListed = (result) => {
+        this.setState(
+            {
+                groupedPhotos: result,
+            }
+        )
+        console.log(this.state.groupedPhotos)
     }
 
     takePicture = async () => {
@@ -85,6 +99,10 @@ class EvokCamera extends React.Component {
                 })
             })
             .catch(err => console.error(err))
+    }
+
+    getLastFile = () => {
+        evokFileSystem.getFilesUriInDirectory(currentFolder, this.onFilesListed)
     }
 
     onMoved = () => {
@@ -141,25 +159,34 @@ class EvokCamera extends React.Component {
                 >
                     <View
                         style={{
+                            flex: 1,
+                            backgroundColor: 'transparent',
+                            justifyContent: 'flex-end'
+                        }}>
+                        <Image
+                            style={{ width: 150, height: 200 }}
+                            source={{ uri: this.state.groupedPhotos[this.state.groupedPhotos.length-2] }}
+                        />
+                    </View>
+
+                    <View
+                        style={{
                             flex: 0.5,
                             alignSelf: 'flex-end',
                             backgroundColor: 'transparent'
                         }}>
+                        
                         <TouchableOpacity style={evokStyles.snapCamButton} onPress={this.takePicture.bind(this)}>
                             <Ionicons name="md-aperture" size={40} color="white" />
                         </TouchableOpacity>
 
                     </View>
                 </Camera>
-            </View>
+            </View >
         )
     }
 
-    getGalleryView() {
-        return (
-            <GalleryScreen image={this.state.picturePreviewPath} />
-        )
-    }
+
 
     render() {
 

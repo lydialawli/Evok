@@ -103,7 +103,7 @@ const evokStyles = StyleSheet.create({
 
     cameraView: {
         flex: 1,
-        justifyContent: 'flex-end',
+      
         alignItems: 'center',
         height: Dimensions.get('window').height,
         width: Dimensions.get('window').width
