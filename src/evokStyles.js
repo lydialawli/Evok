@@ -63,7 +63,8 @@ const evokStyles = StyleSheet.create({
         width: 60,
         height: 60,
         backgroundColor: '#ff6666',
-        borderRadius: 5,
+        borderTopRightRadius:100,
+        borderTopLeftRadius:100,
         alignSelf: 'center',
         alignItems: 'center',
         justifyContent: 'center',
@@ -74,12 +75,31 @@ const evokStyles = StyleSheet.create({
         fontSize: 20
     },
 
+    projectFolderButton: {
+        width: 100,
+        height: 100,
+        justifyContent: 'space-evenly',
+        backgroundColor: '#ffcc00',
+        alignItems: 'center',
+        borderRadius: 8,
+       
+        elevation: 5,
+    },
+
     evokText: {
         flex: 0.5,
         color: '#009999',
         fontSize: 30,
         fontWeight: 'bold',
         alignItems: 'flex-start'
+    },
+
+    ProjectFolderText: {
+        flex: 1,
+        color: '#009999',
+        fontSize: 15,
+        fontWeight: 'bold',
+        alignItems: 'center'
     },
 
     iconText: {

@@ -20,12 +20,14 @@ export class HomeScreen extends React.Component {
             <View style={evokStyles.container} >
                 <Text style={evokStyles.evokText} >
                     Evok
-        </Text>
-                <Button
-                    color='#ffcc00'
-                    title="Go take a Pic"
-                    onPress={() => navigate('Camera')}
-                />
+                </Text>
+                <TouchableOpacity style={color='#009999'} onPress={() => navigate('Camera')}>
+                    <Ionicons name="ios-camera-outline" size={60} color="white" />
+                </TouchableOpacity>
+                <TouchableOpacity style={evokStyles.projectFolderButton} onPress={() => navigate('Gallery')}>
+                    <Text style={evokStyles.ProjectFolderText} >Project Folder</Text>
+                    <Ionicons name="ios-apps-outline" size={60} color="white" />
+                </TouchableOpacity>
             </View>
         )
     }
