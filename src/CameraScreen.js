@@ -51,7 +51,9 @@ class EvokCamera extends React.Component {
         showGallery: 'false',
         permissionsGranted: true,
         lastPictureIs: '',
-        groupedPhotos: []
+        groupedPhotos: [],
+        lastPicOpacity: .6
+        
     }
 
     async componentWillMount() {
@@ -163,13 +165,17 @@ class EvokCamera extends React.Component {
 
                         }}>
                         <ImageBackground
-                            style={{ flex: 7, justifyContent: 'center', opacity: .6}}
+                            style={{ flex: 7, justifyContent: 'center', opacity: this.state.lastPicOpacity}}
                             resizeMode="contain"
                             source={{ uri: this.state.groupedPhotos[this.state.groupedPhotos.length - 5] }}>
                         </ImageBackground>
-
+  
                         <View
-                            style={{ flex: 1, justifyContent: 'flex-end', borderRadius: 50}}>
+                            style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-evenly'}}>
+
+                            <TouchableOpacity style={{ justifyContent: 'flex-start' }}>
+                                <Ionicons name="ios-bug-outline" size={50} color="white" />
+                            </TouchableOpacity>
 
                             <TouchableOpacity style={evokStyles.snapCamButton} onPress={this.takePicture.bind(this)}>
                                 <Ionicons name="md-aperture" size={50} color="white" />
