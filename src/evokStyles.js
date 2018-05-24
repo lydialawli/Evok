@@ -82,7 +82,6 @@ const evokStyles = StyleSheet.create({
         backgroundColor: '#ffcc00',
         alignItems: 'center',
         borderRadius: 8,
-       
         elevation: 5,
     },
 

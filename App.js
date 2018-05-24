@@ -21,7 +21,7 @@ export class HomeScreen extends React.Component {
                 <Text style={evokStyles.evokText} >
                     Evok
                 </Text>
-                <TouchableOpacity style={color='#009999'} onPress={() => navigate('Camera')}>
+                <TouchableOpacity style={evokStyles.homeButton} onPress={() => navigate('Camera')}>
                     <Ionicons name="ios-camera-outline" size={60} color="white" />
                 </TouchableOpacity>
                 <TouchableOpacity style={evokStyles.projectFolderButton} onPress={() => navigate('Gallery')}>

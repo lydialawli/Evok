@@ -165,7 +165,7 @@ class EvokCamera extends React.Component {
                         <ImageBackground
                             style={{ flex: 1, opacity: .6 }}
                             resizeMode="contain"
-                            source={{ uri: this.state.groupedPhotos[this.state.groupedPhotos.length - 4] }}>
+                            source={{ uri: this.state.groupedPhotos[this.state.groupedPhotos.length - 5] }}>
 
                             <View
                                 style={{ flex: 1, justifyContent: 'flex-end', borderWidth:1, borderColor: 'transparent', borderTopRightRadius:100, borderTopLeftRadius:100}}>
