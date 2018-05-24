@@ -163,19 +163,20 @@ class EvokCamera extends React.Component {
 
                         }}>
                         <ImageBackground
-                            style={{ flex: 1, opacity: .6 }}
+                            style={{ flex: 7, justifyContent: 'center', opacity: .6}}
                             resizeMode="contain"
                             source={{ uri: this.state.groupedPhotos[this.state.groupedPhotos.length - 5] }}>
-
-                            <View
-                                style={{ flex: 1, justifyContent: 'flex-end', borderWidth:1, borderColor: 'transparent', borderTopRightRadius:100, borderTopLeftRadius:100}}>
-
-                                <TouchableOpacity style={evokStyles.snapCamButton} onPress={this.takePicture.bind(this)}>
-                                    <Ionicons name="md-aperture" size={50} color="white" />
-                                </TouchableOpacity>
-
-                            </View>
                         </ImageBackground>
+
+                        <View
+                            style={{ flex: 1, justifyContent: 'flex-end', borderRadius: 50}}>
+
+                            <TouchableOpacity style={evokStyles.snapCamButton} onPress={this.takePicture.bind(this)}>
+                                <Ionicons name="md-aperture" size={50} color="white" />
+                            </TouchableOpacity>
+
+                        </View>
+
                     </View>
 
 
