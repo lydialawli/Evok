@@ -18,9 +18,11 @@ const evokStyles = StyleSheet.create({
     camScreenView: {
         backgroundColor: '#ff6666',
         flex: 1,
-        flexDirection: 'column',
         justifyContent: 'center',
-        padding: 8,
+        alignItems: 'center',
+        paddingTop: 10,
+        paddingBottom: 30
+       
     },
 
     imagesWrapper: {

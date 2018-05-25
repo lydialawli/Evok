@@ -189,10 +189,7 @@ class EvokCamera extends React.Component {
                                 thumbImage={<Ionicons name="ios-bicycle-outline" size={20} color="white" /> }
                                 onValueChange={lastPicOpacity => this.setState({ lastPicOpacity })}
                             />
-                            <Text>
-                                {this.state.lastPicOpacity}
-                            </Text>
-                            
+                    
                             <TouchableOpacity style={evokStyles.snapCamButton} onPress={this.takePicture.bind(this)}>
                                 <Ionicons name="md-aperture" size={50} color="white" />
                             </TouchableOpacity>
