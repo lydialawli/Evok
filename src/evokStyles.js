@@ -35,7 +35,9 @@ const evokStyles = StyleSheet.create({
         width: 400,
         flexDirection: 'row',
         justifyContent: 'space-around',
-        alignSelf: 'flex-end'
+        alignSelf: 'center',
+        marginBottom: 10,
+        marginTop: 5
     },
 
     goToCameraButton: {
