@@ -53,7 +53,7 @@ class EvokCamera extends React.Component {
         lastPictureIs: '',
         groupedPhotos: [],
         lastPicOpacity: .6
-        
+
     }
 
     async componentWillMount() {
@@ -104,6 +104,13 @@ class EvokCamera extends React.Component {
 
     getLastFile = () => {
         evokFileSystem.getFilesUriInDirectory(currentFolder, this.onFilesListed)
+    }
+
+    changeLastPicOpacity = () => {
+        if (this.state.lastPicOpacity === .6)
+            this.setState({ lastPicOpacity: .0 })
+        else
+            this.setState({ lastPicOpacity: .0 })
     }
 
     onMoved = () => {
@@ -165,15 +172,15 @@ class EvokCamera extends React.Component {
 
                         }}>
                         <ImageBackground
-                            style={{ flex: 7, justifyContent: 'center', opacity: this.state.lastPicOpacity}}
+                            style={{ flex: 7, justifyContent: 'center', opacity: this.state.lastPicOpacity }}
                             resizeMode="contain"
-                            source={{ uri: this.state.groupedPhotos[this.state.groupedPhotos.length - 5] }}>
+                            source={{ uri: this.state.groupedPhotos[this.state.groupedPhotos.length - 1] }}>
                         </ImageBackground>
-  
-                        <View
-                            style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-evenly'}}>
 
-                            <TouchableOpacity style={{ justifyContent: 'flex-start' }}>
+                        <View
+                            style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-evenly' }}>
+
+                            <TouchableOpacity style={{ justifyContent: 'flex-start' }} onPress={() => this.changeLastPicOpacity()}>
                                 <Ionicons name="ios-bug-outline" size={50} color="white" />
                             </TouchableOpacity>
 
