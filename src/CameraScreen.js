@@ -133,6 +133,14 @@ class EvokCamera extends React.Component {
         )
     }
 
+    bugButton() {
+        return (
+            <View>
+                <Ionicons name="ios-bicycle-outline" size={20} color="white" />
+            </View>
+        )
+    }
+
     getPreviewView() {
         return (
             <View style={{ width: '100%', height: '100%', flexDirection: 'column', justifyContent: 'space-around', paddingTop: 30 }}>
@@ -171,19 +179,20 @@ class EvokCamera extends React.Component {
                         <View
                             style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-evenly' }}>
 
-                            <Slider 
+                            <Slider
                                 style={evokStyles.opacitySlider}
-                                step= {0}
-                                maximumValue = {1}
-                                value= {this.state.lastPicOpacity}
-                                minimumTrackTintColor = '#ffcc00'
+                                step={0}
+                                maximumValue={1}
+                                value={this.state.lastPicOpacity}
+                                minimumTrackTintColor='#ffcc00'
                                 lastPicOpacity={this.state.lastPicOpacity}
+                                thumbImage={<Ionicons name="ios-bicycle-outline" size={20} color="white" /> }
                                 onValueChange={lastPicOpacity => this.setState({ lastPicOpacity })}
                             />
                             <Text>
-                               {this.state.lastPicOpacity}
+                                {this.state.lastPicOpacity}
                             </Text>
-
+                            
                             <TouchableOpacity style={evokStyles.snapCamButton} onPress={this.takePicture.bind(this)}>
                                 <Ionicons name="md-aperture" size={50} color="white" />
                             </TouchableOpacity>

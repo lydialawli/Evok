@@ -22,16 +22,16 @@ const evokStyles = StyleSheet.create({
         justifyContent: 'center',
         padding: 8,
     },
+
     imagesWrapper: {
         display: 'flex',
         flexWrap: 'wrap',
         flexDirection: 'row',
         justifyContent: 'center',
-
     },
 
     bottomBar: {
-        height: 100,
+        height: 50,
         width: 400,
         flexDirection: 'row',
         justifyContent: 'space-around',
@@ -61,10 +61,8 @@ const evokStyles = StyleSheet.create({
 
     opacitySlider: {
         flex: 1,
-        marginLeft: 15,
-        marginRight: 15,
         alignItems: "stretch",
-        justifyContent: "center"
+        justifyContent: "flex-start"
 
     },
 
@@ -72,11 +70,11 @@ const evokStyles = StyleSheet.create({
         width: 60,
         height: 60,
         backgroundColor: '#ff6666',
-        borderTopRightRadius: 50,
-        borderTopLeftRadius: 50,
+        borderRadius: 100,
         alignSelf: 'center',
         alignItems: 'center',
         justifyContent: 'center',
+        elevation: 5,
     },
 
     buttonText: {

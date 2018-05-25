@@ -33,7 +33,6 @@ export default class GalleryScreen extends React.Component {
                 groupedPhotos: result
             }
         )
-        console.log(this.state.groupedPhotos)
     }
 
     alertDeleteWarning = (fileUri) =>
@@ -42,7 +41,7 @@ export default class GalleryScreen extends React.Component {
             'Are you sure?',
             [
                 { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
-                { text: 'OK', onPress: () => {evokFileSystem.deleteImagefromGallery(fileUri, this.getList)} }
+                { text: 'OK', onPress: () => { evokFileSystem.deleteImagefromGallery(fileUri, this.getList) } }
             ],
             { cancelable: false }
         )
@@ -50,14 +49,14 @@ export default class GalleryScreen extends React.Component {
 
     render() {
         const { navigate } = this.props.navigation
-        console.log("Gallery mode") 
+        console.log("Gallery mode")
 
         let images = this.state.groupedPhotos.map(
             (fileUri) => {
                 return (
                     <TouchableOpacity key={fileUri} onPress={() => this.alertDeleteWarning(fileUri)}>
                         <ImageBackground
-                            style={{ width: 100, height: 100, margin: 3}}
+                            style={{ width: 100, height: 100, margin: 3 }}
                             source={{ uri: fileUri }}>
                             <Text> YUPI</Text>
                         </ImageBackground>
@@ -72,15 +71,14 @@ export default class GalleryScreen extends React.Component {
                 <ScrollView contentContainerStyle={evokStyles.imagesWrapper}>
                     {images}
                 </ScrollView>
-                <TouchableOpacity style={evokStyles.homeButton} onPress={() => navigate('Camera')}>
-                    <Ionicons name="ios-add-circle-outline" size={40} color="white" />
-                </TouchableOpacity>
 
                 <View style={evokStyles.bottomBar}>
                     <TouchableOpacity style={evokStyles.homeButton} onPress={() => navigate('Home')}>
                         <Ionicons name="ios-home-outline" size={40} color="white" />
                     </TouchableOpacity>
-
+                    <TouchableOpacity style={evokStyles.homeButton} onPress={() => navigate('Camera')}>
+                        <Ionicons name="ios-add-circle-outline" size={40} color="white" />
+                    </TouchableOpacity>
                 </View>
 
             </View>
