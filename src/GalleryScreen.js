@@ -28,7 +28,6 @@ export default class GalleryScreen extends React.Component {
     }
 
     onFilesListed = (result) => {
-        console.log(result)
         this.setState(
             {
                 groupedPhotos: result
@@ -36,26 +35,27 @@ export default class GalleryScreen extends React.Component {
         )
     }
 
-    alertDeleteWarning = () =>
+    alertDeleteWarning = (fileUri) =>
         Alert.alert(
             'Delete Picture',
             'Are you sure?',
             [
                 { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
-                { text: 'OK', onPress: () => console.log('OK Pressed') },
+                { text: 'OK', onPress: () => {evokFileSystem.deleteImagefromGallery(fileUri, this.updatePhotoList)} }
             ],
             { cancelable: false }
         )
 
+    updatePhotoList = () => {this.getList(), console.log('pic deleted')}
 
     render() {
         const { navigate } = this.props.navigation
-        console.log("Gallery mode")
+        console.log("Gallery mode") 
 
         let images = this.state.groupedPhotos.map(
             (fileUri) => {
                 return (
-                    <TouchableOpacity key={fileUri} onPress={this.alertDeleteWarning}>
+                    <TouchableOpacity key={fileUri} onPress={() => this.alertDeleteWarning(fileUri)}>
                         <Image
                             style={{ width: 100, height: 100, margin: 3 }}
                             source={{ uri: fileUri }}

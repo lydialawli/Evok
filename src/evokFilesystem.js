@@ -40,9 +40,13 @@ evokFileSystem.getFilesUriInDirectory = (directoryUri, callback) => {
         })
         .catch(err => console.error(err))
 
+}
 
+evokFileSystem.deleteImagefromGallery = (FileUri, callback) => {
 
-
+    FileSystem.deleteAsync(FileUri)
+        .then(callback)
+        .catch(err => console.error(err))
 }
 
 export default evokFileSystem
