@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, StyleSheet, View, TouchableOpacity, ScrollView, Text, Alert } from 'react-native'
+import { Image, StyleSheet, View, TouchableOpacity, ScrollView, Text, Alert, ImageBackground } from 'react-native'
 import { StackNavigator } from 'react-navigation'
 import EvokCamera from '../src/CameraScreen.js'
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
@@ -56,10 +56,11 @@ export default class GalleryScreen extends React.Component {
             (fileUri) => {
                 return (
                     <TouchableOpacity key={fileUri} onPress={() => this.alertDeleteWarning(fileUri)}>
-                        <Image
+                        <ImageBackground
                             style={{ width: 100, height: 100, margin: 3 }}
-                            source={{ uri: fileUri }}
-                        />
+                            source={{ uri: fileUri }}>
+                            <Text> YUPI</Text>
+                        </ImageBackground>
                     </TouchableOpacity>
                 )
             }
