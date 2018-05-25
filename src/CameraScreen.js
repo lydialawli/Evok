@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, TouchableOpacity, StyleSheet, Dimensions, Image, ImageBackground, Button, Icon } from 'react-native'
+import { Text, View, TouchableOpacity, StyleSheet, Dimensions, Image, ImageBackground, Button, Icon, Slider } from 'react-native'
 import { Camera, Permissions, Constants, FileSystem } from 'expo'
 import { StackNavigator } from 'react-navigation'
 import GalleryScreen from '../src/GalleryScreen.js'
@@ -38,6 +38,7 @@ export default class CameraScreen extends React.Component {
 
 
 class EvokCamera extends React.Component {
+
     state = {
         isPreviewMode: false,
         picturePreviewPath: '',
@@ -52,7 +53,7 @@ class EvokCamera extends React.Component {
         permissionsGranted: true,
         lastPictureIs: '',
         groupedPhotos: [],
-        lastPicOpacity: .6
+        lastPicOpacity: 0.5
 
     }
 
@@ -102,16 +103,6 @@ class EvokCamera extends React.Component {
             .catch(err => console.error(err))
     }
 
-    getLastFile = () => {
-        evokFileSystem.getFilesUriInDirectory(currentFolder, this.onFilesListed)
-    }
-
-    changeLastPicOpacity = () => {
-        if (this.state.lastPicOpacity === .6)
-            this.setState({ lastPicOpacity: .0 })
-        else
-            this.setState({ lastPicOpacity: .0 })
-    }
 
     onMoved = () => {
         console.log('file moved')
@@ -180,9 +171,18 @@ class EvokCamera extends React.Component {
                         <View
                             style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-evenly' }}>
 
-                            <TouchableOpacity style={{ justifyContent: 'flex-start' }} onPress={() => this.changeLastPicOpacity()}>
-                                <Ionicons name="ios-bug-outline" size={50} color="white" />
-                            </TouchableOpacity>
+                            <Slider 
+                                style={evokStyles.opacitySlider}
+                                step= {0}
+                                maximumValue = {1}
+                                value= {this.state.lastPicOpacity}
+                                minimumTrackTintColor = '#ffcc00'
+                                lastPicOpacity={this.state.lastPicOpacity}
+                                onValueChange={lastPicOpacity => this.setState({ lastPicOpacity })}
+                            />
+                            <Text>
+                               {this.state.lastPicOpacity}
+                            </Text>
 
                             <TouchableOpacity style={evokStyles.snapCamButton} onPress={this.takePicture.bind(this)}>
                                 <Ionicons name="md-aperture" size={50} color="white" />

@@ -57,7 +57,7 @@ export default class GalleryScreen extends React.Component {
                 return (
                     <TouchableOpacity key={fileUri} onPress={() => this.alertDeleteWarning(fileUri)}>
                         <ImageBackground
-                            style={{ width: 100, height: 100, margin: 3 }}
+                            style={{ width: 100, height: 100, margin: 3}}
                             source={{ uri: fileUri }}>
                             <Text> YUPI</Text>
                         </ImageBackground>

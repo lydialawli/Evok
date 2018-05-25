@@ -59,12 +59,21 @@ const evokStyles = StyleSheet.create({
 
     },
 
+    opacitySlider: {
+        flex: 1,
+        marginLeft: 15,
+        marginRight: 15,
+        alignItems: "stretch",
+        justifyContent: "center"
+
+    },
+
     snapCamButton: {
         width: 60,
         height: 60,
         backgroundColor: '#ff6666',
-        borderTopRightRadius:50,
-        borderTopLeftRadius:50,
+        borderTopRightRadius: 50,
+        borderTopLeftRadius: 50,
         alignSelf: 'center',
         alignItems: 'center',
         justifyContent: 'center',
