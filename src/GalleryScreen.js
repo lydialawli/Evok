@@ -33,6 +33,7 @@ export default class GalleryScreen extends React.Component {
                 groupedPhotos: result
             }
         )
+        console.log(this.state.groupedPhotos)
     }
 
     alertDeleteWarning = (fileUri) =>
@@ -41,12 +42,11 @@ export default class GalleryScreen extends React.Component {
             'Are you sure?',
             [
                 { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
-                { text: 'OK', onPress: () => {evokFileSystem.deleteImagefromGallery(fileUri, this.updatePhotoList)} }
+                { text: 'OK', onPress: () => {evokFileSystem.deleteImagefromGallery(fileUri, this.getList)} }
             ],
             { cancelable: false }
         )
 
-    updatePhotoList = () => {this.getList(), console.log('pic deleted')}
 
     render() {
         const { navigate } = this.props.navigation
