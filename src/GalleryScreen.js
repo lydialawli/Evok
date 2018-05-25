@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, StyleSheet, View, TouchableOpacity, Text } from 'react-native'
+import { Image, StyleSheet, View, TouchableOpacity, ScrollView, Text, Alert } from 'react-native'
 import { StackNavigator } from 'react-navigation'
 import EvokCamera from '../src/CameraScreen.js'
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
@@ -36,6 +36,17 @@ export default class GalleryScreen extends React.Component {
         )
     }
 
+    alertDeleteWarning = () =>
+        Alert.alert(
+            'Delete Picture',
+            'Are you sure?',
+            [
+                { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
+                { text: 'OK', onPress: () => console.log('OK Pressed') },
+            ],
+            { cancelable: false }
+        )
+
 
     render() {
         const { navigate } = this.props.navigation
@@ -44,13 +55,12 @@ export default class GalleryScreen extends React.Component {
         let images = this.state.groupedPhotos.map(
             (fileUri) => {
                 return (
-
-                    <Image
-                        key={fileUri}
-                        style={{ width: 100, height: 100, margin: 3 }}
-                        source={{ uri: fileUri }}
-                    />
-
+                    <TouchableOpacity key={fileUri} onPress={this.alertDeleteWarning}>
+                        <Image
+                            style={{ width: 100, height: 100, margin: 3 }}
+                            source={{ uri: fileUri }}
+                        />
+                    </TouchableOpacity>
                 )
             }
         )
@@ -58,9 +68,9 @@ export default class GalleryScreen extends React.Component {
         return (
             <View style={evokStyles.galleryView} >
 
-                <View style={evokStyles.imagesWrapper}>
+                <ScrollView contentContainerStyle={evokStyles.imagesWrapper}>
                     {images}
-                </View>
+                </ScrollView>
                 <TouchableOpacity style={evokStyles.homeButton} onPress={() => navigate('Camera')}>
                     <Ionicons name="ios-add-circle-outline" size={40} color="white" />
                 </TouchableOpacity>
