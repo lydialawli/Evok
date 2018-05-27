@@ -49,12 +49,23 @@ evokFileSystem.getArrayOfPicObjects = (directoryUri, callback) => {
 
             let listOfPicObjects = listOfFileNames.map((fileName) => {
                 return  {
-                    timestamp: fileName.replace(".jpg",""),
+                    timestamp: parseInt(fileName.replace(".jpg","")),
                     fileName : fileName,
                     fileUri: directoryUri + fileName
                 }
     
             })
+
+            let sortByTimestamp = (obj1, obj2)=>
+            {
+                if (obj1.timestamp > obj2.timestamp)
+                    return -1;
+                else
+                    return 1
+                 
+            }
+
+            listOfPicObjects.sort(sortByTimestamp)
 
             callback(listOfPicObjects)
         })
