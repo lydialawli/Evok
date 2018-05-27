@@ -51,9 +51,9 @@ class EvokCamera extends React.Component {
         autofocus: 'on',
         showGallery: 'false',
         permissionsGranted: true,
-        lastPictureIs: '',
         groupedPhotos: [],
-        lastPicOpacity: 0.5
+        lastPicOpacity: 0.5,
+        onionSkin: ''
 
     }
 
@@ -66,7 +66,7 @@ class EvokCamera extends React.Component {
     getList = () => {
         let currentFolder = evokFileSystem.getPath('myPro', '')
 
-        evokFileSystem.getFilesUriInDirectory(currentFolder, this.onFilesListed)
+        evokFileSystem.getArrayOfPicObjects(currentFolder, this.onFilesListed)
     }
 
     onFilesListed = (result) => {
@@ -75,6 +75,8 @@ class EvokCamera extends React.Component {
                 groupedPhotos: result,
             }
         )
+        //console.log(this.state.groupedPhotos)
+
     }
 
     takePicture = async () => {
@@ -156,7 +158,26 @@ class EvokCamera extends React.Component {
         )
     }
 
+    getOnionSkin = () => {
+        return (
+            <ImageBackground
+                style={{ flex: 7, justifyContent: 'center', opacity: this.state.lastPicOpacity }}
+                resizeMode="contain"
+                source={{ uri: this.state.groupedPhotos[this.state.groupedPhotos.length - 1].fileUri }}>
+            </ImageBackground>
+        )
+    }
     getCameraView() {
+        let lastPicUri = ''
+        if (this.state.groupedPhotos.length > 0)
+            lastPicUri = this.state.groupedPhotos[this.state.groupedPhotos.length - 1].fileUri
+
+        console.log(lastPicUri, this.state.groupedPhotos.length)
+        let onionSkin= <View/>
+        if (lastPicUri)
+            onionSkin = this.getOnionSkin()
+        
+
         return (
             <View style={{ width: '100%', height: '100%', alignItems: 'center' }}>
                 <Camera
@@ -170,11 +191,8 @@ class EvokCamera extends React.Component {
                             backgroundColor: 'transparent',
 
                         }}>
-                        <ImageBackground
-                            style={{ flex: 7, justifyContent: 'center', opacity: this.state.lastPicOpacity }}
-                            resizeMode="contain"
-                            source={{ uri: this.state.groupedPhotos[this.state.groupedPhotos.length - 1] }}>
-                        </ImageBackground>
+
+                        {onionSkin}
 
                         <View
                             style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-evenly' }}>
@@ -186,10 +204,10 @@ class EvokCamera extends React.Component {
                                 value={this.state.lastPicOpacity}
                                 minimumTrackTintColor='#ffcc00'
                                 lastPicOpacity={this.state.lastPicOpacity}
-                                thumbImage={<Ionicons name="ios-bicycle-outline" size={20} color="white" /> }
+                                thumbImage={<Ionicons name="ios-bicycle-outline" size={20} color="white" />}
                                 onValueChange={lastPicOpacity => this.setState({ lastPicOpacity })}
                             />
-                    
+
                             <TouchableOpacity style={evokStyles.snapCamButton} onPress={this.takePicture.bind(this)}>
                                 <Ionicons name="md-aperture" size={50} color="white" />
                             </TouchableOpacity>

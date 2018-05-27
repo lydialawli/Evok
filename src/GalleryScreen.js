@@ -24,7 +24,7 @@ export default class GalleryScreen extends React.Component {
     getList = () => {
         let currentFolder = evokFileSystem.getPath('myPro', '')
 
-        evokFileSystem.getFilesUriInDirectory(currentFolder, this.onFilesListed)
+        evokFileSystem.getArrayOfPicObjects(currentFolder, this.onFilesListed)
     }
 
     onFilesListed = (result) => {
@@ -35,13 +35,13 @@ export default class GalleryScreen extends React.Component {
         )
     }
 
-    alertDeleteWarning = (fileUri) =>
+    alertDeleteWarning = (picObject) =>
         Alert.alert(
-            'Delete Picture',
+            'Delete '+picObject.fileName,
             'Are you sure?',
             [
                 { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
-                { text: 'OK', onPress: () => { evokFileSystem.deleteImagefromGallery(fileUri, this.getList) } }
+                { text: 'OK', onPress: () => { evokFileSystem.deleteImagefromGallery(picObject.fileUri, this.getList) } }
             ],
             { cancelable: false }
         )
@@ -52,12 +52,12 @@ export default class GalleryScreen extends React.Component {
         console.log("Gallery mode")
 
         let images = this.state.groupedPhotos.map(
-            (fileUri) => {
+            (picObject) => {
                 return (
-                    <TouchableOpacity key={fileUri} onLongPress={() => this.alertDeleteWarning(fileUri)}>
+                    <TouchableOpacity key={picObject.fileUri} onLongPress={() => this.alertDeleteWarning(picObject)}>
                         <ImageBackground
                             style={{ width: 100, height: 100, margin: 3 }}
-                            source={{ uri: fileUri }}>
+                            source={{ uri: picObject.fileUri }}>
                             <Text> YUPI</Text>
                         </ImageBackground>
                     </TouchableOpacity>

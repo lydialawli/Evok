@@ -42,6 +42,26 @@ evokFileSystem.getFilesUriInDirectory = (directoryUri, callback) => {
 
 }
 
+evokFileSystem.getArrayOfPicObjects = (directoryUri, callback) => {
+
+    FileSystem.readDirectoryAsync(directoryUri)
+        .then((listOfFileNames) => {
+
+            let listOfPicObjects = listOfFileNames.map((fileName) => {
+                return  {
+                    timestamp: fileName.replace(".jpg",""),
+                    fileName : fileName,
+                    fileUri: directoryUri + fileName
+                }
+    
+            })
+
+            callback(listOfPicObjects)
+        })
+        .catch(err => console.error(err))
+
+}
+
 evokFileSystem.deleteImagefromGallery = (FileUri, callback) => {
 
     FileSystem.deleteAsync(FileUri)
