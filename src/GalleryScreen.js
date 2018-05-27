@@ -54,7 +54,7 @@ export default class GalleryScreen extends React.Component {
         let images = this.state.groupedPhotos.map(
             (fileUri) => {
                 return (
-                    <TouchableOpacity key={fileUri} onPress={() => this.alertDeleteWarning(fileUri)}>
+                    <TouchableOpacity key={fileUri} onLongPress={() => this.alertDeleteWarning(fileUri)}>
                         <ImageBackground
                             style={{ width: 100, height: 100, margin: 3 }}
                             source={{ uri: fileUri }}>
