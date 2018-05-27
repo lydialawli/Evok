@@ -56,18 +56,18 @@ export default class GalleryScreen extends React.Component {
                 return (
                     <TouchableOpacity key={picObject.fileUri} onLongPress={() => this.alertDeleteWarning(picObject)}>
                         <ImageBackground
-                            style={{ width: 100, height: 100, margin: 3 }}
+                            style={{ width: 80, height: 80, margin: 3 }}
                             source={{ uri: picObject.fileUri }}>
                             <Text> {new Date(picObject.timestamp).toString()} </Text>
                         </ImageBackground>
                     </TouchableOpacity>
-                )
+                )   
             }
         )
 
         return (
             <View style={evokStyles.galleryView} >
-
+                <Text style={evokStyles.projectTextinGallery}>My project name</Text>
                 <ScrollView contentContainerStyle={evokStyles.imagesWrapper}>
                     {images}
                 </ScrollView>

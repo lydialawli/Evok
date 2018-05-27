@@ -11,7 +11,8 @@ const evokStyles = StyleSheet.create({
     galleryView: {
         backgroundColor: '#ff6666',
         flex: 1,
-        justifyContent: 'space-around',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
         alignItems: 'center'
     },
 
@@ -29,7 +30,9 @@ const evokStyles = StyleSheet.create({
         display: 'flex',
         flexWrap: 'wrap',
         flexDirection: 'row',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
+        paddingBottom: 10
+        
     },
 
     bottomBar: {
@@ -96,12 +99,20 @@ const evokStyles = StyleSheet.create({
         elevation: 5,
     },
 
+    projectTextinGallery: {
+       display: 'flex',
+       color: '#009999',
+       fontSize: 30,
+       fontWeight: 'bold',
+       marginTop: 10
+    },
+
     evokText: {
         flex: 0.5,
         color: '#009999',
         fontSize: 30,
         fontWeight: 'bold',
-        alignItems: 'flex-start'
+        alignItems: 'flex-start',
     },
 
     ProjectFolderText: {

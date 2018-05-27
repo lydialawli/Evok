@@ -26,22 +26,6 @@ evokFileSystem.moveFile = (originalFile, currentFolder, fileName, callback) => {
         .catch(err => console.error(err))
 }
 
-evokFileSystem.getFilesUriInDirectory = (directoryUri, callback) => {
-
-    FileSystem.readDirectoryAsync(directoryUri)
-        .then((listOfFileNames) => {
-
-
-            let listOfFileUris = listOfFileNames.map((fileName) => {
-                return directoryUri + fileName
-            })
-
-            callback(listOfFileUris)
-        })
-        .catch(err => console.error(err))
-
-}
-
 evokFileSystem.getArrayOfPicObjects = (directoryUri, callback) => {
 
     FileSystem.readDirectoryAsync(directoryUri)
