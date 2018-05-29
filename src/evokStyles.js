@@ -23,7 +23,7 @@ const evokStyles = StyleSheet.create({
         alignItems: 'center',
         paddingTop: 10,
         paddingBottom: 30
-       
+
     },
 
     imagesWrapper: {
@@ -32,7 +32,7 @@ const evokStyles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-start',
         paddingBottom: 10
-        
+
     },
 
     bottomBar: {
@@ -100,11 +100,11 @@ const evokStyles = StyleSheet.create({
     },
 
     projectTextinGallery: {
-       display: 'flex',
-       color: '#009999',
-       fontSize: 30,
-       fontWeight: 'bold',
-       marginTop: 10
+        display: 'flex',
+        color: '#009999',
+        fontSize: 30,
+        fontWeight: 'bold',
+        marginTop: 10
     },
 
     evokText: {
@@ -137,7 +137,19 @@ const evokStyles = StyleSheet.create({
         backgroundColor: '#ffcc00',
         alignItems: 'center',
         borderRadius: 8,
+        padding: 22,
         marginTop: 2
+    },
+
+    modalWindow: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'transparent',
+        margin: 2,
+        borderColor: 'rgba(0, 0, 0, 0.1)',
+        borderRadius: 2,
+
     },
 
     cameraView: {
@@ -146,6 +158,16 @@ const evokStyles = StyleSheet.create({
         height: Dimensions.get('window').height,
         width: Dimensions.get('window').width
     },
+
+    buttonHideModal: {
+        backgroundColor: 'lightblue',
+        padding: 12,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 4,
+        borderColor: 'rgba(0, 0, 0, 0.1)',
+
+    }
 })
 
 export default evokStyles 

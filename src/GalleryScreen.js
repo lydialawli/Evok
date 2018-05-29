@@ -2,7 +2,7 @@ import React from 'react'
 import { Image, StyleSheet, View, TouchableOpacity, TouchableHighlight, ScrollView, Text, Alert, ImageBackground, Modal } from 'react-native'
 import { StackNavigator } from 'react-navigation'
 import EvokCamera from '../src/CameraScreen.js'
-import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
+import { Ionicons } from '@expo/vector-icons'
 import evokStyles from '../src/evokStyles.js'
 import HomeScreen from '../App.js'
 import evokFileSystem from '../src/evokFilesystem.js'
@@ -15,7 +15,8 @@ export default class GalleryScreen extends React.Component {
 
     state = {
         groupedPhotos: [],
-        modalVisible: false
+        modalVisible: false,
+        selectedFullImagePicObject:  null
     }
 
     componentWillMount() {
@@ -47,20 +48,35 @@ export default class GalleryScreen extends React.Component {
             { cancelable: false }
         )
 
-    viewFullImage = (lala) => {
+    getFullImageView = (picObject) => {
+
+        console.log('viewFullImage', picObject)
+
+        if (!picObject)
+            return (
+                <View style={{ flex: 1 }}>
+                    <Text> No picObject   </Text>
+                </View>
+            )
+
         return (
-            <View style={{ flex: 1 }}>
+            <View style={{ width: '90%', height: '90%', alignItems: 'center', backgroundColor: 'transparent' }}>
                 <Image
-                    style={{ flex: 1 }}
-                    source={{ uri: lala }}
+                    style={{ width: '100%', height: '100%' }}
+                    source={{ uri: picObject.fileUri }}
                     resizeMode="contain"
                 />
             </View>
         )
     }
 
-    setModalVisible(visible) {
-        this.setState({ modalVisible: visible });
+    setModalVisible(visible, picObject) {
+        console.log('modalview', visible, picObject)
+        this.setState({
+            modalVisible: visible,
+            selectedFullImagePicObject: picObject
+        })
+
     }
 
     render() {
@@ -69,8 +85,14 @@ export default class GalleryScreen extends React.Component {
 
         let images = this.state.groupedPhotos.map(
             (picObject) => {
+
+                let onPressPic = () => {
+                    console.log(picObject)
+                    this.setModalVisible(true, picObject)
+                }
+
                 return (
-                    <TouchableOpacity key={picObject.fileUri} onLongPress={() => this.alertDeleteWarning(picObject)}>
+                    <TouchableOpacity key={picObject.fileUri} onPress={onPressPic} onLongPress={() => this.alertDeleteWarning(picObject)}>
                         <ImageBackground
                             style={{ width: 80, height: 80, margin: 3 }}
                             source={{ uri: picObject.fileUri }}>
@@ -81,6 +103,8 @@ export default class GalleryScreen extends React.Component {
             }
         )
 
+        let fullImage = this.getFullImageView(this.state.selectedFullImagePicObject)
+
         return (
             <View style={evokStyles.galleryView} >
                 <Text style={evokStyles.projectTextinGallery}>My project name</Text>
@@ -90,24 +114,22 @@ export default class GalleryScreen extends React.Component {
 
                 <Modal
                     visible={this.state.modalVisible}
-                    onRequestClose={() => { alert('Modal has been closed.') }} >
-                    <View>
-                        <Text>Hello World!</Text>
-                        <TouchableHighlight
+                    onRequestClose={() => { alert('Modal has been closed.') }}
+                    animationType= {'slide'}
+                    transparent = {true}
+                   >
+
+                    <View style={evokStyles.modalWindow}>
+                        {fullImage}
+
+                        <TouchableHighlight style={evokStyles.buttonHideModal}
                             onPress={() => {
-                                this.setModalVisible(!this.state.modalVisible);
+                                this.setModalVisible(!this.state.modalVisible)
                             }}>
-                            <Text>Hide Modal</Text>
+                            <Text>Hide Picture</Text>
                         </TouchableHighlight>
                     </View>
                 </Modal>
-
-                <TouchableHighlight
-                    onPress={() => {
-                        this.setModalVisible(true);
-                    }}>
-                    <Text>Show Modal</Text>
-                </TouchableHighlight>
 
                 <View style={evokStyles.bottomBar}>
                     <TouchableOpacity style={evokStyles.homeButton} onPress={() => navigate('Home')}>
@@ -123,11 +145,3 @@ export default class GalleryScreen extends React.Component {
     }
 
 }
-
-
-
-/* 
-<TouchableOpacity style={evokStyles.homeButton} onPress={this.getList}>                     
-    <Ionicons name="ios-barcode-outline" size={40} color="white" />
-</TouchableOpacity>
-*/
