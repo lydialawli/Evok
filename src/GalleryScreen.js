@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, StyleSheet, View, TouchableOpacity, ScrollView, Text, Alert, ImageBackground } from 'react-native'
+import { Image, StyleSheet, View, TouchableOpacity, TouchableHighlight, ScrollView, Text, Alert, ImageBackground, Modal } from 'react-native'
 import { StackNavigator } from 'react-navigation'
 import EvokCamera from '../src/CameraScreen.js'
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
@@ -14,7 +14,8 @@ export default class GalleryScreen extends React.Component {
     }
 
     state = {
-        groupedPhotos: []
+        groupedPhotos: [],
+        modalVisible: false
     }
 
     componentWillMount() {
@@ -37,7 +38,7 @@ export default class GalleryScreen extends React.Component {
 
     alertDeleteWarning = (picObject) =>
         Alert.alert(
-            'Delete '+picObject.fileName,
+            'Delete ' + picObject.fileName,
             'Are you sure?',
             [
                 { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
@@ -46,6 +47,21 @@ export default class GalleryScreen extends React.Component {
             { cancelable: false }
         )
 
+    viewFullImage = (lala) => {
+        return (
+            <View style={{ flex: 1 }}>
+                <Image
+                    style={{ flex: 1 }}
+                    source={{ uri: lala }}
+                    resizeMode="contain"
+                />
+            </View>
+        )
+    }
+
+    setModalVisible(visible) {
+        this.setState({ modalVisible: visible });
+    }
 
     render() {
         const { navigate } = this.props.navigation
@@ -61,7 +77,7 @@ export default class GalleryScreen extends React.Component {
                             <Text> {new Date(picObject.timestamp).toString()} </Text>
                         </ImageBackground>
                     </TouchableOpacity>
-                )   
+                )
             }
         )
 
@@ -71,6 +87,27 @@ export default class GalleryScreen extends React.Component {
                 <ScrollView contentContainerStyle={evokStyles.imagesWrapper}>
                     {images}
                 </ScrollView>
+
+                <Modal
+                    visible={this.state.modalVisible}
+                    onRequestClose={() => { alert('Modal has been closed.') }} >
+                    <View>
+                        <Text>Hello World!</Text>
+                        <TouchableHighlight
+                            onPress={() => {
+                                this.setModalVisible(!this.state.modalVisible);
+                            }}>
+                            <Text>Hide Modal</Text>
+                        </TouchableHighlight>
+                    </View>
+                </Modal>
+
+                <TouchableHighlight
+                    onPress={() => {
+                        this.setModalVisible(true);
+                    }}>
+                    <Text>Show Modal</Text>
+                </TouchableHighlight>
 
                 <View style={evokStyles.bottomBar}>
                     <TouchableOpacity style={evokStyles.homeButton} onPress={() => navigate('Home')}>
