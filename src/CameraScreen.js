@@ -135,14 +135,6 @@ class EvokCamera extends React.Component {
         )
     }
 
-    bugButton() {
-        return (
-            <View>
-                <Ionicons name="ios-bicycle-outline" size={20} color="white" />
-            </View>
-        )
-    }
-
     getPreviewView() {
         return (
             <View style={{ width: '100%', height: '100%', flexDirection: 'column', justifyContent: 'space-around', paddingTop: 30 }}>
@@ -163,7 +155,7 @@ class EvokCamera extends React.Component {
             <ImageBackground
                 style={{ flex: 7, justifyContent: 'center', opacity: this.state.lastPicOpacity }}
                 resizeMode="contain"
-                source={{ uri: this.state.groupedPhotos[this.state.groupedPhotos.length - 1].fileUri }}>
+                source={{ uri: this.state.groupedPhotos[0].fileUri }}>
             </ImageBackground>
         )
     }
@@ -204,7 +196,7 @@ class EvokCamera extends React.Component {
                                 value={this.state.lastPicOpacity}
                                 minimumTrackTintColor='#ffcc00'
                                 lastPicOpacity={this.state.lastPicOpacity}
-                                thumbImage={<Ionicons name="ios-bicycle-outline" size={20} color="white" />}
+                                thumbImage={<Ionicons name="ios-bicycle-outline" size={3} color="white" />}
                                 onValueChange={lastPicOpacity => this.setState({ lastPicOpacity })}
                             />
 

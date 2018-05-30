@@ -26,6 +26,7 @@ evokFileSystem.moveFile = (originalFile, currentFolder, fileName, callback) => {
         .catch(err => console.error(err))
 }
 
+
 evokFileSystem.getArrayOfPicObjects = (directoryUri, callback) => {
 
     FileSystem.readDirectoryAsync(directoryUri)
