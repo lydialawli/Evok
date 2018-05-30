@@ -12,7 +12,7 @@ const evokStyles = StyleSheet.create({
         backgroundColor: '#ff6666',
         flex: 1,
         flexDirection: 'column',
-        justifyContent: 'flex-start',
+        justifyContent: 'center',
         alignItems: 'center'
     },
 
@@ -30,7 +30,7 @@ const evokStyles = StyleSheet.create({
         display: 'flex',
         flexWrap: 'wrap',
         flexDirection: 'row',
-        justifyContent: 'flex-start',
+        justifyContent: 'center',
         paddingBottom: 10
 
     },
@@ -133,11 +133,11 @@ const evokStyles = StyleSheet.create({
     homeButton: {
         width: 50,
         height: 50,
-        justifyContent: 'space-around',
+        justifyContent: 'center',
         backgroundColor: '#ffcc00',
         alignItems: 'center',
         borderRadius: 8,
-        padding: 22,
+        padding: 2,
         marginTop: 2
     },
 
