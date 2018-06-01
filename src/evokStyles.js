@@ -2,14 +2,14 @@ import { StyleSheet, Dimensions } from 'react-native'
 
 const evokStyles = StyleSheet.create({
     container: {
-        backgroundColor: '#ff6666',
+        backgroundColor: '#002233',
         flex: 1,
         alignItems: 'center',
         justifyContent: 'space-evenly',
     },
 
     galleryView: {
-        backgroundColor: '#ff6666',
+        backgroundColor: '#ffb84d',
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'center',
@@ -90,18 +90,19 @@ const evokStyles = StyleSheet.create({
     },
 
     projectFolderButton: {
-        width: 100,
-        height: 100,
-        justifyContent: 'space-evenly',
-        backgroundColor: '#ffcc00',
+        width: 300,
+        height: 120,
+        justifyContent: 'flex-start',
+        borderColor: '#ffb84d',
+        backgroundColor: 'transparent',
         alignItems: 'center',
         borderRadius: 8,
-        elevation: 5,
+        elevation: 3,
     },
 
     projectTextinGallery: {
         display: 'flex',
-        color: '#009999',
+        color: '#331f00',
         fontSize: 30,
         fontWeight: 'bold',
         marginTop: 10
@@ -109,18 +110,20 @@ const evokStyles = StyleSheet.create({
 
     evokText: {
         flex: 0.5,
-        color: '#009999',
+        color: '#ffb84d',
+        textShadowRadius: 5,
         fontSize: 30,
-        fontWeight: 'bold',
+        letterSpacing: 4,
         alignItems: 'flex-start',
     },
 
     ProjectFolderText: {
         flex: 1,
-        color: '#009999',
+        color: '#ffb84d',
         fontSize: 15,
-        fontWeight: 'bold',
-        alignItems: 'center'
+        fontWeight: 'normal',
+        justifyContent: 'center',
+        alignItems: 'flex-end'
     },
 
     iconText: {
@@ -134,9 +137,10 @@ const evokStyles = StyleSheet.create({
         width: 50,
         height: 50,
         justifyContent: 'center',
-        backgroundColor: '#ffcc00',
+       
         alignItems: 'center',
         borderRadius: 8,
+        borderColor: '#ffb84d',
         padding: 2,
         marginTop: 2
     },
@@ -160,12 +164,13 @@ const evokStyles = StyleSheet.create({
     },
 
     buttonHideModal: {
-        backgroundColor: 'lightblue',
+        backgroundColor: '#ffb84d',
         padding: 12,
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 4,
         borderColor: 'rgba(0, 0, 0, 0.1)',
+        elevation: 3
 
     }
 })

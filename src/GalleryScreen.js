@@ -96,7 +96,7 @@ export default class GalleryScreen extends React.Component {
                         <ImageBackground
                             style={{ width: 80, height: 80, margin: 3 }}
                             source={{ uri: picObject.fileUri }}>
-                            <Text> {new Date(picObject.timestamp).toString()} </Text>
+                            <Text> {new Date(picObject.timestamp).toDateString()} {new Date(picObject.timestamp).toLocaleTimeString()} </Text>
                         </ImageBackground>
                     </TouchableOpacity>
                 )
