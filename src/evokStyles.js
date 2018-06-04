@@ -9,7 +9,7 @@ const evokStyles = StyleSheet.create({
     },
 
     galleryView: {
-        backgroundColor: '#ffb84d',
+        backgroundColor: '#002233',
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'center',
@@ -17,7 +17,7 @@ const evokStyles = StyleSheet.create({
     },
 
     camScreenView: {
-        backgroundColor: '#ff6666',
+        backgroundColor: '#002233',
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
@@ -92,19 +92,20 @@ const evokStyles = StyleSheet.create({
     projectFolderButton: {
         width: 300,
         height: 120,
-        justifyContent: 'flex-start',
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
         borderColor: '#ffb84d',
         backgroundColor: 'transparent',
         alignItems: 'center',
-        borderRadius: 8,
+        borderRadius: 10,
         elevation: 3,
     },
 
     projectTextinGallery: {
         display: 'flex',
-        color: '#331f00',
+        color: '#ffb84d',
         fontSize: 30,
-        fontWeight: 'bold',
+        fontWeight: 'normal',
         marginTop: 10
     },
 
@@ -122,7 +123,7 @@ const evokStyles = StyleSheet.create({
         color: '#ffb84d',
         fontSize: 15,
         fontWeight: 'normal',
-        justifyContent: 'center',
+        justifyContent: 'flex-end',
         alignItems: 'flex-end'
     },
 
