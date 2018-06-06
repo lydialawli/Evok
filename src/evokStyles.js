@@ -76,7 +76,7 @@ const evokStyles = StyleSheet.create({
     snapCamButton: {
         width: 60,
         height: 60,
-        backgroundColor: '#ff6666',
+        backgroundColor: '#009999',
         borderRadius: 100,
         alignSelf: 'center',
         alignItems: 'center',
@@ -91,13 +91,14 @@ const evokStyles = StyleSheet.create({
 
     projectFolderButton: {
         width: 300,
-        height: 120,
+        height: 300,
         flexDirection: 'row',
         justifyContent: 'flex-end',
         borderColor: '#ffb84d',
         backgroundColor: 'transparent',
         alignItems: 'center',
         borderRadius: 10,
+        
         elevation: 3,
     },
 

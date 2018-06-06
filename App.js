@@ -16,7 +16,8 @@ export class HomeScreen extends React.Component {
     }
 
     state = {
-        groupedPhotos: []
+        groupedPhotos: [],
+        projectTitle: 'press to name'
     }
 
     async componentWillMount() {
@@ -38,13 +39,21 @@ export class HomeScreen extends React.Component {
         //console.log(this.state.groupedPhotos)
     }
 
+    updateProjectName = () => {
+        this.setState({ projectTitle: 'Unga Bunga' })
+    }
+
     getProjectImage = (projectImagefileUri) => {
         return (
             <ImageBackground
-                style={{ flex:1 }}
+                style={{ flex: 1 }}
                 resizeMode="cover"
                 source={{ uri: projectImagefileUri }}>
-                <Text style={evokStyles.ProjectFolderText} >Project Name</Text>
+
+                <Text style={evokStyles.ProjectFolderText} >
+                    {this.state.projectTitle}
+                </Text>
+
             </ImageBackground>
         )
     }
