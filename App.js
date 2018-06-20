@@ -67,16 +67,20 @@ export class HomeScreen extends React.Component {
             projectImage = this.getProjectImage(this.state.groupedPhotos[22].fileUri)
 
         return (
-            <View style={evokStyles.container} >
-                <Text style={evokStyles.evokText} >
-                    EVOK
-                </Text>
-                <TouchableOpacity style={evokStyles.homeButton} onPress={() => navigate('Camera')}>
-                    <Ionicons name="ios-camera-outline" size={60} color="#009999" containerStyle={flex = 1} />
-                </TouchableOpacity>
-                <TouchableOpacity style={evokStyles.projectFolderButton} onPress={() => navigate('Gallery')}>
-                    {projectImage}
-                </TouchableOpacity>
+            <View style={evokStyles.screenContainer} >
+                <View style={evokStyles.topBar}>
+                    <Text style={evokStyles.evokText} >
+                        EVOK
+                    </Text>
+                </View>
+                <View style={evokStyles.elementsContainer}>
+                    <TouchableOpacity style={evokStyles.homeButton} onPress={() => navigate('Camera')}>
+                        <Ionicons name="ios-camera-outline" size={60} color="#009999" containerStyle={flex = 1} />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={evokStyles.projectFolderButton} onPress={() => navigate('Gallery')}>
+                        {projectImage}
+                    </TouchableOpacity>
+                </View>
             </View>
         )
     }

@@ -1,11 +1,27 @@
 import { StyleSheet, Dimensions } from 'react-native'
 
 const evokStyles = StyleSheet.create({
-    container: {
-        backgroundColor: '#002233',
+    screenContainer: {
+        backgroundColor: 'white',
         flex: 1,
+        justifyContent: 'space-around',
+       alignItems: 'center',
+    },
+
+    elementsContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    
+    topBar: {
+        backgroundColor: 'grey',
+        width: Dimensions.get('window').width,
+        height: 80,
+        alignSelf: 'flex-start',
+        justifyContent: 'flex-start',
         alignItems: 'center',
-        justifyContent: 'space-evenly',
+        elevation: 8
     },
 
     galleryView: {
@@ -111,12 +127,12 @@ const evokStyles = StyleSheet.create({
     },
 
     evokText: {
-        flex: 0.5,
+        flex: 1,
         color: '#ffb84d',
         textShadowRadius: 5,
         fontSize: 30,
         letterSpacing: 4,
-        alignItems: 'flex-start',
+        alignItems: 'center',
     },
 
     ProjectFolderText: {
