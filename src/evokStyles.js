@@ -35,7 +35,8 @@ const evokStyles = StyleSheet.create({
     topBarRightIcon: {
         flex:1,
         alignItems: 'flex-end',
-        marginRight: 5
+        marginRight: 5,
+     
     },
 
     galleryView: {
@@ -62,7 +63,6 @@ const evokStyles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         paddingBottom: 10
-
     },
 
     bottomBar: {
@@ -128,7 +128,6 @@ const evokStyles = StyleSheet.create({
         backgroundColor: 'lightblue',
         alignItems: 'center',
         borderRadius: 10,
-        
         elevation: 3,
     },
 
@@ -182,8 +181,27 @@ const evokStyles = StyleSheet.create({
         borderRadius: 4,
         borderColor: 'rgba(0, 0, 0, 0.1)',
         elevation: 3
+    },
 
-    }
+    imageCarousel: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        paddingBottom: 10,
+    },
+
+    timeLineCard: {
+        width: 300,
+        height: 200,
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        borderColor: '#ffb84d',
+        backgroundColor: 'lightblue',
+        alignItems: 'center',
+        borderRadius: 10,
+        elevation: 3,
+    },
 })
 
 export default evokStyles 

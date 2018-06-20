@@ -16,7 +16,7 @@ export default class ElementScreen extends React.Component {
     state = {
         groupedPhotos: [],
         modalVisible: false,
-        selectedFullImagePicObject:  null
+        selectedFullImagePicObject: null
     }
 
     componentWillMount() {
@@ -94,7 +94,7 @@ export default class ElementScreen extends React.Component {
                 return (
                     <TouchableOpacity key={picObject.fileUri} onPress={onPressPic} onLongPress={() => this.alertDeleteWarning(picObject)}>
                         <ImageBackground
-                            style={{ width: 80, height: 80, margin: 1 }}
+                            style={{ width: 300, height: 300, margin: 1 }}
                             source={{ uri: picObject.fileUri }}>
                             <Text> {new Date(picObject.timestamp).toDateString()} {new Date(picObject.timestamp).toLocaleTimeString()} </Text>
                         </ImageBackground>
@@ -106,19 +106,39 @@ export default class ElementScreen extends React.Component {
         let fullImage = this.getFullImageView(this.state.selectedFullImagePicObject)
 
         return (
-            <View style={evokStyles.galleryView} >
-                <Text style={evokStyles.projectTextinGallery}>My project name</Text>
-                <ScrollView contentContainerStyle={evokStyles.imagesWrapper}>
-                    {images}
-                </ScrollView>
+            <View style={evokStyles.screenContainer} >
+
+                <View style={evokStyles.topBar}>
+                    <Text style={evokStyles.topBarText} >
+                        Element 1
+                    </Text>
+                    <TouchableOpacity style={evokStyles.topBarRightIcon} onPress={() => navigate('Home')}>
+                        <Ionicons name="ios-home-outline" size={40} color="white" />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={evokStyles.topBarRightIcon} onPress={() => navigate('Camera')}>
+                        <Ionicons name="ios-add-circle-outline" size={40} color="white" />
+                    </TouchableOpacity>
+                </View>
+
+                <View style={evokStyles.cardsContainer}>
+                    <View style={evokStyles.projectCard}>
+                        <ScrollView contentContainerStyle={evokStyles.imageCarousel}>
+                            {images}
+                        </ScrollView>
+                    </View>
+                    <TouchableOpacity style={evokStyles.timeLineCard}>
+                        <Text style={evokStyles.topBarText} >
+                            Time line displayed here
+                        </Text>
+                    </TouchableOpacity>
+                </View>
 
                 <Modal
                     visible={this.state.modalVisible}
                     onRequestClose={() => { alert('Modal has been closed.') }}
-                    animationType= {'slide'}
-                    transparent = {true}
-                   >
-
+                    animationType={'slide'}
+                    transparent={true}
+                >
                     <View style={evokStyles.modalWindow}>
                         {fullImage}
 
@@ -131,14 +151,6 @@ export default class ElementScreen extends React.Component {
                     </View>
                 </Modal>
 
-                <View style={evokStyles.bottomBar}>
-                    <TouchableOpacity style={evokStyles.homeButton} onPress={() => navigate('Home')}>
-                        <Ionicons name="ios-home-outline" size={40} color="white" />
-                    </TouchableOpacity>
-                    <TouchableOpacity style={evokStyles.homeButton} onPress={() => navigate('Camera')}>
-                        <Ionicons name="ios-add-circle-outline" size={40} color="white" />
-                    </TouchableOpacity>
-                </View>
 
             </View>
         )
