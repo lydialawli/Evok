@@ -142,7 +142,7 @@ const evokStyles = StyleSheet.create({
     projectCardDescription: {
         width: 300,
         height: 100,
-        alignItems: 'flex-end',
+        alignItems: 'flex-start',
         backgroundColor: 'white',
     },
 
@@ -154,13 +154,13 @@ const evokStyles = StyleSheet.create({
         marginTop: 10
     },
 
-    ProjectFolderText: {
+    ProjectCardTitle: {
         flex: 1,
         color: '#ffb84d',
-        fontSize: 15,
+        fontSize: 25,
         fontWeight: 'normal',
-        justifyContent: 'flex-end',
-        alignItems: 'flex-end'
+        marginTop: 5, 
+        marginLeft: 5,
     },
 
     iconText: {

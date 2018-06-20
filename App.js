@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { StyleSheet, Text, View, Button, TouchableOpacity, Icon, Dimensions, ImageBackground, Image } from 'react-native'
+import { StyleSheet, Text, View, Button, TouchableOpacity, TextInput, Icon, Dimensions, ImageBackground, Image } from 'react-native'
 import { StackNavigator } from 'react-navigation'
 import CameraScreen from '../Evok/src/CameraScreen.js'
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
@@ -15,9 +15,13 @@ export class HomeScreen extends React.Component {
         title: 'Home',
     }
 
-    state = {
+    constructor(props) {
+        super(props)
+        this.state  = {
         groupedPhotos: [],
-        projectTitle: 'press to name'
+        projectTitle: 'rename me'
+        }
+
     }
 
     async componentWillMount() {
@@ -49,11 +53,6 @@ export class HomeScreen extends React.Component {
                 style={{ flex: 1 }}
                 resizeMode="cover"
                 source={{ uri: projectImagefileUri }}>
-
-                <Text style={evokStyles.ProjectFolderText} >
-                    {this.state.projectTitle}
-                </Text>
-
             </ImageBackground>
         )
     }
@@ -87,6 +86,16 @@ export class HomeScreen extends React.Component {
                             {projectImage}
                         </TouchableOpacity>
                         <View style={evokStyles.projectCardDescription}>
+                            <TextInput
+                                style={evokStyles.ProjectCardTitle}
+                                onChangeText={(projectTitle) => this.setState({ projectTitle })}
+                                value={this.state.projectTitle}
+                                editable = {true}
+                                maxLength = {20}
+                                placeholderTextColor = {'grey'}
+                                clearTextOnFocus = {true}
+                                underlineColorAndroid = {'transparent'}>
+                            </TextInput>
                         </View>
                     </View>
                     <TouchableOpacity style={evokStyles.projectCard} onPress={() => navigate('Element')}>
