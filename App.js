@@ -7,7 +7,7 @@ import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 import evokStyles from '../Evok/src/evokStyles.js'
 import GalleryScreen from '../Evok/src/GalleryScreen.js'
 import evokFileSystem from '../Evok/src/evokFilesystem.js'
-
+import ElementScreen from '../Evok/src/ElementScreen.js'
 
 export class HomeScreen extends React.Component {
     static navigationOptions = {
@@ -85,7 +85,7 @@ export class HomeScreen extends React.Component {
                     <TouchableOpacity style={evokStyles.projectCard} onPress={() => navigate('Gallery')}>
                         {projectImage}
                     </TouchableOpacity>
-                    <TouchableOpacity style={evokStyles.projectCard}>
+                    <TouchableOpacity style={evokStyles.projectCard} onPress={() => navigate('Element')}>
                         <Text style={evokStyles.topBarText} >
                              + New project
                         </Text>
@@ -101,7 +101,8 @@ const NavigationApp = StackNavigator(
     {
         Home: { screen: HomeScreen },
         Camera: { screen: CameraScreen },
-        Gallery: { screen: GalleryScreen }
+        Gallery: { screen: GalleryScreen },
+        Element: { screen: ElementScreen}
     },
 
     {
