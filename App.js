@@ -69,8 +69,8 @@ export class HomeScreen extends React.Component {
         return (
             <View style={evokStyles.screenContainer} >
                 <View style={evokStyles.topBar}>
-                    <Text style={evokStyles.evokText} >
-                        EVOK
+                    <Text style={evokStyles.topBarText} >
+                        Elements
                     </Text>
                 </View>
                 <View style={evokStyles.elementsContainer}>

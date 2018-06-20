@@ -18,10 +18,18 @@ const evokStyles = StyleSheet.create({
         backgroundColor: 'grey',
         width: Dimensions.get('window').width,
         height: 80,
-        alignSelf: 'flex-start',
-        justifyContent: 'flex-start',
+        justifyContent: 'center',
         alignItems: 'center',
-        elevation: 8
+        elevation: 8,
+        paddingTop: 30
+    },
+
+    topBarText: {
+        flex: 1,
+        color: 'white',
+        textShadowRadius: 2,
+        fontSize: 25,
+        alignSelf: 'center'
     },
 
     galleryView: {
@@ -124,15 +132,6 @@ const evokStyles = StyleSheet.create({
         fontSize: 30,
         fontWeight: 'normal',
         marginTop: 10
-    },
-
-    evokText: {
-        flex: 1,
-        color: '#ffb84d',
-        textShadowRadius: 5,
-        fontSize: 30,
-        letterSpacing: 4,
-        alignItems: 'center',
     },
 
     ProjectFolderText: {
