@@ -71,20 +71,24 @@ export class HomeScreen extends React.Component {
 
                 <View style={evokStyles.topBar}>
                     <TouchableOpacity style={evokStyles.topBarRightIcon}>
-                        <Ionicons name="ios-camera-outline" size={40} color="grey" containerStyle={flex =1} />
+                        <Ionicons name="ios-camera-outline" size={40} color="grey" containerStyle={flex = 1} />
                     </TouchableOpacity>
                     <Text style={evokStyles.topBarText} >
                         Elements
                     </Text>
                     <TouchableOpacity style={evokStyles.topBarRightIcon} onPress={() => navigate('Camera')}>
-                        <Ionicons name="ios-camera-outline" size={40} color="white" containerStyle={flex =1} />
+                        <Ionicons name="ios-camera-outline" size={40} color="white" containerStyle={flex = 1} />
                     </TouchableOpacity>
                 </View>
 
-                <View style={evokStyles.elementsContainer}>
-
-                    <TouchableOpacity style={evokStyles.projectFolderButton} onPress={() => navigate('Gallery')}>
+                <View style={evokStyles.cardsContainer}>
+                    <TouchableOpacity style={evokStyles.projectCard} onPress={() => navigate('Gallery')}>
                         {projectImage}
+                    </TouchableOpacity>
+                    <TouchableOpacity style={evokStyles.projectCard}>
+                        <Text style={evokStyles.topBarText} >
+                             + New project
+                        </Text>
                     </TouchableOpacity>
                 </View>
             </View>

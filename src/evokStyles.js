@@ -8,9 +8,9 @@ const evokStyles = StyleSheet.create({
        alignItems: 'center',
     },
 
-    elementsContainer: {
+    cardsContainer: {
         flex: 1,
-        justifyContent: 'center',
+        justifyContent: 'space-evenly',
         alignItems: 'center'
     },
     
@@ -29,8 +29,7 @@ const evokStyles = StyleSheet.create({
         color: 'white',
         textShadowRadius: 2,
         fontSize: 25,
-        justifyContent: 'center',
-        alignItems: 'center'
+        
     },
 
     topBarRightIcon: {
@@ -120,13 +119,13 @@ const evokStyles = StyleSheet.create({
         fontSize: 20
     },
 
-    projectFolderButton: {
+    projectCard: {
         width: 300,
         height: 300,
         flexDirection: 'row',
         justifyContent: 'flex-end',
         borderColor: '#ffb84d',
-        backgroundColor: 'transparent',
+        backgroundColor: 'lightblue',
         alignItems: 'center',
         borderRadius: 10,
         
