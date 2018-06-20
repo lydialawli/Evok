@@ -127,13 +127,23 @@ const evokStyles = StyleSheet.create({
     projectCard: {
         width: 300,
         height: 300,
-        flexDirection: 'row',
-        justifyContent: 'flex-end',
         borderColor: '#ffb84d',
         backgroundColor: 'lightblue',
         alignItems: 'center',
         borderRadius: 10,
         elevation: 3,
+    },
+
+    projectCardImage: {
+        width: 300,
+        height: 200
+    },
+
+    projectCardDescription: {
+        width: 300,
+        height: 100,
+        alignItems: 'flex-end',
+        backgroundColor: 'white',
     },
 
     projectTextinGallery: {

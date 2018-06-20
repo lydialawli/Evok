@@ -82,12 +82,16 @@ export class HomeScreen extends React.Component {
                 </View>
 
                 <View style={evokStyles.cardsContainer}>
-                    <TouchableOpacity style={evokStyles.projectCard} onPress={() => navigate('Gallery')}>
-                        {projectImage}
-                    </TouchableOpacity>
+                    <View style={evokStyles.projectCard}>
+                        <TouchableOpacity style={evokStyles.projectCardImage} onPress={() => navigate('Gallery')}>
+                            {projectImage}
+                        </TouchableOpacity>
+                        <View style={evokStyles.projectCardDescription}>
+                        </View>
+                    </View>
                     <TouchableOpacity style={evokStyles.projectCard} onPress={() => navigate('Element')}>
                         <Text style={evokStyles.topBarText} >
-                             + New project
+                            + New project
                         </Text>
                     </TouchableOpacity>
                 </View>
@@ -102,7 +106,7 @@ const NavigationApp = StackNavigator(
         Home: { screen: HomeScreen },
         Camera: { screen: CameraScreen },
         Gallery: { screen: GalleryScreen },
-        Element: { screen: ElementScreen}
+        Element: { screen: ElementScreen }
     },
 
     {
