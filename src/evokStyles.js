@@ -15,13 +15,13 @@ const evokStyles = StyleSheet.create({
     },
     
     topBar: {
+        flex: 0.1,
         backgroundColor: 'grey',
-        width: Dimensions.get('window').width,
-        height: 80,
-        justifyContent: 'center',
         alignItems: 'center',
+        justifyContent: 'center',
         elevation: 8,
-        paddingTop: 30
+        flexDirection: 'row',
+        paddingTop: 20
     },
 
     topBarText: {
@@ -29,7 +29,14 @@ const evokStyles = StyleSheet.create({
         color: 'white',
         textShadowRadius: 2,
         fontSize: 25,
-        alignSelf: 'center'
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+
+    topBarRightIcon: {
+        flex:1,
+        alignItems: 'flex-end',
+        marginRight: 5
     },
 
     galleryView: {
@@ -148,18 +155,6 @@ const evokStyles = StyleSheet.create({
         color: 'white',
         fontSize: 15,
         fontWeight: 'bold',
-    },
-
-    homeButton: {
-        width: 50,
-        height: 50,
-        justifyContent: 'center',
-       
-        alignItems: 'center',
-        borderRadius: 8,
-        borderColor: '#ffb84d',
-        padding: 2,
-        marginTop: 2
     },
 
     modalWindow: {
