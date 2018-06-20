@@ -16,7 +16,8 @@ export default class ElementScreen extends React.Component {
     state = {
         groupedPhotos: [],
         modalVisible: false,
-        selectedFullImagePicObject: null
+        selectedFullImagePicObject: null,
+        numberSnaps: 0
     }
 
     componentWillMount() {
@@ -32,7 +33,7 @@ export default class ElementScreen extends React.Component {
     onFilesListed = (result) => {
         this.setState(
             {
-                groupedPhotos: result
+                groupedPhotos: result,
             }
         )
     }
@@ -121,11 +122,37 @@ export default class ElementScreen extends React.Component {
                 </View>
 
                 <View style={evokStyles.cardsContainer}>
+                    <View  style={evokStyles.elementInfoDisplayContainer}>
+                        <View style={evokStyles.elementInfoDisplay2Containers} >
+                            <Text style={evokStyles.textRedElementInfoDisplay} >
+                                {this.state.groupedPhotos.length}
+                            </Text>
+                            <Text style={evokStyles.textRedElementInfoDisplay} >
+                                in 2 days
+                            </Text>
+                            <Text style={evokStyles.textRedElementInfoDisplay} >
+                                15
+                            </Text>
+                        </View>
+                        <View style={evokStyles.elementInfoDisplay2Containers} >
+                            <Text style={evokStyles.textGreyElementInfoDisplay} >
+                                Snaps
+                            </Text>
+                            <Text style={evokStyles.textGreyElementInfoDisplay} >
+                                Next
+                            </Text>
+                            <Text style={evokStyles.textGreyElementInfoDisplay} >
+                                Left
+                            </Text>
+                        </View>
+                    </View>
+
                     <View style={evokStyles.projectCard}>
                         <ScrollView contentContainerStyle={evokStyles.imageCarousel}>
                             {images}
                         </ScrollView>
                     </View>
+
                     <TouchableOpacity style={evokStyles.timeLineCard}>
                         <Text style={evokStyles.topBarText} >
                             Time line displayed here

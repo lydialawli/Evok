@@ -202,6 +202,39 @@ const evokStyles = StyleSheet.create({
         borderRadius: 10,
         elevation: 3,
     },
+
+    elementInfoDisplayContainer: {
+        flex: 0.5,
+        justifyContent: 'center',
+        backgroundColor: 'white',
+        alignItems: 'center',
+        borderRadius: 10,
+    },
+
+    elementInfoDisplay2Containers: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        backgroundColor: 'transparent',
+    },
+
+    textGreyElementInfoDisplay: {
+        flex: 1,
+        color: 'grey',
+        textShadowRadius: 2,
+        fontSize: 20,
+        textAlign: 'center'
+    },
+
+      
+    textRedElementInfoDisplay: {
+        flex: 1,
+        color: 'red',
+        textShadowRadius: 2,
+        fontWeight: 'bold',
+        fontSize: 25,
+        textAlign: 'center'
+    },
 })
 
 export default evokStyles 
