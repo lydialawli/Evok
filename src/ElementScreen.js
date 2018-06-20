@@ -110,19 +110,19 @@ export default class ElementScreen extends React.Component {
             <View style={evokStyles.screenContainer} >
 
                 <View style={evokStyles.topBar}>
+                    <TouchableOpacity style={evokStyles.topBarLeftIcon} onPress={() => navigate('Home')}>
+                        <Ionicons name="ios-arrow-round-back" size={40} color="white" />
+                    </TouchableOpacity>
                     <Text style={evokStyles.topBarText} >
                         Element 1
                     </Text>
-                    <TouchableOpacity style={evokStyles.topBarRightIcon} onPress={() => navigate('Home')}>
-                        <Ionicons name="ios-home-outline" size={40} color="white" />
-                    </TouchableOpacity>
                     <TouchableOpacity style={evokStyles.topBarRightIcon} onPress={() => navigate('Camera')}>
                         <Ionicons name="ios-add-circle-outline" size={40} color="white" />
                     </TouchableOpacity>
                 </View>
 
                 <View style={evokStyles.cardsContainer}>
-                    <View  style={evokStyles.elementInfoDisplayContainer}>
+                    <View style={evokStyles.elementInfoDisplayContainer}>
                         <View style={evokStyles.elementInfoDisplay2Containers} >
                             <Text style={evokStyles.textRedElementInfoDisplay} >
                                 {this.state.groupedPhotos.length}

@@ -16,11 +16,11 @@ const evokStyles = StyleSheet.create({
     
     topBar: {
         flex: 0.1,
+        flexDirection: 'row',
         backgroundColor: 'grey',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'space-between',
         elevation: 8,
-        flexDirection: 'row',
         paddingTop: 20
     },
 
@@ -32,11 +32,16 @@ const evokStyles = StyleSheet.create({
         
     },
 
+    topBarLeftIcon: {
+        flex:1,
+        alignItems: 'flex-start',
+        marginLeft: 5,
+    },
+
     topBarRightIcon: {
         flex:1,
         alignItems: 'flex-end',
         marginRight: 5,
-     
     },
 
     galleryView: {
@@ -159,7 +164,7 @@ const evokStyles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'transparent',
+        backgroundColor: 'black',
         margin: 2,
         borderColor: 'rgba(0, 0, 0, 0.1)',
         borderRadius: 2,
