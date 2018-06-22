@@ -80,6 +80,11 @@ export default class ElementScreen extends React.Component {
 
     }
 
+    milisecIntoHours(milisecs) {
+        h = milisecs / (60*60*1000)
+        return h.toFixed(5)
+    }
+
     render() {
         const { navigate } = this.props.navigation
         console.log("Element mode")
@@ -107,11 +112,13 @@ export default class ElementScreen extends React.Component {
         let imagesInfo = this.state.groupedPhotos.map(
             (picObject, index, array) => {
                 let previousPic = array[index- 1] 
-                let timeSinceLastPic = 0
+                let milisecsSinceLastPic = 0
+                let hoursSinceLastPic = 0
                 
                 if (index > 0) {
-                    timeSinceLastPic = previousPic.timestamp - picObject.timestamp
-                    console.log('timestamp since last pic is ' + timeSinceLastPic)
+                    milisecsSinceLastPic = previousPic.timestamp - picObject.timestamp
+                    hoursSinceLastPic = this.milisecIntoHours(milisecsSinceLastPic)
+                    console.log('timestamp since last pic is ' + hoursSinceLastPic)
                 }
                 return (
                     <View style={evokStyles.timelineObject} key={picObject.timestamp}>
@@ -123,7 +130,7 @@ export default class ElementScreen extends React.Component {
                             <Ionicons name="ios-remove" size={40} color="black" containerStyle={flex = 1} />
                             <Ionicons name="ios-git-commit" size={40} color="black" containerStyle={flex = 1} />
                             <Ionicons name="ios-remove" size={40} color="black" containerStyle={flex = 1} />
-                            <View style={{ borderColor: 'red', borderWidth: 0.6, backgroundColor: 'red', width: 80 }} />
+                            <View style={{ borderColor: 'red', borderWidth: 0.6, backgroundColor: 'red', width: hoursSinceLastPic*20 }} />
                         </View>
                         <Text> {new Date(picObject.timestamp).getHours()}:{new Date(picObject.timestamp).getMinutes()}</Text>
                     </View>
