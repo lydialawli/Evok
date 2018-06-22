@@ -127,11 +127,8 @@ const evokStyles = StyleSheet.create({
     timeLineImages: {
         width: 300,
         height: 100,
-        borderColor: '#ffb84d',
-        backgroundColor: 'lightblue',
+        backgroundColor: 'transparent',
         alignItems: 'center',
-        borderRadius: 10,
-        elevation: 3,
     },
 
     projectCard: {
@@ -220,7 +217,7 @@ const evokStyles = StyleSheet.create({
         width: 300,
         height: 200,
         flexDirection: 'column',
-        justifyContent: 'flex-end',
+        justifyContent: 'center',
         borderColor: '#ffb84d',
         backgroundColor: 'lightblue',
         alignItems: 'center',

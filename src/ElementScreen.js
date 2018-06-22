@@ -108,7 +108,7 @@ export default class ElementScreen extends React.Component {
             (picObject) => {
                 return (
                         <View style={evokStyles.timelineObject} key={picObject.timestamp}>
-                            <Text style={evokStyles.timelineObjectText} key={picObject.timestamp} >
+                            <Text style={evokStyles.timelineObjectText} >
                                 {new Date(picObject.timestamp).toDateString().replace(2018, "")}
                             </Text>
                             <View style={evokStyles.timeLineIcon}>
@@ -118,7 +118,7 @@ export default class ElementScreen extends React.Component {
                                 <Ionicons name="ios-remove" size={40} color="black" containerStyle={flex = 1} />
                                 <Ionicons name="ios-remove" size={40} color="black" containerStyle={flex = 1} />
                             </View>
-                            <Text key={picObject.timestamp} >
+                            <Text>
                                 {new Date(picObject.timestamp).getHours()}:{new Date(picObject.timestamp).getMinutes()}
                             </Text>
                         </View>
