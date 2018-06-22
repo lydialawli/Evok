@@ -195,8 +195,7 @@ class EvokCamera extends React.Component {
                                 maximumValue={1}
                                 value={this.state.lastPicOpacity}
                                 minimumTrackTintColor='#ffcc00'
-                                lastPicOpacity={this.state.lastPicOpacity}
-                                thumbImage={<Ionicons name="ios-bicycle-outline" size={3} color="white" />}
+                                lastPicOpacity={this.state.lastPicOpacity}                 
                                 onValueChange={lastPicOpacity => this.setState({ lastPicOpacity })}
                             />
 

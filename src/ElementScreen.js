@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, StyleSheet, View, TouchableOpacity, TouchableHighlight, ScrollView, Text, Alert, ImageBackground, Modal } from 'react-native'
+import { Image, StyleSheet, View, TouchableOpacity, TouchableHighlight, ScrollView, Text, Alert, ImageBackground, Modal, Slider } from 'react-native'
 import { StackNavigator } from 'react-navigation'
 import EvokCamera from '../src/CameraScreen.js'
 import { Ionicons } from '@expo/vector-icons'
@@ -17,7 +17,7 @@ export default class ElementScreen extends React.Component {
         groupedPhotos: [],
         modalVisible: false,
         selectedFullImagePicObject: null,
-        numberSnaps: 0
+
     }
 
     componentWillMount() {
@@ -104,6 +104,29 @@ export default class ElementScreen extends React.Component {
             }
         )
 
+        let imagesInfo = this.state.groupedPhotos.map(
+            (picObject) => {
+                return (
+                        <View style={evokStyles.timelineObject} key={picObject.timestamp}>
+                            <Text style={evokStyles.timelineObjectText} key={picObject.timestamp} >
+                                {new Date(picObject.timestamp).toDateString().replace(2018, "")}
+                            </Text>
+                            <View style={evokStyles.timeLineIcon}>
+                                <Ionicons name="ios-remove" size={40} color="black" containerStyle={flex = 1} />
+                                <Ionicons name="ios-remove" size={40} color="black" containerStyle={flex = 1} />
+                                <Ionicons name="ios-git-commit" size={40} color="black" containerStyle={flex = 1} />
+                                <Ionicons name="ios-remove" size={40} color="black" containerStyle={flex = 1} />
+                                <Ionicons name="ios-remove" size={40} color="black" containerStyle={flex = 1} />
+                            </View>
+                            <Text key={picObject.timestamp} >
+                                {new Date(picObject.timestamp).getHours()}:{new Date(picObject.timestamp).getMinutes()}
+                            </Text>
+                        </View>
+                   
+                )
+            }
+        )
+
         let fullImage = this.getFullImageView(this.state.selectedFullImagePicObject)
 
         return (
@@ -148,16 +171,19 @@ export default class ElementScreen extends React.Component {
                     </View>
 
                     <View style={evokStyles.projectCard}>
-                        <ScrollView contentContainerStyle={evokStyles.imageCarousel}>
+                        <ScrollView contentContainerStyle={evokStyles.imageCarousel} horizontal={true}>
                             {images}
                         </ScrollView>
                     </View>
 
-                    <TouchableOpacity style={evokStyles.timeLineCard}>
-                        <Text style={evokStyles.topBarText} >
-                            Time line displayed here
-                        </Text>
-                    </TouchableOpacity>
+                    <View style={evokStyles.timeLineCard}>
+                        <View style={evokStyles.timeLineImages}>
+                            <ScrollView contentContainerStyle={evokStyles.imageCarousel} horizontal={true}>
+                                {imagesInfo}
+                            </ScrollView>
+                        </View>
+
+                    </View>
                 </View>
 
                 <Modal

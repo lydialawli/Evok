@@ -124,6 +124,16 @@ const evokStyles = StyleSheet.create({
         fontSize: 20
     },
 
+    timeLineImages: {
+        width: 300,
+        height: 100,
+        borderColor: '#ffb84d',
+        backgroundColor: 'lightblue',
+        alignItems: 'center',
+        borderRadius: 10,
+        elevation: 3,
+    },
+
     projectCard: {
         width: 300,
         height: 300,
@@ -209,7 +219,7 @@ const evokStyles = StyleSheet.create({
     timeLineCard: {
         width: 300,
         height: 200,
-        flexDirection: 'row',
+        flexDirection: 'column',
         justifyContent: 'flex-end',
         borderColor: '#ffb84d',
         backgroundColor: 'lightblue',
@@ -249,6 +259,26 @@ const evokStyles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 25,
         textAlign: 'center'
+    },
+
+    timelineObject: {
+        flex:1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
+    timelineObjectText: {
+        color: 'darkblue',
+        fontSize: 20,
+        textAlign: 'center',
+        fontWeight: 'bold',
+    },
+
+    timeLineIcon: {
+        flex:1,
+        flexDirection: 'row',
+        justifyContent:'center',
+        alignItems: 'center',
     },
 })
 
