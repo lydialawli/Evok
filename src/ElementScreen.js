@@ -105,7 +105,14 @@ export default class ElementScreen extends React.Component {
         )
 
         let imagesInfo = this.state.groupedPhotos.map(
-            (picObject) => {
+            (picObject, index, array) => {
+                let previousPic = array[index- 1] 
+                let timeSinceLastPic = 0
+                
+                if (index > 0) {
+                    timeSinceLastPic = previousPic.timestamp - picObject.timestamp
+                    console.log('timestamp since last pic is ' + timeSinceLastPic)
+                }
                 return (
                     <View style={evokStyles.timelineObject} key={picObject.timestamp}>
                         <Text style={evokStyles.timelineObjectText} >
@@ -114,9 +121,9 @@ export default class ElementScreen extends React.Component {
                         <View style={evokStyles.timeLineIcon} >
                             <Ionicons name="ios-remove" size={40} color="black" containerStyle={flex = 1} />
                             <Ionicons name="ios-remove" size={40} color="black" containerStyle={flex = 1} />
-                            <Ionicons name="ios-git-commit" size={40} color="black" containerStyle={flex=1} />
+                            <Ionicons name="ios-git-commit" size={40} color="black" containerStyle={flex = 1} />
                             <Ionicons name="ios-remove" size={40} color="black" containerStyle={flex = 1} />
-                            <View style={{borderColor: 'red', borderWidth:0.6, backgroundColor: 'red', width: 80}} />
+                            <View style={{ borderColor: 'red', borderWidth: 0.6, backgroundColor: 'red', width: 80 }} />
                         </View>
                         <Text> {new Date(picObject.timestamp).getHours()}:{new Date(picObject.timestamp).getMinutes()}</Text>
                     </View>
