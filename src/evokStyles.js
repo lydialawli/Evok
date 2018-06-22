@@ -129,6 +129,7 @@ const evokStyles = StyleSheet.create({
         height: 100,
         backgroundColor: 'transparent',
         alignItems: 'center',
+
     },
 
     projectCard: {
@@ -261,7 +262,7 @@ const evokStyles = StyleSheet.create({
     timelineObject: {
         flex:1,
         justifyContent: 'center',
-        alignItems: 'center',
+        alignItems: 'flex-start',
     },
 
     timelineObjectText: {
