@@ -124,14 +124,6 @@ const evokStyles = StyleSheet.create({
         fontSize: 20
     },
 
-    timeLineImages: {
-        width: 300,
-        height: 100,
-        backgroundColor: 'transparent',
-        alignItems: 'center',
-
-    },
-
     projectCard: {
         width: 300,
         height: 300,
@@ -223,7 +215,7 @@ const evokStyles = StyleSheet.create({
         backgroundColor: 'lightblue',
         alignItems: 'center',
         borderRadius: 10,
-        elevation: 3,
+        elevation: 3, 
     },
 
     elementInfoDisplayContainer: {
@@ -259,6 +251,14 @@ const evokStyles = StyleSheet.create({
         textAlign: 'center'
     },
 
+    timeLineElementsInside: {
+        width: 300,
+        height: 200,
+        backgroundColor: 'transparent',
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
+    },
+
     timelineObject: {
         flex:1,
         justifyContent: 'center',
@@ -279,5 +279,7 @@ const evokStyles = StyleSheet.create({
         alignItems: 'center',
     },
 })
+
+
 
 export default evokStyles 
