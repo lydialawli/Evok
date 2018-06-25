@@ -150,7 +150,7 @@ export default class ElementScreen extends React.Component {
 
                     <View style={evokStyles.projectCard}>
                         <ScrollView contentContainerStyle={evokStyles.imageCarousel} horizontal={true}>
-                            {images}
+                            {images.reverse()}
                         </ScrollView>
                     </View>
 

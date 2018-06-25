@@ -44,9 +44,9 @@ evokFileSystem.getArrayOfPicObjects = (directoryUri, callback) => {
             let sortByTimestamp = (obj1, obj2)=>
             {
                 if (obj1.timestamp > obj2.timestamp)
-                    return -1;
+                    return 1;
                 else
-                    return 1
+                    return -1
                  
             }
 
