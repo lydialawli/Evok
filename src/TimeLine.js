@@ -15,6 +15,7 @@ let lineXhour =
 export default class TimeLine extends React.Component {
     state = {
         groupedPhotos: [],
+        arrayLengthInHours: 0
     }
 
     componentWillMount() {
@@ -33,7 +34,18 @@ export default class TimeLine extends React.Component {
                 groupedPhotos: result,
             }
         )
+        this.getArrayLengthInHours()
     }
+
+    getArrayLengthInHours = () => {
+        this.setState(
+            {
+                arrayLengthInHours: this.getFullDurationInHours(this.state.groupedPhotos),
+            }
+        )
+        console.log('array length in hours: ' + this.state.arrayLengthInHours)
+    }
+
 
     milisecIntoHours(milisecs) {
         h = milisecs / (60 * 60 * 1000)
@@ -49,8 +61,26 @@ export default class TimeLine extends React.Component {
         return this.milisecIntoHours(array[arrayLastItem].timestamp - array[0].timestamp)
     }
 
+    getLineXhour = () => {
+        let newWidth = 0
+        if (this.state.arrayLengthInHours === 0) { newWidth = 20 }
+        else { newWidth = Math.round(this.state.arrayLengthInHours)*10}
+        console.log('new width is ' + newWidth)
+        return (
+            <View style={{
+                backgroundColor: 'yellow', width: newWidth,
+                height: 20, justifyContent: 'flex-start', alignSelf: 'flex-end'
+            }}>
+            </View>
+        )
+    }
+
+    handleScroll = (event) => { 
+        console.log(event.nativeEvent.contentOffset.x)
+       }
+
     render() {
-       
+
         let timelineSexyVersion = this.state.groupedPhotos.map(
             (picObject, index, array) => {
                 let previousPic = array[index - 1]
@@ -58,7 +88,7 @@ export default class TimeLine extends React.Component {
                 let hoursSinceLastPic = 0
 
                 if (index > 0) {
-                    milisecsSinceLastPic = picObject.timestamp - previousPic.timestamp 
+                    milisecsSinceLastPic = picObject.timestamp - previousPic.timestamp
                     hoursSinceLastPic = this.milisecIntoHours(milisecsSinceLastPic)
                 }
                 return (
@@ -76,20 +106,9 @@ export default class TimeLine extends React.Component {
                         <Text> {new Date(picObject.timestamp).getHours()}:{new Date(picObject.timestamp).getMinutes()}</Text>
                     </View>
                 )
-                console.log(hoursSinceLastPic*20)
+
             }
         )
-
-        
-
-        let arrayLengthInHours =  this.getFullDurationInHours(this.state.groupedPhotos)
-        console.log('array length in hours: ' + arrayLengthInHours, arrayLengthInHours*20)
-
-
-        lineXhour =
-        <View style={{ borderColor: 'transparent', borderBottomColor: 'green', borderWidth: 2, width: 50, height: null, justifyContent: 'center', alignSelf: 'flex-end' }}>
-        </View>
-
 
         let timelineTrueVersion = this.state.groupedPhotos.map(
             (picObject, index, array) => {
@@ -98,9 +117,9 @@ export default class TimeLine extends React.Component {
                 let hoursSinceLastPic = 0
 
                 if (index > 0) {
-                    milisecsSinceLastPic = picObject.timestamp - previousPic.timestamp 
+                    milisecsSinceLastPic = picObject.timestamp - previousPic.timestamp
                     hoursSinceLastPic = this.milisecIntoHours(milisecsSinceLastPic)
-               
+
                 }
                 return (
                     <View style={evokStyles.timelineObject} key={picObject.timestamp}>
@@ -119,6 +138,8 @@ export default class TimeLine extends React.Component {
             }
         )
 
+        let lineXhour = this.getLineXhour()
+
         return (
 
             <View style={evokStyles.timeLineElementsInside}>
@@ -128,7 +149,7 @@ export default class TimeLine extends React.Component {
                 <ScrollView contentContainerStyle={evokStyles.imageCarousel} horizontal={true}>
                     {timelineTrueVersion}
                 </ScrollView>
-                <ScrollView contentContainerStyle={evokStyles.imageCarousel} horizontal={true}>
+                <ScrollView contentContainerStyle={evokStyles.imageCarousel} horizontal={true} onScroll={this.handleScroll} >
                     {lineXhour}
                 </ScrollView>
             </View>
