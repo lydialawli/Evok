@@ -15,7 +15,7 @@ let lineXhour =
 export default class TimeLine extends React.Component {
     state = {
         groupedPhotos: [],
-        arrayLengthInHours: 0
+        arrayLengthInHours: 0,
     }
 
     componentWillMount() {
@@ -32,22 +32,12 @@ export default class TimeLine extends React.Component {
         this.setState(
             {
                 groupedPhotos: result,
+                durationLengthInHours: Math.round(this.getFullDurationInHours(result))
             }
         )
-        this.getArrayLengthInHours()
     }
 
-    getArrayLengthInHours = () => {
-        this.setState(
-            {
-                arrayLengthInHours: this.getFullDurationInHours(this.state.groupedPhotos),
-            }
-        )
-        console.log('array length in hours: ' + this.state.arrayLengthInHours)
-    }
-
-
-    milisecIntoHours(milisecs) {
+    MilisecIntoHours(milisecs) {
         h = milisecs / (60 * 60 * 1000)
         return h.toFixed(5)
     }
@@ -57,15 +47,15 @@ export default class TimeLine extends React.Component {
             return 0
 
         let arrayLastItem = array.length - 1
-        console.log(array.length - 1, array[arrayLastItem])
-        return this.milisecIntoHours(array[arrayLastItem].timestamp - array[0].timestamp)
+        return this.MilisecIntoHours(array[arrayLastItem].timestamp - array[0].timestamp)
     }
 
-    getLineXhour = () => {
+    getScrollLine = () => {
         let newWidth = 0
-        if (this.state.arrayLengthInHours === 0) { newWidth = 20 }
-        else { newWidth = Math.round(this.state.arrayLengthInHours)*10}
+        if (this.state.durationLengthInHours === 0) { newWidth = 20 }
+        else { newWidth = hoursToPixels(this.state.durationLengthInHours) + 300 }
         console.log('new width is ' + newWidth)
+        
         return (
             <View style={{
                 backgroundColor: 'yellow', width: newWidth,
@@ -75,9 +65,17 @@ export default class TimeLine extends React.Component {
         )
     }
 
-    handleScroll = (event) => { 
+    hoursToPixels = (h) => {
+        return h * 10
+    }
+
+    handleScroll = (event) => {
         console.log(event.nativeEvent.contentOffset.x)
-       }
+    }
+
+    scrollToPercentage = (scrollPosition) => {
+        
+    }
 
     render() {
 
@@ -89,7 +87,7 @@ export default class TimeLine extends React.Component {
 
                 if (index > 0) {
                     milisecsSinceLastPic = picObject.timestamp - previousPic.timestamp
-                    hoursSinceLastPic = this.milisecIntoHours(milisecsSinceLastPic)
+                    hoursSinceLastPic = this.MilisecIntoHours(milisecsSinceLastPic)
                 }
                 return (
                     <View style={evokStyles.timelineObject} key={picObject.timestamp}>
@@ -118,7 +116,7 @@ export default class TimeLine extends React.Component {
 
                 if (index > 0) {
                     milisecsSinceLastPic = picObject.timestamp - previousPic.timestamp
-                    hoursSinceLastPic = this.milisecIntoHours(milisecsSinceLastPic)
+                    hoursSinceLastPic = this.MilisecIntoHours(milisecsSinceLastPic)
 
                 }
                 return (
@@ -138,7 +136,7 @@ export default class TimeLine extends React.Component {
             }
         )
 
-        let lineXhour = this.getLineXhour()
+        let lineXhour = this.getScrollLine()
 
         return (
 
