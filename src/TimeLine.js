@@ -53,7 +53,7 @@ export default class TimeLine extends React.Component {
     getScrollLine = () => {
         let newWidth = 0
         if (this.state.durationLengthInHours === 0) { newWidth = 20 }
-        else { newWidth = hoursToPixels(this.state.durationLengthInHours) + 300 }
+        else { newWidth = this.hoursToPixels(this.state.durationLengthInHours) + 300 }
         console.log('new width is ' + newWidth)
         
         return (
@@ -66,7 +66,7 @@ export default class TimeLine extends React.Component {
     }
 
     hoursToPixels = (h) => {
-        return h * 10
+        return h * 10   
     }
 
     handleScroll = (event) => {
