@@ -126,7 +126,7 @@ const evokStyles = StyleSheet.create({
 
     projectCard: {
         width: 300,
-        height: 300,
+        height: 200,
         borderColor: '#ffb84d',
         backgroundColor: 'lightblue',
         alignItems: 'center',
@@ -135,14 +135,14 @@ const evokStyles = StyleSheet.create({
     },
 
     projectCardImage: {
-        width: 300,
-        height: 200
+        width: 100,
+        height: 150
     },
 
     projectCardDescription: {
         width: 300,
-        height: 100,
-        alignItems: 'flex-start',
+        height: 50,
+        alignItems: 'center',
         backgroundColor: 'white',
     },
 

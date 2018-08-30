@@ -8,6 +8,7 @@ import evokStyles from '../Evok/src/evokStyles.js'
 import GalleryScreen from '../Evok/src/GalleryScreen.js'
 import evokFileSystem from '../Evok/src/evokFilesystem.js'
 import ElementScreen from '../Evok/src/ElementScreen.js'
+import { FileSystem } from 'expo'
 
 export class HomeScreen extends React.Component {
     static navigationOptions = {
@@ -19,7 +20,8 @@ export class HomeScreen extends React.Component {
         super(props)
         this.state  = {
         groupedPhotos: [],
-        projectTitle: 'rename me'
+        projectTitle: 'myPro',
+        rootDirectory: FileSystem.documentDirectory
         }
 
     }
@@ -57,13 +59,19 @@ export class HomeScreen extends React.Component {
         )
     }
 
+    createNewFolder = () => {
+        alert("How to name your new folder?")
+        console.log("here goes list of created folders")
+        console.log(this.state.rootDirectory)
+    }
+
     render() {
         const { navigate } = this.props.navigation;
         console.log("homescreen mode")
         let projectImage = <Text>Image goes here</Text>
 
         if (this.state.groupedPhotos[0])
-            projectImage = this.getProjectImage(this.state.groupedPhotos[22].fileUri)
+            projectImage = this.getProjectImage(this.state.groupedPhotos[this.state.groupedPhotos.length-1].fileUri)
 
         return (
             <View style={evokStyles.screenContainer} >
@@ -91,7 +99,7 @@ export class HomeScreen extends React.Component {
                                 onChangeText={(projectTitle) => this.setState({ projectTitle })}
                                 value={this.state.projectTitle}
                                 editable = {true}
-                                maxLength = {20}
+                                maxLength = {10}
                                 placeholderTextColor = {'grey'}
                                 clearTextOnFocus = {true}
                                 underlineColorAndroid = {'transparent'}>
@@ -100,7 +108,12 @@ export class HomeScreen extends React.Component {
                     </View>
                     <TouchableOpacity style={evokStyles.projectCard} onPress={() => navigate('Element')}>
                         <Text style={evokStyles.topBarText} >
-                            + New project
+                            "myPro" folder on Element Screen
+                        </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={evokStyles.projectCard} onPress={() => this.createNewFolder()}>
+                        <Text style={evokStyles.topBarText} >
+                            new Folder
                         </Text>
                     </TouchableOpacity>
                 </View>
