@@ -58,6 +58,12 @@ evokFileSystem.getArrayOfPicObjects = (directoryUri, callback) => {
 
 }
 
+evokFileSystem.readDirectoryPath = (directoryUri) => {
+    FileSystem.getInfoAsync(directoryUri)
+    .then((result) => {console.log("new directory info:  ",result)})
+}
+
+
 evokFileSystem.deleteImagefromGallery = (FileUri, callback) => {
 
     FileSystem.deleteAsync(FileUri)

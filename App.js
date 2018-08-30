@@ -18,10 +18,11 @@ export class HomeScreen extends React.Component {
 
     constructor(props) {
         super(props)
-        this.state  = {
-        groupedPhotos: [],
-        projectTitle: 'myPro',
-        rootDirectory: FileSystem.documentDirectory
+        this.state = {
+            groupedPhotos: [],
+            projectTitle: 'myPro',
+            rootDirectory: FileSystem.documentDirectory,
+            folderName: 1,
         }
 
     }
@@ -61,8 +62,19 @@ export class HomeScreen extends React.Component {
 
     createNewFolder = () => {
         alert("How to name your new folder?")
-        console.log("here goes list of created folders")
-        console.log(this.state.rootDirectory)
+        if (this.getLatestDirectoryPath()) {
+            evokFileSystem.createDirectoryIfDoesntExist(evokFileSystem.getPath(this.state.folderName, ''), () => {
+                this.getLatestDirectoryPath()
+                console.log("new folderName is..", this.state.folderName)
+            }).then(
+                this.setState({ folderName: folderName + 1 })
+            )
+        }
+        console.log(this.state.folderName)
+    }
+
+    getLatestDirectoryPath = () => {
+        evokFileSystem.readDirectoryPath(evokFileSystem.getPath(this.state.folderName, ''))
     }
 
     render() {
@@ -71,7 +83,7 @@ export class HomeScreen extends React.Component {
         let projectImage = <Text>Image goes here</Text>
 
         if (this.state.groupedPhotos[0])
-            projectImage = this.getProjectImage(this.state.groupedPhotos[this.state.groupedPhotos.length-1].fileUri)
+            projectImage = this.getProjectImage(this.state.groupedPhotos[this.state.groupedPhotos.length - 1].fileUri)
 
         return (
             <View style={evokStyles.screenContainer} >
@@ -98,11 +110,11 @@ export class HomeScreen extends React.Component {
                                 style={evokStyles.ProjectCardTitle}
                                 onChangeText={(projectTitle) => this.setState({ projectTitle })}
                                 value={this.state.projectTitle}
-                                editable = {true}
-                                maxLength = {10}
-                                placeholderTextColor = {'grey'}
-                                clearTextOnFocus = {true}
-                                underlineColorAndroid = {'transparent'}>
+                                editable={true}
+                                maxLength={10}
+                                placeholderTextColor={'grey'}
+                                clearTextOnFocus={true}
+                                underlineColorAndroid={'transparent'}>
                             </TextInput>
                         </View>
                     </View>
@@ -115,6 +127,7 @@ export class HomeScreen extends React.Component {
                         <Text style={evokStyles.topBarText} >
                             new Folder
                         </Text>
+
                     </TouchableOpacity>
                 </View>
             </View>
