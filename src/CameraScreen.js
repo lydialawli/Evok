@@ -53,7 +53,8 @@ class EvokCamera extends React.Component {
         permissionsGranted: true,
         groupedPhotos: [],
         lastPicOpacity: 0.5,
-        onionSkin: ''
+        onionSkin: '',
+        folderName: 'myPro'
 
     }
 
@@ -64,7 +65,7 @@ class EvokCamera extends React.Component {
     }
 
     getList = () => {
-        let currentFolder = evokFileSystem.getPath('myPro', '')
+        let currentFolder = evokFileSystem.getPath(this.state.folderName, '')
 
         evokFileSystem.getArrayOfPicObjects(currentFolder, this.onFilesListed)
     }
@@ -89,7 +90,7 @@ class EvokCamera extends React.Component {
             .then(data => {
 
                 let newFileName = Date.now() + '.jpg'
-                let currentFolder = evokFileSystem.getPath('myPro', '')
+                let currentFolder = evokFileSystem.getPath(this.state.folderName, '')
 
                 evokFileSystem.createDirectoryIfDoesntExist(currentFolder, () => {
 
@@ -98,9 +99,11 @@ class EvokCamera extends React.Component {
 
                 this.setState({
                     isPreviewMode: true,
-                    picturePreviewPath: evokFileSystem.getPath('myPro', newFileName),
+                    picturePreviewPath: evokFileSystem.getPath(this.state.folderName, newFileName),
 
                 })
+
+                console.log("getinfo: ", FileSystem.getInfoAsync(currentFolder))
             })
             .catch(err => console.error(err))
     }
