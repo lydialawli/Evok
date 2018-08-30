@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { StyleSheet, Text, View, Button, TouchableOpacity, TextInput, Icon, Dimensions, ImageBackground, Image } from 'react-native'
+import { StyleSheet, Text, View, Button, TouchableOpacity, TextInput, Icon, Dimensions, ImageBackground, Alert, Image } from 'react-native'
 import { StackNavigator } from 'react-navigation'
 import CameraScreen from '../Evok/src/CameraScreen.js'
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
@@ -60,17 +60,31 @@ export class HomeScreen extends React.Component {
         )
     }
 
+    alertCreateNewFolder = (picObject) =>
+    Alert.alert(
+        'Create new element',
+        'Are you sure?',
+        [
+            { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
+            { text: 'OK', onPress: () => { this.createNewFolder() } }
+        ],
+        { cancelable: false }
+    )
+
     createNewFolder = () => {
         alert("How to name your new folder?")
         if (this.getLatestDirectoryPath()) {
+            
+            this.setState({ folderName: this.state.folderName + 1 })
+            console.log("folderName is ", this.state.folderName)
+
             evokFileSystem.createDirectoryIfDoesntExist(evokFileSystem.getPath(this.state.folderName, ''), () => {
                 this.getLatestDirectoryPath()
                 console.log("new folderName is..", this.state.folderName)
-            }).then(
-                this.setState({ folderName: folderName + 1 })
-            )
+            })
         }
-        console.log(this.state.folderName)
+       
+        
     }
 
     getLatestDirectoryPath = () => {
@@ -123,7 +137,7 @@ export class HomeScreen extends React.Component {
                             "myPro" folder on Element Screen
                         </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={evokStyles.projectCard} onPress={() => this.createNewFolder()}>
+                    <TouchableOpacity style={evokStyles.projectCard} onPress={() => this.alertCreateNewFolder()}>
                         <Text style={evokStyles.topBarText} >
                             new Folder
                         </Text>
