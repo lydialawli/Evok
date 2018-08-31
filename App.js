@@ -129,7 +129,7 @@ styles = StyleSheet.create({
 
     card: {
         width: 300,
-        height: '100',
+        height: 100,
         borderColor: '#ffb84d',
         justifyContent: 'center',
         backgroundColor: 'lightblue',
