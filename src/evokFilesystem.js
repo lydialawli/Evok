@@ -71,7 +71,7 @@ evokFileSystem.readDirectoryPath = (directoryUri) => {
 evokFileSystem.deleteImagefromGallery = (FileUri, callback) => {
 
     FileSystem.deleteAsync(FileUri)
-        .then(callback, console.log('pic deleted'))
+        .then(callback)
         .catch(err => console.error(err))
 }
 

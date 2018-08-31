@@ -43,7 +43,6 @@ export class HomeScreen extends React.Component {
                 groupedPhotos: result
             }
         )
-        //console.log(this.state.groupedPhotos)
     }
 
     updateProjectName = () => {
@@ -61,37 +60,23 @@ export class HomeScreen extends React.Component {
     }
 
     alertCreateNewFolder = (picObject) =>
-    Alert.alert(
-        'Create new element',
-        'Are you sure?',
-        [
-            { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
-            { text: 'OK', onPress: () => { this.createNewFolder() } }
-        ],
-        { cancelable: false }
-    )
+        Alert.alert(
+            'Create new element',
+            'Are you sure?',
+            [
+                { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
+                { text: 'OK', onPress: () => { this.createNewFolder() } }
+            ],
+            { cancelable: false }
+        )
 
     createNewFolder = () => {
-        if (this.getLatestDirectoryPath()) {
-
-            this.setState({ folderName: this.state.folderName + 1 })
-            console.log("folderName is ", this.state.folderName)
-
-            evokFileSystem.createDirectoryIfDoesntExist(evokFileSystem.getPath(this.state.folderName, ''), () => {
-                this.getLatestDirectoryPath()
-            })
-        }
-        
-       // (console.log("new folderName is..", this.state.folderName))
-       FileSystem.readDirectoryAsync( FileSystem.documentDirectory,'').then((result)=>{
-            console.log('root directory is ... ', result)
-       })
-        
+        evokFileSystem.createDirectoryIfDoesntExist(evokFileSystem.getPath(Date.now(), ''), () => {
+            console.log(evokFileSystem.readAppDirectory())
+        })
     }
 
-    getLatestDirectoryPath = () => {
-        evokFileSystem.readDirectoryPath(evokFileSystem.getPath(this.state.folderName, ''))
-    }
+
 
     render() {
         const { navigate } = this.props.navigation;
