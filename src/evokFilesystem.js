@@ -68,7 +68,7 @@ evokFileSystem.readDirectoryPath = (directoryUri) => {
 }
 
 
-evokFileSystem.deleteImagefromGallery = (FileUri, callback) => {
+evokFileSystem.deleteFile = (FileUri, callback) => {
 
     FileSystem.deleteAsync(FileUri)
         .then(callback)

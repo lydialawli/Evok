@@ -29,7 +29,13 @@ const evokStyles = StyleSheet.create({
         color: 'white',
         textShadowRadius: 2,
         fontSize: 25,
-        
+    },
+
+    projectCardText: {
+        flex: 1,
+        color: 'white',
+        textShadowRadius: 2,
+        fontSize: 15,
     },
 
     topBarLeftIcon: {
@@ -125,9 +131,9 @@ const evokStyles = StyleSheet.create({
     },
 
     projectCard: {
-        width: 300,
-        height: 200,
+        flex: 1,
         borderColor: '#ffb84d',
+        justifyContent: 'space-evenly',
         backgroundColor: 'lightblue',
         alignItems: 'center',
         borderRadius: 10,
@@ -135,13 +141,12 @@ const evokStyles = StyleSheet.create({
     },
 
     projectCardImage: {
-        width: 100,
-        height: 150
+        flex:1,
     },
 
     projectCardDescription: {
         width: 300,
-        height: 50,
+        height: 30,
         alignItems: 'center',
         backgroundColor: 'white',
     },
@@ -157,7 +162,7 @@ const evokStyles = StyleSheet.create({
     ProjectCardTitle: {
         flex: 1,
         color: '#ffb84d',
-        fontSize: 25,
+        fontSize: 15,
         fontWeight: 'normal',
         marginTop: 5, 
         marginLeft: 5,

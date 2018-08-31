@@ -44,7 +44,7 @@ export default class ElementScreen extends React.Component {
             'Are you sure?',
             [
                 { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
-                { text: 'OK', onPress: () => { evokFileSystem.deleteImagefromGallery(picObject.fileUri, this.getList), console.log('pic deleted') } }
+                { text: 'OK', onPress: () => { evokFileSystem.deleteFile(picObject.fileUri, this.getList), console.log('pic deleted') } }
             ],
             { cancelable: false }
         )

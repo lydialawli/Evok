@@ -88,94 +88,56 @@ export class HomeScreen extends React.Component {
 
         return (
             <View style={evokStyles.screenContainer} >
+
                 <View style={evokStyles.topBar}>
                     <TouchableOpacity style={evokStyles.topBarRightIcon}>
                         <Ionicons name="ios-camera-outline" size={40} color="grey" containerStyle={flex = 1} />
                     </TouchableOpacity>
                     <Text style={evokStyles.topBarText} >
                         Elements
-                     </Text>
+                    </Text>
                     <TouchableOpacity style={evokStyles.topBarRightIcon} onPress={() => navigate('Camera')}>
                         <Ionicons name="ios-camera-outline" size={40} color="white" containerStyle={flex = 1} />
                     </TouchableOpacity>
                 </View>
-                <View>
-                    <TouchableOpacity style={style.card}>
-                        <Text> Aloha! </Text>
-                    </TouchableOpacity>
+
+                <View style={evokStyles.cardsContainer}>
+                    <View style={evokStyles.projectCard}>
+                        <TouchableOpacity style={evokStyles.projectCardImage} onPress={() => navigate('Gallery')}>
+                            {projectImage}
+                        </TouchableOpacity>
+                        <View style={evokStyles.projectCardDescription}>
+                            <TextInput
+                                style={evokStyles.ProjectCardTitle}
+                                onChangeText={(projectTitle) => this.setState({ projectTitle })}
+                                value={this.state.projectTitle}
+                                editable={true}
+                                maxLength={10}
+                                placeholderTextColor={'grey'}
+                                clearTextOnFocus={true}
+                                underlineColorAndroid={'transparent'}>
+                            </TextInput>
+                        </View>
+                    </View>
+                    <View style={evokStyles.projectCardDescription}>
+                        <TouchableOpacity style={evokStyles.projectCard} onPress={() => navigate('Element')}>
+                            <Text style={evokStyles.projectCardText} >
+                                "myPro" folder on Element Screen
+                        </Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={evokStyles.projectCardDescription}>
+                        <TouchableOpacity style={evokStyles.projectCard} onPress={() => this.alertCreateNewFolder()}>
+                            <Text style={evokStyles.projectCardText} >
+                                new Folder
+                        </Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </View>
-
         )
     }
 }
-
-style = StyleSheet.create({
-    card: {
-        flex: 1,
-        borderColor: '#ffb84d',
-        justifyContent: 'space-evenly',
-        backgroundColor: 'lightblue',
-        alignItems: 'center',
-        borderRadius: 10,
-        elevation: 3,
-    },
-})
-
-
-/* return (
-     <View style={evokStyles.screenContainer} >
- 
-         <View style={evokStyles.topBar}>
-             <TouchableOpacity style={evokStyles.topBarRightIcon}>
-                 <Ionicons name="ios-camera-outline" size={40} color="grey" containerStyle={flex = 1} />
-             </TouchableOpacity>
-             <Text style={evokStyles.topBarText} >
-                 Elements
-             </Text>
-             <TouchableOpacity style={evokStyles.topBarRightIcon} onPress={() => navigate('Camera')}>
-                 <Ionicons name="ios-camera-outline" size={40} color="white" containerStyle={flex = 1} />
-             </TouchableOpacity>
-         </View>
- 
-         <View style={evokStyles.cardsContainer}>
-             <View style={evokStyles.projectCard}>
-                 <TouchableOpacity style={evokStyles.projectCardImage} onPress={() => navigate('Gallery')}>
-                     {projectImage}
-                 </TouchableOpacity>
-                 <View style={evokStyles.projectCardDescription}>
-                     <TextInput
-                         style={evokStyles.ProjectCardTitle}
-                         onChangeText={(projectTitle) => this.setState({ projectTitle })}
-                         value={this.state.projectTitle}
-                         editable={true}
-                         maxLength={10}
-                         placeholderTextColor={'grey'}
-                         clearTextOnFocus={true}
-                         underlineColorAndroid={'transparent'}>
-                     </TextInput>
-                 </View>
-             </View>
-             <View style={evokStyles.projectCardDescription}>
-                 <TouchableOpacity style={evokStyles.projectCard} onPress={() => navigate('Element')}>
-                     <Text style={evokStyles.projectCardText} >
-                         "myPro" folder on Element Screen
-                 </Text>
-                 </TouchableOpacity>
-             </View>
-             <View style={evokStyles.projectCardDescription}>
-                 <TouchableOpacity style={evokStyles.projectCard} onPress={() => this.alertCreateNewFolder()}>
-                     <Text style={evokStyles.projectCardText} >
-                         new Folder
-                 </Text>
-                 </TouchableOpacity>
-             </View>
-         </View>
-     </View>
- )
-}
-}*/
-
 
 
 const NavigationApp = StackNavigator(
@@ -194,7 +156,6 @@ const NavigationApp = StackNavigator(
         navigationOptions: ({ navigation }) => ({ header: false })
     }
 )
-
 
 export default class App extends React.Component {
     render() {

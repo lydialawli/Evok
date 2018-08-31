@@ -43,7 +43,7 @@ export default class GalleryScreen extends React.Component {
             'Are you sure?',
             [
                 { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
-                { text: 'OK', onPress: () => { evokFileSystem.deleteImagefromGallery(picObject.fileUri, this.getList) } }
+                { text: 'OK', onPress: () => { evokFileSystem.deleteFile(picObject.fileUri, this.getList) } }
             ],
             { cancelable: false }
         )
