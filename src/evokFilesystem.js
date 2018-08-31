@@ -26,10 +26,12 @@ evokFileSystem.moveFile = (originalFile, currentFolder, fileName, callback) => {
         .catch(err => console.error(err))
 }
 
-evokFileSystem.readAppDirectory = () => {
-    FileSystem.readDirectoryAsync(FileSystem.documentDirectory, '').then((result) => {
-        console.log('root directory is ... ', result)
-    })
+evokFileSystem.readAppDirectory = (callback) => {
+    FileSystem.readDirectoryAsync(FileSystem.documentDirectory, '')
+        .then((result) => {
+            callback(result) 
+        })
+        .catch(err => console.error(err))
 }
 
 evokFileSystem.getArrayOfPicObjects = (directoryUri, callback) => {
@@ -65,6 +67,7 @@ evokFileSystem.getArrayOfPicObjects = (directoryUri, callback) => {
 evokFileSystem.readDirectoryPath = (directoryUri) => {
     FileSystem.getInfoAsync(directoryUri)
         .then((result) => { console.log("directory info:  ", result) })
+        .catch(err=> console.error(err))
 }
 
 

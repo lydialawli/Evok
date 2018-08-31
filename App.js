@@ -22,26 +22,43 @@ export class HomeScreen extends React.Component {
             groupedPhotos: [],
             projectTitle: 'myPro',
             rootDirectory: FileSystem.documentDirectory,
-            folderName: 1,
+            listDirectories: [],
+            listOfCards: []
         }
 
     }
 
     async componentWillMount() {
-        this.getList()
+        this.getArrayOfDirectories()
     }
 
-    getList = () => {
-        let currentFolder = evokFileSystem.getPath('myPro', '')
+    getArrayOfDirectories = () => {
+        evokFileSystem.readAppDirectory((result) => {
+            this.setState({
+                listDirectories: result
+            })
+        }
+        )
 
-        evokFileSystem.getArrayOfPicObjects(currentFolder, this.onFilesListed)
     }
 
-    onFilesListed = (result) => {
-        this.setState(
-            {
-                groupedPhotos: result
-            }
+    getListCards = () => {
+        console.log(this.state)
+
+        let listOfCards = this.state.listDirectories.map((projectName) => {
+            return this.getCard(projectName)
+        })
+        return listOfCards
+    }
+
+
+    getCard = (projectName) => {
+        return (
+            <View>
+                <TouchableOpacity style={styles.card}>
+                    <Text> {projectName}</Text>
+                </TouchableOpacity>
+            </View>
         )
     }
 
@@ -72,7 +89,7 @@ export class HomeScreen extends React.Component {
 
     createNewFolder = () => {
         evokFileSystem.createDirectoryIfDoesntExist(evokFileSystem.getPath(Date.now(), ''), () => {
-            console.log(evokFileSystem.readAppDirectory())
+            console.log(this.getArrayOfDirectories())
         })
     }
 
@@ -101,9 +118,12 @@ export class HomeScreen extends React.Component {
                 </View>
                 <View style={styles.two}>
                     <View style={styles.cardsContainer}>
-                        <TouchableOpacity style={styles.card}>
+                        <TouchableOpacity style={styles.card} onPress={() => this.alertCreateNewFolder()}>
                             <Text> Aloha! </Text>
                         </TouchableOpacity>
+                        <View>
+                            {this.getListCards()}
+                        </View>
                     </View>
                 </View>
             </View>
@@ -114,7 +134,7 @@ export class HomeScreen extends React.Component {
 
 styles = StyleSheet.create({
     two: {
-        flex:1,
+        flex: 1,
         backgroundColor: 'lightgreen',
         alignItems: 'center'
     },
@@ -122,7 +142,7 @@ styles = StyleSheet.create({
         width: Dimensions.get('window').width,
         height: Dimensions.get('window').height,
         backgroundColor: 'pink',
-        flexDirection:'column',
+        flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center'
     },
@@ -134,6 +154,7 @@ styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: 'lightblue',
         alignItems: 'center',
+        margin: 10,
         borderRadius: 10,
         elevation: 3,
     },
