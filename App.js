@@ -72,18 +72,20 @@ export class HomeScreen extends React.Component {
     )
 
     createNewFolder = () => {
-        alert("How to name your new folder?")
         if (this.getLatestDirectoryPath()) {
-            
+
             this.setState({ folderName: this.state.folderName + 1 })
             console.log("folderName is ", this.state.folderName)
 
             evokFileSystem.createDirectoryIfDoesntExist(evokFileSystem.getPath(this.state.folderName, ''), () => {
                 this.getLatestDirectoryPath()
-                console.log("new folderName is..", this.state.folderName)
             })
         }
-       
+        
+       // (console.log("new folderName is..", this.state.folderName))
+       FileSystem.readDirectoryAsync( FileSystem.documentDirectory,'').then((result)=>{
+            console.log('root directory is ... ', result)
+       })
         
     }
 

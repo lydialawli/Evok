@@ -26,6 +26,11 @@ evokFileSystem.moveFile = (originalFile, currentFolder, fileName, callback) => {
         .catch(err => console.error(err))
 }
 
+evokFileSystem.readAppDirectory = () => {
+    FileSystem.readDirectoryAsync(FileSystem.documentDirectory, '').then((result) => {
+        console.log('root directory is ... ', result)
+    })
+}
 
 evokFileSystem.getArrayOfPicObjects = (directoryUri, callback) => {
 
@@ -33,21 +38,20 @@ evokFileSystem.getArrayOfPicObjects = (directoryUri, callback) => {
         .then((listOfFileNames) => {
 
             let listOfPicObjects = listOfFileNames.map((fileName) => {
-                return  {
-                    timestamp: parseInt(fileName.replace(".jpg","")),
-                    fileName : fileName,
+                return {
+                    timestamp: parseInt(fileName.replace(".jpg", "")),
+                    fileName: fileName,
                     fileUri: directoryUri + fileName
                 }
-    
+
             })
 
-            let sortByTimestamp = (obj1, obj2)=>
-            {
+            let sortByTimestamp = (obj1, obj2) => {
                 if (obj1.timestamp > obj2.timestamp)
                     return 1;
                 else
                     return -1
-                 
+
             }
 
             listOfPicObjects.sort(sortByTimestamp)
@@ -60,7 +64,7 @@ evokFileSystem.getArrayOfPicObjects = (directoryUri, callback) => {
 
 evokFileSystem.readDirectoryPath = (directoryUri) => {
     FileSystem.getInfoAsync(directoryUri)
-    .then((result) => {console.log("new directory info:  ",result)})
+        .then((result) => { console.log("directory info:  ", result) })
 }
 
 
