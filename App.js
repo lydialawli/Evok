@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { StyleSheet, Text, View, Button, TouchableOpacity, TextInput, Icon, Dimensions, ImageBackground, Alert, Image } from 'react-native'
+import { StyleSheet, Text, View, Button, TouchableOpacity, TextInput, Icon, Dimensions, ImageBackground, Alert, ScrollView, Image } from 'react-native'
 import { StackNavigator } from 'react-navigation'
 import CameraScreen from '../Evok/src/CameraScreen.js'
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
@@ -50,7 +50,6 @@ export class HomeScreen extends React.Component {
         })
         return listOfCards
     }
-
 
     getCard = (projectName) => {
         return (
@@ -117,14 +116,17 @@ export class HomeScreen extends React.Component {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.two}>
-                    <View style={styles.cardsContainer}>
+                    <ScrollView contentContaistylenerStyle={styles.cardsContainer}>
+                        <TouchableOpacity style={styles.card} onPress={() => navigate('Element')}>
+                            <Text> goes to ElementScreen</Text>
+                        </TouchableOpacity>
                         <TouchableOpacity style={styles.card} onPress={() => this.alertCreateNewFolder()}>
-                            <Text> Aloha! </Text>
+                            <Text> create new folder </Text>
                         </TouchableOpacity>
                         <View>
                             {this.getListCards()}
                         </View>
-                    </View>
+                    </ScrollView>
                 </View>
             </View>
 
@@ -135,14 +137,14 @@ export class HomeScreen extends React.Component {
 styles = StyleSheet.create({
     two: {
         flex: 1,
-        backgroundColor: 'lightgreen',
-        alignItems: 'center'
+        backgroundColor: 'white',
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     cardsContainer: {
         width: Dimensions.get('window').width,
         height: Dimensions.get('window').height,
         backgroundColor: 'pink',
-        flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center'
     },
