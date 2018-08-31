@@ -5,7 +5,7 @@ const evokStyles = StyleSheet.create({
         backgroundColor: 'white',
         flex: 1,
         justifyContent: 'space-around',
-       alignItems: 'center',
+        alignItems: 'flex-start',
     },
 
     cardsContainer: {
@@ -19,7 +19,7 @@ const evokStyles = StyleSheet.create({
         flexDirection: 'row',
         backgroundColor: 'grey',
         alignItems: 'center',
-        justifyContent: 'space-between',
+        justifyContent: 'flex-start',
         elevation: 8,
         paddingTop: 20
     },

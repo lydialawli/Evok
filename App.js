@@ -99,10 +99,12 @@ export class HomeScreen extends React.Component {
                         <Ionicons name="ios-camera-outline" size={40} color="white" containerStyle={flex = 1} />
                     </TouchableOpacity>
                 </View>
-                <View>
-                    <TouchableOpacity style={style.card}>
-                        <Text> Aloha! </Text>
-                    </TouchableOpacity>
+                <View style={styles.two}>
+                    <View style={styles.cardsContainer}>
+                        <TouchableOpacity style={styles.card}>
+                            <Text> Aloha! </Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </View>
 
@@ -110,11 +112,26 @@ export class HomeScreen extends React.Component {
     }
 }
 
-style = StyleSheet.create({
+styles = StyleSheet.create({
+    two: {
+        flex:1,
+        backgroundColor: 'lightgreen',
+        alignItems: 'center'
+    },
+    cardsContainer: {
+        width: Dimensions.get('window').width,
+        height: Dimensions.get('window').height,
+        backgroundColor: 'pink',
+        flexDirection:'column',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+
     card: {
-        flex: 1,
+        width: 300,
+        height: '100',
         borderColor: '#ffb84d',
-        justifyContent: 'space-evenly',
+        justifyContent: 'center',
         backgroundColor: 'lightblue',
         alignItems: 'center',
         borderRadius: 10,
