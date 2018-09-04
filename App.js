@@ -9,6 +9,7 @@ import GalleryScreen from '../Evok/src/GalleryScreen.js'
 import evokFileSystem from '../Evok/src/evokFilesystem.js'
 import ElementScreen from '../Evok/src/ElementScreen.js'
 import { FileSystem } from 'expo'
+import Card from '../Evok/src/Card.js'
 
 export class HomeScreen extends React.Component {
     static navigationOptions = {
@@ -42,11 +43,21 @@ export class HomeScreen extends React.Component {
 
     }
 
+    navigateToELement()
+    {
+        console.log('yupi')
+    }
+
     getListCards = () => {
         console.log(this.state)
 
-        let listOfCards = this.state.listDirectories.map((projectName) => {
-            return this.getCard(projectName)
+        let listOfCards = this.state.listDirectories.map((projectName,index) => {
+            console.log(projectName)
+            return <Card
+                name={projectName}
+                key={index}
+                onCardClicked={this.navigateToELement}
+                />
         })
         return listOfCards
     }
