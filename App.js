@@ -43,21 +43,20 @@ export class HomeScreen extends React.Component {
 
     }
 
-    navigateToELement()
-    {
-        console.log('yupi')
+    navigateToELement = (projectName) => {
+       this.props.navigation.navigate('Element', { projectID: projectName })
     }
 
     getListCards = () => {
         console.log(this.state)
 
-        let listOfCards = this.state.listDirectories.map((projectName,index) => {
+        let listOfCards = this.state.listDirectories.map((projectName, index) => {
             console.log(projectName)
             return <Card
                 name={projectName}
-                key={index}
-                onCardClicked={this.navigateToELement}
-                />
+                key={projectName}
+                onCardPressed={this.navigateToELement}
+            />
         })
         return listOfCards
     }

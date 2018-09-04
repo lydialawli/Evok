@@ -3,11 +3,19 @@ import { Text, View, TouchableOpacity, StyleSheet, Image } from 'react-native'
 
 export default class Card extends React.Component {
 
-    render() {
+    onPress = ()=>{
         
+        this.props.onCardPressed(this.props.name)
+    }
+
+    render() {
+
         return (
             <View >
-                <TouchableOpacity style={styles.card} onPress={this.props.onCardClicked}>
+                <TouchableOpacity
+                    style={styles.card}
+                    onPress={this.onPress}
+                >
                     <Text> {this.props.name}</Text>
                 </TouchableOpacity>
             </View>

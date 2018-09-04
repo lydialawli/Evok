@@ -25,7 +25,8 @@ export default class ElementScreen extends React.Component {
     }
 
     getList = () => {
-        let currentFolder = evokFileSystem.getPath('myPro', '')
+        
+        let currentFolder = evokFileSystem.getPath(this.props.navigation.state.params.projectID, '')
 
         evokFileSystem.getArrayOfPicObjects(currentFolder, this.onFilesListed)
     }
