@@ -131,7 +131,8 @@ const evokStyles = StyleSheet.create({
     },
 
     projectCard: {
-        flex: 1,
+        height: 300,
+        width: 300,
         borderColor: '#ffb84d',
         justifyContent: 'space-evenly',
         backgroundColor: 'lightblue',
