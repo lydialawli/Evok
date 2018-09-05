@@ -16,7 +16,7 @@ export default class CameraScreen extends React.Component {
     }
 
     state = {
-        selectedProjectID: this.props.navigation.state.params.projectID,
+        camerasCurrentProjectID: this.props.navigation.state.params.projectID,
     }
 
 
@@ -25,7 +25,7 @@ export default class CameraScreen extends React.Component {
         console.log("Camera mode")
         return (
             <View style={evokStyles.camScreenView}>
-                <EvokCamera projectID={this.state.selectedProjectID}/>
+                <EvokCamera projectID={this.state.camerasCurrentProjectID}/>
                 <View style={evokStyles.bottomBar}>
                     <TouchableOpacity style={evokStyles.homeButton} onPress={() => navigate('Home')}>
                         <Ionicons name="ios-home-outline" size={40} color="white" />
