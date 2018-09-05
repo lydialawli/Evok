@@ -15,13 +15,17 @@ export default class CameraScreen extends React.Component {
         title: 'Camera',
     }
 
+    state = {
+        selectedProjectID: this.props.navigation.state.params.projectID,
+    }
+
 
     render() {
         const { navigate } = this.props.navigation
         console.log("Camera mode")
         return (
             <View style={evokStyles.camScreenView}>
-                <EvokCamera />
+                <EvokCamera projectID={this.state.selectedProjectID}/>
                 <View style={evokStyles.bottomBar}>
                     <TouchableOpacity style={evokStyles.homeButton} onPress={() => navigate('Home')}>
                         <Ionicons name="ios-home-outline" size={40} color="white" />
@@ -54,7 +58,8 @@ class EvokCamera extends React.Component {
         groupedPhotos: [],
         lastPicOpacity: 0.5,
         onionSkin: '',
-        folderName: 'myPro'
+        projectID: this.props.projectID,
+    
 
     }
 
@@ -65,7 +70,7 @@ class EvokCamera extends React.Component {
     }
 
     getList = () => {
-        let currentFolder = evokFileSystem.getPath(this.state.folderName, '')
+        let currentFolder = evokFileSystem.getPath(this.state.projectID, '')
 
         evokFileSystem.getArrayOfPicObjects(currentFolder, this.onFilesListed)
     }
@@ -90,7 +95,7 @@ class EvokCamera extends React.Component {
             .then(data => {
 
                 let newFileName = Date.now() + '.jpg'
-                let currentFolder = evokFileSystem.getPath(this.state.folderName, '')
+                let currentFolder = evokFileSystem.getPath(this.state.projectID, '')
 
                 evokFileSystem.createDirectoryIfDoesntExist(currentFolder, () => {
 
@@ -99,7 +104,7 @@ class EvokCamera extends React.Component {
 
                 this.setState({
                     isPreviewMode: true,
-                    picturePreviewPath: evokFileSystem.getPath(this.state.folderName, newFileName),
+                    picturePreviewPath: evokFileSystem.getPath(this.state.projectID, newFileName),
 
                 })
 

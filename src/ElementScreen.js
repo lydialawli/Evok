@@ -18,6 +18,7 @@ export default class ElementScreen extends React.Component {
         groupedPhotos: [],
         modalVisible: false,
         selectedFullImagePicObject: null,
+        projectID: this.props.navigation.state.params.projectID
     }
 
     componentWillMount() {
@@ -26,7 +27,7 @@ export default class ElementScreen extends React.Component {
 
     getList = () => {
         
-        let currentFolder = evokFileSystem.getPath(this.props.navigation.state.params.projectID, '')
+        let currentFolder = evokFileSystem.getPath(this.state.projectID, '')
 
         evokFileSystem.getArrayOfPicObjects(currentFolder, this.onFilesListed)
     }
@@ -81,7 +82,10 @@ export default class ElementScreen extends React.Component {
 
     }
 
-    
+    onCameraPressed = (projectName) => {
+        this.props.navigation.navigate('Camera', { projectID: projectName })
+     }
+  
     render() {
         const { navigate } = this.props.navigation
         console.log("Element mode")
@@ -118,7 +122,7 @@ export default class ElementScreen extends React.Component {
                     <Text style={evokStyles.topBarText} >
                         Element 1
                     </Text>
-                    <TouchableOpacity style={evokStyles.topBarRightIcon} onPress={() => navigate('Camera')}>
+                    <TouchableOpacity style={evokStyles.topBarRightIcon} onPress={() => this.onCameraPressed(this.state.projectID)}>
                         <Ionicons name="ios-add-circle-outline" size={40} color="white" />
                     </TouchableOpacity>
                 </View>
