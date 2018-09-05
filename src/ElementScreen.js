@@ -10,8 +10,15 @@ import evokFileSystem from '../src/evokFilesystem.js'
 
 export default class ElementScreen extends React.Component {
     static navigationOptions = {
-        header: null,
         title: 'Element',
+        headerStyle: {
+            backgroundColor: '#999966',
+        },
+        headerTintColor: 'white',
+        headerTitleStyle: {
+            fontWeight: 'bold',
+            color: 'white',
+        }
     }
 
     state = {

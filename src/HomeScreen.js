@@ -13,8 +13,15 @@ import Card from '../src/Card.js'
 
 export default class HomeScreen extends React.Component {
     static navigationOptions = {
-        header: null,
         title: 'Home',
+        headerStyle: {
+            backgroundColor: '#999966',
+        },
+        headerTintColor: 'blue',
+        headerTitleStyle: {
+            fontWeight: 'bold',
+            color: 'white',
+        }
     }
 
     constructor(props) {
@@ -44,7 +51,7 @@ export default class HomeScreen extends React.Component {
     }
 
     navigateToELement = (projectName) => {
-       this.props.navigation.navigate('Element', { projectID: projectName })
+        this.props.navigation.navigate('Element', { projectID: projectName })
     }
 
     getListCards = () => {
@@ -114,28 +121,14 @@ export default class HomeScreen extends React.Component {
 
         return (
             <View style={evokStyles.screenContainer} >
-                <View style={evokStyles.topBar}>
-                    <TouchableOpacity style={evokStyles.topBarRightIcon}>
-                        <Ionicons name="ios-camera-outline" size={40} color="grey" containerStyle={flex = 1} />
-                    </TouchableOpacity>
-                    <Text style={evokStyles.topBarText} >
-                        Elements
-                     </Text>
-                    <TouchableOpacity style={evokStyles.topBarRightIcon} onPress={() => navigate('Camera')}>
-                        <Ionicons name="ios-camera-outline" size={40} color="white" containerStyle={flex = 1} />
-                    </TouchableOpacity>
-                </View>
                 <View style={styles.two}>
                     <ScrollView contentContaistylenerStyle={styles.cardsContainer}>
-                        <TouchableOpacity style={styles.card} onPress={() => navigate('Element')}>
-                            <Text> goes to ElementScreen</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.card} onPress={() => this.alertCreateNewFolder()}>
-                            <Text> create new folder </Text>
-                        </TouchableOpacity>
                         <View>
                             {this.getListCards()}
                         </View>
+                        <TouchableOpacity style={styles.card} onPress={() => this.alertCreateNewFolder()}>
+                            <Text style={evokStyles.topBarText}> Create new Element ? </Text>
+                        </TouchableOpacity>
                     </ScrollView>
                 </View>
             </View>
