@@ -4,33 +4,18 @@ const evokStyles = StyleSheet.create({
     screenContainer: {
         backgroundColor: 'white',
         flex: 1,
-        justifyContent: 'space-around',
-        alignItems: 'flex-start',
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
     },
 
-    cardsContainer: {
+    elementContainer: {
         flex: 1,
         justifyContent: 'space-evenly',
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: 'white',
+        padding: 10
     },
     
-    topBar: {
-        flex: 0.1,
-        flexDirection: 'row',
-        backgroundColor: 'grey',
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-        elevation: 8,
-        paddingTop: 20
-    },
-
-    topBarText: {
-        flex: 1,
-        color: 'white',
-        textShadowRadius: 2,
-        fontSize: 25,
-    },
-
     projectCardText: {
         flex: 1,
         color: 'white',
@@ -38,16 +23,11 @@ const evokStyles = StyleSheet.create({
         fontSize: 15,
     },
 
-    topBarLeftIcon: {
-        flex:1,
-        alignItems: 'flex-start',
-        marginLeft: 5,
-    },
 
-    topBarRightIcon: {
+    plusIcon: {
         flex:1,
-        alignItems: 'flex-end',
-        marginRight: 5,
+        justifyContent: 'flex-start'
+,       alignItems: 'center',
     },
 
     galleryView: {
@@ -139,6 +119,7 @@ const evokStyles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 10,
         elevation: 3,
+        margin: 10
     },
 
     projectCardImage: {
@@ -225,7 +206,7 @@ const evokStyles = StyleSheet.create({
     },
 
     elementInfoDisplayContainer: {
-        flex: 0.5,
+        flex: 1,
         justifyContent: 'center',
         backgroundColor: 'white',
         alignItems: 'center',
