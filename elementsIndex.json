@@ -1,3 +1,34 @@
 {
-    
+    "elements":[
+        {
+            "name":"Tree Front View",
+            "id": "TreeFrontView",
+            "type":"image",
+            "imageHistory": [
+                {
+                    "uri": "/TreeFrontView1544287709043.jpg",
+                    "timestamp": 1544287709043
+                },
+                {
+                    "uri": "/TreeFrontView1544288053186.jpg",
+                    "timestamp": 1544288053186
+                }
+            ]
+        },
+        {
+            "name":"Tree Side View",
+            "id": "TreeSideView",
+            "type":"image",
+            "imageHistory": [
+                {
+                    "uri": "/TreeSideView1544287709043.jpg",
+                    "timestamp": 1544287709043
+                },
+                {
+                    "uri": "/TreeSideView1544288053186.jpg",
+                    "timestamp": 1544288053186
+                }
+            ]
+        }
+    ]
 }
