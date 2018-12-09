@@ -25,7 +25,7 @@ fileSystem.getText() = (from, callback) => {
             callback(result) 
         })
         .catch(err => console.error(err))
-{
+}
 
 
 
