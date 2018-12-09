@@ -18,8 +18,7 @@ fileSystem.saveText = (text, to, callback) => {
 }
 
 
-
-fileSystem.getText() = (from, callback) => {
+fileSystem.getText = (from, callback) => {
     FileSystem.readDirectoryAsync(from)
         .then((result) => {
             callback(result) 
