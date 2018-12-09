@@ -1,4 +1,7 @@
 {
+    "preferences":{
+        "themeColor":"green"
+    },
     "elements":[
         {
             "name":"Tree Front View",

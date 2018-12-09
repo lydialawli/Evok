@@ -19,7 +19,6 @@ export default class CameraScreen extends React.Component {
         camerasCurrentProjectID: this.props.navigation.state.params.projectID,
     }
 
-
     render() {
         const { navigate } = this.props.navigation
         console.log("Camera mode")
