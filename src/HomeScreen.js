@@ -1,4 +1,3 @@
-
 import React from 'react'
 import { StyleSheet, Text, View, Button, TouchableOpacity, TextInput, Icon, Dimensions, ImageBackground, Alert, ScrollView, Image } from 'react-native'
 import { StackNavigator } from 'react-navigation'

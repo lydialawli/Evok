@@ -11,7 +11,7 @@ var storageURI = '../storage.json'
 updateElementIndexFromJson = () => {
 
     readWriteFunctions.getText(storageURI, (result)=>{
-        this.elementIndex = result
+        this.elementIndex = JSON.parse(result)
     })
 }
 
@@ -30,7 +30,7 @@ startStorage()
 }
 
 updateJsonFromElementIndexObj = () => {
-
+    this.storageURI = JSON.stringify(this.elementIndex)
 }
 
 makeNewElementIndex()
