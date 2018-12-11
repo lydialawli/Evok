@@ -1,4 +1,4 @@
-import { fileSystem } from '../src/fileSystem.js'
+import { readWriteFunctions } from '../src/readWriteFunctions.js'
 //import { Elements } from '../storage.json'
 picuri = "/sdfad.jpg"
 
@@ -10,12 +10,10 @@ var storageURI = '../storage.json'
 
 updateElementIndexFromJson = () => {
 
-    fileSystem.getText(storageURI, (result)=>{
+    readWriteFunctions.getText(storageURI, (result)=>{
         this.elementIndex = result
     })
 }
-
-
 
 
 // create function updateJsonFromElementIndexObj(elementIndexObj) ...
@@ -32,7 +30,7 @@ startStorage()
 }
 
 updateJsonFromElementIndexObj = () => {
-    
+
 }
 
 makeNewElementIndex()

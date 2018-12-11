@@ -2,23 +2,23 @@ import { FileSystem } from 'expo'
 
 //this file is for general functions not specific to Evok functionality
 
-const fileSystem = {}
+const readWriteFunctions = {}
 
-fileSystem.move = (originalFile, currentFolder, fileName, callback) => {
+readWriteFunctions.move = (originalFile, currentFolder, fileName, callback) => {
     FileSystem.moveAsync({ from: originalFile, to: currentFolder + '/' + fileName })
         .then(callback)
         .catch(err => console.error(err))
 }
 
 
-fileSystem.saveText = (text, to, callback) => {
+readWriteFunctions.saveText = (text, to, callback) => {
     FileSystem.writeAsStringAsync(to, text)
         .then(callback)
         .catch(err => console.error(err))
 }
 
 
-fileSystem.getText = (from, callback) => {
+readWriteFunctions.getText = (from, callback) => {
     FileSystem.readDirectoryAsync(from)
         .then((result) => {
             callback(result) 
@@ -31,4 +31,4 @@ fileSystem.getText = (from, callback) => {
 
 
 
-export default fileSystem
+export default readWriteFunctions
