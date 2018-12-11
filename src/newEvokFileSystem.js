@@ -6,7 +6,7 @@ var elementIndex = {}
 var storageURI = '../storage.json'
 
 //create function that updateMemory(elementIndex)FromHDrive(storage.json) .
-//.. this is called at the begining to recover last state
+//.. this is called at the beginning to recover last state
 
 updateElementIndexFromJson = () => {
 
