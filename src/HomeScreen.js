@@ -9,6 +9,16 @@ import evokFileSystem from '../src/evokFilesystem.js'
 import ElementScreen from '../src/ElementScreen.js'
 import { FileSystem } from 'expo'
 import Card from '../src/Card.js'
+import newEvokFileSystem from '../src/newEvokFileSystem.js'
+
+var UngaObj = {
+    hello: 'world',
+    hakuna: 'matata',
+    favNumber: 6
+}
+
+var UngaJson = ''
+
 
 export default class HomeScreen extends React.Component {
     static navigationOptions = {
@@ -109,6 +119,16 @@ export default class HomeScreen extends React.Component {
     }
 
 
+    onClickedUngaButton = () => {
+        UngaJson = "aloha"//JSON.stringify(UngaObj)
+        console.log(UngaJson)
+    }
+
+    justDoIt = () => {
+       console.log("Finalllyyyy")
+    }
+
+
 
     render() {
         const { navigate } = this.props.navigation;
@@ -122,6 +142,9 @@ export default class HomeScreen extends React.Component {
             <View style={evokStyles.screenContainer} >
                 <View style={styles.two}>
                     <ScrollView contentContaistylenerStyle={styles.cardsContainer}>
+                        <TouchableOpacity style={styles.card} onPress={() => this.alertCreateNewFolder()}>
+                            <Text style={evokStyles.topBarText}> Unga Button </Text>
+                        </TouchableOpacity>
                         <View>
                             {this.getListCards()}
                         </View>

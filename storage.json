@@ -2,6 +2,14 @@
     "preferences":{
         "themeColor":"green"
     },
+
+    "testObj":{
+        "hello":"world",
+        "hakuna":"matata",
+        "favouriteNum":6
+    },
+
+
     "elements":[
         {
             "name":"Tree Front View",
