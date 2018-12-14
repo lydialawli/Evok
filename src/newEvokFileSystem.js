@@ -1,6 +1,5 @@
-import readWriteFunctions from '../src/readWriteFunctions.js'
+import readWrite from '../src/readWrite.js'
 import { FileSystem } from 'expo'
-import evokFileSystem from '../src/evokFilesystem.js'
 
 //import { Elements } from '../storage.json'
 
@@ -40,7 +39,7 @@ updateUngaIndexFromJUngaJson = (value) => {
 
 updateElementIndexFromJson = () => {
 
-    readWriteFunctions.getText(storageURI, (result) => {
+    readWrite.getText(storageURI, (result) => {
         this.elementIndex = JSON.parse(result)
     })
 }
@@ -63,9 +62,9 @@ updateJsonFromElementIndexObj = (currentElementIndex) => {
     console.log("..storageSTR: " + storageSTR)
     var fileUri = rootDirectory + storageURI
     
-    readWriteFunctions.saveText(storageSTR,storageURI, ()=>{
+    readWrite.saveText(storageSTR,storageURI, ()=>{
         console.log("..text saved " )
-        readWriteFunctions.readText(fileUri)
+        readWrite.readText(fileUri)
     })
 
    /*   FileSystem.writeAsStringAsync(fileUri, storageSTR)

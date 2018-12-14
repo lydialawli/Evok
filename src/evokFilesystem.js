@@ -1,24 +1,7 @@
 import { FileSystem } from 'expo'
 
 const evokFileSystem = {}
-var rootDirectory = FileSystem.documentDirectory
 
-evokFileSystem.saveText = (text, to, callback) => {
-    FileSystem.writeAsStringAsync(rootDirectory + "/" + to, text)
-        .then((result) => {
-            callback(result)
-        })
-        .catch(err => console.error(err)) 
-}
-
-
-evokFileSystem.readText = (fileUri) => {
-    FileSystem.readAsStringAsync(fileUri)
-        .then((result) => {
-            console.log("..new saved json text: " + result)
-        })
-        .catch(err => console.error(err))
-}
 
 evokFileSystem.getPath = (projectFolder, fileName) => {
     let expoDirectory = FileSystem.documentDirectory
