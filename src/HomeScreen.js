@@ -11,14 +11,13 @@ import { FileSystem } from 'expo'
 import Card from '../src/Card.js'
 import newEvokFileSystem from '../src/newEvokFileSystem.js'
 
-var UngaObj = {
-    hello: 'world',
-    hakuna: 'matata',
-    favNumber: 6
+var UngaIndex = {
+   /* UngaObj: [
+        hello= 'world',
+        hakuna= 'matata',
+        favNumber= 9
+    ]  */ 
 }
-
-var UngaJson = ''
-
 
 export default class HomeScreen extends React.Component {
     static navigationOptions = {
@@ -64,10 +63,10 @@ export default class HomeScreen extends React.Component {
     }
 
     getListCards = () => {
-        console.log(this.state)
+       // console.log(this.state)
 
         let listOfCards = this.state.listDirectories.map((projectName, index) => {
-            console.log(projectName)
+            //console.log(projectName)
             return <Card
                 name={projectName}
                 key={projectName}
@@ -119,20 +118,10 @@ export default class HomeScreen extends React.Component {
     }
 
 
-    onClickedUngaButton = () => {
-        UngaJson = "aloha"//JSON.stringify(UngaObj)
-        console.log(UngaJson)
-    }
-
-    justDoIt = () => {
-       console.log("Finalllyyyy")
-    }
-
-
 
     render() {
         const { navigate } = this.props.navigation;
-        console.log("homescreen mode")
+        //console.log("homescreen mode")
         let projectImage = <Text>Image goes here</Text>
 
         if (this.state.groupedPhotos[0])
@@ -142,8 +131,11 @@ export default class HomeScreen extends React.Component {
             <View style={evokStyles.screenContainer} >
                 <View style={styles.two}>
                     <ScrollView contentContaistylenerStyle={styles.cardsContainer}>
-                        <TouchableOpacity style={styles.card} onPress={() => this.alertCreateNewFolder()}>
-                            <Text style={evokStyles.topBarText}> Unga Button </Text>
+                        <TouchableOpacity style={styles.card} onPress={() => newEvokFileSystem.startStorage()}>
+                            <Text style={evokStyles.topBarText}> create elementIndex </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.card} onPress={() => newEvokFileSystem.addNewElement(Date.now(),'test')}>
+                            <Text style={evokStyles.topBarText}> add elements</Text>
                         </TouchableOpacity>
                         <View>
                             {this.getListCards()}

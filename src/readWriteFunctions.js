@@ -3,6 +3,7 @@ import { FileSystem } from 'expo'
 //this file is for general functions not specific to Evok functionality
 
 const readWriteFunctions = {}
+var rootDirectory = FileSystem.documentDirectory
 
 readWriteFunctions.move = (originalFile, currentFolder, fileName, callback) => {
     FileSystem.moveAsync({ from: originalFile, to: currentFolder + '/' + fileName })
@@ -12,23 +13,28 @@ readWriteFunctions.move = (originalFile, currentFolder, fileName, callback) => {
 
 
 readWriteFunctions.saveText = (text, to, callback) => {
-    FileSystem.writeAsStringAsync(to, text)
-        .then(callback)
-        .catch(err => console.error(err))
+    console.log(rootDirectory)
+    /* FileSystem.writeAsStringAsync(rootDirectory + "/" + to, text)
+         .then((result) => {
+             callback(result)
+         })
+         .catch(err => console.error(err)) */
 }
 
-
-readWriteFunctions.getText = (from, callback) => {
-    FileSystem.readDirectoryAsync(from)
+readWriteFunctions.readText = (fileUri) => {
+    FileSystem.readAsStringAsync(fileUri)
         .then((result) => {
-            callback(result) 
+            console.log(result)
         })
         .catch(err => console.error(err))
 }
 
-
-
-
-
+readWriteFunctions.getText = (from, callback) => {
+    FileSystem.readDirectoryAsync(from)
+        .then((result) => {
+            callback(result)
+        })
+        .catch(err => console.error(err))
+}
 
 export default readWriteFunctions
