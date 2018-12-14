@@ -13,18 +13,17 @@ readWriteFunctions.move = (originalFile, currentFolder, fileName, callback) => {
 
 
 readWriteFunctions.saveText = (text, to, callback) => {
-    console.log(rootDirectory)
-    /* FileSystem.writeAsStringAsync(rootDirectory + "/" + to, text)
+     FileSystem.writeAsStringAsync(rootDirectory + "/" + to, text)
          .then((result) => {
              callback(result)
          })
-         .catch(err => console.error(err)) */
+         .catch(err => console.error(err)) 
 }
 
 readWriteFunctions.readText = (fileUri) => {
     FileSystem.readAsStringAsync(fileUri)
         .then((result) => {
-            console.log(result)
+            console.log("..new saved json text: " + result)
         })
         .catch(err => console.error(err))
 }
