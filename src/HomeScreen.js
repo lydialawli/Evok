@@ -44,11 +44,10 @@ export default class HomeScreen extends React.Component {
     getArrayOfDirectories = () => {
         evokFileSystem.readAppDirectory((result) => {
             this.setState({
-                listDirectories: result
+                listDirectories: result,
             })
-        }
-        )
-
+            console.log("..this is list of directiories/elements: "+ result)
+        })
     }
 
     navigateToELement = (projectName) => {
@@ -56,10 +55,8 @@ export default class HomeScreen extends React.Component {
     }
 
     getListCards = () => {
-       // console.log(this.state)
-
         let listOfCards = this.state.listDirectories.map((projectName, index) => {
-            //console.log(projectName)
+           // console.log("..this is list of elements: " + projectName)
             return <Card
                 name={projectName}
                 key={projectName}
