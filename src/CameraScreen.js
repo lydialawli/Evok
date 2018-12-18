@@ -4,7 +4,7 @@ import { Camera, Permissions, Constants, FileSystem } from 'expo'
 import { StackNavigator } from 'react-navigation'
 import GalleryScreen from '../src/GalleryScreen.js'
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
-import evokFileSystem from '../src/evokFilesystem.js'
+import evokFileSystem from '../src/oldEvokFilesystem.js'
 import evokStyles from '../src/evokStyles.js'
 import HomeScreen from '../App.js'
 

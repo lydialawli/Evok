@@ -5,7 +5,7 @@ import CameraScreen from '../src/CameraScreen.js'
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 import evokStyles from '../src/evokStyles.js'
 import GalleryScreen from '../src/GalleryScreen.js'
-import evokFileSystem from '../src/evokFilesystem.js'
+import evokFileSystem from '../src/oldEvokFilesystem.js'
 import ElementScreen from '../src/ElementScreen.js'
 import { FileSystem } from 'expo'
 import Card from '../src/Card.js'
@@ -169,56 +169,3 @@ styles = StyleSheet.create({
     },
 })
 
-
-/* return (
-     <View style={evokStyles.screenContainer} >
- 
-         <View style={evokStyles.topBar}>
-             <TouchableOpacity style={evokStyles.topBarRightIcon}>
-                 <Ionicons name="ios-camera-outline" size={40} color="grey" containerStyle={flex = 1} />
-             </TouchableOpacity>
-             <Text style={evokStyles.topBarText} >
-                 Elements
-             </Text>
-             <TouchableOpacity style={evokStyles.topBarRightIcon} onPress={() => navigate('Camera')}>
-                 <Ionicons name="ios-camera-outline" size={40} color="white" containerStyle={flex = 1} />
-             </TouchableOpacity>
-         </View>
- 
-         <View style={evokStyles.cardsContainer}>
-             <View style={evokStyles.projectCard}>
-                 <TouchableOpacity style={evokStyles.projectCardImage} onPress={() => navigate('Gallery')}>
-                     {projectImage}
-                 </TouchableOpacity>
-                 <View style={evokStyles.projectCardDescription}>
-                     <TextInput
-                         style={evokStyles.ProjectCardTitle}
-                         onChangeText={(projectTitle) => this.setState({ projectTitle })}
-                         value={this.state.projectTitle}
-                         editable={true}
-                         maxLength={10}
-                         placeholderTextColor={'grey'}
-                         clearTextOnFocus={true}
-                         underlineColorAndroid={'transparent'}>
-                     </TextInput>
-                 </View>
-             </View>
-             <View style={evokStyles.projectCardDescription}>
-                 <TouchableOpacity style={evokStyles.projectCard} onPress={() => navigate('Element')}>
-                     <Text style={evokStyles.projectCardText} >
-                         "myPro" folder on Element Screen
-                 </Text>
-                 </TouchableOpacity>
-             </View>
-             <View style={evokStyles.projectCardDescription}>
-                 <TouchableOpacity style={evokStyles.projectCard} onPress={() => this.alertCreateNewFolder()}>
-                     <Text style={evokStyles.projectCardText} >
-                         new Folder
-                 </Text>
-                 </TouchableOpacity>
-             </View>
-         </View>
-     </View>
- )
-}
-}*/

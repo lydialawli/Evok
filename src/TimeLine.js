@@ -5,7 +5,7 @@ import EvokCamera from '../src/CameraScreen.js'
 import { Ionicons } from '@expo/vector-icons'
 import evokStyles from '../src/evokStyles.js'
 import HomeScreen from '../App.js'
-import evokFileSystem from '../src/evokFilesystem.js'
+import evokFileSystem from '../src/oldEvokFilesystem.js'
 
 let lineXhour =
     <View style={{ borderColor: 'transparent', borderBottomColor: 'green', borderWidth: 2, width: 20, height: 2 }}>

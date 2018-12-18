@@ -6,7 +6,7 @@ import TimeLine from '../src/TimeLine.js'
 import { Ionicons } from '@expo/vector-icons'
 import evokStyles from '../src/evokStyles.js'
 import HomeScreen from '../App.js'
-import evokFileSystem from '../src/evokFilesystem.js'
+import evokFileSystem from '../src/oldEvokFilesystem.js'
 
 export default class ElementScreen extends React.Component {
     static navigationOptions = {

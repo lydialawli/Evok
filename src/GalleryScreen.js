@@ -5,7 +5,7 @@ import EvokCamera from '../src/CameraScreen.js'
 import { Ionicons } from '@expo/vector-icons'
 import evokStyles from '../src/evokStyles.js'
 import HomeScreen from '../App.js'
-import evokFileSystem from '../src/evokFilesystem.js'
+import evokFileSystem from '../src/oldEvokFilesystem.js'
 
 export default class GalleryScreen extends React.Component {
     static navigationOptions = {
