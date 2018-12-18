@@ -3,7 +3,7 @@ import { FileSystem } from 'expo'
 
 //import { Elements } from '../storage.json'
 
-
+var elements = []
 var elementIndex = {}
 var storageURI = 'storage.json'
 var rootDirectory = FileSystem.documentDirectory
@@ -25,11 +25,12 @@ newEvokFileSystem.startStorage = () => {
 
 updateElementIndexFromJson = () => {
     var fileUri = rootDirectory + storageURI
-    readWrite.readText(fileUri,(result) => {
+    readWrite.readText(fileUri, (result) => {
         elementIndex = JSON.parse(result)
-        console.log("..elementIndex updated: " + JSON.stringify(elementIndex))})
-
+        console.log("..elementIndex updated: " + JSON.stringify(elementIndex))
+    })
 }
+
 
 //only called once when the app is first ever used
 makeNewElementIndex = () => {
@@ -47,11 +48,12 @@ updateJsonFromElementIndexObj = (currentElementIndex) => {
     var storageSTR = JSON.stringify(currentElementIndex)
     //console.log("..storageSTR: " + storageSTR)
     var fileUri = rootDirectory + storageURI
-    
-    readWrite.saveText(storageSTR,storageURI, ()=>{
+
+    readWrite.saveText(storageSTR, storageURI, () => {
         //console.log("..text saved " )
-        readWrite.readText(fileUri,(result) => {
-            console.log("..updated json as: " + result)})
+        readWrite.readText(fileUri, (result) => {
+            console.log("..updated json as: " + result)
+        })
     })
 }
 

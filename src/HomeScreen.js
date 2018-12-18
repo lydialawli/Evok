@@ -32,41 +32,50 @@ export default class HomeScreen extends React.Component {
             projectTitle: 'myPro',
             rootDirectory: FileSystem.documentDirectory,
             listDirectories: [],
-            listOfCards: []
+            listOfCards: [],
+            elements: []
         }
 
     }
 
     async componentWillMount() {
-        this.getArrayOfDirectories()
+        this._getArrayOfDirectories()
+        newEvokFileSystem.startStorage()
+       /* newEvokFileSystem.getElements((result) => {
+            this.setState({
+                elements: result,
+            })
+            console.log("...elements: " + this.state.elements)
+        })*/
+
     }
 
-    getArrayOfDirectories = () => {
+    _getArrayOfDirectories = () => {
         evokFileSystem.readAppDirectory((result) => {
             this.setState({
                 listDirectories: result,
             })
-            console.log("..this is list of directiories/elements: "+ result)
+            //console.log("..this is list of directiories/elements: "+ result)
         })
     }
 
-    navigateToELement = (projectName) => {
+    _navigateToELement = (projectName) => {
         this.props.navigation.navigate('Element', { projectID: projectName })
     }
 
-    getListCards = () => {
+    _getListCards = () => {
         let listOfCards = this.state.listDirectories.map((projectName, index) => {
-           // console.log("..this is list of elements: " + projectName)
+            // console.log("..this is list of elements: " + projectName)
             return <Card
                 name={projectName}
                 key={projectName}
-                onCardPressed={this.navigateToELement}
+                onCardPressed={this._navigateToELement}
             />
         })
         return listOfCards
     }
 
-    getCard = (projectName) => {
+    _getCard = (projectName) => {
         return (
             <View>
                 <TouchableOpacity style={styles.card}>
@@ -76,11 +85,11 @@ export default class HomeScreen extends React.Component {
         )
     }
 
-    updateProjectName = () => {
+    _updateProjectName = () => {
         this.setState({ projectTitle: 'Unga Bunga' })
     }
 
-    getProjectImage = (projectImagefileUri) => {
+    _getProjectImage = (projectImagefileUri) => {
         return (
             <ImageBackground
                 style={{ flex: 1 }}
@@ -90,20 +99,20 @@ export default class HomeScreen extends React.Component {
         )
     }
 
-    alertCreateNewFolder = (picObject) =>
+    _alertCreateNewFolder = (picObject) =>
         Alert.alert(
             'Create new element',
             'Are you sure?',
             [
                 { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
-                { text: 'OK', onPress: () => { this.createNewFolder() } }
+                { text: 'OK', onPress: () => { this._createNewFolder() } }
             ],
             { cancelable: false }
         )
 
-    createNewFolder = () => {
+    _createNewFolder = () => {
         evokFileSystem.createDirectoryIfDoesntExist(evokFileSystem.getPath(Date.now(), ''), () => {
-            console.log(this.getArrayOfDirectories())
+            console.log(this._getArrayOfDirectories())
         })
     }
 
@@ -115,7 +124,7 @@ export default class HomeScreen extends React.Component {
         let projectImage = <Text>Image goes here</Text>
 
         if (this.state.groupedPhotos[0])
-            projectImage = this.getProjectImage(this.state.groupedPhotos[this.state.groupedPhotos.length - 1].fileUri)
+            projectImage = this._getProjectImage(this.state.groupedPhotos[this.state.groupedPhotos.length - 1].fileUri)
 
         return (
             <View style={evokStyles.screenContainer} >
@@ -124,13 +133,13 @@ export default class HomeScreen extends React.Component {
                         <TouchableOpacity style={styles.card} onPress={() => newEvokFileSystem.startStorage()}>
                             <Text style={evokStyles.topBarText}> create elementIndex </Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.card} onPress={() => newEvokFileSystem.addNewElement(Date.now(),'test')}>
+                        <TouchableOpacity style={styles.card} onPress={() => newEvokFileSystem.addNewElement(Date.now(), 'test')}>
                             <Text style={evokStyles.topBarText}> add elements</Text>
                         </TouchableOpacity>
                         <View>
-                            {this.getListCards()}
+                            {this._getListCards()}
                         </View>
-                        <TouchableOpacity style={styles.card} onPress={() => this.alertCreateNewFolder()}>
+                        <TouchableOpacity style={styles.card} onPress={() => this._alertCreateNewFolder()}>
                             <Text style={evokStyles.topBarText}> Create new Element ? </Text>
                         </TouchableOpacity>
                     </ScrollView>
