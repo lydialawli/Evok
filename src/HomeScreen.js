@@ -11,13 +11,6 @@ import { FileSystem } from 'expo'
 import Card from '../src/Card.js'
 import newEvokFileSystem from '../src/newEvokFileSystem.js'
 
-var UngaIndex = {
-   /* UngaObj: [
-        hello= 'world',
-        hakuna= 'matata',
-        favNumber= 9
-    ]  */ 
-}
 
 export default class HomeScreen extends React.Component {
     static navigationOptions = {

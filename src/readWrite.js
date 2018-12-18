@@ -20,10 +20,10 @@ readWrite.saveText = (text, to, callback) => {
          .catch(err => console.error(err)) 
 }
 
-readWrite.readText = (fileUri) => {
+readWrite.readText = (fileUri, callback) => {
     FileSystem.readAsStringAsync(fileUri)
         .then((result) => {
-            console.log("..new saved json text: " + result)
+            callback(result)
         })
         .catch(err => console.error(err))
 }

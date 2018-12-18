@@ -10,38 +10,16 @@ var rootDirectory = FileSystem.documentDirectory
 
 const newEvokFileSystem = {}
 
-//make a test: create JS obj, input properties and move/save it to .json, and viceversa
-
-var UngaIndex = {
-}
-
-var UngaJson = ''
-
-
-
-newEvokFileSystem.onClickedUngaButton = (value) => {
-    updateUngaIndexToJson(value)
-    console.log(UngaJson)
-}
-
-updateUngaIndexToJson = (value) => {
-    UngaJson = JSON.stringify(value)
-}
-
-updateUngaIndexFromJUngaJson = (value) => {
-    value = JSON.parse(UngaJson)
-}
-
-
 
 //create function that updateMemory(elementIndex)FromHDrive(storage.json) .
 //.. this is called at the beginning to recover last state
 
 updateElementIndexFromJson = () => {
+    var fileUri = rootDirectory + storageURI
+    readWrite.readText(fileUri,(result) => {
+        elementIndex = JSON.parse(result)
+        console.log("..elementIndex updated: " + JSON.stringify(elementIndex))})
 
-    readWrite.getText(storageURI, (result) => {
-        this.elementIndex = JSON.parse(result)
-    })
 }
 
 
@@ -64,18 +42,10 @@ updateJsonFromElementIndexObj = (currentElementIndex) => {
     
     readWrite.saveText(storageSTR,storageURI, ()=>{
         console.log("..text saved " )
-        readWrite.readText(fileUri)
+        readWrite.readText(fileUri,(result) => {
+            console.log("..new saved json text: " + result)})
     })
 
-   /*   FileSystem.writeAsStringAsync(fileUri, storageSTR)
-        .then((result) => {
-            console.log(result)
-        })
-        .catch(err => console.error(err))
-
-    readWriteFunctions.saveText (storageSTR, storageURI, (result) => {
-          console.log("...this is in JSON: " + result)
-      })*/
 
 }
 
@@ -103,7 +73,7 @@ newEvokFileSystem.addNewElement = (elementName, type) => {
 
 
 storageExists = () => {
-    return false
+    return true
 }
 
 
