@@ -10,7 +10,6 @@ var rootDirectory = FileSystem.documentDirectory
 
 const newEvokFileSystem = {}
 
-
 //create function that updateMemory(elementIndex)FromHDrive(storage.json) .
 //.. this is called at the beginning to recover last state
 newEvokFileSystem.startStorage = () => {
