@@ -12,13 +12,12 @@ const newEvokFileSystem = {}
 
 //create function that updateMemory(elementIndex)FromHDrive(storage.json) .
 //.. this is called at the beginning to recover last state
-newEvokFileSystem.startStorage = () => {
+newEvokFileSystem.startStorage = (callback) => {
     if (storageExists()) {
         this.updateElementIndexFromJson()
     }
     else {
         this.makeNewElementIndex()
-        console.log(elementIndex)
     }
 }
 
@@ -28,6 +27,10 @@ updateElementIndexFromJson = () => {
         elementIndex = JSON.parse(result)
         console.log("..elementIndex updated: " + JSON.stringify(elementIndex))
     })
+}
+
+newEvokFileSystem.getArrayOfElements = () => {
+    return elementIndex.elements 
 }
 
 

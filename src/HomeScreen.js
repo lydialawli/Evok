@@ -33,7 +33,8 @@ export default class HomeScreen extends React.Component {
             rootDirectory: FileSystem.documentDirectory,
             listDirectories: [],
             listOfCards: [],
-            elements: []
+            elements: [],
+            elementIndex: []
         }
 
     }
@@ -43,7 +44,6 @@ export default class HomeScreen extends React.Component {
         newEvokFileSystem.startStorage()
     
     }
-
 
 
     _getArrayOfDirectories = () => {
@@ -71,15 +71,6 @@ export default class HomeScreen extends React.Component {
         return listOfCards
     }
 
-    _getCard = (projectName) => {
-        return (
-            <View>
-                <TouchableOpacity style={styles.card}>
-                    <Text> {projectName}</Text>
-                </TouchableOpacity>
-            </View>
-        )
-    }
 
     _updateProjectName = () => {
         this.setState({ projectTitle: 'Unga Bunga' })
