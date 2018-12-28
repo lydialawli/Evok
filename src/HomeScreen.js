@@ -41,16 +41,34 @@ export default class HomeScreen extends React.Component {
     async componentWillMount() {
         this._getArrayOfDirectories()
         newEvokFileSystem.startStorage(this.onStorageReady)
-    
+
     }
 
     onStorageReady = () => {
         this.setState({
-            elements: newEvokFileSystem.getArrayOfElements() ,
+            elements: newEvokFileSystem.getArrayOfElements(),
         })
         console.log("..this is elements: " + JSON.stringify(this.state.elements))
     }
 
+    getListElementCards = () => {
+        let listOfElementCards = this.state.elements.map((x) => {
+            // console.log("..this is list of elements: " + projectName)
+            return <Card
+                name={x.name}
+                key={x.name}
+                type={x.type}
+                onCardPressed={this.alertCardType}
+            />
+        })
+        return listOfElementCards
+    }
+
+  
+    alertCardType = (x) => {
+        alert("this card is a " + x )
+
+    }
 
     _getArrayOfDirectories = () => {
         evokFileSystem.readAppDirectory((result) => {
@@ -127,7 +145,7 @@ export default class HomeScreen extends React.Component {
                             <Text style={evokStyles.topBarText}> add elements</Text>
                         </TouchableOpacity>
                         <View>
-                            {this._getListCards()}
+                            {this.getListElementCards()}
                         </View>
                         <TouchableOpacity style={styles.card} onPress={() => this._alertCreateNewFolder()}>
                             <Text style={evokStyles.topBarText}> Create new Element ? </Text>

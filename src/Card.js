@@ -5,7 +5,7 @@ export default class Card extends React.Component {
 
     onPress = ()=>{
         
-        this.props.onCardPressed(this.props.name)
+        this.props.onCardPressed(this.props.type)
     }
 
     render() {
