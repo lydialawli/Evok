@@ -34,14 +34,13 @@ export default class HomeScreen extends React.Component {
             listDirectories: [],
             listOfCards: [],
             elements: [],
-            elementIndex: []
         }
 
     }
 
     async componentWillMount() {
         this._getArrayOfDirectories()
-        newEvokFileSystem.startStorage(this.onStorageReady())
+        newEvokFileSystem.startStorage(this.onStorageReady)
     
     }
 
@@ -49,6 +48,7 @@ export default class HomeScreen extends React.Component {
         this.setState({
             elements: newEvokFileSystem.getArrayOfElements() ,
         })
+        console.log("..this is elements: " + this.state.elements)
     }
 
 

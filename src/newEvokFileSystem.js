@@ -14,10 +14,11 @@ const newEvokFileSystem = {}
 //.. this is called at the beginning to recover last state
 newEvokFileSystem.startStorage = (callback) => {
     if (storageExists()) {
-        this.updateElementIndexFromJson(callback())
+        console.log("this is callback: "+ callback)
+        this.updateElementIndexFromJson(callback)
     }
     else {
-        this.makeNewElementIndex()
+        this.makeNewElementIndex(callback)
     }
 }
 
@@ -36,18 +37,18 @@ newEvokFileSystem.getArrayOfElements = () => {
 
 
 //only called once when the app is first ever used
-makeNewElementIndex = () => {
+makeNewElementIndex = (callback) => {
     elementIndex = {
         elements: [{ name: 'obj1', type: 'test' }]
     }
     console.log("..new elementIndex created: " + elementIndex)
-    updateJsonFromElementIndexObj(elementIndex)
+    updateJsonFromElementIndexObj(elementIndex,callback)
 }
 
 
 
 // this is called everytime we change the elementObjectIndex inside the app, so next time we open the app everything stills the same
-updateJsonFromElementIndexObj = (currentElementIndex) => {
+updateJsonFromElementIndexObj = (currentElementIndex,callback) => {
     var storageSTR = JSON.stringify(currentElementIndex)
     //console.log("..storageSTR: " + storageSTR)
     var fileUri = rootDirectory + storageURI
@@ -56,6 +57,7 @@ updateJsonFromElementIndexObj = (currentElementIndex) => {
         //console.log("..text saved " )
         readWrite.readText(fileUri, (result) => {
             console.log("..updated json as: " + result)
+            callback()
         })
     })
 }
