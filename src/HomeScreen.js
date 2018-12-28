@@ -48,7 +48,7 @@ export default class HomeScreen extends React.Component {
         this.setState({
             elements: newEvokFileSystem.getArrayOfElements(),
         })
-        console.log("..this is elements: " + JSON.stringify(this.state.elements))
+        //console.log("..this is elements: " + JSON.stringify(this.state.elements))
     }
 
     getListElementCards = () => {
@@ -64,9 +64,9 @@ export default class HomeScreen extends React.Component {
         return listOfElementCards
     }
 
-  
+
     alertCardType = (x) => {
-        alert("this card is a " + x )
+        alert("this card is a " + x)
 
     }
 
@@ -75,7 +75,7 @@ export default class HomeScreen extends React.Component {
             this.setState({
                 listDirectories: result,
             })
-            //console.log("..this is list of directiories/elements: "+ result)
+            //console.log("..this is list of directiories/elements: " + result)
         })
     }
 
@@ -110,22 +110,16 @@ export default class HomeScreen extends React.Component {
         )
     }
 
-    _alertCreateNewFolder = (picObject) =>
+    alertCreateNewElement = () =>
         Alert.alert(
             'Create new element',
             'Are you sure?',
             [
                 { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
-                { text: 'OK', onPress: () => { this._createNewFolder() } }
+                { text: 'OK', onPress: () => { newEvokFileSystem.addNewElement(Date.now(), 'test',this.onStorageReady) } }
             ],
             { cancelable: false }
         )
-
-    _createNewFolder = () => {
-        evokFileSystem.createDirectoryIfDoesntExist(evokFileSystem.getPath(Date.now(), ''), () => {
-            console.log(this._getArrayOfDirectories())
-        })
-    }
 
 
 
@@ -141,15 +135,12 @@ export default class HomeScreen extends React.Component {
             <View style={evokStyles.screenContainer} >
                 <View style={styles.two}>
                     <ScrollView contentContaistylenerStyle={styles.cardsContainer}>
-                        <TouchableOpacity style={styles.card} onPress={() => newEvokFileSystem.addNewElement(Date.now(), 'test')}>
-                            <Text style={evokStyles.topBarText}> add elements</Text>
+                        <TouchableOpacity style={styles.card} onPress={() => this.alertCreateNewElement()}>
+                            <Text style={evokStyles.topBarText}> Add an element </Text>
                         </TouchableOpacity>
                         <View>
                             {this.getListElementCards()}
                         </View>
-                        <TouchableOpacity style={styles.card} onPress={() => this._alertCreateNewFolder()}>
-                            <Text style={evokStyles.topBarText}> Create new Element ? </Text>
-                        </TouchableOpacity>
                     </ScrollView>
                 </View>
             </View>

@@ -67,18 +67,15 @@ updateElementIndexFromNewElement = (newElement,callback) => {
     updateJsonFromElementIndexObj(elementIndex,callback)
 }
 
-consolelog = () => {
-    console.log("..new element created")
-}
 
 
-newEvokFileSystem.addNewElement = (elementName, type) => {
+newEvokFileSystem.addNewElement = (elementName, type, callback) => {
     let newElement = {
         name: elementName,
         type: type,
     }
-    //console.log("..new Element created: " + newElement.name)
-    updateElementIndexFromNewElement(newElement, consolelog)
+    console.log("..new Element created: " + elementName)
+    updateElementIndexFromNewElement(newElement, callback)
 }
 
 
