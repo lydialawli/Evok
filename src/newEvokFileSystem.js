@@ -14,7 +14,7 @@ const newEvokFileSystem = {}
 //.. this is called at the beginning to recover last state
 newEvokFileSystem.startStorage = (callback) => {
     if (storageExists()) {
-        console.log("this is callback: "+ callback)
+        console.log("this is callback: " + callback)
         this.updateElementIndexFromJson(callback)
     }
     else {
@@ -32,7 +32,7 @@ updateElementIndexFromJson = (callback) => {
 }
 
 newEvokFileSystem.getArrayOfElements = () => {
-    return elementIndex.elements 
+    return elementIndex.elements
 }
 
 
@@ -42,13 +42,13 @@ makeNewElementIndex = (callback) => {
         elements: [{ name: 'obj1', type: 'test' }]
     }
     console.log("..new elementIndex created: " + elementIndex)
-    updateJsonFromElementIndexObj(elementIndex,callback)
+    updateJsonFromElementIndexObj(elementIndex, callback)
 }
 
 
 
 // this is called everytime we change the elementObjectIndex inside the app, so next time we open the app everything stills the same
-updateJsonFromElementIndexObj = (currentElementIndex,callback) => {
+updateJsonFromElementIndexObj = (currentElementIndex, callback) => {
     var storageSTR = JSON.stringify(currentElementIndex)
     //console.log("..storageSTR: " + storageSTR)
     var fileUri = rootDirectory + storageURI
@@ -62,9 +62,13 @@ updateJsonFromElementIndexObj = (currentElementIndex,callback) => {
     })
 }
 
-updateElementIndexFromNewElement = (newElement) => {
+updateElementIndexFromNewElement = (newElement,callback) => {
     elementIndex.elements.push(newElement)
-    updateJsonFromElementIndexObj(elementIndex)
+    updateJsonFromElementIndexObj(elementIndex,callback)
+}
+
+consolelog = () => {
+    console.log("..new element created")
 }
 
 
@@ -73,8 +77,8 @@ newEvokFileSystem.addNewElement = (elementName, type) => {
         name: elementName,
         type: type,
     }
-    console.log("..new Element created: " + newElement.name)
-    updateElementIndexFromNewElement(newElement)
+    //console.log("..new Element created: " + newElement.name)
+    updateElementIndexFromNewElement(newElement, consolelog)
 }
 
 

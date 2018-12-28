@@ -36,4 +36,10 @@ readWrite.getText = (from, callback) => {
         .catch(err => console.error(err))
 }
 
+readWrite.delete = (FileUri, callback) => {
+    FileSystem.deleteAsync(FileUri)
+        .then(callback)
+        .catch(err => console.error(err))
+}
+
 export default readWrite

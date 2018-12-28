@@ -123,9 +123,6 @@ export default class HomeScreen extends React.Component {
             <View style={evokStyles.screenContainer} >
                 <View style={styles.two}>
                     <ScrollView contentContaistylenerStyle={styles.cardsContainer}>
-                        <TouchableOpacity style={styles.card} onPress={() => newEvokFileSystem.startStorage()}>
-                            <Text style={evokStyles.topBarText}> create elementIndex </Text>
-                        </TouchableOpacity>
                         <TouchableOpacity style={styles.card} onPress={() => newEvokFileSystem.addNewElement(Date.now(), 'test')}>
                             <Text style={evokStyles.topBarText}> add elements</Text>
                         </TouchableOpacity>
