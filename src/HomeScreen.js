@@ -41,8 +41,14 @@ export default class HomeScreen extends React.Component {
 
     async componentWillMount() {
         this._getArrayOfDirectories()
-        newEvokFileSystem.startStorage()
+        newEvokFileSystem.startStorage(this.onStorageReady())
     
+    }
+
+    onStorageReady = () => {
+        this.setState({
+            elements: newEvokFileSystem.getArrayOfElements() ,
+        })
     }
 
 

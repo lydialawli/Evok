@@ -14,18 +14,19 @@ const newEvokFileSystem = {}
 //.. this is called at the beginning to recover last state
 newEvokFileSystem.startStorage = (callback) => {
     if (storageExists()) {
-        this.updateElementIndexFromJson()
+        this.updateElementIndexFromJson(callback())
     }
     else {
         this.makeNewElementIndex()
     }
 }
 
-updateElementIndexFromJson = () => {
+updateElementIndexFromJson = (callback) => {
     var fileUri = rootDirectory + storageURI
     readWrite.readText(fileUri, (result) => {
         elementIndex = JSON.parse(result)
         console.log("..elementIndex updated: " + JSON.stringify(elementIndex))
+        callback()
     })
 }
 
