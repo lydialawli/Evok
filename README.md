@@ -22,7 +22,7 @@ The examples below are likely scenarious in which _Evok_ can come in handy, and 
 - The evolution of a fat person loosing weight
 - ...
 
-> Say you'd like to __take selfie a day__, for the next ten years, or better yet, until you die. 
+- Say you'd like to __take selfie a day__, for the next ten years, or better yet, until you die. 
 
 >That would require a lot of determination, organisational skill and patience. In this case Evok helps:
 >-  provide a singular storage location (for all the picures you will be taking for the next decades)
@@ -31,6 +31,6 @@ The examples below are likely scenarious in which _Evok_ can come in handy, and 
 >- A reminder feature
 >- Tools to help you take each picture in a coherent way (ie. an __Onion Skin__ of the last picture shown on the camera, as you're about to take the next one)
 
->Imagine you want to keep track of your child's growth in many different aspects, you can:
+- Imagine you want to keep track of your child's growth in many different aspects, you can:
 >- keep track of his physical aspect through images
 >- keep track of text format information (ie. height, weight, behaviour, diary...)
