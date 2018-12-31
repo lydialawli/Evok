@@ -5,7 +5,7 @@ _Evok_ is a tool that allows to record the history of physical objects (elements
 In other words, it's an app that facilitates you the job of capturing the data of a living thing or an object, whatever changes in time, with some key features such as a camera implementation, a storage system, a timeline display etc.
 
 
-Say you have a plant, you start growing it since the vry first day, and would like to keep track of how it grows, through images. 
+Say you have a plant; you start growing it since day one, and would like to keep track of how it grows, how much sun is needed, how it looks...
 
 The idea of Evok is similar to a Timelapse, with the idea of _lapsing_, which basically means to view the accumulated frames as it was animated, overlapped one after the other in a faster speed.
 
