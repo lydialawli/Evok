@@ -14,11 +14,10 @@ The examples below are likely scenarious in which _Evok_ can come in handy, and 
 ## EVOK USE CASES
 
 - Growing plant (tree, flower...)
-- A human's face (like a baby until it's adulthood)
 - An ongoing building contruction
 - A landspape
+- The tummy of a pregnant woman (say for 9 months)
 - A wound (imagine you could see how your wound heals in time with an animation)
-- The evolving height of a child
 - The evolution of a fat person loosing weight
 - ...
 
@@ -31,6 +30,6 @@ The examples below are likely scenarious in which _Evok_ can come in handy, and 
 >- A reminder feature
 >- Tools to help you take each picture in a coherent way (ie. an __Onion Skin__ of the last picture shown on the camera, as you're about to take the next one)
 
-- Imagine you want to keep track of your child's growth in many different aspects, you can:
+- Imagine you want to keep the history of your __child's growth__ in many different aspects, you can:
 >- keep track of his physical aspect through images
->- keep track of text format information (ie. height, weight, behaviour, diary...)
+>- write a diary of the child (using text input)
