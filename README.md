@@ -35,5 +35,4 @@ The examples below are likely scenarious in which _Evok_ can come in handy, and 
 
 
 
-Evok is agnostic to what the app is used for. 
 
