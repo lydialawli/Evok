@@ -2,7 +2,7 @@
 
 _Evok_ is a tool that allows to record the history of physical objects (elements) that evolve over time. Assisting to ensure a coherent input of data and providing options to visualise it. 
 
-In other words, it's an app that facilitates you the job of capturing the data of a living thing or an object, whatever changes in time, with some key features such as a camera implementation, a storage system, a timeline display etc.
+Some key features are: camera implementation (you can take pictures using the app), a storage system (everything will be stored localy, in the users device), a timeline display etc.
 
 
 Say you have a plant; you start growing it since day one, and would like to keep track of how it grows, how much sun is needed, how it looks...
@@ -19,10 +19,7 @@ The examples below are likely scenarious in which _Evok_ can come in handy, and 
 - The tummy of a pregnant woman (say for 9 months)
 - A wound (imagine you could see how your wound heals in time with an animation)
 - The evolution of a fat person loosing weight
-- ...
-
-- Say you'd like to __take selfie a day__, for the next ten years, or better yet, until you die. 
-
+- Say you'd like to __take selfie a day__, for the next ten years, or better yet, for as long as you're alive:
 >That would require a lot of determination, organisational skill and patience. In this case Evok helps:
 >-  provide a singular storage location (for all the picures you will be taking for the next decades)
 >- An easy way to access and preview them as an animation
@@ -33,3 +30,10 @@ The examples below are likely scenarious in which _Evok_ can come in handy, and 
 - Imagine you want to keep the history of your __child's growth__ in many different aspects, you can:
 >- keep track of his physical aspect through images
 >- write a diary of the child (using text input)
+>- Review all the history, in a organised and coherent way
+>- And so on...
+
+
+
+Evok is agnostic to what the app is used for. 
+
