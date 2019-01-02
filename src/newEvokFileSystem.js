@@ -69,9 +69,10 @@ updateElementIndexFromNewElement = (newElement, callback) => {
 
 
 
-newEvokFileSystem.addNewElement = (elementName, type, callback) => {
+newEvokFileSystem.addNewElement = (elementName,timeOfCreation, type, callback) => {
     let newElement = {
         name: elementName,
+        timestamp: timeOfCreation,
         type: type,
     }
     console.log("..new Element created: " + elementName)

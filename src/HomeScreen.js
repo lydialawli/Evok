@@ -66,8 +66,16 @@ export default class HomeScreen extends React.Component {
 
 
     alertCardType = (x) => {
-        alert("this card is a " + x)
-
+        Alert.alert(
+            'Take picture?',
+            'Or show gallery?',
+            [
+                { text: 'Show Gallery', onPress: () => alert("this card is a " + x) },
+                { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
+                { text: 'YES', onPress: () => console.log('OK Pressed') },
+            ],
+            { cancelable: false }
+        )
     }
 
     _getArrayOfDirectories = () => {
@@ -116,7 +124,7 @@ export default class HomeScreen extends React.Component {
             'Are you sure?',
             [
                 { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
-                { text: 'OK', onPress: () => { newEvokFileSystem.addNewElement(Date.now(), 'test', this.onStorageReady) } }
+                { text: 'OK', onPress: () => { newEvokFileSystem.addNewElement("input name here",Date.now(), 'test', this.onStorageReady) } }
             ],
             { cancelable: false }
         )
