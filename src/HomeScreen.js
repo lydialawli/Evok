@@ -8,7 +8,7 @@ import GalleryScreen from '../src/GalleryScreen.js'
 import evokFileSystem from '../src/oldEvokFilesystem.js'
 import ElementScreen from '../src/ElementScreen.js'
 import { FileSystem } from 'expo'
-import elementCard from '../src/elementCard.js'
+import ElementCard from '../src/elementCard.js'
 import newEvokFileSystem from '../src/newEvokFileSystem.js'
 
 
@@ -54,7 +54,7 @@ export default class HomeScreen extends React.Component {
     getListElementCards = () => {
         let listOfElementCards = this.state.elements.map((x) => {
             // console.log("..this is list of elements: " + projectName)
-            return <elementCard
+            return <ElementCard
                 name={x.name}
                 key={x.name}
                 type={x.type}
@@ -86,7 +86,7 @@ export default class HomeScreen extends React.Component {
     _getListCards = () => {
         let listOfCards = this.state.listDirectories.map((projectName, index) => {
             // console.log("..this is list of elements: " + projectName)
-            return <elementCard
+            return < ElementCard
                 name={projectName}
                 key={projectName}
                 onCardPressed={this._navigateToELement}
@@ -116,7 +116,7 @@ export default class HomeScreen extends React.Component {
             'Are you sure?',
             [
                 { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
-                { text: 'OK', onPress: () => { newEvokFileSystem.addNewElement(Date.now(), 'test',this.onStorageReady) } }
+                { text: 'OK', onPress: () => { newEvokFileSystem.addNewElement(Date.now(), 'test', this.onStorageReady) } }
             ],
             { cancelable: false }
         )
