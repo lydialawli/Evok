@@ -134,7 +134,13 @@ export default class HomeScreen extends React.Component {
         )
     }
 
-    //newEvokFileSystem.addNewElement("input name here", Date.now(), 'test', this.onStorageReady)
+    addNewElement = (textInput) => {
+        this.setState({
+            placeholderElementName: 'enter title',
+        })
+        newEvokFileSystem.addNewElement(textInput, Date.now(), 'test', this.onStorageReady)
+
+    }
 
     setModalVisible(visible) {
         console.log('modalview', visible)
@@ -143,29 +149,29 @@ export default class HomeScreen extends React.Component {
         })
     }
 
-    modalView = () => {
-        return (
-            <View>
-                <Text>{this.state.placeholderElementName}</Text>
-            </View>
-        )
-    }
-
-    inputElementTitle = () => {
+    elementTitleInput = () => {
         return (
             <TextInput
-                style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-                onChangeText={(text) => this.setState({ text })}
-                value={this.state.placeholderElementName}
+                style={{ fontSize: 25, height: 40, borderColor: 'gray', borderWidth: 1 }}
+                placeholderTextColor='gray'
+                clearTextOnFocus= {true}
+                //placeholder={this.state.placeholderElementName}
+                defaultValue={this.state.placeholderElementName}
+        
+                //onChangeText={(result) => this.setState(this.state.placeholderElementName = { result })}
+                //onSubmitEditing={(result) => console.log(result)}
+                //value={this.state.placeholderElementName}
+            //onSubmitEditing={console.log("it's done")}
             />
         );
     }
 
 
+
     render() {
         const { navigate } = this.props.navigation;
         //console.log("homescreen mode")
-        let fullImage = this.modalView()
+        let textInput = this.elementTitleInput()
         let projectImage = <Text>Image goes here</Text>
 
         if (this.state.groupedPhotos[0])
@@ -189,10 +195,10 @@ export default class HomeScreen extends React.Component {
                         animationType={'slide'}
                         transparent={true}
                     >
-                        <View style={evokStyles.modalWindow}>
-                            {fullImage}
+                        <View style={styles.modalWindow}>
+                            {textInput}
 
-                            <TouchableHighlight style={evokStyles.buttonHideModal}
+                            <TouchableHighlight style={styles.buttonHideModal}
                                 onPress={() => {
                                     this.setModalVisible(!this.state.modalVisible)
                                 }}>
@@ -234,5 +240,35 @@ styles = StyleSheet.create({
         borderRadius: 10,
         elevation: 3,
     },
+
+    modalWindow: {
+        flex: 0.5,
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
+        backgroundColor: 'white',
+        margin: 2,
+        borderColor: 'rgba(0, 0, 0, 0.1)',
+        borderRadius: 2,
+
+    },
+
+    textModalTitle: {
+        flex: 1,
+        color: 'black',
+        textShadowRadius: 2,
+        fontWeight: 'bold',
+        fontSize: 25,
+    },
+
+    buttonHideModal: {
+        backgroundColor: '#ffb84d',
+        padding: 2,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 4,
+        borderColor: 'rgba(0, 0, 0, 0.1)',
+        elevation: 3
+    },
+
 })
 
