@@ -5,7 +5,7 @@ export default class ElementCard extends React.Component {
 
     onPress = ()=>{
         
-        this.props.onCardPressed(this.props.type)
+        this.props.onCardPressed(this.props.id)
     }
 
     render() {

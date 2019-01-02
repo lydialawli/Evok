@@ -61,19 +61,20 @@ export default class HomeScreen extends React.Component {
                 name={x.name}
                 key={x.name}
                 type={x.type}
-                onCardPressed={this.alertCardType}
+                onCardPressed={this.alertCardOptions}
+                id={x.id}
             />
         })
         return listOfElementCards
     }
+   
 
-
-    alertCardType = (x) => {
+    alertCardOptions = (x) => {
         Alert.alert(
             'Take picture?',
             'Or show gallery?',
             [
-                { text: 'Show metadata', onPress: () => alert("this card is a " + x) },
+                { text: 'Show metadata', onPress: () => alert("this card's id is " + x) },
                 { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
                 { text: 'YES', onPress: () => console.log('OK Pressed') },
             ],
@@ -157,9 +158,9 @@ export default class HomeScreen extends React.Component {
                 placeholderTextColor='gray'
                 clearTextOnFocus={true}
                 placeholder={this.state.placeholderElementName}
-            //defaultValue={this.state.placeholderElementName}
+                //defaultValue={this.state.placeholderElementName}
 
-            onChangeText={(result) => this.setState(this.state.newTextInput = {result})}
+                onChangeText={(result) => this.setState(this.state.newTextInput = { result })}
             //onSubmitEditing={(result) => console.log(result)}
             //value={this.state.placeholderElementName}  
             //onSubmitEditing={console.log(this.state.newTextInput)}
@@ -288,7 +289,7 @@ styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#ffb84d',
-        margin:5,
+        margin: 5,
         borderRadius: 4,
         borderColor: 'rgba(0, 0, 0, 0.1)',
         elevation: 3
