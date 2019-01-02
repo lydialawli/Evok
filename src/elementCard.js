@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, View, TouchableOpacity, StyleSheet, Image } from 'react-native'
 
-export default class Card extends React.Component {
+export default class elementCard extends React.Component {
 
     onPress = ()=>{
         

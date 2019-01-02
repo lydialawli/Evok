@@ -8,7 +8,7 @@ import GalleryScreen from '../src/GalleryScreen.js'
 import evokFileSystem from '../src/oldEvokFilesystem.js'
 import ElementScreen from '../src/ElementScreen.js'
 import { FileSystem } from 'expo'
-import Card from '../src/Card.js'
+import elementCard from '../src/elementCard.js'
 import newEvokFileSystem from '../src/newEvokFileSystem.js'
 
 
@@ -48,13 +48,13 @@ export default class HomeScreen extends React.Component {
         this.setState({
             elements: newEvokFileSystem.getArrayOfElements(),
         })
-        //console.log("..this is elements: " + JSON.stringify(this.state.elements))
+        console.log("..elements strigified: " + JSON.stringify(this.state.elements))
     }
 
     getListElementCards = () => {
         let listOfElementCards = this.state.elements.map((x) => {
             // console.log("..this is list of elements: " + projectName)
-            return <Card
+            return <elementCard
                 name={x.name}
                 key={x.name}
                 type={x.type}
@@ -86,7 +86,7 @@ export default class HomeScreen extends React.Component {
     _getListCards = () => {
         let listOfCards = this.state.listDirectories.map((projectName, index) => {
             // console.log("..this is list of elements: " + projectName)
-            return <Card
+            return <elementCard
                 name={projectName}
                 key={projectName}
                 onCardPressed={this._navigateToELement}

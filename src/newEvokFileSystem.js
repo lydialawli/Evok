@@ -36,7 +36,7 @@ newEvokFileSystem.getArrayOfElements = () => {
 }
 
 
-//only called once when the app is first ever used
+//only called once when the app is first ever used:
 makeNewElementIndex = (callback) => {
     elementIndex = {
         elements: [{ name: 'obj1', type: 'test' }]
@@ -62,9 +62,9 @@ updateJsonFromElementIndexObj = (currentElementIndex, callback) => {
     })
 }
 
-updateElementIndexFromNewElement = (newElement,callback) => {
+updateElementIndexFromNewElement = (newElement, callback) => {
     elementIndex.elements.push(newElement)
-    updateJsonFromElementIndexObj(elementIndex,callback)
+    updateJsonFromElementIndexObj(elementIndex, callback)
 }
 
 
