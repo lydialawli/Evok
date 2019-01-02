@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, Button, TouchableOpacity, TextInput, Icon, Dimensions, ImageBackground, Alert, ScrollView, Image } from 'react-native'
+import { StyleSheet, Text, View, Button, TouchableOpacity, TouchableHighlight, TextInput, Icon, Dimensions, ImageBackground, Modal, Alert, ScrollView, Image } from 'react-native'
 import { StackNavigator } from 'react-navigation'
 import CameraScreen from '../src/CameraScreen.js'
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
@@ -34,6 +34,8 @@ export default class HomeScreen extends React.Component {
             listDirectories: [],
             listOfCards: [],
             elements: [],
+            modalVisible: false,
+            placeholderElementName: 'enter title'
         }
 
     }
@@ -78,6 +80,8 @@ export default class HomeScreen extends React.Component {
         )
     }
 
+
+
     _getArrayOfDirectories = () => {
         evokFileSystem.readAppDirectory((result) => {
             this.setState({
@@ -118,22 +122,50 @@ export default class HomeScreen extends React.Component {
         )
     }
 
-    alertCreateNewElement = () =>
+    alertCreateNewElement = () => {
         Alert.alert(
             'Create new element',
             'Are you sure?',
             [
                 { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
-                { text: 'OK', onPress: () => { newEvokFileSystem.addNewElement("input name here",Date.now(), 'test', this.onStorageReady) } }
+                { text: 'OK', onPress: () => { this.setModalVisible(true) } }
             ],
             { cancelable: false }
         )
+    }
 
+    //newEvokFileSystem.addNewElement("input name here", Date.now(), 'test', this.onStorageReady)
+
+    setModalVisible(visible) {
+        console.log('modalview', visible)
+        this.setState({
+            modalVisible: visible,
+        })
+    }
+
+    modalView = () => {
+        return (
+            <View>
+                <Text>{this.state.placeholderElementName}</Text>
+            </View>
+        )
+    }
+
+    inputElementTitle = () => {
+        return (
+            <TextInput
+                style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+                onChangeText={(text) => this.setState({ text })}
+                value={this.state.placeholderElementName}
+            />
+        );
+    }
 
 
     render() {
         const { navigate } = this.props.navigation;
         //console.log("homescreen mode")
+        let fullImage = this.modalView()
         let projectImage = <Text>Image goes here</Text>
 
         if (this.state.groupedPhotos[0])
@@ -150,6 +182,25 @@ export default class HomeScreen extends React.Component {
                             {this.getListElementCards()}
                         </View>
                     </ScrollView>
+
+                    <Modal
+                        visible={this.state.modalVisible}
+                        onRequestClose={() => { alert('Modal has been closed.') }}
+                        animationType={'slide'}
+                        transparent={true}
+                    >
+                        <View style={evokStyles.modalWindow}>
+                            {fullImage}
+
+                            <TouchableHighlight style={evokStyles.buttonHideModal}
+                                onPress={() => {
+                                    this.setModalVisible(!this.state.modalVisible)
+                                }}>
+                                <Text>Hide Modal</Text>
+                            </TouchableHighlight>
+                        </View>
+                    </Modal>
+
                 </View>
             </View>
 
