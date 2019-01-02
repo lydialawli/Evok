@@ -5,8 +5,8 @@
 
     "elements":[
         {
-            "name":"Tree Front View",
-            "id": "TreeFrontView",
+            "name":"userTextInput",
+            "id": "willBeTimeStamp",
             "type":"image",
             "imageHistory": [
                 {
@@ -21,7 +21,7 @@
         },
         {
             "name":"Tree Side View",
-            "id": "TreeSideView",
+            "id": 1213443536456,
             "type":"image",
             "imageHistory": [
                 {

@@ -35,7 +35,8 @@ export default class HomeScreen extends React.Component {
             listOfCards: [],
             elements: [],
             modalVisible: false,
-            placeholderElementName: 'enter title'
+            placeholderElementName: 'enter title',
+            newTextInput: ''
         }
 
     }
@@ -72,7 +73,7 @@ export default class HomeScreen extends React.Component {
             'Take picture?',
             'Or show gallery?',
             [
-                { text: 'Show Gallery', onPress: () => alert("this card is a " + x) },
+                { text: 'Show metadata', onPress: () => alert("this card is a " + x) },
                 { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
                 { text: 'YES', onPress: () => console.log('OK Pressed') },
             ],
@@ -136,7 +137,7 @@ export default class HomeScreen extends React.Component {
 
     addNewElement = (textInput) => {
         this.setState({
-            placeholderElementName: 'enter title',
+            placeholderElementName: 'Enter new title',
         })
         newEvokFileSystem.addNewElement(textInput, Date.now(), 'test', this.onStorageReady)
 
@@ -152,16 +153,16 @@ export default class HomeScreen extends React.Component {
     elementTitleInput = () => {
         return (
             <TextInput
-                style={{ fontSize: 25, height: 40, borderColor: 'gray', borderWidth: 1 }}
+                style={{ fontSize: 25, height: 60, width: 200, borderColor: 'red', borderWidth: 1 }}
                 placeholderTextColor='gray'
-                clearTextOnFocus= {true}
-                //placeholder={this.state.placeholderElementName}
-                defaultValue={this.state.placeholderElementName}
-        
-                //onChangeText={(result) => this.setState(this.state.placeholderElementName = { result })}
-                //onSubmitEditing={(result) => console.log(result)}
-                //value={this.state.placeholderElementName}
-            //onSubmitEditing={console.log("it's done")}
+                clearTextOnFocus={true}
+                placeholder={this.state.placeholderElementName}
+            //defaultValue={this.state.placeholderElementName}
+
+            onChangeText={(result) => this.setState(this.state.newTextInput = {result})}
+            //onSubmitEditing={(result) => console.log(result)}
+            //value={this.state.placeholderElementName}  
+            //onSubmitEditing={console.log(this.state.newTextInput)}
             />
         );
     }
@@ -197,13 +198,21 @@ export default class HomeScreen extends React.Component {
                     >
                         <View style={styles.modalWindow}>
                             {textInput}
-
-                            <TouchableHighlight style={styles.buttonHideModal}
-                                onPress={() => {
-                                    this.setModalVisible(!this.state.modalVisible)
-                                }}>
-                                <Text>Hide Modal</Text>
-                            </TouchableHighlight>
+                            <View style={styles.modalButtons}>
+                                <TouchableHighlight style={styles.buttonHideModal}
+                                    onPress={() => {
+                                        this.setModalVisible(!this.state.modalVisible)
+                                        this.addNewElement(this.state.newTextInput.result)
+                                    }}>
+                                    <Text style={styles.modalButtonText}>Done</Text>
+                                </TouchableHighlight>
+                                <TouchableHighlight style={styles.buttonHideModal}
+                                    onPress={() => {
+                                        this.setModalVisible(!this.state.modalVisible)
+                                    }}>
+                                    <Text style={styles.modalButtonText}>Cancel</Text>
+                                </TouchableHighlight>
+                            </View>
                         </View>
                     </Modal>
 
@@ -243,13 +252,19 @@ styles = StyleSheet.create({
 
     modalWindow: {
         flex: 0.5,
-        justifyContent: 'space-evenly',
+        justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: 'white',
         margin: 2,
         borderColor: 'rgba(0, 0, 0, 0.1)',
         borderRadius: 2,
 
+    },
+    modalButtons: {
+        height: 50,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 
     textModalTitle: {
@@ -260,11 +275,20 @@ styles = StyleSheet.create({
         fontSize: 25,
     },
 
+
+    modalButtonText: {
+        flex: 1,
+        color: 'black',
+        fontWeight: 'bold',
+        fontSize: 20,
+    },
+
     buttonHideModal: {
-        backgroundColor: '#ffb84d',
         padding: 2,
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: '#ffb84d',
+        margin:5,
         borderRadius: 4,
         borderColor: 'rgba(0, 0, 0, 0.1)',
         elevation: 3
