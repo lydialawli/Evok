@@ -47,6 +47,24 @@ export default class HomeScreen extends React.Component {
 
     }
 
+    getElementIndexfromElementID = () => {
+
+        // elementIndex = this.state.elements.map(e => e.id).indexOf(1546611852196)
+
+        var elementID = 1546611852196
+            index = -1
+        for (var i = 0; i < this.state.elements.length; i++) {
+            if (this.state.elements[i].id === elementID) {
+                index = i
+                break
+            }
+        }
+
+        console.log(index)
+        //myArray.map(x => x.hello).indexOf('stevie')
+
+    }
+
     onStorageReady = () => {
         this.setState({
             elements: newEvokFileSystem.getArrayOfElements(),
@@ -66,7 +84,7 @@ export default class HomeScreen extends React.Component {
         })
         return listOfElementCards
     }
-   
+
 
     alertCardOptions = (x) => {
         console.log("this is id: " + x)
@@ -183,6 +201,9 @@ export default class HomeScreen extends React.Component {
             <View style={evokStyles.screenContainer} >
                 <View style={styles.two}>
                     <ScrollView contentContaistylenerStyle={styles.cardsContainer}>
+                        <TouchableOpacity style={styles.card} onPress={() => this.getElementIndexfromElementID()}>
+                            <Text style={evokStyles.topBarText}> call getElementIndexfromElementID() </Text>
+                        </TouchableOpacity>
                         <TouchableOpacity style={styles.card} onPress={() => this.alertCreateNewElement()}>
                             <Text style={evokStyles.topBarText}> Add an element </Text>
                         </TouchableOpacity>
