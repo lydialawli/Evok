@@ -148,16 +148,8 @@ export default class HomeScreen extends React.Component {
         )
     }
 
-    alertCreateNewElement = () => {
-        Alert.alert(
-            'Create new element',
-            'Are you sure?',
-            [
-                { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
-                { text: 'OK', onPress: () => { this.setModalVisible(true) } }
-            ],
-            { cancelable: false }
-        )
+    onPressedAddNewElement = () => {
+        this.setModalVisible(true)
     }
 
     addNewElement = (textInput) => {
@@ -220,7 +212,8 @@ export default class HomeScreen extends React.Component {
             <View style={evokStyles.screenContainer} >
                 <View style={styles.two}>
                     <ScrollView contentContaistylenerStyle={styles.cardsContainer}>
-                        <TouchableOpacity style={styles.card} onPress={() => this.alertCreateNewElement()}>
+
+                        <TouchableOpacity style={styles.card} onPress={() => this.onPressedAddNewElement()}>
                             <Text style={evokStyles.topBarText}> Add an element </Text>
                         </TouchableOpacity>
                         <View>
