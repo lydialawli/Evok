@@ -62,7 +62,6 @@ export default class HomeScreen extends React.Component {
                 key={x.name}
                 type={x.type}
                 onCardPressed={this.alertCardOptions}
-                id={x.id}
             />
         })
         return listOfElementCards
@@ -74,7 +73,7 @@ export default class HomeScreen extends React.Component {
             'Take picture?',
             'Or show gallery?',
             [
-                { text: 'Show metadata', onPress: () => alert("this card's id is " + x) },
+                { text: 'Show id', onPress: () => alert("this card's id is " + x) },
                 { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
                 { text: 'YES', onPress: () => console.log('OK Pressed') },
             ],
