@@ -69,7 +69,7 @@ updateElementIndexFromNewElement = (newElement, callback) => {
 
 
 
-newEvokFileSystem.addNewElement = (elementName,timeOfCreation, type, callback) => {
+newEvokFileSystem.addNewElement = (elementName, timeOfCreation, type, callback) => {
     let newElement = {
         name: elementName,
         id: timeOfCreation,

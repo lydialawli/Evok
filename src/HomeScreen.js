@@ -47,52 +47,39 @@ export default class HomeScreen extends React.Component {
 
     }
 
-    getElementIndexfromElementID = () => {
-
-        // elementIndex = this.state.elements.map(e => e.id).indexOf(1546611852196)
-
-        var elementID = 1546611852196
-            index = -1
-        for (var i = 0; i < this.state.elements.length; i++) {
-            if (this.state.elements[i].id === elementID) {
-                index = i
-                break
-            }
-        }
-
-        console.log(index)
-        //myArray.map(x => x.hello).indexOf('stevie')
-
-    }
-
     onStorageReady = () => {
         this.setState({
             elements: newEvokFileSystem.getArrayOfElements(),
         })
-        console.log("..elements strigified: " + JSON.stringify(this.state.elements))
+        console.log("..elements: " + JSON.stringify(this.state.elements))
     }
 
     getListElementCards = () => {
-        let listOfElementCards = this.state.elements.map((x) => {
-            // console.log("..this is list of elements: " + projectName)
+        let listOfElementCards = this.state.elements.map((e) => {
             return <ElementCard
-                name={x.name}
-                key={x.name}
-                type={x.type}
+                name={e.name}
+                key={e.name}
+                type={e.type}
+                id={e.id}
                 onCardPressed={this.alertCardOptions}
+                onLongPressed={this.alertLongPressed}
             />
-        })
+                })
         return listOfElementCards
     }
 
+    alertLongPressed = (elementID) => {
+        Alert.alert('You long-pressed the button!'+ elementID)
+    }
 
-    alertCardOptions = (x) => {
-        console.log("this is id: " + x)
+
+    alertCardOptions = (elementID) => {
+        console.log("this is id: " + elementID)
         Alert.alert(
             'Take picture?',
             'Or show ID?',
             [
-                { text: 'Show id', onPress: () => alert("this card's id is " + x) },
+                { text: 'Show id', onPress: () => alert("this card's id is " + elementID) },
                 { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
                 { text: 'YES', onPress: () => console.log('OK Pressed') },
             ],
@@ -162,6 +149,18 @@ export default class HomeScreen extends React.Component {
 
     }
 
+    getElementIndexfromElementID = (elementID) => {
+        //Shorter way: index = this.state.elements.map(e => e.id).indexOf(1546611852196)
+        index = -1
+        for (var i = 0; i < this.state.elements.length; i++) {
+            if (this.state.elements[i].id === elementID) {
+                index = i
+                break
+            }
+        }
+        console.log(index)
+    }
+
     setModalVisible(visible) {
         console.log('modalview', visible)
         this.setState({
@@ -201,7 +200,7 @@ export default class HomeScreen extends React.Component {
             <View style={evokStyles.screenContainer} >
                 <View style={styles.two}>
                     <ScrollView contentContaistylenerStyle={styles.cardsContainer}>
-                        <TouchableOpacity style={styles.card} onPress={() => this.getElementIndexfromElementID()}>
+                        <TouchableOpacity style={styles.card} onPress={() => this.getElementIndexfromElementID(1546611852196)}>
                             <Text style={evokStyles.topBarText}> call getElementIndexfromElementID() </Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.card} onPress={() => this.alertCreateNewElement()}>
