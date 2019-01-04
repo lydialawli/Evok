@@ -69,9 +69,10 @@ export default class HomeScreen extends React.Component {
    
 
     alertCardOptions = (x) => {
+        console.log("this is id: " + x)
         Alert.alert(
             'Take picture?',
-            'Or show gallery?',
+            'Or show ID?',
             [
                 { text: 'Show id', onPress: () => alert("this card's id is " + x) },
                 { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },

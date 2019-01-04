@@ -74,6 +74,7 @@ newEvokFileSystem.addNewElement = (elementName,timeOfCreation, type, callback) =
         name: elementName,
         id: timeOfCreation,
         type: type,
+        imageHistory: []
     }
     console.log("..new Element created: " + elementName)
     updateElementIndexFromNewElement(newElement, callback)
