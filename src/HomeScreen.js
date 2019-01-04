@@ -16,7 +16,7 @@ export default class HomeScreen extends React.Component {
     static navigationOptions = {
         title: 'Home',
         headerStyle: {
-            backgroundColor: '#999966',
+            backgroundColor: 'grey',
         },
         headerTintColor: 'blue',
         headerTitleStyle: {
@@ -64,29 +64,48 @@ export default class HomeScreen extends React.Component {
                 onCardPressed={this.alertCardOptions}
                 onLongPressed={this.alertLongPressed}
             />
-                })
+        })
         return listOfElementCards
     }
 
     alertLongPressed = (elementID) => {
-        Alert.alert('You long-pressed the button!'+ elementID)
+        Alert.alert(
+            'Delete element and its content PERMANENTLY',
+            'Are you sure?',
+            [
+                { text: 'yes', onPress: () => this.deleteElementByIndex(elementID) },
+                { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
+            ],
+            { cancelable: true }
+        )
+    }
+
+    deleteElementByIndex = (elementID) => {
+        var ind = this.getElementIndexfromElementID(elementID)
+        //console.log("this is index: " + index)
+
+        var elementToDelete = this.state.elements.splice(ind,1)
+        //console.log("this is new array " + JSON.stringify(this.state.elements))
+
+        newEvokFileSystem.updateElementIndexFromDeletedElement(elementToDelete,this.onStorageReady)
+
+        //console.log("this is new elementArray: " + JSON.stringify(this.state.elements))
+
     }
 
 
     alertCardOptions = (elementID) => {
-        console.log("this is id: " + elementID)
         Alert.alert(
             'Take picture?',
-            'Or show ID?',
+            'Or show cards index?',
             [
-                { text: 'Show id', onPress: () => alert("this card's id is " + elementID) },
+                { text: 'Show index', onPress: () => alert("index is: " + this.getElementIndexfromElementID(elementID)) },
                 { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
                 { text: 'YES', onPress: () => console.log('OK Pressed') },
             ],
             { cancelable: false }
         )
     }
-
 
 
     _getArrayOfDirectories = () => {
@@ -159,6 +178,7 @@ export default class HomeScreen extends React.Component {
             }
         }
         console.log(index)
+        return index
     }
 
     setModalVisible(visible) {
@@ -200,9 +220,6 @@ export default class HomeScreen extends React.Component {
             <View style={evokStyles.screenContainer} >
                 <View style={styles.two}>
                     <ScrollView contentContaistylenerStyle={styles.cardsContainer}>
-                        <TouchableOpacity style={styles.card} onPress={() => this.getElementIndexfromElementID(1546611852196)}>
-                            <Text style={evokStyles.topBarText}> call getElementIndexfromElementID() </Text>
-                        </TouchableOpacity>
                         <TouchableOpacity style={styles.card} onPress={() => this.alertCreateNewElement()}>
                             <Text style={evokStyles.topBarText}> Add an element </Text>
                         </TouchableOpacity>

@@ -67,6 +67,11 @@ updateElementIndexFromNewElement = (newElement, callback) => {
     updateJsonFromElementIndexObj(elementIndex, callback)
 }
 
+newEvokFileSystem.updateElementIndexFromDeletedElement = (elementToDelete, callback) => {
+    elementIndex.elements.pop(elementToDelete)
+    updateJsonFromElementIndexObj(elementIndex, callback)
+}
+
 
 
 newEvokFileSystem.addNewElement = (elementName, timeOfCreation, type, callback) => {

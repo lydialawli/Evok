@@ -12,7 +12,7 @@ export default class ElementScreen extends React.Component {
     static navigationOptions = {
         title: 'Element',
         headerStyle: {
-            backgroundColor: '#999966',
+            backgroundColor: 'grey',
         },
         headerTintColor: 'white',
         headerTitleStyle: {
