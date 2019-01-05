@@ -21,6 +21,18 @@ newEvokFileSystem.startStorage = (callback) => {
     else {
         this.makeNewElementIndex(callback)
     }
+
+}
+
+whatever = () => {
+    console.log("images directory created now")
+}
+
+newEvokFileSystem.createImagesDirectoryIfDoesnotExist = () => {
+    let imagesPath = rootDirectory + imagesFolder
+
+    readWrite.createDirectoryIfDoesntExist(imagesPath, this.whatever)
+    
 }
 
 updateElementIndexFromJson = (callback) => {
@@ -111,25 +123,25 @@ updateElementIndexFromNewElement = (newElement, callback) => {
 
 newEvokFileSystem.saveImage = (originalFile, elementID, callback) => {
     var fileName =  Date.now() + '.jpg' 
-    var currentFolder = rootDirectory + "/" + imagesFolder
+    var currentFolder = rootDirectory + imagesFolder
 
 
-    readWrite.move(originalFile, currentFolder, fileName, updateElementObjFromNewInstant(elementID,fileName,callback))
+    readWrite.move(originalFile, currentFolder, fileName, updateElementIndexFromNewInstant(elementID,fileName,callback))
 }
 
-updateElementIndexFromNewInstant = (elementID, fileName, callback) => {
+updateElementIndexFromNewInstant = (elementID, fileName,callback) => {
     i = newEvokFileSystem.getIndexfromElementID(elementID)
 
     let newInstance = {
         uri: fileName,
         timestamp: fileName.replace(".jpg","")
     }
-    
+
     elementIndex.elements[i].imageHistory.push(newInstance)
 
     updateJsonFromElementIndexObj(elementIndex, console.log("Instance is saved in storage.json"))
    
-    callback()
+    callback(elementID)
 }
 
 

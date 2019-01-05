@@ -35,7 +35,7 @@ export default class EvokCamera extends React.Component {
 
         this.camera.takePictureAsync()
             .then(data => {
-                newEvokFileSystem.saveImage(data.uri, this.state.elementID, this.setElementObJ(this.state.elementID))
+                newEvokFileSystem.saveImage(data.uri, this.state.elementID, this.setElementObJ)
             })
             .catch(err => console.error(err))
     }

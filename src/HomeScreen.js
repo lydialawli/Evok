@@ -44,6 +44,7 @@ export default class HomeScreen extends React.Component {
     async componentWillMount() {
         this._getArrayOfDirectories()
         newEvokFileSystem.startStorage(this.onStorageReady)
+        newEvokFileSystem.createImagesDirectoryIfDoesnotExist()
 
     }
 
@@ -167,7 +168,7 @@ export default class HomeScreen extends React.Component {
     }
 
     navigateToCamera = (projectName, elementID) => {
-        this.props.navigation.navigate('Camera', { projectID: projectName, elementID: elementID})
+        this.props.navigation.navigate('Camera', { projectID: projectName, elementID: elementID })
     }
 
     render() {
@@ -190,7 +191,7 @@ export default class HomeScreen extends React.Component {
                         <View>
                             {this.getListElementCards()}
                         </View>
-                        <TouchableOpacity style={styles.card} onPress={() => this.navigateToCamera('Myproject',1546692494684)}>
+                        <TouchableOpacity style={styles.card} onPress={() => this.navigateToCamera('Myproject', 1546692494684)}>
                             <Text style={evokStyles.topBarText}> Go to Camera Screen </Text>
                         </TouchableOpacity>
                     </ScrollView>

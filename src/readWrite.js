@@ -5,6 +5,17 @@ import { FileSystem } from 'expo'
 const readWrite = {}
 var rootDirectory = FileSystem.documentDirectory
 
+readWrite.createDirectoryIfDoesntExist = (directoryPath, callback) => {
+    FileSystem.makeDirectoryAsync(directoryPath)
+        .then(() => {
+            callback()
+        })
+        .catch(e => {
+            callback()
+            console.log(e, 'Directory already exists')
+        })
+}
+
 readWrite.move = (originalFile, currentFolder, fileName, callback) => {
     FileSystem.moveAsync({ from: originalFile, to: currentFolder + '/' + fileName })
         .then(callback)
@@ -13,11 +24,11 @@ readWrite.move = (originalFile, currentFolder, fileName, callback) => {
 
 
 readWrite.saveText = (text, to, callback) => {
-     FileSystem.writeAsStringAsync(rootDirectory + "/" + to, text)
-         .then((result) => {
-             callback(result)
-         })
-         .catch(err => console.error(err)) 
+    FileSystem.writeAsStringAsync(rootDirectory + "/" + to, text)
+        .then((result) => {
+            callback(result)
+        })
+        .catch(err => console.error(err))
 }
 
 readWrite.readText = (fileUri, callback) => {
