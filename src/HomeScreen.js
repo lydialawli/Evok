@@ -73,7 +73,7 @@ export default class HomeScreen extends React.Component {
             'Delete element and its content PERMANENTLY',
             'Are you sure?',
             [
-                { text: 'yes', onPress: () => newEvokFileSystem.deleteElementFromElementsArray(elementID, this.onStorageReady) },
+                { text: 'yes', onPress: () => newEvokFileSystem.deleteElementObj(elementID, this.onStorageReady) },
                 { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
             ],
             { cancelable: true }
@@ -85,7 +85,7 @@ export default class HomeScreen extends React.Component {
             'Take picture?',
             'Or show cards index?',
             [
-                { text: 'Show index', onPress: () => alert("index is: " + newEvokFileSystem.getElementIndexfromElementID(elementID)) },
+                { text: 'Show index', onPress: () => alert("index is: " + newEvokFileSystem.getIndexfromElementID(elementID)) },
                 { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
                 { text: 'YES', onPress: () => console.log('OK Pressed') },
             ],

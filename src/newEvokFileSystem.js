@@ -63,7 +63,7 @@ updateJsonFromElementIndexObj = (currentElementIndex, callback) => {
 }
 
 
-newEvokFileSystem.getElementIndexfromElementID = (elementID) => {
+newEvokFileSystem.getIndexfromElementID = (elementID) => {
     //Shorter way: index = this.state.elements.map(e => e.id).indexOf(1546611852196)
     index = -1
     for (var i = 0; i < elementIndex.elements.length; i++) {
@@ -76,8 +76,8 @@ newEvokFileSystem.getElementIndexfromElementID = (elementID) => {
     return index
 }
 
-newEvokFileSystem.deleteElementFromElementsArray = (elementID, callback) => {
-    i = newEvokFileSystem.getElementIndexfromElementID(elementID)
+newEvokFileSystem.deleteElementObj = (elementID, callback) => {
+    i = newEvokFileSystem.getIndexfromElementID(elementID)
     
     elementIndex.elements.splice(i,1)
 
