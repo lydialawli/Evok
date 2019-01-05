@@ -12,7 +12,7 @@ readWrite.createDirectoryIfDoesntExist = (directoryPath, callback) => {
         })
         .catch(e => {
             callback()
-            console.log(e, 'Directory already exists')
+            console.log('Directory already exists')
         })
 }
 

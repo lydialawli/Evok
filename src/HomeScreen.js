@@ -100,7 +100,7 @@ export default class HomeScreen extends React.Component {
             this.setState({
                 listDirectories: result,
             })
-            console.log("..this is list of directiories/elements: " + result)
+            //console.log("..this is list of directiories/elements: " + result)
         })
     }
 
