@@ -62,17 +62,27 @@ updateJsonFromElementIndexObj = (currentElementIndex, callback) => {
     })
 }
 
-updateElementIndexFromNewElement = (newElement, callback) => {
-    elementIndex.elements.push(newElement)
-    updateJsonFromElementIndexObj(elementIndex, callback)
+
+newEvokFileSystem.getElementIndexfromElementID = (elementID) => {
+    //Shorter way: index = this.state.elements.map(e => e.id).indexOf(1546611852196)
+    index = -1
+    for (var i = 0; i < elementIndex.elements.length; i++) {
+        if (elementIndex.elements[i].id === elementID) {
+            index = i
+            break
+        }
+    }
+    console.log("index is: " + index)
+    return index
 }
 
-newEvokFileSystem.updateElementIndexFromDeletedElement = (elementToDelete, callback) => {
-    elementIndex.elements.pop(elementToDelete)
+newEvokFileSystem.deleteElementFromElementsArray = (elementID, callback) => {
+    i = newEvokFileSystem.getElementIndexfromElementID(elementID)
+    
+    elementIndex.elements.splice(i,1)
+
     updateJsonFromElementIndexObj(elementIndex, callback)
 }
-
-
 
 newEvokFileSystem.addNewElement = (elementName, timeOfCreation, type, callback) => {
     let newElement = {
@@ -84,6 +94,12 @@ newEvokFileSystem.addNewElement = (elementName, timeOfCreation, type, callback) 
     console.log("..new Element created: " + elementName)
     updateElementIndexFromNewElement(newElement, callback)
 }
+
+updateElementIndexFromNewElement = (newElement, callback) => {
+    elementIndex.elements.push(newElement)
+    updateJsonFromElementIndexObj(elementIndex, callback)
+}
+
 
 
 storageExists = () => {

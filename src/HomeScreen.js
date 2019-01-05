@@ -73,33 +73,19 @@ export default class HomeScreen extends React.Component {
             'Delete element and its content PERMANENTLY',
             'Are you sure?',
             [
-                { text: 'yes', onPress: () => this.deleteElementByIndex(elementID) },
+                { text: 'yes', onPress: () => newEvokFileSystem.deleteElementFromElementsArray(elementID, this.onStorageReady) },
                 { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
             ],
             { cancelable: true }
         )
     }
 
-    deleteElementByIndex = (elementID) => {
-        var ind = this.getElementIndexfromElementID(elementID)
-        //console.log("this is index: " + index)
-
-        var elementToDelete = this.state.elements.splice(ind,1)
-        //console.log("this is new array " + JSON.stringify(this.state.elements))
-
-        newEvokFileSystem.updateElementIndexFromDeletedElement(elementToDelete,this.onStorageReady)
-
-        //console.log("this is new elementArray: " + JSON.stringify(this.state.elements))
-
-    }
-
-
     alertCardOptions = (elementID) => {
         Alert.alert(
             'Take picture?',
             'Or show cards index?',
             [
-                { text: 'Show index', onPress: () => alert("index is: " + this.getElementIndexfromElementID(elementID)) },
+                { text: 'Show index', onPress: () => alert("index is: " + newEvokFileSystem.getElementIndexfromElementID(elementID)) },
                 { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
                 { text: 'YES', onPress: () => console.log('OK Pressed') },
             ],
@@ -134,10 +120,6 @@ export default class HomeScreen extends React.Component {
     }
 
 
-    _updateProjectName = () => {
-        this.setState({ projectTitle: 'Unga Bunga' })
-    }
-
     _getProjectImage = (projectImagefileUri) => {
         return (
             <ImageBackground
@@ -158,19 +140,6 @@ export default class HomeScreen extends React.Component {
         })
         newEvokFileSystem.addNewElement(textInput, Date.now(), 'test', this.onStorageReady)
 
-    }
-
-    getElementIndexfromElementID = (elementID) => {
-        //Shorter way: index = this.state.elements.map(e => e.id).indexOf(1546611852196)
-        index = -1
-        for (var i = 0; i < this.state.elements.length; i++) {
-            if (this.state.elements[i].id === elementID) {
-                index = i
-                break
-            }
-        }
-        console.log(index)
-        return index
     }
 
     setModalVisible(visible) {
