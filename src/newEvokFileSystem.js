@@ -7,6 +7,7 @@ var elements = []
 var elementIndex = {}
 var storageURI = 'storage.json'
 var rootDirectory = FileSystem.documentDirectory
+var imagesFolder = 'images'
 
 const newEvokFileSystem = {}
 
@@ -72,16 +73,24 @@ newEvokFileSystem.getIndexfromElementID = (elementID) => {
             break
         }
     }
-    console.log("index is: " + index)
+    //console.log("index is: " + index)
     return index
 }
 
 newEvokFileSystem.deleteElementObj = (elementID, callback) => {
     i = newEvokFileSystem.getIndexfromElementID(elementID)
-    
-    elementIndex.elements.splice(i,1)
+
+    elementIndex.elements.splice(i, 1)
 
     updateJsonFromElementIndexObj(elementIndex, callback)
+}
+
+newEvokFileSystem.getElementObj = (elementID) => {
+    i = newEvokFileSystem.getIndexfromElementID(elementID)
+
+    //console.log("this is elementObj: " + JSON.stringify(elementIndex.elements[i]))
+    return elementIndex.elements[i]
+
 }
 
 newEvokFileSystem.addNewElement = (elementName, timeOfCreation, type, callback) => {
@@ -100,6 +109,28 @@ updateElementIndexFromNewElement = (newElement, callback) => {
     updateJsonFromElementIndexObj(elementIndex, callback)
 }
 
+newEvokFileSystem.saveImage = (originalFile, elementID, callback) => {
+    var fileName =  Date.now() + '.jpg' 
+    var currentFolder = rootDirectory + "/" + imagesFolder
+
+
+    readWrite.move(originalFile, currentFolder, fileName, updateElementObjFromNewInstant(elementID,fileName,callback))
+}
+
+updateElementIndexFromNewInstant = (elementID, fileName, callback) => {
+    i = newEvokFileSystem.getIndexfromElementID(elementID)
+
+    let newInstance = {
+        uri: fileName,
+        timestamp: fileName.replace(".jpg","")
+    }
+    
+    elementIndex.elements[i].imageHistory.push(newInstance)
+
+    updateJsonFromElementIndexObj(elementIndex, console.log("Instance is saved in storage.json"))
+   
+    callback()
+}
 
 
 storageExists = () => {

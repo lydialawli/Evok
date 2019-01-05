@@ -7,6 +7,7 @@ import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 import evokFileSystem from '../src/oldEvokFilesystem.js'
 import evokStyles from '../src/evokStyles.js'
 import HomeScreen from '../App.js'
+import EvokCamera from '../src/EvokCamera.js'
 
 
 export default class CameraScreen extends React.Component {
@@ -17,14 +18,15 @@ export default class CameraScreen extends React.Component {
 
     state = {
         camerasCurrentProjectID: this.props.navigation.state.params.projectID,
+        elementID: this.props.navigation.state.params.elementID
     }
 
-    render() {
+    _render() {
         const { navigate } = this.props.navigation
         console.log("Camera mode")
         return (
             <View style={evokStyles.camScreenView}>
-                <EvokCamera projectID={this.state.camerasCurrentProjectID}/>
+                <OldEvokCamera projectID={this.state.camerasCurrentProjectID} />
                 <View style={evokStyles.bottomBar}>
                     <TouchableOpacity style={evokStyles.homeButton} onPress={() => navigate('Home')}>
                         <Ionicons name="ios-home-outline" size={40} color="white" />
@@ -36,11 +38,21 @@ export default class CameraScreen extends React.Component {
             </View>
         )
     }
+
+    render() {
+        const { navigate } = this.props.navigation
+        console.log("Camera mode")
+        return (
+            <View>
+                <EvokCamera elementID= {this.state.elementID}></EvokCamera>
+            </View>
+        )
+    }
 }
 
 
 
-class EvokCamera extends React.Component {
+class OldEvokCamera extends React.Component {
 
     state = {
         isPreviewMode: false,
@@ -58,7 +70,7 @@ class EvokCamera extends React.Component {
         lastPicOpacity: 0.5,
         onionSkin: '',
         projectID: this.props.projectID,
-    
+
 
     }
 
@@ -172,10 +184,10 @@ class EvokCamera extends React.Component {
             lastPicUri = this.state.groupedPhotos[this.state.groupedPhotos.length - 1].fileUri
 
         console.log(lastPicUri, this.state.groupedPhotos.length)
-        let onionSkin= <View/>
+        let onionSkin = <View />
         if (lastPicUri)
             onionSkin = this.getOnionSkin()
-        
+
 
         return (
             <View style={{ width: '100%', height: '100%', alignItems: 'center' }}>
@@ -202,7 +214,7 @@ class EvokCamera extends React.Component {
                                 maximumValue={1}
                                 value={this.state.lastPicOpacity}
                                 minimumTrackTintColor='#ffcc00'
-                                lastPicOpacity={this.state.lastPicOpacity}                 
+                                lastPicOpacity={this.state.lastPicOpacity}
                                 onValueChange={lastPicOpacity => this.setState({ lastPicOpacity })}
                             />
 

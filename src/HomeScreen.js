@@ -99,7 +99,7 @@ export default class HomeScreen extends React.Component {
             this.setState({
                 listDirectories: result,
             })
-            //console.log("..this is list of directiories/elements: " + result)
+            console.log("..this is list of directiories/elements: " + result)
         })
     }
 
@@ -166,7 +166,9 @@ export default class HomeScreen extends React.Component {
         );
     }
 
-
+    navigateToCamera = (projectName, elementID) => {
+        this.props.navigation.navigate('Camera', { projectID: projectName, elementID: elementID})
+    }
 
     render() {
         const { navigate } = this.props.navigation;
@@ -188,6 +190,9 @@ export default class HomeScreen extends React.Component {
                         <View>
                             {this.getListElementCards()}
                         </View>
+                        <TouchableOpacity style={styles.card} onPress={() => this.navigateToCamera('Myproject',1546692494684)}>
+                            <Text style={evokStyles.topBarText}> Go to Camera Screen </Text>
+                        </TouchableOpacity>
                     </ScrollView>
 
                     <Modal
