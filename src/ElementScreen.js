@@ -25,21 +25,22 @@ export default class ElementScreen extends React.Component {
         groupedPhotos: [],
         modalVisible: false,
         selectedFullImagePicObject: null,
-        projectID: this.props.navigation.state.params.projectID
+        projectID: this.props.navigation.state.params.projectID,
+        elementID: this.props.navigation.state.params.elementID
     }
 
     componentWillMount() {
-        this.getList()
+        //this._getList()
     }
 
-    getList = () => {
+    _getList = () => {
 
         let currentFolder = evokFileSystem.getPath(this.state.projectID, '')
 
         evokFileSystem.getArrayOfPicObjects(currentFolder, this.onFilesListed)
     }
 
-    onFilesListed = (result) => {
+    _onFilesListed = (result) => {
         this.setState(
             {
                 groupedPhotos: result,
@@ -47,7 +48,7 @@ export default class ElementScreen extends React.Component {
         )
     }
 
-    alertDeleteWarning = (picObject) =>
+    _alertDeleteWarning = (picObject) =>
         Alert.alert(
             'Delete ' + picObject.fileName,
             'Are you sure?',
@@ -58,7 +59,7 @@ export default class ElementScreen extends React.Component {
             { cancelable: false }
         )
 
-    getFullImageView = (picObject) => {
+    _getFullImageView = (picObject) => {
 
         console.log('viewFullImage', picObject)
 
@@ -80,7 +81,7 @@ export default class ElementScreen extends React.Component {
         )
     }
 
-    setModalVisible(visible, picObject) {
+    _setModalVisible(visible, picObject) {
         console.log('modalview', visible, picObject)
         this.setState({
             modalVisible: visible,
@@ -89,11 +90,21 @@ export default class ElementScreen extends React.Component {
 
     }
 
-    onCameraPressed = (projectName) => {
+    _onCameraPressed = (projectName) => {
         this.props.navigation.navigate('Camera', { projectID: projectName })
     }
 
     render() {
+        return (
+            <View>
+                <Text  >
+                    ElementID is: {this.state.elementID}
+                </Text>
+            </View>
+        )
+    }
+
+    _render() {
         const { navigate } = this.props.navigation
         console.log("Element mode")
 
@@ -102,11 +113,11 @@ export default class ElementScreen extends React.Component {
 
                 let onPressPic = () => {
                     console.log(picObject)
-                    this.setModalVisible(true, picObject)
+                    this._setModalVisible(true, picObject)
                 }
 
                 return (
-                    <TouchableOpacity key={picObject.fileUri} onPress={onPressPic} onLongPress={() => this.alertDeleteWarning(picObject)}>
+                    <TouchableOpacity key={picObject.fileUri} onPress={onPressPic} onLongPress={() => this._alertDeleteWarning(picObject)}>
                         <ImageBackground
                             style={{ width: 300, height: 300, margin: 1 }}
                             source={{ uri: picObject.fileUri }}>
@@ -117,12 +128,12 @@ export default class ElementScreen extends React.Component {
             }
         )
 
-        let fullImage = this.getFullImageView(this.state.selectedFullImagePicObject)
+        let fullImage = this._getFullImageView(this.state.selectedFullImagePicObject)
 
         return (
 
             <View style={evokStyles.elementContainer}>
-                <TouchableOpacity style={evokStyles.plusIcon} onPress={() => this.onCameraPressed(this.state.projectID)}>
+                <TouchableOpacity style={evokStyles.plusIcon} onPress={() => this._onCameraPressed(this.state.projectID)}>
                     <Ionicons name="ios-add-circle-outline" size={40} color="black" />
                 </TouchableOpacity>
                 <View style={evokStyles.elementInfoDisplayContainer}>
@@ -172,7 +183,7 @@ export default class ElementScreen extends React.Component {
 
                         <TouchableHighlight style={evokStyles.buttonHideModal}
                             onPress={() => {
-                                this.setModalVisible(!this.state.modalVisible)
+                                this._setModalVisible(!this.state.modalVisible)
                             }}>
                             <Text>Hide Picture</Text>
                         </TouchableHighlight>

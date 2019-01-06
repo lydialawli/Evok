@@ -86,7 +86,7 @@ export default class HomeScreen extends React.Component {
             'Take picture?',
             'Or show cards index?',
             [
-                { text: 'Show index', onPress: () => alert("index is: " + newEvokFileSystem.getIndexfromElementID(elementID)) },
+                { text: 'go to Element', onPress: () => this.navigateToELement('Myproject', elementID) },
                 { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
                 { text: 'YES', onPress: () => this.navigateToCamera('Myproject', elementID) },
             ],
@@ -104,8 +104,8 @@ export default class HomeScreen extends React.Component {
         })
     }
 
-    _navigateToELement = (projectName) => {
-        this.props.navigation.navigate('Element', { projectID: projectName })
+    navigateToELement = (projectName, elementID) => {
+        this.props.navigation.navigate('Element', { projectID: projectName, elementID: elementID })
     }
 
     _getListCards = () => {
@@ -114,7 +114,7 @@ export default class HomeScreen extends React.Component {
             return < ElementCard
                 name={projectName}
                 key={projectName}
-                onCardPressed={this._navigateToELement}
+                onCardPressed={this.navigateToELement}
             />
         })
         return listOfCards
@@ -191,9 +191,7 @@ export default class HomeScreen extends React.Component {
                         <View>
                             {this.getListElementCards()}
                         </View>
-                        <TouchableOpacity style={styles.card} onPress={() => this.navigateToCamera('Myproject', 1546793099442)}>
-                            <Text style={evokStyles.topBarText}> Go to Camera Screen </Text>
-                        </TouchableOpacity>
+    
                     </ScrollView>
 
                     <Modal
