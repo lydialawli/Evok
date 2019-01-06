@@ -7,6 +7,7 @@ import { Ionicons } from '@expo/vector-icons'
 import evokStyles from '../src/evokStyles.js'
 import HomeScreen from '../App.js'
 import evokFileSystem from '../src/oldEvokFilesystem.js'
+import newEvokFileSystem from '../src/newEvokFileSystem.js'
 
 export default class ElementScreen extends React.Component {
     static navigationOptions = {
@@ -26,11 +27,19 @@ export default class ElementScreen extends React.Component {
         modalVisible: false,
         selectedFullImagePicObject: null,
         projectID: this.props.navigation.state.params.projectID,
-        elementID: this.props.navigation.state.params.elementID
+        elementID: this.props.navigation.state.params.elementID,
+        elementObj: {}
     }
 
-    componentWillMount() {
+    async componentWillMount() {
+        this.setElementObJ(this.state.elementID)
         //this._getList()
+    }
+
+    setElementObJ = (elementID) => {
+        this.setState({
+            elementObj: newEvokFileSystem.getElementObj(elementID)
+        })
     }
 
     _getList = () => {
@@ -95,6 +104,9 @@ export default class ElementScreen extends React.Component {
     }
 
     render() {
+        const { navigate } = this.props.navigation
+        console.log("Element mode")
+
         return (
             <View>
                 <Text  >
