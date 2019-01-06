@@ -5,6 +5,7 @@ import EvokCamera from '../src/CameraScreen.js'
 import TimeLine from '../src/TimeLine.js'
 import { Ionicons } from '@expo/vector-icons'
 import evokStyles from '../src/evokStyles.js'
+import { FileSystem } from 'expo'
 import HomeScreen from '../App.js'
 import evokFileSystem from '../src/oldEvokFilesystem.js'
 import newEvokFileSystem from '../src/newEvokFileSystem.js'
@@ -26,21 +27,26 @@ export default class ElementScreen extends React.Component {
         groupedPhotos: [],
         modalVisible: false,
         selectedFullImagePicObject: null,
+        rootDirectory: FileSystem.documentDirectory,
         projectID: this.props.navigation.state.params.projectID,
         elementID: this.props.navigation.state.params.elementID,
-        elementObj: {}
+        elementObj: {},
+        imageHistory: {},
     }
 
     async componentWillMount() {
-        this.setElementObJ(this.state.elementID)
+        this.onOpenedElementScreen(this.state.elementID)
         //this._getList()
     }
 
-    setElementObJ = (elementID) => {
+    onOpenedElementScreen = (elementID) => {
         this.setState({
-            elementObj: newEvokFileSystem.getElementObj(elementID)
+            elementObj: newEvokFileSystem.getElementObj(elementID),
+            imageHistory: newEvokFileSystem.getElementObj(elementID).imageHistory
         })
+
     }
+
 
     _getList = () => {
 
@@ -107,11 +113,34 @@ export default class ElementScreen extends React.Component {
         const { navigate } = this.props.navigation
         console.log("Element mode")
 
+        let images = this.state.imageHistory.map(
+            (imageObj) => {
+
+                let imagePath = this.state.rootDirectory + 'images/' + imageObj.uri
+
+                return (
+                    <TouchableOpacity key={imageObj.uri}>
+                        <ImageBackground
+                            style={{ width: 300, height: 300, margin: 1 }}
+                            source={{ uri: imagePath}}>
+                        </ImageBackground>
+                    </TouchableOpacity>
+                )
+            }
+        )
+
         return (
             <View>
+
                 <Text  >
-                    ElementID is: {this.state.elementID}
+                    Element name is: {JSON.stringify(this.state.elementObj.name)}
                 </Text>
+
+                <View style={evokStyles.projectCard}>
+                    <ScrollView contentContainerStyle={evokStyles.imageCarousel} horizontal={true}>
+                        {images.reverse()}
+                    </ScrollView>
+                </View>
             </View>
         )
     }
