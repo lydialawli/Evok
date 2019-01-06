@@ -88,7 +88,7 @@ export default class HomeScreen extends React.Component {
             [
                 { text: 'Show index', onPress: () => alert("index is: " + newEvokFileSystem.getIndexfromElementID(elementID)) },
                 { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
-                { text: 'YES', onPress: () => console.log('OK Pressed') },
+                { text: 'YES', onPress: () => this.navigateToCamera('Myproject', elementID) },
             ],
             { cancelable: false }
         )
@@ -191,7 +191,7 @@ export default class HomeScreen extends React.Component {
                         <View>
                             {this.getListElementCards()}
                         </View>
-                        <TouchableOpacity style={styles.card} onPress={() => this.navigateToCamera('Myproject', 1546692494684)}>
+                        <TouchableOpacity style={styles.card} onPress={() => this.navigateToCamera('Myproject', 1546793099442)}>
                             <Text style={evokStyles.topBarText}> Go to Camera Screen </Text>
                         </TouchableOpacity>
                     </ScrollView>
