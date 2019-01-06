@@ -24,10 +24,10 @@ newEvokFileSystem.startStorage = (callback) => {
 
 }
 
-newEvokFileSystem.deleteImagesDirectory = () => {
+newEvokFileSystem.deleteImagesDirectory = () =>  {
     var file = rootDirectory + imagesFolder
 
-    readWrite.delete(file, console.log("images deleted"))
+    readWrite.delete(file, console.log("images directory deleted"))
 }
 
 readImagesDirectory = () => {
@@ -102,13 +102,14 @@ newEvokFileSystem.getIndexfromElementID = (elementID) => {
 
 newEvokFileSystem.deleteElementObj = (elementID, callback) => {
     i = newEvokFileSystem.getIndexfromElementID(elementID)
-  
+
     deleteAllImagesFromElementObj(elementID, i)
 
     elementIndex.elements.splice(i, 1)
-   
     updateJsonFromElementIndexObj(elementIndex, callback)
     
+    readImagesDirectory()
+
 }
 
 deleteAllImagesFromElementObj = (elementID, ind) => {
