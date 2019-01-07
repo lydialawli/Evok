@@ -24,7 +24,7 @@ newEvokFileSystem.startStorage = (callback) => {
 
 }
 
-newEvokFileSystem.deleteImagesDirectory = () =>  {
+newEvokFileSystem.deleteImagesDirectory = () => {
     var file = rootDirectory + imagesFolder
 
     readWrite.delete(file, console.log("images directory deleted"))
@@ -107,7 +107,7 @@ newEvokFileSystem.deleteElementObj = (elementID, callback) => {
 
     elementIndex.elements.splice(i, 1)
     updateJsonFromElementIndexObj(elementIndex, callback)
-    
+
     readImagesDirectory()
 
 }
@@ -152,15 +152,14 @@ updateElementIndexFromNewElement = (newElement, callback) => {
     updateJsonFromElementIndexObj(elementIndex, callback)
 }
 
-newEvokFileSystem.saveImage = (originalFile, elementID, callback) => {
+newEvokFileSystem.saveImage = (originalFile, elementID, callback, callback2) => {
     var fileName = Date.now() + '.jpg'
     var currentFolder = rootDirectory + imagesFolder
 
-
-    readWrite.move(originalFile, currentFolder, fileName, updateElementIndexFromNewInstant(elementID, fileName, callback))
+    readWrite.move(originalFile, currentFolder, fileName, updateElementIndexFromNewInstant(elementID, fileName, callback, callback2))
 }
 
-updateElementIndexFromNewInstant = (elementID, fileName, callback) => {
+updateElementIndexFromNewInstant = (elementID, fileName, callback, callback2) => {
     i = newEvokFileSystem.getIndexfromElementID(elementID)
 
     let newInstance = {
@@ -173,6 +172,7 @@ updateElementIndexFromNewInstant = (elementID, fileName, callback) => {
     updateJsonFromElementIndexObj(elementIndex, this.onInstanceCreated)
 
     callback(elementID)
+    callback2(rootDirectory + "images/" + fileName)
 }
 
 onInstanceCreated = () => { console.log("Instance is saved in storage.json") }

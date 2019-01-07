@@ -52,7 +52,7 @@ export default class HomeScreen extends React.Component {
         this.setState({
             elements: newEvokFileSystem.getArrayOfElements(),
         })
-        console.log("..elements: " + JSON.stringify(this.state.elements))
+        console.log("..elements: " + JSON.stringify(this.state.elements,null,2))
     }
 
     getListElementCards = () => {

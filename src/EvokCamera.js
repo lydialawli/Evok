@@ -11,7 +11,9 @@ export default class EvokCamera extends React.Component {
     state = {
         hasCameraPermission: null,
         elementID: this.props.elementID,
-        elementObj: {}
+        elementObj: {},
+        isPreviewMode: false,
+        imageToPreview: ''
     }
 
     async componentWillMount() {
@@ -35,12 +37,60 @@ export default class EvokCamera extends React.Component {
 
         this.camera.takePictureAsync()
             .then(data => {
-                newEvokFileSystem.saveImage(data.uri, this.state.elementID, this.setElementObJ)
+                newEvokFileSystem.saveImage(data.uri, this.state.elementID, this.setElementObJ, this.onPictureTaken)
+
             })
             .catch(err => console.error(err))
     }
 
-    render() {
+    onPictureTaken = (filePath) => {
+        this.setState({
+            isPreviewMode: true,
+            imageToPreview: filePath
+        })
+    }
+
+    goToPreviewMode = () => {
+        this.setState({ isPreviewMode: true })
+    }
+
+    getPreviewImageView() {
+
+        if (!this.state.imageToPreview)
+            return <View />
+
+        return (
+            <View style={{ flex: 1 }}>
+                <Image
+                    style={{ flex: 1, marginTop: 20 }}
+                    source={{ uri: this.state.imageToPreview }}
+                    resizeMode="contain"
+                />
+            </View>
+        )
+    }
+
+    getPreviewView() {
+        return (
+            <View style={{ width: '100%', height: '100%', flexDirection: 'column', justifyContent: 'space-around', paddingTop: 30 }}>
+                <View style={{ flex: 1, justifyContent: 'flex-end' }}>
+                    {this.getPreviewImageView()}
+                </View>
+                <View style={evokStyles.previewButtonContainer}>
+                    <TouchableOpacity style={evokStyles.goToCameraButton} onPress={this.goToCameraMode}>
+                        <Ionicons name="ios-arrow-dropleft" size={40} color="white" />
+                    </TouchableOpacity>
+                </View>
+            </View>
+        )
+    }
+
+    goToCameraMode = () => {
+        this.setState({ isPreviewMode: false })
+    }
+
+    getCameraView = () => {
+
         return (
             <View style={styles.view}>
                 <Camera
@@ -63,6 +113,27 @@ export default class EvokCamera extends React.Component {
 
             </View>
         )
+
+    }
+
+    render() {
+
+        const { hasCameraPermission } = this.state
+
+        if (hasCameraPermission === null) {
+            return <Text>Camera permission is null</Text>
+        }
+
+        else if (hasCameraPermission === false) {
+            return <Text>No access to camera</Text>
+        }
+
+        let viewToRender = this.getCameraView()
+
+        if (this.state.isPreviewMode)
+            viewToRender = this.getPreviewView()
+
+        return viewToRender
     }
 }
 
