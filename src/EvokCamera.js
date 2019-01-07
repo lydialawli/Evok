@@ -11,26 +11,31 @@ export default class EvokCamera extends React.Component {
     state = {
         hasCameraPermission: null,
         elementID: this.props.elementID,
-        elementObj: {},
+        imageHistory: {},
         isPreviewMode: false,
         imageToPreview: '',
         type: 'back',
         flashMode: 'off',
         ratio: '16:9',
+        lastImagePath: '',
+        lastPicOpacity: 0.5,
+        onionSkin: '',
     }
 
     async componentWillMount() {
         const { status } = await Permissions.askAsync(Permissions.CAMERA)
         this.setState({ hasCameraPermission: status === 'granted' })
-        this.setElementObJ(this.state.elementID)
+        this.setImageHistoryObj(this.state.elementID)
     }
 
-    setElementObJ = (elementID) => {
+    setImageHistoryObj = (elementID) => {
         this.setState({
-            elementObj: newEvokFileSystem.getElementObj(elementID)
+            imageHistory: newEvokFileSystem.getElementObj(elementID).imageHistory,
+        })
+        this.setState({
+            lastImagePath: newEvokFileSystem.getImagePath(this.state.imageHistory[this.state.imageHistory.length - 1].uri)
         })
     }
-
 
     takePicture = async () => {
         console.log("...takePicture")
@@ -40,7 +45,7 @@ export default class EvokCamera extends React.Component {
 
         this.camera.takePictureAsync()
             .then(data => {
-                newEvokFileSystem.saveImage(data.uri, this.state.elementID, this.setElementObJ, this.onPictureTaken)
+                newEvokFileSystem.saveImage(data.uri, this.state.elementID, this.setImageHistoryObj, this.onPictureTaken)
 
             })
             .catch(err => console.error(err))
@@ -88,11 +93,24 @@ export default class EvokCamera extends React.Component {
         )
     }
 
+    getOnionSkin = () => {
+        return (
+            <ImageBackground
+                style={{ flex: 7, justifyContent: 'center', opacity: this.state.lastPicOpacity }}
+                resizeMode="contain"
+                source={{ uri: this.state.lastImagePath }}>
+            </ImageBackground>
+        )
+    }
+
+
     goToCameraMode = () => {
         this.setState({ isPreviewMode: false })
     }
 
     getCameraView = () => {
+
+        let onionSkin = this.getOnionSkin()
 
         return (
             <View style={styles.view}>
@@ -101,13 +119,10 @@ export default class EvokCamera extends React.Component {
                     style={evokStyles.cameraView}
                     ratio={this.state.ratio}
                 >
-                    <View
-                        style={{
-                            width: '100%', height: '100%',
-                            backgroundColor: 'transparent',
+                    <View style={{ width: '100%', height: '100%', backgroundColor: 'transparent' }}>
 
-                        }}>
-                        <Text style={styles.text}> This is element's ID: {this.state.elementID}</Text>
+                        {onionSkin}
+
                         <TouchableOpacity style={evokStyles.snapCamButton} onPress={this.takePicture.bind(this)}>
                             <Ionicons name="md-aperture" size={50} color="white" />
                         </TouchableOpacity>

@@ -133,7 +133,10 @@ newEvokFileSystem.getElementObj = (elementID) => {
 
     //console.log("this is elementObj: " + JSON.stringify(elementIndex.elements[i]))
     return elementIndex.elements[i]
+}
 
+newEvokFileSystem.getImagePath = (fileUri) => {
+    return rootDirectory + 'images/' + fileUri
 }
 
 newEvokFileSystem.addNewElement = (elementName, timeOfCreation, type, callback) => {
