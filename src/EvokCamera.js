@@ -13,7 +13,10 @@ export default class EvokCamera extends React.Component {
         elementID: this.props.elementID,
         elementObj: {},
         isPreviewMode: false,
-        imageToPreview: ''
+        imageToPreview: '',
+        type: 'back',
+        flashMode: 'off',
+        ratio: '16:9',
     }
 
     async componentWillMount() {
