@@ -1,12 +1,16 @@
-# ALL ABOUT EVOK
+# Developers notes
 This file is intended to be understood by the developers and designers only. For now, it is just Ly.
 
-## NEXT TASKS
-- [ ] hola 
-- [ ] adeu
+## Tasks
+- [x] write f() `getElementIndexByID`  (to get the position inside)
+- [ ]
+- <details><summary> [x] 22 dec</summary>
+
+</details>
 
 
-## IDEAS TO IMPROVE EVOK
+
+## Ideas
 
 - Ability to **group** different **elements** into a **project**
 - Quick access to take new picture from an element of a project
