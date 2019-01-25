@@ -208,6 +208,20 @@ const evokStyles = StyleSheet.create({
         elevation: 3, 
     },
 
+
+    sliderCard: {
+        width: 300,
+        height: 60,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        borderColor: '#ffb84d',
+        backgroundColor: 'lightblue',
+        alignItems: 'center',
+        borderRadius: 10,
+        margin: 10,
+        elevation: 3, 
+    },
+
     elementInfoDisplayContainer: {
         flex: 1,
         justifyContent: 'center',

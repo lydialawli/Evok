@@ -139,6 +139,7 @@ export default class EvokCamera extends React.Component {
                     <View style={{ width: '100%', height: '100%', backgroundColor: 'transparent' }}>
 
                         {onionSkin}
+
                         <View style={{ width: '100%', height: '100%',position: 'absolute', flexDirection: 'column', justifyContent: 'flex-end'}}>
                             {opacitySlider}
                             <TouchableOpacity style={evokStyles.snapCamButton} onPress={this.takePicture.bind(this)}>

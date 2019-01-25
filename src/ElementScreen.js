@@ -32,11 +32,13 @@ export default class ElementScreen extends React.Component {
         elementID: this.props.navigation.state.params.elementID,
         elementObj: {},
         imageHistory: {},
+        sliderValue: 0.5,
+        imageDisplayed: 0
     }
 
     async componentWillMount() {
         this.onOpenedElementScreen(this.state.elementID)
-        //this._getList()
+        this._getList()
     }
 
     onOpenedElementScreen = (elementID) => {
@@ -44,7 +46,6 @@ export default class ElementScreen extends React.Component {
             elementObj: newEvokFileSystem.getElementObj(elementID),
             imageHistory: newEvokFileSystem.getElementObj(elementID).imageHistory
         })
-
     }
 
 
@@ -52,7 +53,7 @@ export default class ElementScreen extends React.Component {
 
         let currentFolder = evokFileSystem.getPath(this.state.projectID, '')
 
-        evokFileSystem.getArrayOfPicObjects(currentFolder, this.onFilesListed)
+        evokFileSystem.getArrayOfPicObjects(currentFolder, this._onFilesListed)
     }
 
     _onFilesListed = (result) => {
@@ -109,9 +110,25 @@ export default class ElementScreen extends React.Component {
         this.props.navigation.navigate('Camera', { projectID: projectName })
     }
 
+    getImageDisplayed = () => {
+        let imageUri = this.state.imageHistory[this.state.imageDisplayed].uri
+        let imagePath = this.state.rootDirectory + 'images/' + imageUri
+
+        return (
+            <TouchableOpacity >
+                <ImageBackground
+                    style={{ width: 300, height: 300, margin: 1 }}
+                    source={{ uri: imagePath }}>
+                </ImageBackground>
+            </TouchableOpacity>
+        )
+    }
+
     render() {
         const { navigate } = this.props.navigation
         console.log("Element mode")
+
+        let imageDisplayed = this.getImageDisplayed()
 
         let images = this.state.imageHistory.map(
             (imageObj) => {
@@ -122,7 +139,7 @@ export default class ElementScreen extends React.Component {
                     <TouchableOpacity key={imageObj.uri}>
                         <ImageBackground
                             style={{ width: 300, height: 300, margin: 1 }}
-                            source={{ uri: imagePath}}>
+                            source={{ uri: imagePath }}>
                         </ImageBackground>
                     </TouchableOpacity>
                 )
@@ -137,8 +154,8 @@ export default class ElementScreen extends React.Component {
                 return (
                     <TouchableOpacity key={imageObj.uri}>
                         <ImageBackground
-                            style={{ width: 300, height: 300, margin: 1, opacity: 0}}
-                            source={{ uri: imagePath}}>
+                            style={{ width: 300, height: 300, margin: 1, opacity: 0 }}
+                            source={{ uri: imagePath }}>
                         </ImageBackground>
                     </TouchableOpacity>
                 )
@@ -146,22 +163,30 @@ export default class ElementScreen extends React.Component {
         )
 
         return (
-            <View>
+            <View style={{ justifyContent: 'space-evenly', alignItems: 'center' }}>
 
                 <Text  >
                     Element name is: {JSON.stringify(this.state.elementObj.name)}
                 </Text>
 
                 <View style={evokStyles.projectCard}>
-                    <ScrollView contentContainerStyle={evokStyles.imageCarousel} horizontal={true}>
-                        {images.reverse()}
-                    </ScrollView>
+                    {imageDisplayed}
                 </View>
 
-                <View style={evokStyles.projectCard}>
-                    <ScrollView contentContainerStyle={evokStyles.imageCarousel} horizontal={true}>
-                        {images2.reverse()}
-                    </ScrollView>
+                <View style={evokStyles.timeLineCard}>
+                    <TimeLine />
+                </View>
+
+                <View style={evokStyles.sliderCard}>
+                    <View style={{ height:50, width: 250, alignItems: 'stretch', justifyContent: 'center' }}>
+                        <Slider
+                            maximumValue={10}
+                            minimumValue={0}
+                            minimumTrackTintColor='#ffcc00'
+                            value={this.state.sliderValue}
+                            onValueChange={(sliderValue) => this.setState({ sliderValue })} />
+                        <Text>Value: {this.state.sliderValue}</Text>
+                    </View>
                 </View>
             </View>
         )
@@ -259,3 +284,16 @@ export default class ElementScreen extends React.Component {
     }
 
 }
+
+
+
+/* 
+old maybe useful code: 
+
+   <View style={evokStyles.projectCard}>
+        <ScrollView contentContainerStyle={evokStyles.imageCarousel} horizontal={true}>
+            {images.reverse()}
+        </ScrollView>
+    </View>
+
+*/
