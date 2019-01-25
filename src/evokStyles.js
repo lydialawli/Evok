@@ -73,7 +73,8 @@ const evokStyles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 8,
-        marginHorizontal: 3
+        marginHorizontal: 3,
+        position: 'absolute'
 
     },
 
@@ -88,10 +89,11 @@ const evokStyles = StyleSheet.create({
     },
 
     opacitySlider: {
-        flex: 1,
-        alignItems: "stretch",
-     
-
+        //alignItems: "stretch",
+        width: 400,
+        height: 100,
+        justifyContent: 'center',
+    
     },
 
     snapCamButton: {
@@ -103,6 +105,7 @@ const evokStyles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         elevation: 5,
+     
     },
 
     buttonText: {

@@ -96,14 +96,13 @@ export default class EvokCamera extends React.Component {
     getOnionSkin = () => {
         return (
             <ImageBackground
-                style={{ flex: 7, justifyContent: 'center', opacity: this.state.lastPicOpacity }}
+                style={{ width: '100%', height: '100%', justifyContent: 'center', opacity: this.state.lastPicOpacity, position: 'absolute' }}
                 resizeMode="contain"
                 source={{ uri: this.state.lastImagePath }}>
-                {this.getOpacitySlider()}
-                {this.getSnapButton()}
             </ImageBackground>
         )
     }
+
 
     getOpacitySlider = () => {
         return (
@@ -116,14 +115,6 @@ export default class EvokCamera extends React.Component {
                 lastPicOpacity={this.state.lastPicOpacity}
                 onValueChange={lastPicOpacity => this.setState({ lastPicOpacity })}
             />
-        )
-    }
-
-    getSnapButton = () => {
-        return (
-            <TouchableOpacity style={evokStyles.snapCamButton} onPress={this.takePicture.bind(this)}>
-                <Ionicons name="md-aperture" size={50} color="white" />
-            </TouchableOpacity>
         )
     }
 
@@ -148,7 +139,12 @@ export default class EvokCamera extends React.Component {
                     <View style={{ width: '100%', height: '100%', backgroundColor: 'transparent' }}>
 
                         {onionSkin}
-
+                        <View style={{ width: '100%', height: '100%',position: 'absolute', flexDirection: 'column', justifyContent: 'flex-end'}}>
+                            {opacitySlider}
+                            <TouchableOpacity style={evokStyles.snapCamButton} onPress={this.takePicture.bind(this)}>
+                                <Ionicons name="md-aperture" size={50} color="white" />
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 </Camera>
 
