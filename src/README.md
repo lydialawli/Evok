@@ -3,10 +3,6 @@
 ## Tasks
 - [x] write f() `getElementIndexByID`  (to get the position inside)
 - [ ] onClick element > for loop > go through obj ID
-- <details><summary> [x] 22 dec</summary>
-
-</details>
-
 
 
 ## Ideas
@@ -17,3 +13,23 @@
 - QR sticker downloadable (and explained)
 - Reminder
 - export / import files
+
+
+## Markdown 
+
+**collapsing/hiding**
+><details><summary> click me</summary>
+>blabla
+></details>
+
+**representing code**
+```js
+console.log('hakuna matata')
+```
+
+## Javascript
+
+**to view a string displayed as an object**
+```js
+JSON.stringify(obj,null,2)
+```
