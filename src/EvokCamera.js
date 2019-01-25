@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, TouchableOpacity, Dimensions, Image, ImageBackground, Button, Icon } from 'react-native'
+import { Text, View, StyleSheet, TouchableOpacity, Dimensions, Image, ImageBackground, Button, Icon, Slider } from 'react-native'
 import { Camera, Permissions } from 'expo'
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 import newEvokFileSystem from '../src/newEvokFileSystem.js'
@@ -99,7 +99,31 @@ export default class EvokCamera extends React.Component {
                 style={{ flex: 7, justifyContent: 'center', opacity: this.state.lastPicOpacity }}
                 resizeMode="contain"
                 source={{ uri: this.state.lastImagePath }}>
+                {this.getOpacitySlider()}
+                {this.getSnapButton()}
             </ImageBackground>
+        )
+    }
+
+    getOpacitySlider = () => {
+        return (
+            <Slider
+                style={evokStyles.opacitySlider}
+                step={0}
+                maximumValue={1}
+                value={this.state.lastPicOpacity}
+                minimumTrackTintColor='#ffcc00'
+                lastPicOpacity={this.state.lastPicOpacity}
+                onValueChange={lastPicOpacity => this.setState({ lastPicOpacity })}
+            />
+        )
+    }
+
+    getSnapButton = () => {
+        return (
+            <TouchableOpacity style={evokStyles.snapCamButton} onPress={this.takePicture.bind(this)}>
+                <Ionicons name="md-aperture" size={50} color="white" />
+            </TouchableOpacity>
         )
     }
 
@@ -112,6 +136,8 @@ export default class EvokCamera extends React.Component {
 
         let onionSkin = this.getOnionSkin()
 
+        let opacitySlider = this.getOpacitySlider()
+
         return (
             <View style={styles.view}>
                 <Camera
@@ -123,9 +149,6 @@ export default class EvokCamera extends React.Component {
 
                         {onionSkin}
 
-                        <TouchableOpacity style={evokStyles.snapCamButton} onPress={this.takePicture.bind(this)}>
-                            <Ionicons name="md-aperture" size={50} color="white" />
-                        </TouchableOpacity>
                     </View>
                 </Camera>
 

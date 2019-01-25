@@ -90,7 +90,7 @@ const evokStyles = StyleSheet.create({
     opacitySlider: {
         flex: 1,
         alignItems: "stretch",
-        justifyContent: "flex-start"
+     
 
     },
 

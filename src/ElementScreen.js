@@ -129,6 +129,22 @@ export default class ElementScreen extends React.Component {
             }
         )
 
+        let images2 = this.state.imageHistory.map(
+            (imageObj) => {
+
+                let imagePath = this.state.rootDirectory + 'images/' + imageObj.uri
+
+                return (
+                    <TouchableOpacity key={imageObj.uri}>
+                        <ImageBackground
+                            style={{ width: 300, height: 300, margin: 1, opacity: 0}}
+                            source={{ uri: imagePath}}>
+                        </ImageBackground>
+                    </TouchableOpacity>
+                )
+            }
+        )
+
         return (
             <View>
 
@@ -139,6 +155,12 @@ export default class ElementScreen extends React.Component {
                 <View style={evokStyles.projectCard}>
                     <ScrollView contentContainerStyle={evokStyles.imageCarousel} horizontal={true}>
                         {images.reverse()}
+                    </ScrollView>
+                </View>
+
+                <View style={evokStyles.projectCard}>
+                    <ScrollView contentContainerStyle={evokStyles.imageCarousel} horizontal={true}>
+                        {images2.reverse()}
                     </ScrollView>
                 </View>
             </View>
