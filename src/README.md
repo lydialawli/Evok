@@ -1,8 +1,8 @@
 # Developers notes
 
 ## Tasks
-- [x] write f() `getElementIndexByID`  (to get the position inside)
-- [ ] onClick element > for loop > go through obj ID
+- [x] create `getElementIndexByID()`  (to get the position inside)
+- [ ] `onClick` element > for loop > go through obj ID
 
 
 ## Ideas
