@@ -2,8 +2,8 @@
 This file is intended to be understood by the developers and designers only. For now, it is just Ly.
 
 ## NEXT TASKS
-- [] hola 
-- [] adeu
+- [ ] hola 
+- [ ] adeu
 
 
 ## IDEAS TO IMPROVE EVOK
