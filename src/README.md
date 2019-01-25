@@ -1,5 +1,4 @@
 # Developers notes
-This file is intended to be understood by the developers and designers only. For now, it is just Ly.
 
 ## Tasks
 - [x] write f() `getElementIndexByID`  (to get the position inside)
