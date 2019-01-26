@@ -2,7 +2,7 @@ import React from 'react'
 import { Image, StyleSheet, View, TouchableOpacity, TouchableHighlight, ScrollView, Text, Alert, ImageBackground, Modal, Slider } from 'react-native'
 import { StackNavigator } from 'react-navigation'
 import EvokCamera from '../src/CameraScreen.js'
-import TimeLine from '../src/TimeLine.js'
+import TimeLine from '../src/_TimeLine.js'
 import { Ionicons } from '@expo/vector-icons'
 import evokStyles from '../src/evokStyles.js'
 import { FileSystem } from 'expo'
@@ -178,15 +178,7 @@ export default class ElementScreen extends React.Component {
                 </View>
 
                 <View style={evokStyles.sliderCard}>
-                    <View style={{ height:50, width: 250, alignItems: 'stretch', justifyContent: 'center' }}>
-                        <Slider
-                            maximumValue={10}
-                            minimumValue={0}
-                            minimumTrackTintColor='#ffcc00'
-                            value={this.state.sliderValue}
-                            onValueChange={(sliderValue) => this.setState({ sliderValue })} />
-                        <Text>Value: {this.state.sliderValue}</Text>
-                    </View>
+
                 </View>
             </View>
         )
@@ -295,5 +287,15 @@ old maybe useful code:
             {images.reverse()}
         </ScrollView>
     </View>
-
+    
+    NORMAL REACT NATIVE SLIDER:
+    <View style={{ height:50, width: 250, alignItems: 'stretch', justifyContent: 'center' }}>
+        <Slider
+            maximumValue={10}
+            minimumValue={0}
+            minimumTrackTintColor='#ffcc00'
+            value={this.state.sliderValue}
+            onValueChange={(sliderValue) => this.setState({ sliderValue })} />
+            <Text>Value: {this.state.sliderValue}</Text>
+    </View>
 */
