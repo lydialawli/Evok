@@ -15,11 +15,36 @@ let lineXhour =
 export default class TimeLine extends React.Component {
     state = {
         imageHistory: this.props.data,
+        currentTimestamp : 0
     }
 
     componentWillMount() {
+        this.setLengthOfTimeline()
         console.log('data in timeline is: ' + JSON.stringify(this.state.imageHistory,null,2))
     }
+
+
+    setLengthOfTimeline = () => {
+        this.setState(
+            {
+                durationLengthInHours: Math.round(this.getFullDurationInHours(this.state.imageHistory))
+            }
+        )
+    }
+
+    MilisecIntoHours(milisecs) {
+        h = milisecs / (60 * 60 * 1000)
+        return h.toFixed(5)
+    }
+
+    getFullDurationInHours = (array) => {
+        if (array.length === 0)
+            return 0
+
+        let arrayLastItem = array.length - 1
+        return this.MilisecIntoHours(array[arrayLastItem].timestamp - array[0].timestamp)
+    }
+
 
     render() {
         return (
@@ -27,6 +52,7 @@ export default class TimeLine extends React.Component {
                 <ScrollView contentContainerStyle={evokStyles.imageCarousel} horizontal={true}>
                     <Text> {JSON.stringify(this.state.imageHistory)} </Text>
                 </ScrollView>
+                <Text> {JSON.stringify(this.state.durationLengthInHours)} </Text>
             </View>
         )
     }

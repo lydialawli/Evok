@@ -34,7 +34,8 @@ export default class ElementScreen extends React.Component {
         elementObj: {},
         imageHistory: {},
         sliderValue: 0.5,
-        imageDisplayed: 0
+        imageDisplayed: 0,
+        currentImageTimestamp: 0,
     }
 
     async componentWillMount() {
@@ -112,9 +113,11 @@ export default class ElementScreen extends React.Component {
     }
 
     getImageDisplayed = () => {
-        let imageUri = this.state.imageHistory[this.state.imageDisplayed].uri
+        let imageObj = this.state.imageHistory[this.state.imageDisplayed]
+        let imageUri = imageObj.uri
         let imagePath = this.state.rootDirectory + 'images/' + imageUri
-
+        let timestamp = imageObj.timestamp
+        //console.log('currentTimestamp is: ' + timestamp)
         return (
             <TouchableOpacity >
                 <ImageBackground
@@ -123,6 +126,14 @@ export default class ElementScreen extends React.Component {
                 </ImageBackground>
             </TouchableOpacity>
         )
+     
+        //this.setCurrentImageTimestamp(timestamp)
+    }
+
+    setCurrentImageTimestamp = (timestamp) => {
+        let currentTimestamp = timestamp
+
+        console.log('currentTimestamp is: ' + currentTimestamp)
     }
 
     render() {
