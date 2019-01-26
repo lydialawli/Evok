@@ -211,7 +211,7 @@ const evokStyles = StyleSheet.create({
 
     sliderCard: {
         width: 300,
-        height: 60,
+        height: 100,
         flexDirection: 'column',
         justifyContent: 'center',
         borderColor: '#ffb84d',
@@ -271,7 +271,7 @@ const evokStyles = StyleSheet.create({
 
     timelineObjectText: {
         color: 'darkblue',
-        fontSize: 20,
+        fontSize: 15,
         textAlign: 'center',
         fontWeight: 'bold',
     },

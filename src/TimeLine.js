@@ -15,12 +15,12 @@ let lineXhour =
 export default class TimeLine extends React.Component {
     state = {
         imageHistory: this.props.data,
-        currentTimestamp : 0
+        currentTimestamp: 0
     }
 
     componentWillMount() {
         this.setLengthOfTimeline()
-        console.log('data in timeline is: ' + JSON.stringify(this.state.imageHistory,null,2))
+        console.log('data in timeline is: ' + JSON.stringify(this.state.imageHistory, null, 2))
     }
 
 
@@ -45,12 +45,60 @@ export default class TimeLine extends React.Component {
         return this.MilisecIntoHours(array[arrayLastItem].timestamp - array[0].timestamp)
     }
 
+    hoursToPixels = (h) => {
+        return h * 10
+    }
+
+    getScrollLine = () => {
+        let newWidth = 0
+        if (this.state.durationLengthInHours === 0) { newWidth = 20 }
+        else { newWidth = this.hoursToPixels(this.state.durationLengthInHours) + 300 }
+        console.log('new width is ' + newWidth)
+
+        let textLine = this.state.imageHistory.map(
+            (imageObj) => {
+                <View style={{ margin: 1022.5 }} >
+                    <Ionicons name="ios-git-commit" size={20} color="black" containerStyle={flex = 1} />
+                </View>
+            }
+        )
+
+        let text = this.text(newWidth)
+        return (
+            <View>
+                <View style={{
+                    backgroundColor: 'yellow', width: newWidth,
+                    height: 20, justifyContent: 'center', alignSelf: 'center'
+                }}>
+
+                    {text}
+
+                </View>
+            </View>
+        )
+    }
+
+
+    text = (newWidth) => {
+        return (
+            <View style={{ height: 20, margin: 1022.5 }} >
+                <Ionicons name="ios-git-commit" size={20} color="black" containerStyle={flex = 1} />
+            </View>
+        )
+    }
+
+    handleScroll = (event) => {
+        console.log(event.nativeEvent.contentOffset.x)
+    }
+
 
     render() {
+
+        let lineXhour = this.getScrollLine()
         return (
             <View >
-                <ScrollView contentContainerStyle={evokStyles.imageCarousel} horizontal={true}>
-                    <Text> {JSON.stringify(this.state.imageHistory)} </Text>
+                <ScrollView contentContainerStyle={evokStyles.imageCarousel} horizontal={true} onScroll={this.handleScroll} >
+                    {lineXhour}
                 </ScrollView>
                 <Text> {JSON.stringify(this.state.durationLengthInHours)} </Text>
             </View>
