@@ -2,13 +2,14 @@ import React from 'react'
 import { Image, StyleSheet, View, TouchableOpacity, TouchableHighlight, ScrollView, Text, Alert, ImageBackground, Modal, Slider } from 'react-native'
 import { StackNavigator } from 'react-navigation'
 import EvokCamera from '../src/CameraScreen.js'
-import TimeLine from '../src/_TimeLine.js'
+import TimeLine_ from '../src/_TimeLine.js'
 import { Ionicons } from '@expo/vector-icons'
 import evokStyles from '../src/evokStyles.js'
 import { FileSystem } from 'expo'
 import HomeScreen from '../App.js'
 import evokFileSystem from '../src/oldEvokFilesystem.js'
 import newEvokFileSystem from '../src/newEvokFileSystem.js'
+import TimeLine from '../src/timeLine.js'
 
 export default class ElementScreen extends React.Component {
     static navigationOptions = {
@@ -174,16 +175,18 @@ export default class ElementScreen extends React.Component {
                 </View>
 
                 <View style={evokStyles.timeLineCard}>
-                    <TimeLine />
+                    <TimeLine_ />
                 </View>
 
                 <View style={evokStyles.sliderCard}>
-
+                    <TimeLine data={this.state.imageHistory}/>
                 </View>
             </View>
         )
     }
 
+
+    /*
     _render() {
         const { navigate } = this.props.navigation
         console.log("Element mode")
@@ -273,10 +276,9 @@ export default class ElementScreen extends React.Component {
 
             </View>
         )
-    }
+    }*/
 
 }
-
 
 
 /* 

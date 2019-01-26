@@ -12,7 +12,7 @@ let lineXhour =
     </View>
 
 
-export default class TimeLine extends React.Component {
+export default class TimeLine_ extends React.Component {
     state = {
         groupedPhotos: [],
         arrayLengthInHours: 0,
