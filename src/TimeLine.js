@@ -15,7 +15,10 @@ let lineXhour =
 export default class TimeLine extends React.Component {
     state = {
         imageHistory: this.props.data,
-        currentTimestamp: 0
+        currentTimestamp: 0,
+        scrollPosition: 0,
+        currentMoment: this.props.timestamp,
+        timelineWidth: 0,
     }
 
     componentWillMount() {
@@ -27,7 +30,8 @@ export default class TimeLine extends React.Component {
     setLengthOfTimeline = () => {
         this.setState(
             {
-                durationLengthInHours: Math.round(this.getFullDurationInHours(this.state.imageHistory))
+                durationLengthInHours: Math.round(this.getFullDurationInHours(this.state.imageHistory)),
+                timelineWidth: this.props.width
             }
         )
     }
@@ -53,7 +57,7 @@ export default class TimeLine extends React.Component {
         let newWidth = 0
         if (this.state.durationLengthInHours === 0) { newWidth = 20 }
         else { newWidth = this.hoursToPixels(this.state.durationLengthInHours) + 300 }
-        console.log('new width is ' + newWidth)
+        //console.log('new width is ' + newWidth)
 
         let textLine = this.state.imageHistory.map(
             (imageObj) => {
@@ -88,19 +92,23 @@ export default class TimeLine extends React.Component {
     }
 
     handleScroll = (event) => {
-        console.log(event.nativeEvent.contentOffset.x)
+        //console.log(event.nativeEvent.contentOffset.x)
+        this.setState(
+            {
+                scrollPosition:event.nativeEvent.contentOffset.x
+            }
+        )
     }
 
 
     render() {
-
         let lineXhour = this.getScrollLine()
         return (
             <View >
                 <ScrollView contentContainerStyle={evokStyles.imageCarousel} horizontal={true} onScroll={this.handleScroll} >
                     {lineXhour}
                 </ScrollView>
-                <Text> {JSON.stringify(this.state.durationLengthInHours)} </Text>
+                <Text> {JSON.stringify(this.state.scrollPosition)} </Text>
             </View>
         )
     }

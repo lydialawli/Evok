@@ -139,6 +139,7 @@ export default class ElementScreen extends React.Component {
     render() {
         const { navigate } = this.props.navigation
         console.log("Element mode")
+        console.log('width is: '+ this.state.timelineWidth)
 
         let imageDisplayed = this.getImageDisplayed()
 
@@ -190,7 +191,7 @@ export default class ElementScreen extends React.Component {
                 </View>
 
                 <View style={evokStyles.sliderCard}>
-                    <TimeLine data={this.state.imageHistory}/>
+                    <TimeLine data={this.state.imageHistory} timestamp= {this.state.currentImageTimestamp} width = {300} />
                 </View>
             </View>
         )
