@@ -19,6 +19,7 @@ export default class TimeLine extends React.Component {
         scrollPosition: 0,
         currentMoment: this.props.timestamp,
         timelineWidth: 0,
+        currentPosition: 0,
     }
 
     componentWillMount() {
@@ -31,15 +32,30 @@ export default class TimeLine extends React.Component {
         this.setState(
             {
                 durationLengthInHours: Math.round(this.getFullDurationInHours(this.state.imageHistory)),
-                timelineWidth: this.props.width
+                timelineWidth: this.props.width,
+                durationInPx: this.getFullDurationInPixels(this.state.imageHistory),
+                currentPosition: this.milisecIntoPixels(this.state.currentMoment) + (this.state.timelineWidth*0.5)
             }
         )
+    }
+
+    milisecIntoPixels = (timestamp) => {
+       return this.hoursToPixels(this.MilisecIntoHours(timestamp))
     }
 
     MilisecIntoHours(milisecs) {
         h = milisecs / (60 * 60 * 1000)
         return h.toFixed(5)
     }
+
+    getFullDurationInPixels= (array) => {
+        if (array.length === 0)
+            return 0
+
+        let arrayLastItem = array.length - 1
+        return this.milisecIntoPixels(array[arrayLastItem].timestamp - array[0].timestamp)
+    }
+
 
     getFullDurationInHours = (array) => {
         if (array.length === 0)
@@ -51,6 +67,35 @@ export default class TimeLine extends React.Component {
 
     hoursToPixels = (h) => {
         return h * 10
+    }
+
+    getTimelineBarWidth = () => {
+        let newWidth = 0
+        if (this.state.durationInPx === 0) { newWidth = 20 }
+        else { newWidth = this.state.durationInPx + this.state.timelineWidth }
+        //console.log('new width is ' + newWidth)
+
+        let textLine = this.state.imageHistory.map(
+            (imageObj) => {
+                <View style={{ margin: 1022.5 }} >
+                    <Ionicons name="ios-git-commit" size={20} color="black" containerStyle={flex = 1} />
+                </View>
+            }
+        )
+
+        let text = this.text(newWidth)
+        return (
+            <View>
+                <View style={{
+                    backgroundColor: 'yellow', width: newWidth,
+                    height: 20, justifyContent: 'center', alignSelf: 'center'
+                }}>
+
+                    {text}
+
+                </View>
+            </View>
+        )
     }
 
     getScrollLine = () => {
@@ -103,12 +148,17 @@ export default class TimeLine extends React.Component {
 
     render() {
         let lineXhour = this.getScrollLine()
+        let barWidth= this.getTimelineBarWidth()
         return (
             <View >
                 <ScrollView contentContainerStyle={evokStyles.imageCarousel} horizontal={true} onScroll={this.handleScroll} >
                     {lineXhour}
                 </ScrollView>
+                <ScrollView contentContainerStyle={evokStyles.imageCarousel} horizontal={true} onScroll={this.handleScroll} >
+                    {barWidth}
+                </ScrollView>
                 <Text> {JSON.stringify(this.state.scrollPosition)} </Text>
+                <Text> {JSON.stringify(this.state.currentPosition)} </Text>
             </View>
         )
     }
