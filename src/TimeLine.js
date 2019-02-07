@@ -90,8 +90,7 @@ export default class TimeLine extends React.Component {
                     backgroundColor: 'yellow', width: timelineBarWidth, 
                     height: 20, flexDirection: 'row', 
                 }}>
-                    {instance}
-                    {instance2}
+                    {mapOfEventsPosition}
                 </View>
             </View>
         )
@@ -123,11 +122,12 @@ export default class TimeLine extends React.Component {
             let eventPosition = this.getInstanceInPx(imageObj)
 
             return (
-                <View style={{ height: 20, left: eventPosition, position: 'relative' }} >
+                <View key={imageObj.timestamp} style={{ height: 20, left: eventPosition, position: 'absolute', margin: 2}} >
                     <Ionicons name="ios-git-commit" size={20} color="black" containerStyle={flex = 1} />
                 </View>
             )
         })
+        return mapOfEvents
 
     }
 
