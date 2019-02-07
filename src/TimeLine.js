@@ -34,9 +34,11 @@ export default class TimeLine extends React.Component {
                 durationLengthInHours: Math.round(this.getFullDurationInHours(this.state.imageHistory)),
                 timelineWidth: this.props.width,
                 durationInPx: this.getFullDurationInPixels(this.state.imageHistory),
-                currentPosition: this.milisecIntoPixels(this.state.currentMoment) + (this.state.timelineWidth*0.5)
+                currentPosition: this.milisecIntoPixels(this.state.currentMoment) + (this.state.timelineWidth*0.5),
+                genesisTimestamp: this.state.imageHistory[0].timestamp
             }
         )
+
     }
 
     milisecIntoPixels = (timestamp) => {
@@ -69,6 +71,11 @@ export default class TimeLine extends React.Component {
         return h * 10
     }
 
+    getMsSinceGenesisTimestamp = (x) => {
+        
+        return x.timestamp - genesisTimestamp
+    }
+
     getTimelineBarWidth = () => {
         let newWidth = 0
         if (this.state.durationInPx === 0) { newWidth = 20 }
@@ -99,6 +106,7 @@ export default class TimeLine extends React.Component {
     }
 
     getScrollLine = () => {
+        console.log('genesis timestamp is: '+this.state.genesisTimestamp)
         let newWidth = 0
         if (this.state.durationLengthInHours === 0) { newWidth = 20 }
         else { newWidth = this.hoursToPixels(this.state.durationLengthInHours) + 300 }
