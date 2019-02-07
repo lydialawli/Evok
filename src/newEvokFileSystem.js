@@ -88,7 +88,7 @@ updateJsonFromElementIndexObj = (currentElementIndex, callback) => {
 
 
 newEvokFileSystem.getIndexfromElementID = (elementID) => {
-    //Shorter way: index = this.state.elements.map(e => e.id).indexOf(1546611852196)
+    //Shorter way: index = this.state.elements.map(e => e.id).indexOf(elementID)
     index = -1
     for (var i = 0; i < elementIndex.elements.length; i++) {
         if (elementIndex.elements[i].id === elementID) {

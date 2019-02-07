@@ -54,7 +54,7 @@ export default class TimeLine_ extends React.Component {
         let newWidth = 0
         if (this.state.durationLengthInHours === 0) { newWidth = 20 }
         else { newWidth = this.hoursToPixels(this.state.durationLengthInHours) + 300 }
-        console.log('new width is ' + newWidth)
+        //console.log('new width is ' + newWidth)
         
         return (
             <View style={{
