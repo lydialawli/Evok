@@ -1,9 +1,13 @@
 # Developers notes
 
 ## Tasks
+- [] 
+
+
+
+## Tasks of milestone Rock #1
 - [x] create `getElementIndexByID()`  (to get the position inside)
 - [ ] `onClick` element > for loop > go through obj ID
-
 
 ## Ideas
 
