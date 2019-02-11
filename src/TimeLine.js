@@ -20,6 +20,7 @@ export default class TimeLine extends React.Component {
         currentMoment: this.props.timestamp,
         timelineWidth: 0,
         currentPosition: 0,
+        milisecToPixelFactor: 1/3600
     }
 
     componentWillMount() {
@@ -31,7 +32,6 @@ export default class TimeLine extends React.Component {
     setLengthOfTimeline = () => {
         this.setState(
             {
-                durationLengthInHours: Math.round(this.getFullDurationInHours(this.state.imageHistory)),
                 timelineWidth: this.props.width,
                 durationInPx: this.getFullDurationInPixels(this.state.imageHistory),
                 currentPosition: this.milisecIntoPixels(this.state.currentMoment) + (this.state.timelineWidth * 0.5),
@@ -40,15 +40,10 @@ export default class TimeLine extends React.Component {
         )
     }
 
-    milisecIntoPixels = (timestamp) => {
-        return this.hoursToPixels(this.MilisecIntoHours(timestamp))
+    milisecIntoPixels = (ms) => {
+        return ms * this.state.milisecToPixelFactor
     }
 
-    MilisecIntoHours(milisecs) {
-        h = milisecs / (60 * 60 * 1000)
-        return h
-        //return h.toFixed(5)
-    }
 
     getFullDurationInPixels = (array) => {
         if (array.length === 0)
@@ -59,18 +54,6 @@ export default class TimeLine extends React.Component {
     }
 
 
-    getFullDurationInHours = (array) => {
-        if (array.length === 0)
-            return 0
-
-        let arrayLastItem = array.length - 1
-        return this.MilisecIntoHours(array[arrayLastItem].timestamp - array[0].timestamp)
-    }
-
-    hoursToPixels = (h) => {
-        return h * 10
-    }
-
     getMsSinceGenesisTimestamp = (x) => {
         return x.timestamp - this.state.genesisTimestamp
     }
@@ -80,8 +63,8 @@ export default class TimeLine extends React.Component {
     getTimelineBarWidth = () => {
 
         let timelineBarWidth = this.state.durationInPx + this.state.timelineWidth
-        //console.log('timeline bar width = '+ timelineBarWidth)
-        let mapOfEventsPosition = this.getMapOfEvents(this.state.imageHistory)
+        console.log('timeline bar width = '+ timelineBarWidth)
+        let timelineInstances = this.getTimelineInstances(this.state.imageHistory)
         let instance = this.get1InstancePX(this.state.imageHistory[2])
         let instance2 = this.get1InstancePX(this.state.imageHistory[4])
         return (
@@ -90,7 +73,7 @@ export default class TimeLine extends React.Component {
                     backgroundColor: 'yellow', width: timelineBarWidth, 
                     height: 20, flexDirection: 'row', 
                 }}>
-                    {instance2}
+                    {timelineInstances}
                 </View>
             </View>
         )
@@ -98,8 +81,9 @@ export default class TimeLine extends React.Component {
     }
 
     get1InstancePX = (imageObj) => {
-        let x = this.getMsSinceGenesisTimestamp(imageObj)
-        let instanceInPx = this.milisecIntoPixels(x)
+        let t = this.getMsSinceGenesisTimestamp(imageObj)
+        let instanceInPx = this.milisecIntoPixels(t) 
+       
 
         //console.log('instance px: '+instanceInPx)
         return (
@@ -110,19 +94,20 @@ export default class TimeLine extends React.Component {
     }
 
 
-    getInstanceInPx = (imageObj) => {
-        let x = this.getMsSinceGenesisTimestamp(imageObj)
+    getInstancePosition = (imageObj) => {
+        let t = this.getMsSinceGenesisTimestamp(imageObj)
         //console.log('x is: ' + x)
-        return instanceInPx = this.milisecIntoPixels(x)
+        return instanceInPx = this.milisecIntoPixels(t) + this.state.timelineWidth*0.5
     }
 
-    getMapOfEvents = (array) => {
+    getTimelineInstances= (array) => {
         let mapOfEvents = array.map((imageObj) => {
 
-            let eventPosition = this.getInstanceInPx(imageObj)
+            let instancePosition = this.getInstancePosition(imageObj)
+            console.log("isntancePosition is: "+ instancePosition)
 
             return (
-                <View key={imageObj.timestamp} style={{ height: 20, left: eventPosition, position: 'absolute', margin: 2}} >
+                <View key={imageObj.timestamp} style={{ height: 20, left: instancePosition, position: 'absolute', margin: 2}} >
                     <Ionicons name="ios-git-commit" size={20} color="black" containerStyle={flex = 1} />
                 </View>
             )
