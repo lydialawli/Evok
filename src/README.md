@@ -3,6 +3,7 @@
 ## **Next issues**
 ### In regards to building the **timeline**:
 - [ ] Need to figure out a way to display all the instances position in the timeline. Current problem is that a few timestamps are way too close to each other (taken almost instantly after each other, it's not spread out evenly). Guess I have to create different scales in a same timeline (ie.if distance between array[a] and array[b] < 20px, then create a minimum separation between to instances)
+- [ ] Decide who is the source of truth
 
 
 
