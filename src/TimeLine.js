@@ -90,7 +90,7 @@ export default class TimeLine extends React.Component {
                     backgroundColor: 'yellow', width: timelineBarWidth, 
                     height: 20, flexDirection: 'row', 
                 }}>
-                    {mapOfEventsPosition}
+                    {instance2}
                 </View>
             </View>
         )
@@ -139,6 +139,10 @@ export default class TimeLine extends React.Component {
                 scrollPosition: event.nativeEvent.contentOffset.x
             }
         )
+    }
+
+    onScrollPositionChanged = (x) => {
+        this.props.onTimelineMoved(x)
     }
 
 
