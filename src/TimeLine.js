@@ -20,12 +20,12 @@ export default class TimeLine extends React.Component {
         currentMoment: this.props.timestamp,
         timelineWidth: 0,
         currentPosition: 0,
-        milisecToPixelFactor: 1/3600
+        milisecToPixelFactor: 1 / 3600
     }
 
     componentWillMount() {
         this.setLengthOfTimeline()
-        console.log('data in timeline is: ' + JSON.stringify(this.state.imageHistory, null, 2))
+        console.log('data in timeline is: ', JSON.stringify(this.state.imageHistory, null, 2))
     }
 
 
@@ -63,15 +63,15 @@ export default class TimeLine extends React.Component {
     getTimelineBarWidth = () => {
 
         let timelineBarWidth = this.state.durationInPx + this.state.timelineWidth
-        console.log('timeline bar width = '+ timelineBarWidth)
+        // console.log('timeline bar width = ',timelineBarWidth)
         let timelineInstances = this.getTimelineInstances(this.state.imageHistory)
         let instance = this.get1InstancePX(this.state.imageHistory[2])
         let instance2 = this.get1InstancePX(this.state.imageHistory[4])
         return (
-            <View>
+            <View style={{justifyContent:'center'}}>
                 <View style={{
-                    backgroundColor: 'yellow', width: timelineBarWidth, 
-                    height: 20, flexDirection: 'row', 
+                    backgroundColor: 'yellow', width: timelineBarWidth,
+                    height: 20, flexDirection: 'row',
                 }}>
                     {timelineInstances}
                 </View>
@@ -82,8 +82,8 @@ export default class TimeLine extends React.Component {
 
     get1InstancePX = (imageObj) => {
         let t = this.getMsSinceGenesisTimestamp(imageObj)
-        let instanceInPx = this.milisecIntoPixels(t) 
-       
+        let instanceInPx = this.milisecIntoPixels(t)
+
 
         //console.log('instance px: '+instanceInPx)
         return (
@@ -96,18 +96,17 @@ export default class TimeLine extends React.Component {
 
     getInstancePosition = (imageObj) => {
         let t = this.getMsSinceGenesisTimestamp(imageObj)
-        //console.log('x is: ' + x)
-        return instanceInPx = this.milisecIntoPixels(t) + this.state.timelineWidth*0.5
+        return instanceInPx = this.milisecIntoPixels(t) + this.state.timelineWidth * 0.5
     }
 
-    getTimelineInstances= (array) => {
+    getTimelineInstances = (array) => {
         let mapOfEvents = array.map((imageObj) => {
 
             let instancePosition = this.getInstancePosition(imageObj)
-            console.log("isntancePosition is: "+ instancePosition)
+            //console.log("isntancePosition is: "+ instancePosition)
 
             return (
-                <View key={imageObj.timestamp} style={{ height: 20, left: instancePosition, position: 'absolute', margin: 2}} >
+                <View key={imageObj.timestamp} style={{ height: 20, left: instancePosition, position: 'absolute', margin: 2 }} >
                     <Ionicons name="ios-git-commit" size={20} color="black" containerStyle={flex = 1} />
                 </View>
             )
@@ -121,7 +120,7 @@ export default class TimeLine extends React.Component {
         //console.log(event.nativeEvent.contentOffset.x)
         this.setState(
             {
-                scrollPosition: event.nativeEvent.contentOffset.x
+                scrollPosition: event.nativeEvent.contentOffset.x + (this.state.timelineWidth * 0.5)
             }
         )
     }
@@ -133,11 +132,13 @@ export default class TimeLine extends React.Component {
 
     render() {
         let timelineBarWidth = this.getTimelineBarWidth()
+        let timelineMiddle = this.state.timelineWidth * 0.5
         return (
-            <View >
-                <ScrollView contentContainerStyle={evokStyles.imageCarousel} horizontal={true} onScroll={this.handleScroll} >
+            <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                <ScrollView contentContainerStyle={evokStyles.timelineScroll} horizontal={true} onScroll={this.handleScroll} >
                     {timelineBarWidth}
                 </ScrollView>
+                <Text style={{justifyContent: 'center', alignItems: 'center'}}>|</Text>
                 <Text> {JSON.stringify(this.state.scrollPosition)} </Text>
             </View>
         )

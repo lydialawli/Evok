@@ -282,6 +282,13 @@ const evokStyles = StyleSheet.create({
         justifyContent:'center',
         alignItems: 'center',
     },
+
+    timelineScroll: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+    }
 })
 
 
