@@ -16,6 +16,7 @@ export default class TimeLine_ extends React.Component {
     state = {
         groupedPhotos: [],
         arrayLengthInHours: 0,
+        scrollPosition: 0,
     }
 
     componentWillMount() {
@@ -70,7 +71,12 @@ export default class TimeLine_ extends React.Component {
     }
 
     handleScroll = (event) => {
-        console.log(event.nativeEvent.contentOffset.x)
+         //console.log(event.nativeEvent.contentOffset.x)
+         this.setState(
+            {
+                scrollPosition: event.nativeEvent.contentOffset.x 
+            }
+        )
     }
 
     scrollToPercentage = (scrollPosition) => {
@@ -141,14 +147,12 @@ export default class TimeLine_ extends React.Component {
         return (
 
             <View style={evokStyles.timeLineElementsInside}>
-                <ScrollView contentContainerStyle={evokStyles.imageCarousel} horizontal={true}>
+                <ScrollView contentContainerStyle={evokStyles.imageCarousel} horizontal={true} onScroll={this.handleScroll}>
                     {timelineSexyVersion}
                 </ScrollView>
-                <ScrollView contentContainerStyle={evokStyles.imageCarousel} horizontal={true}>
+                <Text> {JSON.stringify(this.state.scrollPosition)} </Text>
+                <ScrollView contentContainerStyle={evokStyles.imageCarousel} horizontal={true} onScroll={this.handleScroll}>
                     {timelineTrueVersion}
-                </ScrollView>
-                <ScrollView contentContainerStyle={evokStyles.imageCarousel} horizontal={true} onScroll={this.handleScroll} >
-                    {lineXhour}
                 </ScrollView>
             </View>
 
