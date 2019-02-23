@@ -45,7 +45,6 @@ export default class HomeScreen extends React.Component {
         this._getArrayOfDirectories()
         newEvokFileSystem.startStorage(this.onStorageReady)
         newEvokFileSystem.createImagesDirectoryIfDoesnotExist()
-
     }
 
     onStorageReady = () => {
