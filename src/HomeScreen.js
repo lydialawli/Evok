@@ -42,7 +42,7 @@ export default class HomeScreen extends React.Component {
     }
 
     async componentWillMount() {
-        this._getArrayOfDirectories()
+        //this._getArrayOfDirectories()
         newEvokFileSystem.startStorage(this.onStorageReady)
         newEvokFileSystem.createImagesDirectoryIfDoesnotExist()
     }
@@ -85,7 +85,7 @@ export default class HomeScreen extends React.Component {
             'Take picture?',
             'Or show cards index?',
             [
-                { text: 'go to Element', onPress: () => this.navigateToELement('Myproject', elementID) },
+                { text: 'go to Element', onPress: () => this.navigateToELement(elementID) },
                 { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
                 { text: 'YES', onPress: () => this.navigateToCamera('Myproject', elementID) },
             ],
@@ -103,8 +103,8 @@ export default class HomeScreen extends React.Component {
         })
     }
 
-    navigateToELement = (projectName, elementID) => {
-        this.props.navigation.navigate('Element', { projectID: projectName, elementID: elementID })
+    navigateToELement = (elementID) => {
+        this.props.navigation.navigate('Element', { elementID: elementID })
     }
 
     _getListCards = () => {

@@ -5,7 +5,7 @@ import { FileSystem } from 'expo'
 
 var elements = []
 var elementIndex = {}
-var storageURI = 'storage.json'
+var storageFileName = 'storage-test.json'
 var rootDirectory = FileSystem.documentDirectory
 var imagesFolder = 'images'
 
@@ -14,7 +14,20 @@ const newEvokFileSystem = {}
 //create function that updateMemory(elementIndex)FromHDrive(storage.json) .
 //.. this is called at the beginning to recover last state
 newEvokFileSystem.startStorage = (callback) => {
-    if (storageExists()) {
+    this.storageExists(this.onStorageExistsSolved, callback)
+}
+
+storageExists = (callback1, callback) => {
+    let fileUri= rootDirectory + storageFileName
+
+    FileSystem.getInfoAsync(fileUri).then((obj)=>{
+        console.log(obj)
+        callback1(obj.exists, callback)
+    })
+}
+
+onStorageExistsSolved = (exists, callback) => {
+    if (exists) {
         //console.log("this is callback: " + callback)
         this.updateElementIndexFromJson(callback)
     }
@@ -47,7 +60,7 @@ newEvokFileSystem.createImagesDirectoryIfDoesnotExist = () => {
 }
 
 updateElementIndexFromJson = (callback) => {
-    var fileUri = rootDirectory + storageURI
+    var fileUri = rootDirectory + storageFileName
     readWrite.readText(fileUri, (result) => {
         elementIndex = JSON.parse(result)
         //console.log("..elementIndex updated: " + JSON.stringify(elementIndex))
@@ -63,7 +76,7 @@ newEvokFileSystem.getArrayOfElements = () => {
 //only called once when the app is first ever used:
 makeNewElementIndex = (callback) => {
     elementIndex = {
-        elements: [{ name: 'obj1', type: 'test' }]
+        elements: []
     }
     console.log("..new elementIndex created: " + elementIndex)
     updateJsonFromElementIndexObj(elementIndex, callback)
@@ -75,9 +88,9 @@ makeNewElementIndex = (callback) => {
 updateJsonFromElementIndexObj = (currentElementIndex, callback) => {
     var storageSTR = JSON.stringify(currentElementIndex)
     //console.log("..storageSTR: " + storageSTR)
-    var fileUri = rootDirectory + storageURI
+    var fileUri = rootDirectory + storageFileName
 
-    readWrite.saveText(storageSTR, storageURI, () => {
+    readWrite.saveText(storageSTR, storageFileName, () => {
         //console.log("..text saved " )
         readWrite.readText(fileUri, (result) => {
             console.log("..updated json as: " + result)
@@ -120,6 +133,7 @@ deleteAllImagesFromElementObj = (elementID, ind) => {
         imageToDelete = imagesArray[i].uri
         deleteImageFromFileSystem(imageToDelete)
     }
+    console.log('directory "'+elementIndex.elements[ind].name + '" deleted')
 }
 
 deleteImageFromFileSystem = (fileUri) => {
@@ -179,12 +193,6 @@ updateElementIndexFromNewInstant = (elementID, fileName, callback, callback2) =>
 }
 
 onInstanceCreated = () => { console.log("Instance is saved in storage.json") }
-
-
-storageExists = () => {
-    return true
-}
-
 
 
 export default newEvokFileSystem

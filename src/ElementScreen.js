@@ -9,7 +9,7 @@ import { FileSystem } from 'expo'
 import HomeScreen from '../App.js'
 import evokFileSystem from '../src/oldEvokFilesystem.js'
 import newEvokFileSystem from '../src/newEvokFileSystem.js'
-import TimeLine from '../src/timeLine.js'
+import TimeLine from '../src/TimeLine.js'
 
 export default class ElementScreen extends React.Component {
     static navigationOptions = {
@@ -29,18 +29,19 @@ export default class ElementScreen extends React.Component {
         modalVisible: false,
         selectedFullImagePicObject: null,
         rootDirectory: FileSystem.documentDirectory,
-        projectID: this.props.navigation.state.params.projectID,
+        //projectID: this.props.navigation.state.params.projectID,
         elementID: this.props.navigation.state.params.elementID,
         elementObj: {},
         imageHistory: {},
         sliderValue: 0.5,
         imageDisplayed: 0,
         currentImageTimestamp: 0,
+        placeholderImage: 'https://facebook.github.io/react-native/docs/assets/favicon.png'
     }
 
     async componentWillMount() {
         this.onOpenedElementScreen(this.state.elementID)
-        this._getList()
+        //this._getList()
     }
 
     onOpenedElementScreen = (elementID) => {
@@ -48,6 +49,7 @@ export default class ElementScreen extends React.Component {
             elementObj: newEvokFileSystem.getElementObj(elementID),
             imageHistory: newEvokFileSystem.getElementObj(elementID).imageHistory
         })
+        console.log('imageHistory: ' + this.state.imageHistory)
     }
 
 
@@ -113,20 +115,35 @@ export default class ElementScreen extends React.Component {
     }
 
     getImageDisplayed = () => {
-        let imageObj = this.state.imageHistory[this.state.imageDisplayed]
-        let imageUri = imageObj.uri
-        let imagePath = this.state.rootDirectory + 'images/' + imageUri
-        let timestamp = imageObj.timestamp
-        //console.log('currentTimestamp is: ' + timestamp)
-        return (
-            <TouchableOpacity >
-                <ImageBackground
-                    style={{ width: 300, height: 300, margin: 1 }}
-                    source={{ uri: imagePath }}>
-                </ImageBackground>
-            </TouchableOpacity>
-        )
-     
+
+        if (this.state.imageHistory.length > 0) {
+            let imageObj = this.state.imageHistory[this.state.imageDisplayed]
+            let imageUri = imageObj.uri
+            let imagePath = this.state.rootDirectory + 'images/' + imageUri
+            let timestamp = imageObj.timestamp
+            //console.log('currentTimestamp is: ' + timestamp)
+            return (
+                <TouchableOpacity >
+                    <ImageBackground
+                        style={{ width: 300, height: 300, margin: 1 }}
+                        source={{ uri: imagePath }}>
+                    </ImageBackground>
+                </TouchableOpacity>
+            )
+        }
+
+        else {
+            return (
+                <TouchableOpacity >
+                    <ImageBackground
+                        style={{ width: 300, height: 300, margin: 1 }}
+                        source={{ uri: this.state.placeholderImage }}>
+                    </ImageBackground>
+                </TouchableOpacity>
+            )
+        }
+
+
         //this.setCurrentImageTimestamp(timestamp)
     }
 
@@ -139,7 +156,7 @@ export default class ElementScreen extends React.Component {
     render() {
         const { navigate } = this.props.navigation
         console.log("Element mode")
-        console.log('width is: '+ this.state.timelineWidth)
+        console.log('width is: ' + this.state.timelineWidth)
 
         let imageDisplayed = this.getImageDisplayed()
 
@@ -174,7 +191,6 @@ export default class ElementScreen extends React.Component {
                 )
             }
         )
-
         return (
             <View style={{ justifyContent: 'space-evenly', alignItems: 'center' }}>
 
@@ -191,10 +207,30 @@ export default class ElementScreen extends React.Component {
                 </View>
 
                 <View style={evokStyles.sliderCard}>
-                    <TimeLine data={this.state.imageHistory} timestamp= {this.state.currentImageTimestamp} width = {300} />
+                    
                 </View>
             </View>
         )
+        /*return (
+            <View style={{ justifyContent: 'space-evenly', alignItems: 'center' }}>
+
+                <Text  >
+                    Element name is: {JSON.stringify(this.state.elementObj.name)}
+                </Text>
+
+                <View style={evokStyles.projectCard}>
+                    {imageDisplayed}
+                </View>
+
+                <View style={evokStyles.timeLineCard}>
+                    <TimeLine_ />
+                </View>
+
+                <View style={evokStyles.sliderCard}>
+                    <TimeLine data={this.state.imageHistory} timestamp={this.state.currentImageTimestamp} width={300} />
+                </View>
+            </View>
+        )*/
     }
 
 
@@ -293,15 +329,15 @@ export default class ElementScreen extends React.Component {
 }
 
 
-/* 
-old maybe useful code: 
+/*
+old maybe useful code:
 
    <View style={evokStyles.projectCard}>
         <ScrollView contentContainerStyle={evokStyles.imageCarousel} horizontal={true}>
             {images.reverse()}
         </ScrollView>
     </View>
-    
+
     NORMAL REACT NATIVE SLIDER:
     <View style={{ height:50, width: 250, alignItems: 'stretch', justifyContent: 'center' }}>
         <Slider
