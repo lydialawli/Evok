@@ -7,11 +7,24 @@
 
 WHAT DO I NEED TO MAKE THE TIMELINE WORK:
 
-- [x] timeline should show **all instances** in a scrollable line
-- [ ] function that takes the scrollPosition (in pixels) and transforms it into currentTimestamp (miliseconds)
-- [ ] function that can pass currentTimestamp as a prop to the parent component (ElementScreen)
-- [ ] function that 
-
+- [ ] create fake array (mock data) to use it in timeline
+- [ ] divide TImeline component into 2 parts (TLDisplay and TLSroll)
+- [ ] add props when calling Timeline
+- [ ] TLDisplay should receive 
+    - data
+    - currentTimestamp (in ms)
+    - mode (vertical or horizontal)
+    - style
+    - scale (to later change from ms to px and viceversa)
+- [ ] TLScroll should receive 
+    - data
+    - currentTimestamp (in ms)
+    - mode (vertical or horizontal)
+    - style
+    - scale (to later change from ms to px and viceversa)
+    - onTLchange()
+    - onScrollChange(this.props.scrollPosition) //this function will pass an argument to the parent component(ElementScreen)
+- [ ] 
 
 ## Tasks of milestone Rock #1
 - [x] create `getElementIndexByID()`  (to get the position inside)
