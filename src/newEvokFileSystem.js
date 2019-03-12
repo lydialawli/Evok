@@ -158,7 +158,20 @@ newEvokFileSystem.addNewElement = (elementName, timeOfCreation, type, callback) 
         name: elementName,
         id: timeOfCreation,
         type: type,
-        imageHistory: []
+        imageHistory: [
+            { 
+                "uri": "/1552389285.jpg",
+                "timestamp": 1552389285
+            },
+            { 
+                "uri": "/1552389362.jpg",
+                "timestamp": 1552389362
+            },
+            { 
+                "uri": "/1552389285.jpg",
+                "timestamp": 1552389374
+            }
+        ]
     }
     console.log("..new Element created: " + elementName)
     updateElementIndexFromNewElement(newElement, callback)

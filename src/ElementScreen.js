@@ -47,7 +47,7 @@ export default class ElementScreen extends React.Component {
     onOpenedElementScreen = (elementID) => {
         this.setState({
             elementObj: newEvokFileSystem.getElementObj(elementID),
-            imageHistory: newEvokFileSystem.getElementObj(elementID).imageHistory
+            imageHistory: newEvokFileSystem.getElementObj(elementID).imageHistory,
         })
         console.log('imageHistory: ' + this.state.imageHistory)
     }
@@ -126,7 +126,7 @@ export default class ElementScreen extends React.Component {
                 <TouchableOpacity >
                     <ImageBackground
                         style={{ width: 300, height: 300, margin: 1 }}
-                        source={{ uri: imagePath }}>
+                        source={{ uri: this.state.placeholderImage }}>
                     </ImageBackground>
                 </TouchableOpacity>
             )
@@ -191,6 +191,13 @@ export default class ElementScreen extends React.Component {
                 )
             }
         )
+
+        updateCurrentMoment = (curentPosition) =>{
+            this.setState({
+                currentImageTimestamp: curentPosition
+            })
+        }
+
         return (
             <View style={{ justifyContent: 'space-evenly', alignItems: 'center' }}>
 
@@ -202,35 +209,12 @@ export default class ElementScreen extends React.Component {
                     {imageDisplayed}
                 </View>
 
-                <View style={evokStyles.timeLineCard}>
-                    <TimeLine_ />
-                </View>
-
                 <View style={evokStyles.sliderCard}>
-                    
+                    <TimeLine data={this.state.imageHistory} timestamp={this.state.imageHistory[0].timestamp} width={300} scale={1/3600} onTimelineMoved={this.updateCurrentMoment}/>
                 </View>
             </View>
         )
-        /*return (
-            <View style={{ justifyContent: 'space-evenly', alignItems: 'center' }}>
 
-                <Text  >
-                    Element name is: {JSON.stringify(this.state.elementObj.name)}
-                </Text>
-
-                <View style={evokStyles.projectCard}>
-                    {imageDisplayed}
-                </View>
-
-                <View style={evokStyles.timeLineCard}>
-                    <TimeLine_ />
-                </View>
-
-                <View style={evokStyles.sliderCard}>
-                    <TimeLine data={this.state.imageHistory} timestamp={this.state.currentImageTimestamp} width={300} />
-                </View>
-            </View>
-        )*/
     }
 
 

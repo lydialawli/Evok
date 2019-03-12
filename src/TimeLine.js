@@ -20,7 +20,7 @@ export default class TimeLine extends React.Component {
         currentMoment: this.props.timestamp,
         timelineWidth: 0,
         currentPosition: 0,
-        milisecToPixelFactor: 1 / 3600
+        milisecToPixelFactor: this.props.scale
     }
 
     componentWillMount() {
@@ -60,15 +60,15 @@ export default class TimeLine extends React.Component {
 
 
 
-    getTimelineBarWidth = () => {
+    _getTimelineBarWidth = () => {
 
         let timelineBarWidth = this.state.durationInPx + this.state.timelineWidth
         // console.log('timeline bar width = ',timelineBarWidth)
-        let timelineInstances = this.getTimelineInstances(this.state.imageHistory)
-        let instance = this.get1InstancePX(this.state.imageHistory[2])
-        let instance2 = this.get1InstancePX(this.state.imageHistory[4])
+        let timelineInstances = this._getTimelineInstances(this.state.imageHistory)
+        let instance = this._get1InstancePX(this.state.imageHistory[0])
+        let instance2 = this._get1InstancePX(this.state.imageHistory[2])
         return (
-            <View style={{justifyContent:'center'}}>
+            <View style={{ justifyContent: 'center' }}>
                 <View style={{
                     backgroundColor: 'yellow', width: timelineBarWidth,
                     height: 20, flexDirection: 'row',
@@ -80,7 +80,7 @@ export default class TimeLine extends React.Component {
 
     }
 
-    get1InstancePX = (imageObj) => {
+    _get1InstancePX = (imageObj) => {
         let t = this.getMsSinceGenesisTimestamp(imageObj)
         let instanceInPx = this.milisecIntoPixels(t)
 
@@ -94,15 +94,15 @@ export default class TimeLine extends React.Component {
     }
 
 
-    getInstancePosition = (imageObj) => {
+    _getInstancePosition = (imageObj) => {
         let t = this.getMsSinceGenesisTimestamp(imageObj)
         return instanceInPx = this.milisecIntoPixels(t) + this.state.timelineWidth * 0.5
     }
 
-    getTimelineInstances = (array) => {
+    _getTimelineInstances = (array) => {
         let mapOfEvents = array.map((imageObj) => {
 
-            let instancePosition = this.getInstancePosition(imageObj)
+            let instancePosition = this._getInstancePosition(imageObj)
             //console.log("isntancePosition is: "+ instancePosition)
 
             return (
@@ -129,9 +129,73 @@ export default class TimeLine extends React.Component {
         this.props.onTimelineMoved(x)
     }
 
+    getTimelineDisplayInstances = () => {
+        this.state.imageHistory.map(
+            (imageObj, index, array) => {
+                let previousImage = array[index - 1]
+                let epochInMs = 0
+                let epochInPx = 0
+                console.log('previousImage: ',previousImage)
+                if (index == 0) {
+                    epochInMs = imageObj.timestamp 
+                    epochInPx = this.milisecIntoPixels(epochInMs)
+                }
+                else {
+                    epochInMs = imageObj.timestamp - previousImage.timestamp
+                    epochInPx = this.milisecIntoPixels(epochInMs)
+                }
+                return (
+                    <View style={evokStyles.timelineObject} key={imageObj.timestamp}>
+                        <Text style={evokStyles.timelineObjectText} >
+                            {new Date(imageObj.timestamp).toDateString().replace(2019, "")}
+                        </Text>
+                        <View style={evokStyles.timeLineIcon} >
+                            <Ionicons name="ios-remove" size={40} color="black" containerStyle={flex = 1} />
+                            <Ionicons name="ios-remove" size={40} color="black" containerStyle={flex = 1} />
+                            <Ionicons name="ios-git-commit" size={40} color="black" containerStyle={flex = 1} />
+                            <Ionicons name="ios-remove" size={40} color="black" containerStyle={flex = 1} />
+                            <View style={{ borderColor: 'red', borderWidth: 0.6, backgroundColor: 'red', width: epochInPx * 20 }} />
+                        </View>
+                        <Text> {new Date(imageObj.timestamp).getHours()}:{new Date(imageObj.timestamp).getMinutes()}</Text>
+                    </View>
+                )
+            }
+        )
+    }
+
+    getTimelineDisplay = () => {
+        let instances = this.getTimelineDisplayInstances()
+        let newWidth = 0
+        if (this.state.durationInPx === 0) { newWidth = 20 }
+        else { newWidth = this.state.durationInPx + 300 }
+
+        return (
+            <View style={{
+                backgroundColor: 'yellow', width: newWidth,
+                height: 20, justifyContent: 'flex-start', alignSelf: 'flex-end'
+            }}>
+                {instances}
+            </View>
+        )
+    }
 
     render() {
-        let timelineBarWidth = this.getTimelineBarWidth()
+        let TlDisplay = this.getTimelineDisplay()
+
+        return (
+            <View style={evokStyles.timeLineElementsInside}>
+
+                <ScrollView contentContainerStyle={evokStyles.imageCarousel} horizontal={true} onScroll={this.handleScroll}>
+                    {TlDisplay}
+                </ScrollView>
+
+            </View>
+        )
+    }
+
+
+    /*render() {
+        let timelineBarWidth = this._getTimelineBarWidth()
         let timelineMiddle = this.state.timelineWidth * 0.5
         return (
             <View style={{justifyContent: 'center', alignItems: 'center'}}>
@@ -142,6 +206,6 @@ export default class TimeLine extends React.Component {
                 <Text> {JSON.stringify(this.state.scrollPosition)} </Text>
             </View>
         )
-    }
+    }*/
 
 }
