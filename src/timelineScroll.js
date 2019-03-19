@@ -3,6 +3,13 @@ import { Text, View, StyleSheet, ScrollView } from 'react-native'
 
 export default class TimelineScroll extends React.Component {
 
+    state = {
+        currentTimestamp: this.props.currentTimestamp,
+        scrollPosition: 0,
+        array: this.props.data,
+        mode: this.props.mode,
+
+    }
 
     getTimelineScrollBar = () => {
 
@@ -17,12 +24,27 @@ export default class TimelineScroll extends React.Component {
         )
     }
 
+    handleScroll = (event) => {
+        //console.log(event.nativeEvent.contentOffset.x)
+        this.setState(
+            {
+                scrollPosition: event.nativeEvent.contentOffset.x + (this.state.timelineWidth * 0.5)
+            }
+        )
+        this.getCurrentTimestampFromCurrentPosition
+
+    }
+
+    getCurrentTimestampFromCurrentPosition = () => {
+        //make a function that receives scrollPosition and converts it to ms
+    }
+
     render() {
         let Tlscroll = this.getTimelineScrollBar()
 
         return (
 
-            <ScrollView contentContainerStyle={styles.imageCarousel} >
+            <ScrollView contentContainerStyle={styles.imageCarousel} onScroll={this.handleScroll}>
 
                 <Text style={{ alignSelf: 'center' }}  >I am scrollbar</Text>
                 {Tlscroll}

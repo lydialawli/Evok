@@ -3,6 +3,13 @@ import { Text, View, StyleSheet, ScrollView } from 'react-native'
 
 export default class TimelineDisplay extends React.Component {
 
+    state = {
+        currentTimestamp: this.props.currentTimestamp,
+        scrollPosition: 0,
+        array: this.props.data,
+        mode: this.props.mode,
+    }
+    
 
     getTimelineDisplay = () => {
         

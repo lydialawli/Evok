@@ -217,6 +217,7 @@ export default class ElementScreen extends React.Component {
                         width={300}
                         scale={1 / 3600}
                         onTimelineMoved={this.updateCurrentMoment}
+                        mode={'horizontal'}
                     />
                 </View>
             </View>

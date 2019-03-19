@@ -189,9 +189,20 @@ export default class TimeLine extends React.Component {
         return (
             <View style={timelineStyles.timeLineElementsInside}>
 
-                <TimelineDisplay></TimelineDisplay>
+                <TimelineDisplay
+                    data={this.props.data}
+                    currentTimestamp={this.state.currentTimestamp}
+                    mode={this.props.mode}
+                    scale={this.props.scale}
+                ></TimelineDisplay>
 
-                <TimelineScroll></TimelineScroll>
+                <TimelineScroll
+                    data={this.props.data}
+                    currentTimestamp={this.state.currentTimestamp}
+                    mode={this.props.mode}
+                    scale={this.props.scale}
+                    onScrollChange={this.updateParentCurrentMoment}
+                ></TimelineScroll>
 
             </View>
         )
