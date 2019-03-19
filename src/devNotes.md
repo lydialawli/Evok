@@ -16,7 +16,7 @@ WHAT DO I NEED TO MAKE THE TIMELINE WORK:
     - mode (vertical or horizontal)
     - style
     - scale (to later change from ms to px and viceversa)
-- [ ] add TLScroll props, should receive 
+- [x] add TLScroll props, should receive 
     - data
     - currentTimestamp (in ms)
     - mode (vertical or horizontal)
@@ -24,7 +24,9 @@ WHAT DO I NEED TO MAKE THE TIMELINE WORK:
     - scale (to later change from ms to px and viceversa)
     - onTLchange()
     - onScrollChange(this.props.scrollPosition) //this function will pass an argument to the parent component(ElementScreen)
-- [ ] 
+- [ ] timelineDisplay working well
+    - [ ] show all instances
+    - [ ] when currentTimestamp changes (given through parent as prop) the bar changes position (left-right)
 
 ## Tasks of milestone Rock #1
 - [x] create `getElementIndexByID()`  (to get the position inside)

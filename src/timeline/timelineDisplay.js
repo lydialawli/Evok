@@ -1,5 +1,7 @@
 import React from 'react'
 import { Text, View, StyleSheet, ScrollView } from 'react-native'
+import utils from '../timeline/utils.js'
+
 
 export default class TimelineDisplay extends React.Component {
 
@@ -8,11 +10,13 @@ export default class TimelineDisplay extends React.Component {
         scrollPosition: 0,
         array: this.props.data,
         mode: this.props.mode,
+        msToPixelsFactor: this.props.scale,
+        durationInPixels: utils.getFullDurationInPixels(this.props.data, this.props.scale),
     }
     
 
     getTimelineDisplay = () => {
-        
+        console.log('duration in pxls is: ',this.state.durationInPixels)
         let  newWidth = 300
 
         return (
@@ -22,6 +26,7 @@ export default class TimelineDisplay extends React.Component {
             }}>
             </View>
         )
+       
     }
 
     render() {
@@ -29,7 +34,7 @@ export default class TimelineDisplay extends React.Component {
 
         return (
                 <ScrollView contentContainerStyle={styles.timelineDisplayBar} >
-                 <Text style={{ alignSelf: 'center' }}  >I am display</Text>
+                 <Text style={{ alignSelf: 'center' }}  >I am display, {this.state.durationInPixels} </Text>
                     {TlDisplay}
                 </ScrollView>
         )

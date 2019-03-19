@@ -170,6 +170,10 @@ newEvokFileSystem.addNewElement = (elementName, timeOfCreation, type, callback) 
             { 
                 "uri": "/1552389285.jpg",
                 "timestamp": 1552389374
+            },
+            { 
+                "uri": "/1553012364.jpg",
+                "timestamp": 1553012364
             }
         ]
     }

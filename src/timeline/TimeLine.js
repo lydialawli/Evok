@@ -3,8 +3,8 @@ import { Image, StyleSheet, View, TouchableOpacity, TouchableHighlight, ScrollVi
 import { StackNavigator } from 'react-navigation'
 import { Ionicons } from '@expo/vector-icons'
 import evokStyles from '../evokStyles.js'
-import TimelineDisplay from '../timelineDisplay.js'
-import TimelineScroll from './timelineScroll.js'
+import TimelineDisplay from '../timeline/timelineDisplay.js'
+import TimelineScroll from '../timeline/timelineScroll.js'
 
 let lineXhour =
     <View style={{ borderColor: 'transparent', borderBottomColor: 'green', borderWidth: 2, width: 20, height: 2 }}>
