@@ -3,8 +3,8 @@ import { Image, StyleSheet, View, TouchableOpacity, TouchableHighlight, ScrollVi
 import { StackNavigator } from 'react-navigation'
 import { Ionicons } from '@expo/vector-icons'
 import evokStyles from '../evokStyles.js'
-import TimelineDisplay from '../src/timelineDisplay.js'
-import TimelineScroll from '../src/timelineScroll.js'
+import TimelineDisplay from '../timelineDisplay.js'
+import TimelineScroll from './timelineScroll.js'
 
 let lineXhour =
     <View style={{ borderColor: 'transparent', borderBottomColor: 'green', borderWidth: 2, width: 20, height: 2 }}>
@@ -18,7 +18,7 @@ export default class TimeLine extends React.Component {
         scrollPosition: 0,
         currentMoment: this.props.timestamp,
         timelineWidth: 0,
-        currentPosition: 0,
+        currentPosition: 0, 
         milisecToPixelFactor: this.props.scale
     }
 

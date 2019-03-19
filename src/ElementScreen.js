@@ -9,7 +9,7 @@ import { FileSystem } from 'expo'
 import HomeScreen from '../App.js'
 import evokFileSystem from '../src/oldEvokFilesystem.js'
 import newEvokFileSystem from '../src/newEvokFileSystem.js'
-import TimeLine from '../src/TimeLine.js'
+import TimeLine from '../src/timeline/TimeLine.js'
 
 export default class ElementScreen extends React.Component {
     static navigationOptions = {
