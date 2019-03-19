@@ -8,7 +8,7 @@
 WHAT DO I NEED TO MAKE THE TIMELINE WORK:
 
 - [x] create fake array (mock data) to use it in timeline
-- [ ] divide TImeline component into 2 parts (TLDisplay and TLSroll)
+- [ ] divide TImeline component into 2 parts (TLDisplay and TLSroll) in seperate files 
 - [ ] add props when calling Timeline
 - [ ] TLDisplay should receive 
     - data

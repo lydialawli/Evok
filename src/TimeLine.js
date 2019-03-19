@@ -6,6 +6,7 @@ import { Ionicons } from '@expo/vector-icons'
 import evokStyles from '../src/evokStyles.js'
 import HomeScreen from '../App.js'
 import evokFileSystem from '../src/oldEvokFilesystem.js'
+import TimelineDisplay from '../src/timelineDisplay.js'
 
 let lineXhour =
     <View style={{ borderColor: 'transparent', borderBottomColor: 'green', borderWidth: 2, width: 20, height: 2 }}>
@@ -129,15 +130,15 @@ export default class TimeLine extends React.Component {
         this.props.onTimelineMoved(x)
     }
 
-    getTimelineDisplayInstances = () => {
+    _getTimelineDisplayInstances = () => {
         this.state.imageHistory.map(
             (imageObj, index, array) => {
                 let previousImage = array[index - 1]
                 let epochInMs = 0
                 let epochInPx = 0
-                console.log('previousImage: ',previousImage)
+                console.log('previousImage: ', previousImage)
                 if (index == 0) {
-                    epochInMs = imageObj.timestamp 
+                    epochInMs = imageObj.timestamp
                     epochInPx = this.milisecIntoPixels(epochInMs)
                 }
                 else {
@@ -163,8 +164,8 @@ export default class TimeLine extends React.Component {
         )
     }
 
-    getTimelineDisplay = () => {
-        let instances = this.getTimelineDisplayInstances()
+    _getTimelineDisplay = () => {
+        let instances = this._getTimelineDisplayInstances()
         let newWidth = 0
         if (this.state.durationInPx === 0) { newWidth = 20 }
         else { newWidth = this.state.durationInPx + 300 }
@@ -179,16 +180,15 @@ export default class TimeLine extends React.Component {
         )
     }
 
+
     render() {
-        let TlDisplay = this.getTimelineDisplay()
+        let TlDisplay = this._getTimelineDisplay()
 
         return (
             <View style={evokStyles.timeLineElementsInside}>
 
-                <ScrollView contentContainerStyle={evokStyles.imageCarousel} horizontal={true} onScroll={this.handleScroll}>
-                    {TlDisplay}
-                </ScrollView>
-
+                <TimelineDisplay></TimelineDisplay>
+                
             </View>
         )
     }
