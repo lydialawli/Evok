@@ -1,12 +1,10 @@
 import React from 'react'
 import { Image, StyleSheet, View, TouchableOpacity, TouchableHighlight, ScrollView, Text, Alert, ImageBackground, Modal, Slider } from 'react-native'
 import { StackNavigator } from 'react-navigation'
-import EvokCamera from '../src/CameraScreen.js'
 import { Ionicons } from '@expo/vector-icons'
 import evokStyles from '../src/evokStyles.js'
-import HomeScreen from '../App.js'
-import evokFileSystem from '../src/oldEvokFilesystem.js'
 import TimelineDisplay from '../src/timelineDisplay.js'
+import TimelineScroll from '../src/timelineScroll.js'
 
 let lineXhour =
     <View style={{ borderColor: 'transparent', borderBottomColor: 'green', borderWidth: 2, width: 20, height: 2 }}>
@@ -185,10 +183,12 @@ export default class TimeLine extends React.Component {
         let TlDisplay = this._getTimelineDisplay()
 
         return (
-            <View style={evokStyles.timeLineElementsInside}>
+            <View style={timelineStyles.timeLineElementsInside}>
 
                 <TimelineDisplay></TimelineDisplay>
-                
+
+                <TimelineScroll></TimelineScroll>
+
             </View>
         )
     }
@@ -209,3 +209,18 @@ export default class TimeLine extends React.Component {
     }*/
 
 }
+
+
+
+timelineStyles = StyleSheet.create({
+
+    timeLineElementsInside: {
+        width: 300,
+        height: 200,
+        backgroundColor: 'transparent',
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
+    },
+
+
+})

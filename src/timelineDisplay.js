@@ -10,7 +10,7 @@ export default class TimelineDisplay extends React.Component {
 
         return (
             <View style={{
-                backgroundColor: 'yellow', width: newWidth,
+                backgroundColor: 'pink', width: newWidth,
                 height: 20, justifyContent: 'flex-start', alignSelf: 'flex-end'
             }}>
             </View>
@@ -21,7 +21,8 @@ export default class TimelineDisplay extends React.Component {
         let TlDisplay = this.getTimelineDisplay()
 
         return (
-                <ScrollView contentContainerStyle={styles.imageCarousel} >
+                <ScrollView contentContainerStyle={styles.timelineDisplayBar} >
+                 <Text style={{ alignSelf: 'center' }}  >I am display</Text>
                     {TlDisplay}
                 </ScrollView>
         )
@@ -31,12 +32,13 @@ export default class TimelineDisplay extends React.Component {
 styles = StyleSheet.create({
 
 
-    imageCarousel: {
+    timelineDisplayBar: {
+        flexDirection: 'center', 
         display: 'flex',
         flexWrap: 'wrap',
         flexDirection: 'row',
         justifyContent: 'center',
-        paddingBottom: 10,
+      
     },
 
 })
