@@ -8,15 +8,15 @@
 WHAT DO I NEED TO MAKE THE TIMELINE WORK:
 
 - [x] create fake array (mock data) to use it in timeline
-- [ ] divide TImeline component into 2 parts (TLDisplay and TLSroll) in seperate files 
+- [x] divide TImeline component into 2 parts (TLDisplay and TLSroll) in seperate files 
 - [ ] add props when calling Timeline
-- [ ] TLDisplay should receive 
+- [ ] add TLDisplay props, should receive 
     - data
     - currentTimestamp (in ms)
     - mode (vertical or horizontal)
     - style
     - scale (to later change from ms to px and viceversa)
-- [ ] TLScroll should receive 
+- [ ] add TLScroll props, should receive 
     - data
     - currentTimestamp (in ms)
     - mode (vertical or horizontal)

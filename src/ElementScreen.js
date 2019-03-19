@@ -192,7 +192,7 @@ export default class ElementScreen extends React.Component {
             }
         )
 
-        updateCurrentMoment = (curentPosition) =>{
+        updateCurrentMoment = (curentPosition) => {
             this.setState({
                 currentImageTimestamp: curentPosition
             })
@@ -210,7 +210,14 @@ export default class ElementScreen extends React.Component {
                 </View>
 
                 <View style={evokStyles.sliderCard}>
-                    <TimeLine data={this.state.imageHistory} timestamp={this.state.imageHistory[0].timestamp} width={300} scale={1/3600} onTimelineMoved={this.updateCurrentMoment}/>
+                    <TimeLine
+                        data={this.state.imageHistory}
+                        timestamp={this.state.imageHistory[0].timestamp}
+                        currentImageTimestamp={this.state.currentImageTimestamp}
+                        width={300}
+                        scale={1 / 3600}
+                        onTimelineMoved={this.updateCurrentMoment}
+                    />
                 </View>
             </View>
         )

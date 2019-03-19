@@ -178,6 +178,10 @@ export default class TimeLine extends React.Component {
         )
     }
 
+    updateParentCurrentMoment = (currentPosition) => {
+        this.props.onTimelineMoved(currentPosition)
+    }
+
 
     render() {
         let TlDisplay = this._getTimelineDisplay()
