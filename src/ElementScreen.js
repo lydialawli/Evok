@@ -218,6 +218,7 @@ export default class ElementScreen extends React.Component {
                         scale={1 / 3600}
                         onTimelineMoved={this.updateCurrentMoment}
                         mode={'horizontal'}
+                        cardWidth={300}
                     />
                 </View>
             </View>

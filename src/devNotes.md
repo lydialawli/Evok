@@ -10,7 +10,7 @@ WHAT DO I NEED TO MAKE THE TIMELINE WORK:
 - [x] create fake array (mock data) to use it in timeline
 - [x] divide TImeline component into 2 parts (TLDisplay and TLSroll) in seperate files 
 - [x] add props when calling Timeline
-- [ ] add TLDisplay props, should receive 
+- [x] add TLDisplay props, should receive 
     - data
     - currentTimestamp (in ms)
     - mode (vertical or horizontal)
@@ -28,9 +28,11 @@ WHAT DO I NEED TO MAKE THE TIMELINE WORK:
     - [ ] show all instances
     - [ ] when currentTimestamp changes (given through parent as prop) the bar changes position (left-right)
 
-## Tasks of milestone Rock #1
-- [x] create `getElementIndexByID()`  (to get the position inside)
-- [ ] `onClick` element > for loop > go through obj ID
+
+
+
+
+
 
 ## Ideas
 

@@ -194,6 +194,7 @@ export default class TimeLine extends React.Component {
                     currentTimestamp={this.state.currentTimestamp}
                     mode={this.props.mode}
                     scale={this.props.scale}
+                    cardWidth={this.props.cardWidth}
                 ></TimelineDisplay>
 
                 <TimelineScroll
