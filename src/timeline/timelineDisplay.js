@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, StyleSheet, ScrollView } from 'react-native'
+import { Text, View, StyleSheet, ScrollView, ViewPagerAndroid } from 'react-native'
 import utils from '../timeline/utils.js'
 import { Ionicons } from '@expo/vector-icons'
 
@@ -13,7 +13,8 @@ export default class TimelineDisplay extends React.Component {
         mode: this.props.mode,
         msToPixelsFactor: this.props.scale,
         durationInPx: utils.getFullDurationInPixels(this.props.data, this.props.scale),
-        timelineCardWidth: this.props.cardWidth
+        timelineCardWidth: this.props.cardWidth,
+        PositionInPx: utils.milisecIntoPixels(this.props.currentTimestamp, this.props.scale),
     }
 
 
@@ -95,17 +96,29 @@ export default class TimelineDisplay extends React.Component {
         return 500
     }
 
+
     render() {
         let instances = this.getInstancesDisplayed(this.state.array)
 
         return (
-            <ScrollView contentContainerStyle={DisplayStyles.timelineDisplayBar}
-             horizontal={true} 
-            scrollTo={this.getCurrentPosition}
-            onScroll={this.handleScroll}
-            >
-                {instances}
-            </ScrollView>
+            /* <ScrollView contentContainerStyle={DisplayStyles.timelineDisplayBar}
+              horizontal={true} 
+             scrollTo={this.getCurrentPosition}
+             onScroll={this.handleScroll}
+ 
+             >
+                 {instances}
+             </ScrollView>*/
+            <ViewPagerAndroid
+                style={DisplayStyles.viewPager}
+                initialPage={0}>
+                <View style={DisplayStyles.pageStyle} key="1">
+                    <Text>First page</Text>
+                </View>
+                <View style={DisplayStyles.pageStyle} key="2">
+                    <Text>Second page</Text>
+                </View>
+            </ViewPagerAndroid>
         )
     }
 }
@@ -117,6 +130,8 @@ DisplayStyles = StyleSheet.create({
         //flexWrap: 'wrap',
         flexDirection: 'row',
         justifyContent: 'center',
+
+
     },
     timelineObject: {
         display: 'flex',
@@ -134,6 +149,13 @@ DisplayStyles = StyleSheet.create({
     timeLineIcon: {
         flexDirection: 'row',
     },
+    viewPager: {
+        flex: 1
+      },
+      pageStyle: {
+        alignItems: 'center',
+        padding: 20,
+      }
 
 })
 
