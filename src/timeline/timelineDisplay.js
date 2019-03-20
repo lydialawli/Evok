@@ -1,6 +1,7 @@
 import React from 'react'
 import { Text, View, StyleSheet, ScrollView } from 'react-native'
 import utils from '../timeline/utils.js'
+import { Ionicons } from '@expo/vector-icons'
 
 
 export default class TimelineDisplay extends React.Component {
@@ -14,45 +15,49 @@ export default class TimelineDisplay extends React.Component {
         durationInPx: utils.getFullDurationInPixels(this.props.data, this.props.scale),
         timelineCardWidth: this.props.cardWidth
     }
-    
 
 
-    _getTimelineDisplayInstances = () => {
-        this.state.imageHistory.map(
+
+    getInstancesDisplayed = (array) => {
+        //console.log('array is>',this.state.array)
+        let NewArray = array.map(
             (imageObj, index, array) => {
                 let previousImage = array[index - 1]
-                let epochInMs = 0
-                let epochInPx = 0
-                console.log('previousImage: ', previousImage)
-                if (index == 0) {
-                    epochInMs = imageObj.timestamp
-                    epochInPx = this.milisecIntoPixels(epochInMs)
+                let msSInceLastPic = 0
+                let pxSinceLastPic = 0
+                //console.log('previousImage: ', previousImage)
+                if (index > 0) {
+                    msSInceLastPic = imageObj.timestamp - previousImage.timestamp
+                    pxSinceLastPic = utils.milisecIntoPixels(msSInceLastPic, this.state.msToPixelsFactor)
                 }
-                else {
-                    epochInMs = imageObj.timestamp - previousImage.timestamp
-                    epochInPx = this.milisecIntoPixels(epochInMs)
-                }
+
                 return (
-                    <View style={evokStyles.timelineObject} key={imageObj.timestamp}>
-                        <Text style={evokStyles.timelineObjectText} >
-                            {new Date(imageObj.timestamp).toDateString().replace(2019, "")}
+                    <ScrollView contentContainerStyle={DisplayStyles.timelineObject} key={imageObj.timestamp}>
+                        <Text style={DisplayStyles.timelineObjectText} >
+                            {new Date(imageObj.timestamp).toDateString().replace(1970, "")}
                         </Text>
-                        <View style={evokStyles.timeLineIcon} >
+                        <View style={{ flexDirection: 'row' }} key={imageObj.timestamp} >
                             <Ionicons name="ios-remove" size={40} color="black" containerStyle={flex = 1} />
                             <Ionicons name="ios-remove" size={40} color="black" containerStyle={flex = 1} />
                             <Ionicons name="ios-git-commit" size={40} color="black" containerStyle={flex = 1} />
                             <Ionicons name="ios-remove" size={40} color="black" containerStyle={flex = 1} />
-                            <View style={{ borderColor: 'red', borderWidth: 0.6, backgroundColor: 'red', width: epochInPx * 20 }} />
+                            <View style={{ alignSelf: 'center', height: 2, borderColor: 'red', backgroundColor: 'red', width: pxSinceLastPic + 32, }} />
                         </View>
-                        <Text> {new Date(imageObj.timestamp).getHours()}:{new Date(imageObj.timestamp).getMinutes()}</Text>
-                    </View>
+                        <Text style={{ alignSelf: 'center' }}>
+                            {new Date(imageObj.timestamp).getHours()}:{new Date(imageObj.timestamp).getMinutes()}
+                        </Text>
+                    </ScrollView>
+
                 )
             }
         )
+        return NewArray
     }
 
+
+
     _getTimelineDisplay = () => {
-        let instances = this._getTimelineDisplayInstances()
+        let instances = this.getInstancesDisplayed()
         let newWidth = 0
         if (this.state.durationInPx === 0) { newWidth = 20 }
         else { newWidth = this.state.durationInPx + 300 }
@@ -67,46 +72,42 @@ export default class TimelineDisplay extends React.Component {
         )
     }
 
-    getTimelineDisplay = () => {
-        //let instances = this._getTimelineDisplayInstances()
-        console.log('duration in pxls is: ',this.state.durationInPixels)
-        let  newWidth = 0
-
-        if (this.state.durationInPx === 0) { newWidth = 50 }
-        else { newWidth = this.state.durationInPx + this.state.timelineCardWidth }
-
-        return (
-            <View style={{
-                backgroundColor: 'pink', width: newWidth,
-                height: 20, justifyContent: 'flex-start', alignSelf: 'flex-end'
-            }}>
-            </View>
-        )
-    }
 
 
     render() {
-        let TlDisplay = this.getTimelineDisplay()
+        let instances = this.getInstancesDisplayed(this.state.array)
 
         return (
-                <ScrollView contentContainerStyle={styles.timelineDisplayBar} >
-                 <Text style={{ alignSelf: 'center' }}  >I am display </Text>
-                    {TlDisplay}
-                </ScrollView>
+            <ScrollView contentContainerStyle={DisplayStyles.timelineDisplayBar} horizontal={true} >
+                {instances}
+            </ScrollView>
         )
     }
 }
 
-styles = StyleSheet.create({
-
+DisplayStyles = StyleSheet.create({
 
     timelineDisplayBar: {
-        flexDirection: 'center', 
         display: 'flex',
-        flexWrap: 'wrap',
+        //flexWrap: 'wrap',
         flexDirection: 'row',
         justifyContent: 'center',
-      
+    },
+    timelineObject: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+
+    },
+
+    timelineObjectText: {
+        color: 'darkblue',
+        fontSize: 15,
+        textAlign: 'left',
+        fontWeight: 'bold',
+    },
+    timeLineIcon: {
+        flexDirection: 'row',
     },
 
 })

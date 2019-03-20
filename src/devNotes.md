@@ -25,7 +25,8 @@ WHAT DO I NEED TO MAKE THE TIMELINE WORK:
     - onTLchange()
     - onScrollChange(this.props.scrollPosition) //this function will pass an argument to the parent component(ElementScreen)
 - [ ] timelineDisplay working well
-    - [ ] show all instances
+    - [x] show all instances
+    - [ ] create proper array example
     - [ ] when currentTimestamp changes (given through parent as prop) the bar changes position (left-right)
 
 
