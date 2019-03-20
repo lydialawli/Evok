@@ -23,13 +23,29 @@ export default class TimelineDisplay extends React.Component {
         let NewArray = array.map(
             (imageObj, index, array) => {
                 let previousImage = array[index - 1]
-                let msSInceLastPic = 0
-                let pxSinceLastPic = 0
                 //console.log('previousImage: ', previousImage)
-                if (index > 0) {
-                    msSInceLastPic = imageObj.timestamp - previousImage.timestamp
-                    pxSinceLastPic = utils.milisecIntoPixels(msSInceLastPic, this.state.msToPixelsFactor)
+                let epochInMs = 0
+                let epochInPx = 0
+
+                if (index == 0) {
+                    epochInMs = imageObj.timestamp
+                    epochInPx = utils.milisecIntoPixels(epochInMs, this.state.msToPixelsFactor) / 1000
                 }
+                else if (index == (array.length-1)){
+                    epochInPx = 0
+                }
+                else {
+                    epochInMs = imageObj.timestamp - previousImage.timestamp
+                    epochInPx = utils.milisecIntoPixels(epochInMs, this.state.msToPixelsFactor)
+                    console.log('epochPX:', epochInPx)
+                }
+                
+                if (epochInPx < 100)
+                    epochInPx = epochInPx / 2
+                if (epochInPx > 100) {
+                    epochInPx = epochInPx / 5
+                }
+                console.log('nw epochPX:', epochInPx)
 
                 return (
                     <ScrollView contentContainerStyle={DisplayStyles.timelineObject} key={imageObj.timestamp}>
@@ -41,7 +57,7 @@ export default class TimelineDisplay extends React.Component {
                             <Ionicons name="ios-remove" size={40} color="black" containerStyle={flex = 1} />
                             <Ionicons name="ios-git-commit" size={40} color="black" containerStyle={flex = 1} />
                             <Ionicons name="ios-remove" size={40} color="black" containerStyle={flex = 1} />
-                            <View style={{ alignSelf: 'center', height: 2, borderColor: 'red', backgroundColor: 'red', width: pxSinceLastPic + 32, }} />
+                            <View style={{ alignSelf: 'center', height: 2, borderColor: 'red', backgroundColor: 'red', width: epochInPx + 32, }} />
                         </View>
                         <Text style={{ alignSelf: 'center' }}>
                             {new Date(imageObj.timestamp).getHours()}:{new Date(imageObj.timestamp).getMinutes()}

@@ -160,24 +160,28 @@ newEvokFileSystem.addNewElement = (elementName, timeOfCreation, type, callback) 
         type: type,
         imageHistory: [
             { 
-                "uri": "/1552389285.jpg",
-                "timestamp": 1552389285
+                "uri": "/1546300800.jpg",
+                "timestamp": 1546300800
             },
             { 
-                "uri": "/1552389362.jpg",
-                "timestamp": 1552389362
+                "uri": "/1548979200.jpg",
+                "timestamp": 1548979200
             },
             { 
-                "uri": "/1552389285.jpg",
-                "timestamp": 1552389374
+                "uri": "/1551398400.jpg",
+                "timestamp": 1551398400
             },
             { 
-                "uri": "/1553012364.jpg",
-                "timestamp": 1553012364
+                "uri": "/1551744000.jpg",
+                "timestamp": 1551744000
             },
             { 
-                "uri": "/1553080556.jpg",
-                "timestamp": 1553080556
+                "uri": "/1554076800.jpg",
+                "timestamp": 1554076800
+            },
+            { 
+                "uri": "/1556668800.jpg",
+                "timestamp": 1556668800
             }
         ]
     }
