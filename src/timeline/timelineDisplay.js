@@ -31,7 +31,7 @@ export default class TimelineDisplay extends React.Component {
                     epochInMs = imageObj.timestamp
                     epochInPx = utils.milisecIntoPixels(epochInMs, this.state.msToPixelsFactor) / 1000
                 }
-                else if (index == (array.length-1)){
+                else if (index == (array.length - 1)) {
                     epochInPx = 0
                 }
                 else {
@@ -39,7 +39,7 @@ export default class TimelineDisplay extends React.Component {
                     epochInPx = utils.milisecIntoPixels(epochInMs, this.state.msToPixelsFactor)
                     console.log('epochPX:', epochInPx)
                 }
-                
+
                 if (epochInPx < 100)
                     epochInPx = epochInPx / 2
                 if (epochInPx > 100) {
@@ -87,14 +87,23 @@ export default class TimelineDisplay extends React.Component {
             </View>
         )
     }
+    handleScroll = (event) => {
+        console.log(event.nativeEvent.contentOffset.x)
+    }
 
-
+    getCurrentPosition = () => {
+        return 500
+    }
 
     render() {
         let instances = this.getInstancesDisplayed(this.state.array)
 
         return (
-            <ScrollView contentContainerStyle={DisplayStyles.timelineDisplayBar} horizontal={true} >
+            <ScrollView contentContainerStyle={DisplayStyles.timelineDisplayBar}
+             horizontal={true} 
+            scrollTo={this.getCurrentPosition}
+            onScroll={this.handleScroll}
+            >
                 {instances}
             </ScrollView>
         )
