@@ -2,7 +2,7 @@ import React from 'react'
 import { Text, View, StyleSheet, ScrollView, ViewPagerAndroid } from 'react-native'
 import utils from '../timeline/utils.js'
 import { Ionicons } from '@expo/vector-icons'
-import DisplayFlatlist from '../timeline/flatlist.js'
+import DisplayFlatlist from '../timeline/displayFlatlist.js'
 
 export default class TimelineDisplay extends React.Component {
 
@@ -112,6 +112,7 @@ export default class TimelineDisplay extends React.Component {
             <View>
                 <DisplayFlatlist
                     data={this.props.data}
+                    style={DisplayStyles.timelineDisplayBar}
                 >
                 </DisplayFlatlist>
             </View>

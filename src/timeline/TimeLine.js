@@ -5,6 +5,7 @@ import { Ionicons } from '@expo/vector-icons'
 import evokStyles from '../evokStyles.js'
 import TimelineDisplay from '../timeline/timelineDisplay.js'
 import TimelineScroll from '../timeline/timelineScroll.js'
+import DisplayFlatlist from '../timeline/displayFlatlist.js'
 
 let lineXhour =
     <View style={{ borderColor: 'transparent', borderBottomColor: 'green', borderWidth: 2, width: 20, height: 2 }}>
@@ -18,7 +19,7 @@ export default class TimeLine extends React.Component {
         scrollPosition: 0,
         currentMoment: this.props.timestamp,
         timelineWidth: 0,
-        currentPosition: 0, 
+        currentPosition: 0,
         milisecToPixelFactor: this.props.scale
     }
 
@@ -189,13 +190,13 @@ export default class TimeLine extends React.Component {
         return (
             <View style={timelineStyles.timeLineElementsInside}>
 
-                <TimelineDisplay
+
+                <DisplayFlatlist
                     data={this.props.data}
-                    currentTimestamp={this.state.currentTimestamp}
-                    mode={this.props.mode}
+                    style={timelineStyles.timelineDisplayBar}
                     scale={this.props.scale}
-                    cardWidth={this.props.cardWidth}
-                ></TimelineDisplay>
+                >
+                </DisplayFlatlist>
 
                 <TimelineScroll
                     data={this.props.data}
@@ -208,6 +209,14 @@ export default class TimeLine extends React.Component {
             </View>
         )
     }
+
+  /*  <TimelineDisplay
+    data={this.props.data}
+    currentTimestamp={this.state.currentTimestamp}
+    mode={this.props.mode}
+    scale={this.props.scale}
+    cardWidth={this.props.cardWidth}
+></TimelineDisplay>*/
 
 
     /*render() {
@@ -237,6 +246,15 @@ timelineStyles = StyleSheet.create({
         justifyContent: 'space-evenly',
         alignItems: 'center',
     },
+    timelineDisplayBar: {
+        display: 'flex',
+        //flexWrap: 'wrap',
+        flexDirection: 'row',
+        justifyContent: 'center',
+
+
+    },
+    
 
 
 })
