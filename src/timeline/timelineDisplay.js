@@ -2,7 +2,7 @@ import React from 'react'
 import { Text, View, StyleSheet, ScrollView, ViewPagerAndroid } from 'react-native'
 import utils from '../timeline/utils.js'
 import { Ionicons } from '@expo/vector-icons'
-
+import DisplayFlatlist from '../timeline/flatlist.js'
 
 export default class TimelineDisplay extends React.Component {
 
@@ -109,16 +109,14 @@ export default class TimelineDisplay extends React.Component {
              >
                  {instances}
              </ScrollView>*/
-            <ViewPagerAndroid
-                style={DisplayStyles.viewPager}
-                initialPage={0}>
-                <View style={DisplayStyles.pageStyle} key="1">
-                    <Text>First page</Text>
-                </View>
-                <View style={DisplayStyles.pageStyle} key="2">
-                    <Text>Second page</Text>
-                </View>
-            </ViewPagerAndroid>
+            <View>
+                <DisplayFlatlist
+                    data={this.props.data}
+                >
+                </DisplayFlatlist>
+            </View>
+
+
         )
     }
 }
@@ -151,11 +149,11 @@ DisplayStyles = StyleSheet.create({
     },
     viewPager: {
         flex: 1
-      },
-      pageStyle: {
+    },
+    pageStyle: {
         alignItems: 'center',
         padding: 20,
-      }
+    }
 
 })
 

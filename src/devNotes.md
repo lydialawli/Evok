@@ -24,6 +24,7 @@ WHAT DO I NEED TO MAKE THE TIMELINE WORK:
     - scale (to later change from ms to px and viceversa)
     - onTLchange()
     - onScrollChange(this.props.scrollPosition) //this function will pass an argument to the parent component(ElementScreen)
+- [ ] experiment with Flatlist insteasd of ScrollView
 - [ ] timelineDisplay working well
     - [x] show all instances
     - [ ] create proper array example
