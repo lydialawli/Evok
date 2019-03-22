@@ -6,9 +6,10 @@ export default class InstancesListItem extends Component {
 
 
     render() {
+        console.log('timestamp:',this.props.obj)
 
         return (
-            /* <View style={styles.timelineObject}>
+             <View style={styles.timelineObject}>
                  <Text style={styles.timelineObjectText} >
                      {new Date(this.props.timestamp).toDateString().replace(1970, "")}
                  </Text>
@@ -20,13 +21,7 @@ export default class InstancesListItem extends Component {
                  <Text style={{ alignSelf: 'center' }}>
                      {new Date(this.props.timestamp).getHours()}:{new Date(this.props.timestamp).getMinutes()}
                  </Text>
-             </View>*/
-            <View >
-                <Text >
-                    {this.props.timestamp}
-                </Text>
-                <Ionicons name="ios-git-commit" size={40} color="black" containerStyle={flex = 1} />
-            </View>
+             </View>
         )
     }
 
@@ -37,7 +32,7 @@ styles = StyleSheet.create({
 
     timelineDisplayBar: {
         display: 'flex',
-        //flexWrap: 'wrap',
+        flexWrap: 'wrap',
         flexDirection: 'row',
         justifyContent: 'center',
 

@@ -1,16 +1,20 @@
 import React from "react"
 import { View, Text, FlatList, VirtualizedList, StyleSheet, ScrollView } from "react-native"
 import InstancesListItem from '../timeline/listItem.js'
+
 //import { List, ListItem } from "react-native-elements"
 
 export default class DisplayFlatlist extends React.Component {
-getItem = (i,d,index) => {
-    return d.map(function(e) { return e.timestamp; }).indexOf(i.timestamp)
-}
+
 
     render() {
-      
 
+        let data = this.props.data.map((item, index)=>{
+            const it = Object.assign(item,{key:index.toString()})
+            return it
+        })
+
+      
         return (
             /* <View style={this.props.style}>
                  <FlatList
@@ -24,25 +28,27 @@ getItem = (i,d,index) => {
                  />
  
              </View>*/
-         
-                <VirtualizedList
-                    data={this.props.data}
-                    renderItem={({ item }) => (
-                        <InstancesListItem
-                            timestamp={item.timestamp}
-                            item={item}
-                        />
-                    )}
-                    keyExtractor={(item, index )=> item.timestamp}
-                    getItemCount={data => data.length}
-                    disableVirtualization= {false}
-                    getItem={this.getItem(item, data, index)}
-                    
-                    horizontal={true}
 
-                >
-                </VirtualizedList>
-          
+            <VirtualizedList
+                data={data}
+                renderItem={( {item} ) => {
+                    //console.log('item',item)
+                    return(<InstancesListItem
+                        timestamp={item.timestamp}
+                        key={item.timestamp}
+                        obj={item}
+                    />
+                )}}
+                //keyExtractor={item => item.timestamp.toString()}
+                getItemCount={data => data.length}
+                disableVirtualization={false}
+                getItem={(data, index) => data[index]}
+
+                horizontal={true}
+
+            >
+            </VirtualizedList>
+
 
         )
     }
@@ -57,7 +63,7 @@ styles = StyleSheet.create({
 
 
     },
-    
+
 
 
 })

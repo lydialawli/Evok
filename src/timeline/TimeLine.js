@@ -185,7 +185,7 @@ export default class TimeLine extends React.Component {
 
 
     render() {
-        let TlDisplay = this._getTimelineDisplay()
+        //let TlDisplay = this._getTimelineDisplay()
 
         return (
             <View style={timelineStyles.timeLineElementsInside}>
