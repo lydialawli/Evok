@@ -183,7 +183,7 @@ export default class TimeLine extends React.Component {
         //this.props.onTimelineMoved(currentPosition)
         console.log('scrollPos-->', currentPosition)
 
-        var ind = Math.floor(currentPosition/100)
+        var ind = Math.floor(currentPosition / 100)
 
         /*var x = currentPosition
         var y = 0
@@ -222,7 +222,6 @@ export default class TimeLine extends React.Component {
         else if (x >= 201 && x <= 300)
             return 2
     }
-
 
     render() {
         //let TlDisplay = this._getTimelineDisplay()
