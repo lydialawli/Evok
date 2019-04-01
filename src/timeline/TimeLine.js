@@ -183,7 +183,9 @@ export default class TimeLine extends React.Component {
         //this.props.onTimelineMoved(currentPosition)
         console.log('scrollPos-->', currentPosition)
 
-        var x = currentPosition
+        var ind = Math.floor(currentPosition/100)
+
+        /*var x = currentPosition
         var y = 0
         switch (true) {
             case (x >= 0 && x <= 100):
@@ -206,10 +208,10 @@ export default class TimeLine extends React.Component {
                 break
             default:
                 break
+        }*/
 
-        }
-        console.log('y:', y)
-        this.props.onPositionChanged(y)
+        console.log('ind:', ind)
+        this.props.onPositionChanged(ind)
 
     }
     getIndex = (x) => {
