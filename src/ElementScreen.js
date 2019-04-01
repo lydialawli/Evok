@@ -33,6 +33,7 @@ export default class ElementScreen extends React.Component {
         elementID: this.props.navigation.state.params.elementID,
         elementObj: {},
         imageHistory: {},
+        selectedItemTimestamp: 0,
         sliderValue: 0.5,
         imageDisplayed: 0,
         currentImageTimestamp: 0,
@@ -153,12 +154,35 @@ export default class ElementScreen extends React.Component {
         console.log('currentTimestamp is: ' + currentTimestamp)
     }
 
+    getItemIndex = (index) => {
+        this.setState({
+            selectedItemTimestamp: this.state.imageHistory[index].timestamp
+        })
+    }
+
+
+    getItemText = () => {
+        if (this.state.selectedItemTimestamp == 0) {
+            return (
+                <Text>no item yet</Text>
+            )
+        }
+        else{
+            return (
+                <Text>{this.state.selectedItemTimestamp}</Text>
+            )
+        }
+    }
+
+
+
     render() {
         const { navigate } = this.props.navigation
-        console.log("Element mode")
-        console.log('width is: ' + this.state.timelineWidth)
+        //console.log("Element mode")
+        // console.log('width is: ' + this.state.timelineWidth)
 
         let imageDisplayed = this.getImageDisplayed()
+        let itemText = this.getItemText()
 
         let images = this.state.imageHistory.map(
             (imageObj) => {
@@ -198,6 +222,14 @@ export default class ElementScreen extends React.Component {
             })
         }
 
+        isEmpty = (obj) => {
+            for (var key in obj) {
+                if (obj.hasOwnProperty(key))
+                    return false
+            }
+            return true
+        }
+
         return (
             <View style={{ justifyContent: 'space-evenly', alignItems: 'center' }}>
 
@@ -206,10 +238,12 @@ export default class ElementScreen extends React.Component {
                 </Text>
 
                 <View style={evokStyles.projectCard}>
-                    {imageDisplayed}
+                    {itemText}
+
                 </View>
 
                 <View style={evokStyles.sliderCard}>
+                    <Text style={{ alignSelf: 'center', fontSize: 30 }}>|</Text>
                     <TimeLine
                         data={this.state.imageHistory}
                         timestamp={this.state.imageHistory[0].timestamp}
@@ -219,7 +253,9 @@ export default class ElementScreen extends React.Component {
                         onTimelineMoved={this.updateCurrentMoment}
                         mode={'horizontal'}
                         cardWidth={300}
+                        onPositionChanged={this.getItemIndex}
                     />
+
                 </View>
             </View>
         )

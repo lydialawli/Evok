@@ -180,9 +180,12 @@ export default class TimeLine extends React.Component {
     }
 
     updateParentCurrentMoment = (currentPosition) => {
-        this.props.onTimelineMoved(currentPosition)
+        //this.props.onTimelineMoved(currentPosition)
+        console.log('scrollPos->', currentPosition)
+        this.props.onPositionChanged(5)
     }
 
+ 
 
     render() {
         //let TlDisplay = this._getTimelineDisplay()
@@ -196,6 +199,8 @@ export default class TimeLine extends React.Component {
                     style={timelineStyles.timelineDisplayBar}
                     scale={this.props.scale}
                     index={3}
+                    onScrolled={this.updateParentCurrentMoment}
+                    cardWidth={this.props.width}
                 >
                 </DisplayFlatlist>
 
@@ -211,13 +216,13 @@ export default class TimeLine extends React.Component {
         )
     }
 
-  /*  <TimelineDisplay
-    data={this.props.data}
-    currentTimestamp={this.state.currentTimestamp}
-    mode={this.props.mode}
-    scale={this.props.scale}
-    cardWidth={this.props.cardWidth}
-></TimelineDisplay>*/
+    /*  <TimelineDisplay
+      data={this.props.data}
+      currentTimestamp={this.state.currentTimestamp}
+      mode={this.props.mode}
+      scale={this.props.scale}
+      cardWidth={this.props.cardWidth}
+  ></TimelineDisplay>*/
 
 
     /*render() {
@@ -255,7 +260,7 @@ timelineStyles = StyleSheet.create({
 
 
     },
-    
+
 
 
 })

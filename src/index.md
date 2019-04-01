@@ -12,6 +12,7 @@
       - ElementScreen
             - Timeline
                     - timelineDisplay or displayFlatlist
+                            - listItem 
                     - timelineScroll
                     - utils 
     Tools : 
@@ -19,4 +20,6 @@
      - readWrite
      - evokStyles 
 ]
+
+
 

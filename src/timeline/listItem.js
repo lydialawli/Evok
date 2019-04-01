@@ -6,7 +6,7 @@ export default class InstancesListItem extends Component {
 
 
     render() {
-        console.log('timestamp:',this.props.obj)
+        //console.log('timestamp:',this.props.obj)
 
         return (
              <View style={styles.timelineObject}>

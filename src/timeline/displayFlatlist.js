@@ -7,10 +7,6 @@ import { Ionicons } from '@expo/vector-icons'
 
 export default class DisplayFlatlist extends React.Component {
 
-    scrollToItem = () => {
-
-    }
-
 
     renderSeparator = () => {
         return (
@@ -30,14 +26,33 @@ export default class DisplayFlatlist extends React.Component {
     }
 
     handleScroll = (event) => {
+        this.props.onScrolled(event.nativeEvent.contentOffset.x)// + (this.props.cardWidth*0.5))
 
-        console.log('position:',event.nativeEvent.contentOffset.x)
+        //console.log('position:',event.nativeEvent.contentOffset.x)
         /*this.setState(
             {
                 scrollPosition: event.nativeEvent.contentOffset.x + (this.state.timelineWidth * 0.5)
             }
         )*/
 
+    }
+
+    getAdditionalListLength = () => {
+        return (
+            <View style={{
+                justifyContent: 'center',
+                marginTop: 40
+            }}>
+                <View style={{
+                    //alignSelf: 'center',
+                    height: 2,
+                    borderColor: 'grey',
+                    backgroundColor: 'grey',
+                    width: this.props.cardWidth*0.5,
+                }} />
+            </View>
+        )
+       
     }
 
     render() {
@@ -54,7 +69,7 @@ export default class DisplayFlatlist extends React.Component {
             <VirtualizedList
                 data={data}
                 renderItem={({ item }) => {
-                    //console.log('item',item)
+                    console.log('item',item)
                     return (<InstancesListItem
                         timestamp={item.timestamp}
                         key={item.timestamp}
@@ -70,6 +85,8 @@ export default class DisplayFlatlist extends React.Component {
                 horizontal={true}
                 ItemSeparatorComponent={this.renderSeparator}
                 onScroll={this.handleScroll}
+                //ListHeaderComponent={this.getAdditionalListLength}
+                ListFooterComponent={this.getAdditionalListLength}
             >
             </VirtualizedList>
 
