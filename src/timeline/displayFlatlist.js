@@ -29,6 +29,17 @@ export default class DisplayFlatlist extends React.Component {
         )
     }
 
+    handleScroll = (event) => {
+
+        console.log('position:',event.nativeEvent.contentOffset.x)
+        /*this.setState(
+            {
+                scrollPosition: event.nativeEvent.contentOffset.x + (this.state.timelineWidth * 0.5)
+            }
+        )*/
+
+    }
+
     render() {
 
         let data = this.props.data.map((item, index) => {
@@ -58,7 +69,7 @@ export default class DisplayFlatlist extends React.Component {
                 initialScrollIndex={this.props.index}
                 horizontal={true}
                 ItemSeparatorComponent={this.renderSeparator}
-
+                onScroll={this.handleScroll}
             >
             </VirtualizedList>
 
