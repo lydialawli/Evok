@@ -2,6 +2,7 @@ import React from "react"
 import { View, Text, FlatList, VirtualizedList, StyleSheet, ScrollView } from "react-native"
 import InstancesListItem from '../timeline/listItem.js'
 import { Ionicons } from '@expo/vector-icons'
+import utils from '../timeline/utils.js'
 
 //import { List, ListItem } from "react-native-elements"
 
@@ -46,13 +47,13 @@ export default class DisplayFlatlist extends React.Component {
                 <View style={{
                     //alignSelf: 'center',
                     height: 2,
-                    borderColor: 'grey',
-                    backgroundColor: 'grey',
-                    width: this.props.cardWidth*0.5,
+                    borderColor: 'pink',
+                    backgroundColor: 'pink',
+                    width: this.props.cardWidth * 0.5 + 90,
                 }} />
             </View>
         )
-       
+
     }
 
     render() {
@@ -69,7 +70,7 @@ export default class DisplayFlatlist extends React.Component {
             <VirtualizedList
                 data={data}
                 renderItem={({ item }) => {
-                    console.log('item',item)
+                    //console.log('item',item)
                     return (<InstancesListItem
                         timestamp={item.timestamp}
                         key={item.timestamp}
@@ -87,6 +88,7 @@ export default class DisplayFlatlist extends React.Component {
                 onScroll={this.handleScroll}
                 //ListHeaderComponent={this.getAdditionalListLength}
                 ListFooterComponent={this.getAdditionalListLength}
+
             >
             </VirtualizedList>
 
@@ -101,9 +103,8 @@ styles = StyleSheet.create({
     timelineDisplayBar: {
         flex: 0.5,
         justifyContent: 'center',
-
-
     },
+
 
 
 

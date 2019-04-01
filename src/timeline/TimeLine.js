@@ -181,11 +181,46 @@ export default class TimeLine extends React.Component {
 
     updateParentCurrentMoment = (currentPosition) => {
         //this.props.onTimelineMoved(currentPosition)
-        console.log('scrollPos->', currentPosition)
-        this.props.onPositionChanged(5)
+        console.log('scrollPos-->', currentPosition)
+
+        var x = currentPosition
+        var y = 0
+        switch (true) {
+            case (x >= 0 && x <= 100):
+                y = 0
+                break
+            case (x >= 101 && x <= 200):
+                y = 1
+                break
+            case x >= 201 && x <= 300:
+                y = 2
+                break
+            case x >= 301 && x <= 400:
+                y = 3
+                break
+            case x >= 401 && x <= 500:
+                y = 4
+                break
+            case x >= 501 && x <= 610:
+                y = 5
+                break
+            default:
+                break
+
+        }
+        console.log('y:', y)
+        this.props.onPositionChanged(y)
+
+    }
+    getIndex = (x) => {
+        if (x >= 0 && x <= 100)
+            return 0
+        else if (x >= 101 && x <= 200)
+            return 1
+        else if (x >= 201 && x <= 300)
+            return 2
     }
 
- 
 
     render() {
         //let TlDisplay = this._getTimelineDisplay()

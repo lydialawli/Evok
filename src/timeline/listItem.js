@@ -47,7 +47,7 @@ styles = StyleSheet.create({
 
     timelineObjectText: {
         color: 'darkblue',
-        fontSize: 15,
+        fontSize: 10,
         textAlign: 'left',
         fontWeight: 'bold',
     },
