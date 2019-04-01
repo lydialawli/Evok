@@ -223,6 +223,10 @@ export default class TimeLine extends React.Component {
             return 2
     }
 
+
+
+    
+
     render() {
         //let TlDisplay = this._getTimelineDisplay()
 
