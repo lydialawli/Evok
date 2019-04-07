@@ -49,7 +49,7 @@ export default class DisplayFlatlist extends React.Component {
                     height: 2,
                     borderColor: 'pink',
                     backgroundColor: 'pink',
-                    width: this.props.cardWidth * 0.5 + 90,
+                    width: this.props.cardWidth * 0.5,
                 }} />
             </View>
         )

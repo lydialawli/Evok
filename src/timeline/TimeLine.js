@@ -185,6 +185,10 @@ export default class TimeLine extends React.Component {
 
         var ind = Math.floor(currentPosition / 100)
 
+        if(ind<0){
+            ind = 0
+        }
+
         /*var x = currentPosition
         var y = 0
         switch (true) {
@@ -223,9 +227,6 @@ export default class TimeLine extends React.Component {
             return 2
     }
 
-
-
-    
 
     render() {
         //let TlDisplay = this._getTimelineDisplay()

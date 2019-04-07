@@ -154,7 +154,7 @@ export default class ElementScreen extends React.Component {
         console.log('currentTimestamp is: ' + currentTimestamp)
     }
 
-    getItemIndex = (index) => {
+    getItemTimestamp = (index) => {
         this.setState({
             selectedItemTimestamp: this.state.imageHistory[index].timestamp
         })
@@ -253,7 +253,7 @@ export default class ElementScreen extends React.Component {
                         onTimelineMoved={this.updateCurrentMoment}
                         mode={'horizontal'}
                         cardWidth={300}
-                        onPositionChanged={this.getItemIndex}
+                        onPositionChanged={this.getItemTimestamp}
                     />
 
                 </View>
