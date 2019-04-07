@@ -10,6 +10,7 @@ import ElementScreen from '../src/ElementScreen.js'
 import { FileSystem } from 'expo'
 import ElementCard from '../src/elementCard.js'
 import newEvokFileSystem from '../src/newEvokFileSystem.js'
+import readWrite from '../src/readWrite.js'
 
 
 export default class HomeScreen extends React.Component {
@@ -53,6 +54,7 @@ export default class HomeScreen extends React.Component {
             elements: newEvokFileSystem.getArrayOfElements(),
         })
         console.log("..elements: " + JSON.stringify(this.state.elements,null,2))
+        
     }
 
     getListElementCards = () => {
@@ -157,15 +159,15 @@ export default class HomeScreen extends React.Component {
     }
 
    _safePic = (uri, elementID, callback1, callback2) => {
-        newEvokFileSystem._saveImage(uri, elementID, this._setImageHistoryObj, callback1, callback2)
+        newEvokFileSystem._downloadImage(uri, elementID, this._setImageHistoryObj, callback1, callback2)
     }
 
-    _displayFileInTerminal = (elementID) => {
+    _displayElementID = (elementID) => {
         console.log('elementID: ',elementID)
     }
 
     _consoleImagePath = (imagePath) =>{
-        console.log('imagePath is:', imagePath)
+        console.log('imagePath is:', JSON.stringify(imagePath))
     }
 
     elementTitleInput = () => {
@@ -211,9 +213,9 @@ export default class HomeScreen extends React.Component {
                         </View>
 
                         <TouchableOpacity style={styles.card} onPress={() => 
-                            this._safePic ('http://www.bleaq.com/wp-content/uploads/kate-macdowell-04.jpg',
-                            1554640308439,
-                            this._displayFileInTerminal,
+                            this._safePic ('http://www.bleaq.com/wp-content/uploads/kate-macdowell-14.jpg',
+                            1554649020457,
+                            this._displayElementID,
                             this._consoleImagePath
 
                             )}>

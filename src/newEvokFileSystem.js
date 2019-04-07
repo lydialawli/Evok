@@ -18,9 +18,9 @@ newEvokFileSystem.startStorage = (callback) => {
 }
 
 storageExists = (callback1, callback) => {
-    let fileUri= rootDirectory + storageFileName
+    let fileUri = rootDirectory + storageFileName
 
-    FileSystem.getInfoAsync(fileUri).then((obj)=>{
+    FileSystem.getInfoAsync(fileUri).then((obj) => {
         console.log(obj)
         callback1(obj.exists, callback)
     })
@@ -133,7 +133,7 @@ deleteAllImagesFromElementObj = (elementID, ind) => {
         imageToDelete = imagesArray[i].uri
         deleteImageFromFileSystem(imageToDelete)
     }
-    console.log('directory "'+elementIndex.elements[ind].name + '" deleted')
+    console.log('directory "' + elementIndex.elements[ind].name + '" deleted')
 }
 
 deleteImageFromFileSystem = (fileUri) => {
@@ -159,30 +159,30 @@ newEvokFileSystem.addNewElement = (elementName, timeOfCreation, type, callback) 
         id: timeOfCreation,
         type: type,
         imageHistory: [
-            { 
-               /* "uri": "/1546300800.jpg",
-                "timestamp": 1546300800
-            },
-            { 
-                "uri": "/1548979200.jpg",
-                "timestamp": 1548979200
-            },
-            { 
-                "uri": "/1551398400.jpg",
-                "timestamp": 1551398400
-            },
-            { 
-                "uri": "/1551744000.jpg",
-                "timestamp": 1551744000
-            },
-            { 
-                "uri": "/1554076800.jpg",
-                "timestamp": 1554076800
-            },
-            { 
-                "uri": "/1556668800.jpg",
-                "timestamp": 1556668800*/
-            }
+            /* {
+                "uri": "/1546300800.jpg",
+                 "timestamp": 1546300800
+             },
+             { 
+                 "uri": "/1548979200.jpg",
+                 "timestamp": 1548979200
+             },
+             { 
+                 "uri": "/1551398400.jpg",
+                 "timestamp": 1551398400
+             },
+             { 
+                 "uri": "/1551744000.jpg",
+                 "timestamp": 1551744000
+             },
+             { 
+                 "uri": "/1554076800.jpg",
+                 "timestamp": 1554076800
+             },
+             { 
+                 "uri": "/1556668800.jpg",
+                 "timestamp": 1556668800
+            }*/
         ]
     }
     console.log("..new Element created: " + elementName)
@@ -201,11 +201,20 @@ newEvokFileSystem.saveImage = (originalFile, elementID, callback, callback2) => 
     readWrite.move(originalFile, currentFolder, fileName, updateElementIndexFromNewInstant(elementID, fileName, callback, callback2))
 }
 
-newEvokFileSystem._saveImage = (originalFile, elementID, callback, callback2) => {
+newEvokFileSystem._downloadImage = (originalFile, elementID, callback, callback2) => {
     var fileName = Date.now() + '.jpg'
     var currentFolder = rootDirectory + imagesFolder
-
-    readWrite.download(originalFile, currentFolder, fileName, updateElementIndexFromNewInstant(elementID, fileName, callback, callback2))
+    FileSystem.downloadAsync(
+        originalFile,
+        currentFolder + '/' + fileName
+    )
+        .then(
+            updateElementIndexFromNewInstant(elementID, fileName, callback, callback2)
+        )
+        .catch(error => {
+            console.error(error);
+        });
+    //readWrite.download(originalFile, currentFolder, fileName, updateElementIndexFromNewInstant(elementID, fileName, callback, callback2))
 }
 
 updateElementIndexFromNewInstant = (elementID, fileName, callback, callback2) => {

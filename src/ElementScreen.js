@@ -128,7 +128,7 @@ export default class ElementScreen extends React.Component {
                 <TouchableOpacity >
                     <ImageBackground
                         style={{ width: 300, height: 300, margin: 1 }}
-                        source={{ uri: this.state.placeholderImage }}>
+                        source={{ uri: this.state.currentImage }}>
                     </ImageBackground>
                 </TouchableOpacity>
             )
@@ -162,9 +162,9 @@ export default class ElementScreen extends React.Component {
     }
 
     getItemImage = (index) => {
-        var imageObj = this.state.imageHistory[index]
+        var image = this.state.imageHistory[index].uri
         this.setState({
-            currentImage:  this.state.rootDirectory + 'images/' + imageObj.uri
+            currentImage:  this.state.rootDirectory + 'images/' + image
         })
     }
 
