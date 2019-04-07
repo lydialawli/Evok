@@ -65,8 +65,8 @@ export default class DisplayFlatlist extends React.Component {
                 <View style={{
                     //alignSelf: 'center',
                     height: 2,
-                    borderColor: 'pink',
-                    backgroundColor: 'pink',
+                    borderColor: 'transparent',
+                    backgroundColor: 'transparent',
                     width: this.props.cardWidth / 3,
                 }} />
                 <View style={{ flexDirection: 'row' }} >
@@ -75,8 +75,8 @@ export default class DisplayFlatlist extends React.Component {
                 <View style={{
                     //alignSelf: 'center',
                     height: 2,
-                    borderColor: 'red',
-                    backgroundColor: 'red',
+                    borderColor: 'transparent',
+                    backgroundColor: 'transparent',
                     width: this.props.cardWidth / 3,
                 }} />
             </View>
