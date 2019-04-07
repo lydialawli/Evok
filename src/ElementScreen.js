@@ -118,17 +118,12 @@ export default class ElementScreen extends React.Component {
 
     getImageDisplayed = () => {
 
-        if (this.state.imageHistory.length > 0) {
-            let imageObj = this.state.imageHistory[this.state.imageDisplayed]
-            let imageUri = imageObj.uri
-            let imagePath = this.state.rootDirectory + 'images/' + imageUri
-            let timestamp = imageObj.timestamp
-            //console.log('currentTimestamp is: ' + timestamp)
+        if (this.state.imageHistory.length <= 0) {
             return (
                 <TouchableOpacity >
                     <ImageBackground
                         style={{ width: 300, height: 300, margin: 1 }}
-                        source={{ uri: this.state.currentImage }}>
+                        source={{ uri: this.state.placeholderImage }}>
                     </ImageBackground>
                 </TouchableOpacity>
             )
@@ -262,7 +257,7 @@ export default class ElementScreen extends React.Component {
                         onTimelineMoved={this.updateCurrentMoment}
                         mode={'horizontal'}
                         cardWidth={300}
-                        onPositionChanged={this.getItemTimestamp}
+                        onPositionChanged={this.getItemImage}
                     />
 
                 </View>
