@@ -30,6 +30,8 @@ WHAT DO I NEED TO MAKE THE TIMELINE WORK:
     - [ ] create proper array example
     - [ ] when currentTimestamp changes (given through parent as prop) the bar changes position (left-right)
 
+- [ ] create a placeholder if element has no item yet (in flatlist component)
+
 
 
 

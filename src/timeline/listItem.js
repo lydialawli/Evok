@@ -11,7 +11,7 @@ export default class InstancesListItem extends Component {
         return (
              <View style={styles.timelineObject}>
                  <Text style={styles.timelineObjectText} >
-                     {new Date(this.props.timestamp).toDateString().replace(1970, "")}
+                     {new Date(this.props.timestamp).toDateString().replace(2019, "")}
                  </Text>
                  <View style={{ flexDirection: 'row' }} key={this.props.timestamp} >
                      <Ionicons name="ios-remove" size={40} color="black" containerStyle={flex = 1} />

@@ -36,7 +36,8 @@ export default class HomeScreen extends React.Component {
             elements: [],
             modalVisible: false,
             placeholderElementName: 'enter title',
-            newTextInput: ''
+            newTextInput: '',
+            imageHistory: {}
         }
 
     }
@@ -149,6 +150,24 @@ export default class HomeScreen extends React.Component {
         })
     }
 
+    _setImageHistoryObj = (elementID) => {
+        this.setState({
+            imageHistory: newEvokFileSystem.getElementObj(elementID).imageHistory,
+        })
+    }
+
+   _safePic = (uri, elementID, callback1, callback2) => {
+        newEvokFileSystem._saveImage(uri, elementID, this._setImageHistoryObj, callback1, callback2)
+    }
+
+    _displayFileInTerminal = (elementID) => {
+        console.log('elementID: ',elementID)
+    }
+
+    _consoleImagePath = (imagePath) =>{
+        console.log('imagePath is:', imagePath)
+    }
+
     elementTitleInput = () => {
         return (
             <TextInput
@@ -190,6 +209,16 @@ export default class HomeScreen extends React.Component {
                         <View>
                             {this.getListElementCards()}
                         </View>
+
+                        <TouchableOpacity style={styles.card} onPress={() => 
+                            this._safePic ('http://www.bleaq.com/wp-content/uploads/kate-macdowell-04.jpg',
+                            1554640308439,
+                            this._displayFileInTerminal,
+                            this._consoleImagePath
+
+                            )}>
+                            <Text style={evokStyles.topBarText}> Add a pic </Text>
+                        </TouchableOpacity>
     
                     </ScrollView>
 

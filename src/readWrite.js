@@ -23,6 +23,12 @@ readWrite.move = (originalFile, currentFolder, fileName, callback) => {
 }
 
 
+readWrite.copy = (originalFile, currentFolder, fileName, callback) => {
+    FileSystem.copyAsync({ from: originalFile, to: currentFolder + '/' + fileName })
+        .then(callback)
+        .catch(err => console.error(err))
+}
+
 readWrite.saveText = (text, to, callback) => {
     FileSystem.writeAsStringAsync(rootDirectory + "/" + to, text)
         .then((result) => {
@@ -49,6 +55,12 @@ readWrite.getText = (from, callback) => {
 
 readWrite.delete = (FileUri, callback) => {
     FileSystem.deleteAsync(FileUri)
+        .then(callback)
+        .catch(err => console.error(err))
+}
+
+readWrite.download = (originalFile, currentFolder, fileName, callback) => {
+    FileSystem.downloadAsync({ from: originalFile, to: currentFolder + '/' + fileName })
         .then(callback)
         .catch(err => console.error(err))
 }

@@ -37,7 +37,8 @@ export default class ElementScreen extends React.Component {
         sliderValue: 0.5,
         imageDisplayed: 0,
         currentImageTimestamp: 0,
-        placeholderImage: 'https://facebook.github.io/react-native/docs/assets/favicon.png'
+        placeholderImage: 'https://facebook.github.io/react-native/docs/assets/favicon.png',
+        currentImage: ''
     }
 
     async componentWillMount() {
@@ -138,7 +139,7 @@ export default class ElementScreen extends React.Component {
                 <TouchableOpacity >
                     <ImageBackground
                         style={{ width: 300, height: 300, margin: 1 }}
-                        source={{ uri: this.state.placeholderImage }}>
+                        source={{ uri: this.state.currentImage }}>
                     </ImageBackground>
                 </TouchableOpacity>
             )
@@ -159,6 +160,14 @@ export default class ElementScreen extends React.Component {
             selectedItemTimestamp: this.state.imageHistory[index].timestamp
         })
     }
+
+    getItemImage = (index) => {
+        var imageObj = this.state.imageHistory[index]
+        this.setState({
+            currentImage:  this.state.rootDirectory + 'images/' + imageObj.uri
+        })
+    }
+
 
 
     getItemText = () => {
@@ -238,7 +247,7 @@ export default class ElementScreen extends React.Component {
                 </Text>
 
                 <View style={evokStyles.projectCard}>
-                    {itemText}
+                    {imageDisplayed}
 
                 </View>
 

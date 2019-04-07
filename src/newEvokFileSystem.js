@@ -160,7 +160,7 @@ newEvokFileSystem.addNewElement = (elementName, timeOfCreation, type, callback) 
         type: type,
         imageHistory: [
             { 
-                "uri": "/1546300800.jpg",
+               /* "uri": "/1546300800.jpg",
                 "timestamp": 1546300800
             },
             { 
@@ -181,7 +181,7 @@ newEvokFileSystem.addNewElement = (elementName, timeOfCreation, type, callback) 
             },
             { 
                 "uri": "/1556668800.jpg",
-                "timestamp": 1556668800
+                "timestamp": 1556668800*/
             }
         ]
     }
@@ -199,6 +199,13 @@ newEvokFileSystem.saveImage = (originalFile, elementID, callback, callback2) => 
     var currentFolder = rootDirectory + imagesFolder
 
     readWrite.move(originalFile, currentFolder, fileName, updateElementIndexFromNewInstant(elementID, fileName, callback, callback2))
+}
+
+newEvokFileSystem._saveImage = (originalFile, elementID, callback, callback2) => {
+    var fileName = Date.now() + '.jpg'
+    var currentFolder = rootDirectory + imagesFolder
+
+    readWrite.download(originalFile, currentFolder, fileName, updateElementIndexFromNewInstant(elementID, fileName, callback, callback2))
 }
 
 updateElementIndexFromNewInstant = (elementID, fileName, callback, callback2) => {
