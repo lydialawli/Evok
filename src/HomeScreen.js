@@ -213,8 +213,8 @@ export default class HomeScreen extends React.Component {
                         </View>
 
                         <TouchableOpacity style={styles.card} onPress={() => 
-                            this._safePic ('http://www.bleaq.com/wp-content/uploads/kate-macdowell-14.jpg',
-                            1554649020457,
+                            this._safePic ('http://www.bleaq.com/wp-content/uploads/kate-macdowell-01.jpg',
+                            1554655385269,
                             this._displayElementID,
                             this._consoleImagePath
 

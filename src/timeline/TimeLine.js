@@ -239,7 +239,7 @@ export default class TimeLine extends React.Component {
                     data={this.props.data}
                     style={timelineStyles.timelineDisplayBar}
                     scale={this.props.scale}
-                    index={3}
+                    index={0}
                     onScrolled={this.updateParentCurrentMoment}
                     cardWidth={this.props.width}
                 >

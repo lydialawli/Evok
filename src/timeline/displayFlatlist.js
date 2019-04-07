@@ -53,7 +53,38 @@ export default class DisplayFlatlist extends React.Component {
                 }} />
             </View>
         )
+    }
 
+    getAddMorePicButton = () => {
+        return (
+            <View style={{
+                justifyContent: 'center',
+                marginTop: 40,
+                flexDirection: 'row',
+            }}>
+                <View style={{
+                    //alignSelf: 'center',
+                    height: 2,
+                    borderColor: 'pink',
+                    backgroundColor: 'pink',
+                    width: this.props.cardWidth / 3,
+                }} />
+                <View style={{ flexDirection: 'row' }} >
+                    <Ionicons name="ios-add-circle-outline" size={40} color="black" containerStyle={{flex: 1, alignSelf: 70}} />
+                </View>
+                <View style={{
+                    //alignSelf: 'center',
+                    height: 2,
+                    borderColor: 'red',
+                    backgroundColor: 'red',
+                    width: this.props.cardWidth / 3,
+                }} />
+            </View>
+        )
+    }
+
+    emptyListView = () => {
+        return
     }
 
     render() {
@@ -86,8 +117,9 @@ export default class DisplayFlatlist extends React.Component {
                 horizontal={true}
                 ItemSeparatorComponent={this.renderSeparator}
                 onScroll={this.handleScroll}
+                ListEmptyComponent={this.emptyListView}
                 //ListHeaderComponent={this.getAdditionalListLength}
-                ListFooterComponent={this.getAdditionalListLength}
+                ListFooterComponent={this.getAddMorePicButton}
 
             >
             </VirtualizedList>
