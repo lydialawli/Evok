@@ -188,31 +188,9 @@ export default class TimeLine extends React.Component {
         if(ind<0){
             ind = 0
         }
-
-        /*var x = currentPosition
-        var y = 0
-        switch (true) {
-            case (x >= 0 && x <= 100):
-                y = 0
-                break
-            case (x >= 101 && x <= 200):
-                y = 1
-                break
-            case x >= 201 && x <= 300:
-                y = 2
-                break
-            case x >= 301 && x <= 400:
-                y = 3
-                break
-            case x >= 401 && x <= 500:
-                y = 4
-                break
-            case x >= 501 && x <= 610:
-                y = 5
-                break
-            default:
-                break
-        }*/
+        if(ind>= this.state.imageHistory.length){
+            ind = this.state.imageHistory.length-1
+        }
 
         console.log('ind:', ind)
         this.props.onPositionChanged(ind)

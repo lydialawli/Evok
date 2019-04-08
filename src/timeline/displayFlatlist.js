@@ -27,7 +27,7 @@ export default class DisplayFlatlist extends React.Component {
     }
 
     handleScroll = (event) => {
-        this.props.onScrolled(event.nativeEvent.contentOffset.x)// + (this.props.cardWidth*0.5))
+        this.props.onScrolled(event.nativeEvent.contentOffset.x) + (this.props.cardWidth*0.5)
 
         //console.log('position:',event.nativeEvent.contentOffset.x)
         /*this.setState(
@@ -55,7 +55,7 @@ export default class DisplayFlatlist extends React.Component {
         )
     }
 
-    getAddMorePicButton = () => {
+    _getAddMorePicButton = () => {
         return (
             <View style={{
                 justifyContent: 'center',
@@ -70,7 +70,7 @@ export default class DisplayFlatlist extends React.Component {
                     width: this.props.cardWidth / 3,
                 }} />
                 <View style={{ flexDirection: 'row' }} >
-                    <Ionicons name="ios-add-circle-outline" size={40} color="black" containerStyle={{flex: 1, alignSelf: 70}} />
+                    <Ionicons name="ios-add-circle-outline" size={40} color="black" containerStyle={{ flex: 1, alignSelf: 70 }} />
                 </View>
                 <View style={{
                     //alignSelf: 'center',
@@ -81,6 +81,29 @@ export default class DisplayFlatlist extends React.Component {
                 }} />
             </View>
         )
+    }
+
+    getAddMorePicButton = () => {
+        return (
+            <View style={{
+                justifyContent: 'center',
+                marginTop: 40,
+                flexDirection: 'row',
+            }}>
+                <View style={{
+                    //alignSelf: 'center',
+                    height: 2,
+                    borderColor: 'transparent',
+                    backgroundColor: 'transparent',
+                    width: this.props.cardWidth / 2,
+                }}>
+                    <View style={{justifyContent: 'flex-start', alignSelf: 'flex-start', position: 'absolute' }} >
+                        <Ionicons name="ios-add-circle-outline" size={40} color="black" containerStyle={{ flex: 1, alignSelf: 70 }} />
+                    </View>
+                </View>
+            </View>
+        )
+
     }
 
     emptyListView = () => {
@@ -118,7 +141,7 @@ export default class DisplayFlatlist extends React.Component {
                 ItemSeparatorComponent={this.renderSeparator}
                 onScroll={this.handleScroll}
                 ListEmptyComponent={this.emptyListView}
-                //ListHeaderComponent={this.getAdditionalListLength}
+                ListHeaderComponent={this.getAddMorePicButton}
                 ListFooterComponent={this.getAddMorePicButton}
 
             >
