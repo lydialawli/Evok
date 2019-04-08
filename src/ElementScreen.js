@@ -117,13 +117,24 @@ export default class ElementScreen extends React.Component {
     }
 
     getImageDisplayed = () => {
-
+        var firstImageOfArray= this.state.rootDirectory+'images/'+this.state.imageHistory[0].uri
         if (this.state.imageHistory.length <= 0) {
             return (
                 <TouchableOpacity >
                     <ImageBackground
                         style={{ width: 300, height: 300, margin: 1 }}
                         source={{ uri: this.state.placeholderImage }}>
+                    </ImageBackground>
+                </TouchableOpacity>
+            )
+        }
+
+        else if (this.state.currentImage == '') {
+            return (
+                <TouchableOpacity >
+                    <ImageBackground
+                        style={{ width: 300, height: 300, margin: 1 }}
+                        source={{ uri: firstImageOfArray }}>
                     </ImageBackground>
                 </TouchableOpacity>
             )

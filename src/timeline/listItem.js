@@ -7,21 +7,21 @@ export default class InstancesListItem extends Component {
 
     render() {
         //console.log('timestamp:',this.props.obj)
-
+        
         return (
-             <View style={styles.timelineObject}>
-                 <Text style={styles.timelineObjectText} >
-                     {new Date(this.props.timestamp).toDateString().replace(2019, "")}
-                 </Text>
-                 <View style={{ flexDirection: 'row' }} key={this.props.timestamp} >
-                     <Ionicons name="ios-remove" size={40} color="black" containerStyle={flex = 1} />
-                     <Ionicons name="ios-git-commit" size={40} color="black" containerStyle={flex = 1} />
-                     <Ionicons name="ios-remove" size={40} color="black" containerStyle={flex = 1} />
-                 </View>
-                 <Text style={{ alignSelf: 'center' }}>
-                     {new Date(this.props.timestamp).getHours()}:{new Date(this.props.timestamp).getMinutes()}
-                 </Text>
-             </View>
+            <View style={styles.timelineObject}>
+                <Text style={styles.timelineObjectText} >
+                    {new Date(this.props.timestamp).toDateString().replace(2019, "")}
+                </Text>
+                <View style={{ flexDirection: 'row' }} key={this.props.timestamp} >
+                    <Ionicons name="ios-remove" size={40} color="black" containerStyle={flex = 1} />
+                    <Ionicons name="ios-git-commit" size={40} color="black" containerStyle={flex = 1} />
+                    <Ionicons name="ios-remove" size={40} color="black" containerStyle={flex = 1} />
+                </View>
+                <Text style={{ alignSelf: 'center' }}>
+                    {new Date(this.props.timestamp).getHours()}:{new Date(this.props.timestamp).getMinutes()}
+                </Text>
+            </View>
         )
     }
 
