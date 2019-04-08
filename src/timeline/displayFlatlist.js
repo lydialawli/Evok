@@ -123,19 +123,20 @@ export default class DisplayFlatlist extends React.Component {
 
             <VirtualizedList
                 data={data}
-                renderItem={({ item }) => {
+                renderItem={({ item, index }) => {
                     //console.log('item',item)
                     return (<InstancesListItem
                         timestamp={item.timestamp}
-                        key={item.timestamp}
                         obj={item}
+                        ind= {index}
+                        key={index}
                     />
                     )
                 }}
-                //keyExtractor={item => item.timestamp.toString()}
+                keyExtractor={(item, index) => 'key'+index}
                 getItemCount={data => data.length}
                 disableVirtualization={false}
-                getItem={(data, index) => data[index]}
+                getItem={(data, index) => (data[index],index)}
                 initialScrollIndex={this.props.index}
                 horizontal={true}
                 ItemSeparatorComponent={this.renderSeparator}
