@@ -7,27 +7,33 @@ export default class InstancesListItem extends Component {
 
     render() {
         //console.log('timestamp:',this.props.obj)
-        
+
         return (
             <View style={styles.timelineObject}>
                 <Text style={styles.timelineObjectText} >
                     {this.props.ind}
                 </Text>
-                <View style={{ flexDirection: 'row' }} key={this.props.timestamp} >
-                    <Ionicons name="ios-remove" size={40} color="black" containerStyle={flex = 1} />
-                    <Ionicons name="ios-git-commit" size={40} color="black" containerStyle={flex = 1} />
-                    <Ionicons name="ios-remove" size={40} color="black" containerStyle={flex = 1} />
+                <View style={{
+                    //alignSelf: 'center',
+                    height: 2,
+                    borderColor: 'pink',
+                    backgroundColor: 'pink',
+                    width: 100,
+                }}>
+
                 </View>
-                <Text style={{ alignSelf: 'center' }}>
-                    {new Date(this.props.timestamp).getHours()}:{new Date(this.props.timestamp).getMinutes()}
-                </Text>
+                <Ionicons name="md-bicycle" size={20} color="black" containerStyle={{
+                    flex: 1,
+                    //position: 'absolute',
+                    //alignItems: 'center'
+                }} />
             </View>
         )
     }
 
     _render() {
         //console.log('timestamp:',this.props.obj)
-        
+
         return (
             <View style={styles.timelineObject}>
                 <Text style={styles.timelineObjectText} >
@@ -68,7 +74,7 @@ styles = StyleSheet.create({
     timelineObjectText: {
         color: 'darkblue',
         fontSize: 10,
-        textAlign: 'left',
+        textAlign: 'center',
         fontWeight: 'bold',
     },
     timeLineIcon: {

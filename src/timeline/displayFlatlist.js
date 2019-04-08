@@ -139,7 +139,7 @@ export default class DisplayFlatlist extends React.Component {
                 getItem={(data, index) => (data[index],index)}
                 initialScrollIndex={this.props.index}
                 horizontal={true}
-                ItemSeparatorComponent={this.renderSeparator}
+                //ItemSeparatorComponent={this.renderSeparator}
                 onScroll={this.handleScroll}
                 ListEmptyComponent={this.emptyListView}
                 ListHeaderComponent={this.getAddMorePicButton}

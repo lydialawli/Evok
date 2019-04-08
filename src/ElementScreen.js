@@ -258,7 +258,7 @@ export default class ElementScreen extends React.Component {
                 </View>
 
                 <View style={evokStyles.sliderCard}>
-                    <Text style={{ alignSelf: 'center', fontSize: 30 }}>|</Text>
+                    <Text style={{ alignSelf: 'center', fontSize: 30, color: 'grey' }}>|</Text>
                     <TimeLine
                         data={this.state.imageHistory}
                         timestamp={this.state.imageHistory[0].timestamp}
