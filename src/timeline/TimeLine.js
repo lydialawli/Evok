@@ -185,11 +185,11 @@ export default class TimeLine extends React.Component {
 
         var ind = Math.floor(currentPosition / 100)
 
-        if(ind<0){
+        if (ind < 0) {
             ind = 0
         }
-        if(ind>= this.state.imageHistory.length){
-            ind = this.state.imageHistory.length-1
+        if (ind >= this.state.imageHistory.length) {
+            ind = this.state.imageHistory.length - 1
         }
 
         console.log('ind:', ind)
@@ -223,17 +223,19 @@ export default class TimeLine extends React.Component {
                 >
                 </DisplayFlatlist>
 
-                <TimelineScroll
-                    data={this.props.data}
-                    currentTimestamp={this.state.currentTimestamp}
-                    mode={this.props.mode}
-                    scale={this.props.scale}
-                    onScrollChange={this.updateParentCurrentMoment}
-                ></TimelineScroll>
+
 
             </View>
         )
     }
+
+   /* <TimelineScroll
+    data={this.props.data}
+    currentTimestamp={this.state.currentTimestamp}
+    mode={this.props.mode}
+    scale={this.props.scale}
+    onScrollChange={this.updateParentCurrentMoment}
+></TimelineScroll>*/
 
     /*  <TimelineDisplay
       data={this.props.data}
@@ -268,7 +270,7 @@ timelineStyles = StyleSheet.create({
         width: 300,
         height: 200,
         backgroundColor: 'transparent',
-        justifyContent: 'space-evenly',
+        justifyContent: 'center',
         alignItems: 'center',
     },
     timelineDisplayBar: {
