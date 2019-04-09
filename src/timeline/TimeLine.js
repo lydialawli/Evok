@@ -35,8 +35,8 @@ export default class TimeLine extends React.Component {
         this.setState(
             {
                 timelineWidth: this.props.width,
-                durationInPx: utils.getFullDurationInPixels(this.state.imageHistory,this.state.ms2pxFactor),
-                currentPosition: utils.milisecIntoPixels(this.state.currentMoment,this.state.ms2pxFactor) + (this.state.timelineWidth * 0.5),
+                durationInPx: utils.getFullDurationInPixels(this.state.imageHistory, this.state.ms2pxFactor),
+                currentPosition: utils.milisecIntoPixels(this.state.currentMoment, this.state.ms2pxFactor) + (this.state.timelineWidth * 0.5),
                 genesisTimestamp: this.state.imageHistory[0].timestamp
             }
         )
@@ -122,11 +122,11 @@ export default class TimeLine extends React.Component {
                 console.log('previousImage: ', previousImage)
                 if (index == 0) {
                     epochInMs = imageObj.timestamp
-                    epochInPx = utils.milisecIntoPixels(epochInMs,this.state.ms2pxFactor)
+                    epochInPx = utils.milisecIntoPixels(epochInMs, this.state.ms2pxFactor)
                 }
                 else {
                     epochInMs = imageObj.timestamp - previousImage.timestamp
-                    epochInPx = utils.milisecIntoPixels(epochInMs,this.state.ms2pxFactor)
+                    epochInPx = utils.milisecIntoPixels(epochInMs, this.state.ms2pxFactor)
                 }
                 return (
                     <View style={evokStyles.timelineObject} key={imageObj.timestamp}>
@@ -163,23 +163,42 @@ export default class TimeLine extends React.Component {
         )
     }
 
-    updateParentCurrentMoment = (currentPosition) => {
-        //this.props.onTimelineMoved(currentPosition)
-        console.log('scrollPos-->', currentPosition)
-        
-        let maxPosition = this.state.barWidth
-        
-        let ind = Math.floor(currentPosition * this.props.data.length / maxPosition)
+    isHalfWay = (n) => {
+        var decimal = n - Math.floor(n)
 
-        if (ind < 0) {
-            ind = 0
-        }
-        if (ind >= this.props.data.length) {
+        if (decimal >= 0.5 && n<this.state.barWidth-this.props.objWidth)
+            return true
+        else { return false }
+
+    }
+
+    updateParentCurrentMoment = (currentPosition) => {
+        console.log('scrollPos-->', currentPosition)
+        let ind = 0
+        let ind2 = 0
+
+        if (currentPosition >= this.state.barWidth) {
             ind = this.props.data.length - 1
         }
 
-        console.log('ind:', ind)
-        this.props.onPositionChanged(ind)
+        else if (currentPosition <= 0) {
+            ind = 0
+        }
+
+        else {
+            let maxPosition = this.state.barWidth
+
+            if (this.isHalfWay(currentPosition)) {
+                ind = Math.floor(currentPosition * this.props.data.length / maxPosition)
+                ind2 = ind + 1
+            }
+            else {
+                ind = Math.floor(currentPosition * this.props.data.length / maxPosition)
+            }
+        }
+
+        console.log('ind:', ind, ' ind2:', ind2)
+        this.props.onPositionChanged(ind, ind2)
     }
 
 
@@ -207,13 +226,13 @@ export default class TimeLine extends React.Component {
         )
     }
 
-   /* <TimelineScroll
-    data={this.props.data}
-    currentTimestamp={this.state.currentTimestamp}
-    mode={this.props.mode}
-    scale={this.props.scale}
-    onScrollChange={this.updateParentCurrentMoment}
-></TimelineScroll>*/
+    /* <TimelineScroll
+     data={this.props.data}
+     currentTimestamp={this.state.currentTimestamp}
+     mode={this.props.mode}
+     scale={this.props.scale}
+     onScrollChange={this.updateParentCurrentMoment}
+ ></TimelineScroll>*/
 
     /*  <TimelineDisplay
       data={this.props.data}

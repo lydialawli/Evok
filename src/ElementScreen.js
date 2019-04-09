@@ -40,7 +40,8 @@ export default class ElementScreen extends React.Component {
         imageDisplayed: 0,
         currentImageTimestamp: 0,
         placeholderImage: 'https://facebook.github.io/react-native/docs/assets/favicon.png',
-        currentImage: ''
+        currentImage: '',
+        nextImage: 0
     }
 
     async componentWillMount() {
@@ -119,11 +120,20 @@ export default class ElementScreen extends React.Component {
     }
 
 
-    getItemImage = (index) => {
-        var image = this.state.imageHistory[index].uri
+    getItemImage = (index, index2) => {
+        var pic1 = this.state.imageHistory[index].uri
+        var pic2 = this.state.imageHistory[index2].uri
+       
         this.setState({
-            currentImage: this.state.rootDirectory + 'images/' + image
+            currentImage: this.state.rootDirectory + 'images/' + pic1
         })
+
+
+        if (index2 != 0) {
+            this.setState({
+                nextImage: this.state.rootDirectory + 'images/' + pic2
+            })
+        }
     }
 
 
@@ -192,6 +202,7 @@ export default class ElementScreen extends React.Component {
                         imagesFolder={FileSystem.documentDirectory + 'images/'}
                         placeholder={this.state.placeholderImage}
                         currentImage={this.state.currentImage}
+                        nextImage={this.state.nextImage}
                     />
                 </View>
 
