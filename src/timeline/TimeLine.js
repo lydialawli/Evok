@@ -176,6 +176,7 @@ export default class TimeLine extends React.Component {
         console.log('scrollPos-->', currentPosition)
         let ind = 0
         let ind2 = 0
+        let isHalfway = this.isHalfWay(currentPosition)
 
         if (currentPosition >= this.state.barWidth) {
             ind = this.props.data.length - 1
@@ -198,7 +199,7 @@ export default class TimeLine extends React.Component {
         }
 
         console.log('ind:', ind, ' ind2:', ind2)
-        this.props.onPositionChanged(ind, ind2)
+        this.props.onPositionChanged(ind, ind2,isHalfway)
     }
 
 

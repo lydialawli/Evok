@@ -3,7 +3,7 @@ import { Image, View, Text, StyleSheet, TouchableOpacity, ImageBackground } from
 import evokStyles from '../src/evokStyles.js'
 
 export default class CurrentPic extends Component {
-   
+
 
 
     getImageDisplayed = () => {
@@ -31,14 +31,31 @@ export default class CurrentPic extends Component {
         }
 
         else {
-            return (
-                <TouchableOpacity >
-                    <ImageBackground
-                        style={{ width: 300, height: 300, margin: 1 }}
-                        source={{ uri: this.props.currentImage }}>
-                    </ImageBackground>
-                </TouchableOpacity>
-            )
+            if (this.props.isHalfway == false) {
+                return (
+                    <TouchableOpacity >
+                        <ImageBackground
+                            style={{ width: 300, height: 300, margin: 1 }}
+                            source={{ uri: this.props.currentImage }}>
+                        </ImageBackground>
+                    </TouchableOpacity>
+                )
+            }
+            else {
+                return (
+                    <TouchableOpacity >
+                        <ImageBackground
+                            style={{ width: 300, height: 300, margin: 1, opacity: 0.5,}}
+                            source={{ uri: this.props.currentImage }}>
+                            <ImageBackground
+                                style={{ width: 300, height: 300, margin: 1, opacity: 0.5 }}
+                                source={{ uri: this.props.nextImage }}>
+                            </ImageBackground>
+                        </ImageBackground>
+
+                    </TouchableOpacity>
+                )
+            }
         }
     }
 

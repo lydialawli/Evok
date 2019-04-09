@@ -41,7 +41,8 @@ export default class ElementScreen extends React.Component {
         currentImageTimestamp: 0,
         placeholderImage: 'https://facebook.github.io/react-native/docs/assets/favicon.png',
         currentImage: '',
-        nextImage: 0
+        nextImage: '',
+        isHalfway: false
     }
 
     async componentWillMount() {
@@ -120,12 +121,13 @@ export default class ElementScreen extends React.Component {
     }
 
 
-    getItemImage = (index, index2) => {
+    getItemImage = (index, index2, isHalfway) => {
         var pic1 = this.state.imageHistory[index].uri
         var pic2 = this.state.imageHistory[index2].uri
        
         this.setState({
-            currentImage: this.state.rootDirectory + 'images/' + pic1
+            currentImage: this.state.rootDirectory + 'images/' + pic1,
+            isHalfway: isHalfway
         })
 
 
@@ -203,6 +205,7 @@ export default class ElementScreen extends React.Component {
                         placeholder={this.state.placeholderImage}
                         currentImage={this.state.currentImage}
                         nextImage={this.state.nextImage}
+                        isHalfway={this.state.isHalfway}
                     />
                 </View>
 
