@@ -9,7 +9,9 @@ import { FileSystem } from 'expo'
 import HomeScreen from '../App.js'
 import evokFileSystem from '../src/oldEvokFilesystem.js'
 import newEvokFileSystem from '../src/newEvokFileSystem.js'
+import CurrentPic from '../src/currentPic.js'
 import TimeLine from '../src/timeline/TimeLine.js'
+
 
 export default class ElementScreen extends React.Component {
     static navigationOptions = {
@@ -116,77 +118,12 @@ export default class ElementScreen extends React.Component {
         this.props.navigation.navigate('Camera', { projectID: projectName })
     }
 
-    getImageDisplayed = () => {
-        var firstImageOfArray= this.state.rootDirectory+'images/'+this.state.imageHistory[0].uri
-        if (this.state.imageHistory.length <= 0) {
-            return (
-                <TouchableOpacity >
-                    <ImageBackground
-                        style={{ width: 300, height: 300, margin: 1 }}
-                        source={{ uri: this.state.placeholderImage }}>
-                    </ImageBackground>
-                </TouchableOpacity>
-            )
-        }
-
-        else if (this.state.currentImage == '') {
-            return (
-                <TouchableOpacity >
-                    <ImageBackground
-                        style={{ width: 300, height: 300, margin: 1 }}
-                        source={{ uri: firstImageOfArray }}>
-                    </ImageBackground>
-                </TouchableOpacity>
-            )
-        }
-
-        else {
-            return (
-                <TouchableOpacity >
-                    <ImageBackground
-                        style={{ width: 300, height: 300, margin: 1 }}
-                        source={{ uri: this.state.currentImage }}>
-                    </ImageBackground>
-                </TouchableOpacity>
-            )
-        }
-
-
-        //this.setCurrentImageTimestamp(timestamp)
-    }
-
-    setCurrentImageTimestamp = (timestamp) => {
-        let currentTimestamp = timestamp
-
-        console.log('currentTimestamp is: ' + currentTimestamp)
-    }
-
-    getItemTimestamp = (index) => {
-        this.setState({
-            selectedItemTimestamp: this.state.imageHistory[index].timestamp
-        })
-    }
 
     getItemImage = (index) => {
         var image = this.state.imageHistory[index].uri
         this.setState({
-            currentImage:  this.state.rootDirectory + 'images/' + image
+            currentImage: this.state.rootDirectory + 'images/' + image
         })
-    }
-
-
-
-    getItemText = () => {
-        if (this.state.selectedItemTimestamp == 0) {
-            return (
-                <Text>no item yet</Text>
-            )
-        }
-        else{
-            return (
-                <Text>{this.state.selectedItemTimestamp}</Text>
-            )
-        }
     }
 
 
@@ -195,9 +132,6 @@ export default class ElementScreen extends React.Component {
         const { navigate } = this.props.navigation
         //console.log("Element mode")
         // console.log('width is: ' + this.state.timelineWidth)
-
-        let imageDisplayed = this.getImageDisplayed()
-        let itemText = this.getItemText()
 
         let images = this.state.imageHistory.map(
             (imageObj) => {
@@ -253,9 +187,14 @@ export default class ElementScreen extends React.Component {
                 </Text>
 
                 <View style={evokStyles.projectCard}>
-                    {imageDisplayed}
-
+                    <CurrentPic
+                        data={this.state.imageHistory}
+                        imagesFolder={FileSystem.documentDirectory + 'images/'}
+                        placeholder={this.state.placeholderImage}
+                        currentImage={this.state.currentImage}
+                    />
                 </View>
+
 
                 <View style={evokStyles.sliderCard}>
                     <Text style={{ alignSelf: 'center', fontSize: 30, color: 'grey' }}>|</Text>
@@ -269,7 +208,7 @@ export default class ElementScreen extends React.Component {
                         mode={'horizontal'}
                         cardWidth={300}
                         onPositionChanged={this.getItemImage}
-                        styles={{justifyContent: 'center', alignSelf: 'center'}}
+                        styles={{ justifyContent: 'center', alignSelf: 'center' }}
                         objWidth={100}
                     />
 
