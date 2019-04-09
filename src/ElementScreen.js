@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, StyleSheet, View, TouchableOpacity, TouchableHighlight, ScrollView, Text, Alert, ImageBackground, Modal, Slider } from 'react-native'
+import { Image, StyleSheet, View, TouchableOpacity, Switch, Button, TouchableHighlight, ScrollView, Text, Alert, ImageBackground, Modal, Slider } from 'react-native'
 import { StackNavigator } from 'react-navigation'
 import EvokCamera from '../src/CameraScreen.js'
 import TimeLine_ from '../src/_TimeLine.js'
@@ -24,7 +24,9 @@ export default class ElementScreen extends React.Component {
             headerTitleStyle: {
                 fontWeight: 'bold',
                 color: 'white',
-            }
+            },
+            headerRight:
+                <Switch />
         }
     }
 
@@ -51,6 +53,7 @@ export default class ElementScreen extends React.Component {
         this.onOpenedElementScreen(this.state.elementID)
         //this._getList()
     }
+
 
     onOpenedElementScreen = (elementID) => {
         this.setState({
@@ -196,9 +199,6 @@ export default class ElementScreen extends React.Component {
         return (
             <View style={{ justifyContent: 'space-evenly', alignItems: 'center' }}>
 
-                <Text  >
-                    Element name is: {JSON.stringify(this.state.elementObj.name)}
-                </Text>
 
                 <View style={evokStyles.projectCard}>
                     <CurrentPic
