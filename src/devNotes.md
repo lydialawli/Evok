@@ -24,13 +24,16 @@ WHAT DO I NEED TO MAKE THE TIMELINE WORK:
     - scale (to later change from ms to px and viceversa)
     - onTLchange()
     - onScrollChange(this.props.scrollPosition) //this function will pass an argument to the parent component(ElementScreen)
-- [ ] experiment with Flatlist insteasd of ScrollView
-- [ ] timelineDisplay working well
+- [x] experiment with Flatlist insteasd of ScrollView
+- [x] timelineDisplay working well
     - [x] show all instances
-    - [ ] create proper array example
-    - [ ] when currentTimestamp changes (given through parent as prop) the bar changes position (left-right)
+    - [x] create proper array example
+    - [x] when currentTimestamp changes (given through parent as prop) the bar changes position (left-right)
 
 - [ ] create a placeholder if element has no item yet (in flatlist component)
+- [ ] fix Gallery screen
+- [ ] make sure switching screens works well
+- [ ] add drawer to SettingScreen (create setting screen with one button (switch))
 
 
 
