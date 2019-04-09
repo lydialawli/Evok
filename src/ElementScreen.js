@@ -1,6 +1,6 @@
 import React from 'react'
 import { Image, StyleSheet, View, TouchableOpacity, Switch, Button, TouchableHighlight, ScrollView, Text, Alert, ImageBackground, Modal, Slider } from 'react-native'
-import { StackNavigator } from 'react-navigation'
+import { StackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation'
 import EvokCamera from '../src/CameraScreen.js'
 import TimeLine_ from '../src/_TimeLine.js'
 import { Ionicons } from '@expo/vector-icons'
@@ -25,8 +25,7 @@ export default class ElementScreen extends React.Component {
                 fontWeight: 'bold',
                 color: 'white',
             },
-            headerRight:
-                <Switch onValueChange={this.toggleSwitch} value={this.switchValue} />
+            
         }
     }
 
@@ -150,8 +149,50 @@ export default class ElementScreen extends React.Component {
     }
 
 
-
     render() {
+        const { navigate } = this.props.navigation
+        //console.log("Element mode")   
+
+
+        return (
+            <View style={{ justifyContent: 'space-evenly', alignItems: 'center' }}>
+                <Switch onValueChange={this.toggleSwitch} value={this.state.switchValue} />
+
+                <View style={evokStyles.projectCard}>
+                    <CurrentPic
+                        data={this.state.imageHistory}
+                        imagesFolder={FileSystem.documentDirectory + 'images/'}
+                        placeholder={this.state.placeholderImage}
+                        currentImage={this.state.currentImage}
+                        nextImage={this.state.nextImage}
+                        isHalfway={this.state.isHalfway}
+                        switchIsOn={this.state.switchValue}
+                    />
+                </View>
+
+
+                <View style={evokStyles.sliderCard}>
+                    <Text style={{ alignSelf: 'center', fontSize: 30, color: 'grey' }}>|</Text>
+                    <TimeLine
+                        data={this.state.imageHistory}
+                        timestamp={this.state.imageHistory[0].timestamp}
+                        currentImageTimestamp={this.state.currentImageTimestamp}
+                        width={300}
+                        scale={1 / 3600}
+                        mode={'horizontal'}
+                        cardWidth={300}
+                        onPositionChanged={this.getItemImage}
+                        styles={{ justifyContent: 'center', alignSelf: 'center' }}
+                        objWidth={100}
+                    />
+
+                </View>
+            </View>
+        )
+
+    }
+
+    _render() {
         const { navigate } = this.props.navigation
         //console.log("Element mode")
         // console.log('width is: ' + this.state.timelineWidth)
@@ -242,118 +283,5 @@ export default class ElementScreen extends React.Component {
     }
 
 
-    /*
-    _render() {
-        const { navigate } = this.props.navigation
-        console.log("Element mode")
-
-        let images = this.state.groupedPhotos.map(
-            (picObject) => {
-
-                let onPressPic = () => {
-                    console.log(picObject)
-                    this._setModalVisible(true, picObject)
-                }
-
-                return (
-                    <TouchableOpacity key={picObject.fileUri} onPress={onPressPic} onLongPress={() => this._alertDeleteWarning(picObject)}>
-                        <ImageBackground
-                            style={{ width: 300, height: 300, margin: 1 }}
-                            source={{ uri: picObject.fileUri }}>
-                            <Text> {new Date(picObject.timestamp).toDateString()} {new Date(picObject.timestamp).toLocaleTimeString()} </Text>
-                        </ImageBackground>
-                    </TouchableOpacity>
-                )
-            }
-        )
-
-        let fullImage = this._getFullImageView(this.state.selectedFullImagePicObject)
-
-        return (
-
-            <View style={evokStyles.elementContainer}>
-                <TouchableOpacity style={evokStyles.plusIcon} onPress={() => this._onCameraPressed(this.state.projectID)}>
-                    <Ionicons name="ios-add-circle-outline" size={40} color="black" />
-                </TouchableOpacity>
-                <View style={evokStyles.elementInfoDisplayContainer}>
-                    <View style={evokStyles.elementInfoDisplay2Containers} >
-                        <Text style={evokStyles.textRedElementInfoDisplay} >
-                            {this.state.groupedPhotos.length}
-                        </Text>
-                        <Text style={evokStyles.textRedElementInfoDisplay} >
-                            in 2 days
-                            </Text>
-                        <Text style={evokStyles.textRedElementInfoDisplay} >
-                            15
-                            </Text>
-                    </View>
-                    <View style={evokStyles.elementInfoDisplay2Containers} >
-                        <Text style={evokStyles.textGreyElementInfoDisplay} >
-                            Snaps
-                            </Text>
-                        <Text style={evokStyles.textGreyElementInfoDisplay} >
-                            Next
-                            </Text>
-                        <Text style={evokStyles.textGreyElementInfoDisplay} >
-                            Left
-                            </Text>
-                    </View>
-                </View>
-
-                <View style={evokStyles.projectCard}>
-                    <ScrollView contentContainerStyle={evokStyles.imageCarousel} horizontal={true}>
-                        {images.reverse()}
-                    </ScrollView>
-                </View>
-
-                <View style={evokStyles.timeLineCard}>
-                    <TimeLine />
-                </View>
-
-
-                <Modal
-                    visible={this.state.modalVisible}
-                    onRequestClose={() => { alert('Modal has been closed.') }}
-                    animationType={'slide'}
-                    transparent={true}
-                >
-                    <View style={evokStyles.modalWindow}>
-                        {fullImage}
-
-                        <TouchableHighlight style={evokStyles.buttonHideModal}
-                            onPress={() => {
-                                this._setModalVisible(!this.state.modalVisible)
-                            }}>
-                            <Text>Hide Picture</Text>
-                        </TouchableHighlight>
-                    </View>
-                </Modal>
-
-
-            </View>
-        )
-    }*/
 
 }
-
-
-/*
-old maybe useful code:
-
-   <View style={evokStyles.projectCard}>
-        <ScrollView contentContainerStyle={evokStyles.imageCarousel} horizontal={true}>
-            {images.reverse()}
-        </ScrollView>
-    </View>
-
-    NORMAL REACT NATIVE SLIDER:
-    <View style={{ height:50, width: 250, alignItems: 'stretch', justifyContent: 'center' }}>
-        <Slider
-            maximumValue={10}
-            minimumValue={0}
-            minimumTrackTintColor='#ffcc00'
-            value={this.state.sliderValue}
-            onValueChange={(sliderValue) => this.setState({ sliderValue })} />
-            <Text>Value: {this.state.sliderValue}</Text>
-    </View>
-*/
