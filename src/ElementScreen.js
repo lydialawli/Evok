@@ -26,7 +26,7 @@ export default class ElementScreen extends React.Component {
                 color: 'white',
             },
             headerRight:
-                <Switch />
+                <Switch onValueChange={this.toggleSwitch} value={this.switchValue} />
         }
     }
 
@@ -46,12 +46,18 @@ export default class ElementScreen extends React.Component {
         placeholderImage: 'https://facebook.github.io/react-native/docs/assets/favicon.png',
         currentImage: '',
         nextImage: '',
-        isHalfway: false
+        isHalfway: false,
+        switchValue: false,
     }
 
     async componentWillMount() {
         this.onOpenedElementScreen(this.state.elementID)
         //this._getList()
+    }
+
+    toggleSwitch = (value) => {
+        this.setState({ switchValue: value })
+        console.log('Switch is: ' + value)
     }
 
 
@@ -198,7 +204,7 @@ export default class ElementScreen extends React.Component {
 
         return (
             <View style={{ justifyContent: 'space-evenly', alignItems: 'center' }}>
-
+                <Switch onValueChange={this.toggleSwitch} value={this.state.switchValue} />
 
                 <View style={evokStyles.projectCard}>
                     <CurrentPic
@@ -208,6 +214,7 @@ export default class ElementScreen extends React.Component {
                         currentImage={this.state.currentImage}
                         nextImage={this.state.nextImage}
                         isHalfway={this.state.isHalfway}
+                        switchIsOn={this.state.switchValue}
                     />
                 </View>
 

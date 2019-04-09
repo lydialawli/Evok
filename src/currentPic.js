@@ -31,21 +31,11 @@ export default class CurrentPic extends Component {
         }
 
         else {
-            if (this.props.isHalfway == false) {
+            if (this.props.isHalfway && this.props.switchIsOn) {
                 return (
                     <TouchableOpacity >
                         <ImageBackground
-                            style={{ width: 300, height: 300, margin: 1 }}
-                            source={{ uri: this.props.currentImage }}>
-                        </ImageBackground>
-                    </TouchableOpacity>
-                )
-            }
-            else {
-                return (
-                    <TouchableOpacity >
-                        <ImageBackground
-                            style={{ width: 300, height: 300, margin: 1, opacity: 0.5,}}
+                            style={{ width: 300, height: 300, margin: 1, opacity: 0.5, }}
                             source={{ uri: this.props.currentImage }}>
                             <ImageBackground
                                 style={{ width: 300, height: 300, margin: 1, opacity: 0.5 }}
@@ -53,6 +43,16 @@ export default class CurrentPic extends Component {
                             </ImageBackground>
                         </ImageBackground>
 
+                    </TouchableOpacity>
+                )
+            }
+            else {
+                return (
+                    <TouchableOpacity >
+                        <ImageBackground
+                            style={{ width: 300, height: 300, margin: 1 }}
+                            source={{ uri: this.props.currentImage }}>
+                        </ImageBackground>
                     </TouchableOpacity>
                 )
             }
