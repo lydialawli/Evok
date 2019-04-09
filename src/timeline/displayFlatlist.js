@@ -130,6 +130,7 @@ export default class DisplayFlatlist extends React.Component {
                         obj={item}
                         ind= {index}
                         key={index}
+                        objWidth={this.props.objWidth}
                     />
                     )
                 }}

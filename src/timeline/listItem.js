@@ -18,7 +18,7 @@ export default class InstancesListItem extends Component {
                     height: 2,
                     borderColor: 'pink',
                     backgroundColor: 'pink',
-                    width: 100,
+                    width: this.props.objWidth,
                 }}>
 
                 </View>

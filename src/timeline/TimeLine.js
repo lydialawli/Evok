@@ -220,6 +220,7 @@ export default class TimeLine extends React.Component {
                     index={0}
                     onScrolled={this.updateParentCurrentMoment}
                     cardWidth={this.props.width}
+                    objWidth={100}
                 >
                 </DisplayFlatlist>
 
