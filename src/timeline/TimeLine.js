@@ -6,6 +6,7 @@ import evokStyles from '../evokStyles.js'
 import TimelineDisplay from '../timeline/timelineDisplay.js'
 import TimelineScroll from '../timeline/timelineScroll.js'
 import DisplayFlatlist from '../timeline/displayFlatlist.js'
+import utils from '../timeline/utils.js'
 
 let lineXhour =
     <View style={{ borderColor: 'transparent', borderBottomColor: 'green', borderWidth: 2, width: 20, height: 2 }}>
@@ -20,7 +21,8 @@ export default class TimeLine extends React.Component {
         currentMoment: this.props.timestamp,
         timelineWidth: 0,
         currentPosition: 0,
-        milisecToPixelFactor: this.props.scale
+        ms2pxFactor: this.props.scale,
+        barWidth: this.props.data.length * this.props.objWidth,
     }
 
     componentWillMount() {
@@ -33,31 +35,13 @@ export default class TimeLine extends React.Component {
         this.setState(
             {
                 timelineWidth: this.props.width,
-                durationInPx: this.getFullDurationInPixels(this.state.imageHistory),
-                currentPosition: this.milisecIntoPixels(this.state.currentMoment) + (this.state.timelineWidth * 0.5),
+                durationInPx: utils.getFullDurationInPixels(this.state.imageHistory,this.state.ms2pxFactor),
+                currentPosition: utils.milisecIntoPixels(this.state.currentMoment,this.state.ms2pxFactor) + (this.state.timelineWidth * 0.5),
                 genesisTimestamp: this.state.imageHistory[0].timestamp
             }
         )
+        console.log('barwidth:', this.state.barWidth)
     }
-
-    milisecIntoPixels = (ms) => {
-        return ms * this.state.milisecToPixelFactor
-    }
-
-
-    getFullDurationInPixels = (array) => {
-        if (array.length === 0)
-            return 0
-
-        let arrayLastItem = array.length - 1
-        return this.milisecIntoPixels(array[arrayLastItem].timestamp - array[0].timestamp)
-    }
-
-
-    getMsSinceGenesisTimestamp = (x) => {
-        return x.timestamp - this.state.genesisTimestamp
-    }
-
 
 
     _getTimelineBarWidth = () => {
@@ -81,8 +65,8 @@ export default class TimeLine extends React.Component {
     }
 
     _get1InstancePX = (imageObj) => {
-        let t = this.getMsSinceGenesisTimestamp(imageObj)
-        let instanceInPx = this.milisecIntoPixels(t)
+        let t = utils.getMsSinceGenesisTimestamp(imageObj, this.state.genesisTimestamp)
+        let instanceInPx = utils.milisecIntoPixels(t, this.state.ms2pxFactor)
 
 
         //console.log('instance px: '+instanceInPx)
@@ -95,8 +79,8 @@ export default class TimeLine extends React.Component {
 
 
     _getInstancePosition = (imageObj) => {
-        let t = this.getMsSinceGenesisTimestamp(imageObj)
-        return instanceInPx = this.milisecIntoPixels(t) + this.state.timelineWidth * 0.5
+        let t = utils.getMsSinceGenesisTimestamp(imageObj, this.state.genesisTimestamp)
+        return instanceInPx = utils.milisecIntoPixels(t, this.state.ms2pxFactor) + this.state.timelineWidth * 0.5
     }
 
     _getTimelineInstances = (array) => {
@@ -138,11 +122,11 @@ export default class TimeLine extends React.Component {
                 console.log('previousImage: ', previousImage)
                 if (index == 0) {
                     epochInMs = imageObj.timestamp
-                    epochInPx = this.milisecIntoPixels(epochInMs)
+                    epochInPx = utils.milisecIntoPixels(epochInMs,this.state.ms2pxFactor)
                 }
                 else {
                     epochInMs = imageObj.timestamp - previousImage.timestamp
-                    epochInPx = this.milisecIntoPixels(epochInMs)
+                    epochInPx = utils.milisecIntoPixels(epochInMs,this.state.ms2pxFactor)
                 }
                 return (
                     <View style={evokStyles.timelineObject} key={imageObj.timestamp}>
@@ -182,27 +166,20 @@ export default class TimeLine extends React.Component {
     updateParentCurrentMoment = (currentPosition) => {
         //this.props.onTimelineMoved(currentPosition)
         console.log('scrollPos-->', currentPosition)
-
-        var ind = Math.floor(currentPosition / 100)
+        
+        let maxPosition = this.state.barWidth
+        
+        let ind = Math.floor(currentPosition * this.props.data.length / maxPosition)
 
         if (ind < 0) {
             ind = 0
         }
-        if (ind >= this.state.imageHistory.length) {
-            ind = this.state.imageHistory.length - 1
+        if (ind >= this.props.data.length) {
+            ind = this.props.data.length - 1
         }
 
         console.log('ind:', ind)
         this.props.onPositionChanged(ind)
-
-    }
-    getIndex = (x) => {
-        if (x >= 0 && x <= 100)
-            return 0
-        else if (x >= 101 && x <= 200)
-            return 1
-        else if (x >= 201 && x <= 300)
-            return 2
     }
 
 
@@ -220,7 +197,7 @@ export default class TimeLine extends React.Component {
                     index={0}
                     onScrolled={this.updateParentCurrentMoment}
                     cardWidth={this.props.width}
-                    objWidth={100}
+                    objWidth={this.props.objWidth}
                 >
                 </DisplayFlatlist>
 

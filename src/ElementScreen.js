@@ -270,6 +270,7 @@ export default class ElementScreen extends React.Component {
                         cardWidth={300}
                         onPositionChanged={this.getItemImage}
                         styles={{justifyContent: 'center', alignSelf: 'center'}}
+                        objWidth={100}
                     />
 
                 </View>
