@@ -3,15 +3,15 @@ import { Text, View, TouchableOpacity, StyleSheet, Image } from 'react-native'
 
 export default class ElementCard extends React.Component {
 
-    onPressed = ()=>{
-        
-        this.props.onCardPressed(this.props.id)
+    onPressed = () => {
+
+        this.props.onCardPressed(this.props.id, this.props.name)
     }
 
-    onLongPressed  =() => {
+    onLongPressed = () => {
         this.props.onLongPressed(this.props.id)
     }
-    
+
     render() {
 
         return (

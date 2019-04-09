@@ -14,15 +14,17 @@ import TimeLine from '../src/timeline/TimeLine.js'
 
 
 export default class ElementScreen extends React.Component {
-    static navigationOptions = {
-        title: 'Element',
-        headerStyle: {
-            backgroundColor: 'grey',
-        },
-        headerTintColor: 'white',
-        headerTitleStyle: {
-            fontWeight: 'bold',
-            color: 'white',
+    static navigationOptions = ({ navigation }) => {
+        return {
+            title: navigation.state.params.elementName,
+            headerStyle: {
+                backgroundColor: 'grey',
+            },
+            headerTintColor: 'white',
+            headerTitleStyle: {
+                fontWeight: 'bold',
+                color: 'white',
+            }
         }
     }
 
@@ -124,7 +126,7 @@ export default class ElementScreen extends React.Component {
     getItemImage = (index, index2, isHalfway) => {
         var pic1 = this.state.imageHistory[index].uri
         var pic2 = this.state.imageHistory[index2].uri
-       
+
         this.setState({
             currentImage: this.state.rootDirectory + 'images/' + pic1,
             isHalfway: isHalfway

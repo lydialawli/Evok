@@ -83,14 +83,14 @@ export default class HomeScreen extends React.Component {
         )
     }
 
-    alertCardOptions = (elementID) => {
+    alertCardOptions = (elementID, elementName) => {
         Alert.alert(
             'Take picture?',
             'Or show cards index?',
             [
-                { text: 'go to Element', onPress: () => this.navigateToELement(elementID) },
+                { text: 'go to Element', onPress: () => this.navigateToELement(elementID, elementName) },
                 { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
-                { text: 'YES', onPress: () => this.navigateToCamera('Myproject', elementID) },
+                { text: 'YES', onPress: () => this.navigateToCamera('Myproject', elementID, elementName) },
             ],
             { cancelable: false }
         )
@@ -106,8 +106,8 @@ export default class HomeScreen extends React.Component {
         })
     }
 
-    navigateToELement = (elementID) => {
-        this.props.navigation.navigate('Element', { elementID: elementID })
+    navigateToELement = (elementID,elementName) => {
+        this.props.navigation.navigate('Element', { elementID: elementID,elementName })
     }
 
     _getListCards = () => {
@@ -151,7 +151,7 @@ export default class HomeScreen extends React.Component {
             modalVisible: visible,
         })
     }
-
+    //FUNCTIONS TO DOWNLOAD PICS-----------------------------------------------
     _setImageHistoryObj = (elementID) => {
         this.setState({
             imageHistory: newEvokFileSystem.getElementObj(elementID).imageHistory,
@@ -169,6 +169,7 @@ export default class HomeScreen extends React.Component {
     _consoleImagePath = (imagePath) =>{
         console.log('imagePath is:', JSON.stringify(imagePath))
     }
+    //-------------------------------------------------------------------------
 
     elementTitleInput = () => {
         return (
