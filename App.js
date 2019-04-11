@@ -6,10 +6,16 @@ import HomeScreen from '../Evok/src/HomeScreen.js'
 import ElementScreen from '../Evok/src/ElementScreen.js'
 import GalleryScreen from '../Evok/src/GalleryScreen.js'
 import CameraScreen from '../Evok/src/CameraScreen.js'
+import { Ionicons } from '@expo/vector-icons'
 
 const TabNavigation = TabNavigator({
     Element: { screen: ElementScreen },
-    Gallery: { screen: GalleryScreen },
+    Gallery: {
+        screen: GalleryScreen,
+        navigationOptions: {
+            tabBarIcon: < Ionicons size={20} name={'md-images'} />
+        }
+    },
 })
 
 const NavigationApp = StackNavigator(

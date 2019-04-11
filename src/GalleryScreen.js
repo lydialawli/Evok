@@ -13,7 +13,18 @@ export default class GalleryScreen extends React.Component {
         title: 'Gallery',
     }
 
-    state = {
+    render() {
+        const { navigate } = this.props.navigation
+        console.log("Gallery mode")
+        return (
+            <View style={evokStyles.galleryView}>
+                <Text>I am gallery screen</Text>
+            </View>
+        )
+    }
+
+
+    /*state = {
         groupedPhotos: [],
         modalVisible: false,
         selectedFullImagePicObject:  null
@@ -142,6 +153,6 @@ export default class GalleryScreen extends React.Component {
 
             </View>
         )
-    }
+    }*/
 
 }
