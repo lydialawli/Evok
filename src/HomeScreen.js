@@ -108,11 +108,6 @@ export default class HomeScreen extends React.Component {
     }
 
     navigateToELement = (elementID, elementName) => {
-       /* const setParamsAction = NavigationActions.setParams({
-            params: { elementID: elementID, elementName },
-            key: 'Gallery',
-        })
-        this.props.navigation.dispatch(setParamsAction)*/
         this.props.navigation.navigate('Tabs', { elementID: elementID, elementName })
 
     }

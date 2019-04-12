@@ -15,43 +15,36 @@ export const Tabs = TabNavigator(
       screen: ElementScreen,
       navigationOptions: {
         title: 'Timeline',
-      }
+        tabBarIcon: <Ionicons name="md-settings" size={10} color="white"></Ionicons>
+      },
+
     },
     Gallery: {
       screen: GalleryScreen,
       navigationOptions: {
         title: 'Gallery',
-      }
+      },
     },
   },
   {
-    defaultNavigationOptions: ({ navigation }) => ({
-      tabBarIcon: ({ focused, horizontal, tintColor }) => {
-        const { routeName } = navigation.state
-        let IconComponent = Ionicons
-        let iconName;
-        if (routeName === 'Timeline') {
-          iconName = `ios-information-circle${focused ? '' : '-outline'}`;
-
-        } else if (routeName === 'Gallery') {
-          iconName = "md-images"
-        }
-
-        return <IconComponent name={iconName} size={25} color={tintColor} />;
-      },
-    }),
     tabBarOptions: {
       activeTintColor: 'white',
       inactiveTintColor: 'gray',
+      activeBackgroundColor: '#666699',
+      inactiveBackgroundColor: 'yellow',
+      //showLabel: false
+
     },
-    tabBarColor: 'gray'
+  },
+  {
+    headerMode: 'screen'
   }
 )
 
 export const HomeStack = StackNavigator(
   {
     Home: { screen: HomeScreen },
-    Tab: { screen: Tabs },
+    Tab: { screen: Tabs, navigationOptions: { title: 'Header title' } },
     Camera: { screen: CameraScreen },
     // Gallery: { screen: GalleryScreen },
     //Element: { screen: ElementScreen }
@@ -89,16 +82,17 @@ export const SettingsStack = StackNavigator({
 
 export const GalleryStack = StackNavigator(
   {
-  Settings: {
-    screen: GalleryScreen,
-    navigationOptions: {
-      title: 'Gallery',
-    },
-  }},
+    Settings: {
+      screen: GalleryScreen,
+      navigationOptions: {
+        title: 'Gallery',
+      },
+    }
+  },
   {
     initialRouteName: 'Gallery',
   }
-  
+
 )
 
 export const Root = StackNavigator({
@@ -106,7 +100,12 @@ export const Root = StackNavigator({
     screen: HomeStack
   },
   Tabs: {
-    screen: Tabs
+    screen: Tabs,
+    navigationOptions: {
+      title: 'Header title', headerStyle: {
+        backgroundColor: '#999966',
+      }
+    }
   },
   Settings: {
     screen: SettingsStack
@@ -114,7 +113,8 @@ export const Root = StackNavigator({
   Gallery: {
     screen: GalleryStack
   },
-}, {
+},
+  {
     headerMode: 'none',
   },
 

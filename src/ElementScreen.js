@@ -16,6 +16,7 @@ import TimeLine from '../src/timeline/TimeLine.js'
 export default class ElementScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
+            header: 'true',
             title: 'Element',
             headerStyle: {
                 backgroundColor: 'grey',
@@ -72,7 +73,7 @@ export default class ElementScreen extends React.Component {
             elementObj: newEvokFileSystem.getElementObj(elementID),
             imageHistory: newEvokFileSystem.getElementObj(elementID).imageHistory,
         })
-        console.log('imageHistory: ' + this.state.imageHistory)
+        //console.log('imageHistory: ' + this.state.imageHistory)
     }
 
 
@@ -158,7 +159,7 @@ export default class ElementScreen extends React.Component {
 
     render() {
         const { navigate } = this.props.navigation
-        //console.log("Element mode")   
+        console.log("Element mode")   
 
 
         return (

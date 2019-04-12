@@ -5,12 +5,13 @@ import EvokCamera from '../src/CameraScreen.js'
 import { Ionicons } from '@expo/vector-icons'
 import evokStyles from '../src/evokStyles.js'
 import HomeScreen from '../App.js'
-import evokFileSystem from '../src/oldEvokFilesystem.js'
+import newEvokFileSystem from '../src/newEvokFileSystem.js'
 
 export default class GalleryScreen extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
         return {
+            header: 'true',
             title: 'Gallery',
             headerStyle: {
                 backgroundColor: 'grey',
@@ -30,23 +31,132 @@ export default class GalleryScreen extends React.Component {
         }
     }
 
-    state={
-        elementID:this.props.navigation.state.params.elementID
+    state = {
+        elementID: this.props.navigation.state.params.elementID,
+        elementObj: {},
+        imageHistory: {},
+        modalVisible: false,
+        selectedFullImagePicObject: {}
+    }
+
+    async componentWillMount() {
+        this.onOpenGallery(this.state.elementID)
+    }
+
+    onOpenGallery = (elementID) => {
+        this.setState({
+            elementObj: newEvokFileSystem.getElementObj(elementID),
+            imageHistory: newEvokFileSystem.getElementObj(elementID).imageHistory,
+        })
+        console.log('imageHistory: ' + JSON.stringify(this.state.imageHistory,null,2))
+    }
+
+    getImagesPaths = () => {
+        let images = this.state.imageHistory.map(
+            (imageObj) => {
+
+                let onPressPic = () => {
+                    console.log('pressed img is:',imageObj)
+                    this.setModalVisible(true, imageObj)
+                }
+                let uri = imageObj.uri
+
+                let fileUri = newEvokFileSystem.getImagePath(uri)
+                let t = imageObj.timestamp
+
+                return (
+                    <TouchableOpacity key={t} onPress={onPressPic} onLongPress={() => this.alertDeleteWarning(imageObj)}>
+                        <ImageBackground
+                            style={{ width: 100, height: 100, margin: 1 }}
+                            source={{ uri: fileUri }}>
+                        </ImageBackground>
+                    </TouchableOpacity>
+                )
+            }
+        )
+        return images
+    }
+
+    alertDeleteWarning = (imageObj) => {
+        Alert.alert(
+            'Delete ' + imageObj.uri,
+            'Are you sure?',
+            [
+                { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
+                //{ text: 'OK', onPress: () => {'delete image permanently', this.getImagesPaths) } }
+            ],
+            { cancelable: false }
+        )
+    }
+
+    getFullImageView = (imageObj) => {
+
+        console.log('viewFullImage', imageObj)
+        let fileUri = newEvokFileSystem.getImagePath(imageObj.uri)
+
+        if (!imageObj)
+            return (
+                <View style={{ flex: 1 }}>
+                    <Text> No imageObj   </Text>
+                </View>
+            )
+
+        return (
+            <View style={{ width: '90%', height: '90%', alignItems: 'center', backgroundColor: 'transparent' }}>
+                <Image
+                    style={{ width: '100%', height: '100%' }}
+                    source={{ uri: fileUri }}
+                    resizeMode="contain"
+                />
+            </View>
+        )
+    }
+
+    setModalVisible =(visible, imageObj) => {
+        console.log('modalview', visible, imageObj)
+        this.setState({
+            modalVisible: visible,
+            selectedFullImagePicObject: imageObj
+        })
+
     }
 
 
     render() {
 
         const { navigate } = this.props.navigation
+        let images = this.getImagesPaths()
+        let fullImage = this.getFullImageView(this.state.selectedFullImagePicObject)
 
         console.log("Gallery mode")
-        console.log('elementID:',this.state.elementID)
         return (
             <View style={evokStyles.galleryView}>
-                <Text style={{ color: 'white' }}>I am gallery screen</Text>
+                <ScrollView contentContainerStyle={evokStyles.imagesWrapper}>
+                    {images}
+                </ScrollView>
+                <Modal
+                    visible={this.state.modalVisible}
+                    onRequestClose={() => { alert('Modal has been closed.') }}
+                    animationType= {'slide'}
+                    transparent = {true}
+                   >
+
+                    <View style={evokStyles.modalWindow}>
+                        {fullImage}
+
+                        <TouchableHighlight style={evokStyles.buttonHideModal}
+                            onPress={() => {
+                                this.setModalVisible(!this.state.modalVisible)
+                            }}>
+                            <Text>Hide Picture</Text>
+                        </TouchableHighlight>
+                    </View>
+                </Modal>
             </View>
         )
     }
+
+
 
 
     /*state = {
