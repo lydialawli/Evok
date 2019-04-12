@@ -36,7 +36,7 @@ export default class GalleryScreen extends React.Component {
         elementObj: {},
         imageHistory: {},
         modalVisible: false,
-        selectedFullImagePicObject: {}
+        selectedImageToPreview: ''
     }
 
     async componentWillMount() {
@@ -89,10 +89,11 @@ export default class GalleryScreen extends React.Component {
         )
     }
 
-    getFullImageView = (imageObj) => {
+    getFullImageView = (uri) => {
 
-        console.log('viewFullImage', imageObj)
-        let fileUri = newEvokFileSystem.getImagePath(imageObj.uri)
+        //console.log('viewFullImage', imageObj)
+       
+        let fullPath = newEvokFileSystem.getImagePath(uri)
 
         if (!imageObj)
             return (
@@ -105,7 +106,7 @@ export default class GalleryScreen extends React.Component {
             <View style={{ width: '90%', height: '90%', alignItems: 'center', backgroundColor: 'transparent' }}>
                 <Image
                     style={{ width: '100%', height: '100%' }}
-                    source={{ uri: fileUri }}
+                    source={{ uri: fullPath }}
                     resizeMode="contain"
                 />
             </View>
@@ -113,10 +114,10 @@ export default class GalleryScreen extends React.Component {
     }
 
     setModalVisible =(visible, imageObj) => {
-        console.log('modalview', visible, imageObj)
+        //console.log('modalview', visible, imageObj)
         this.setState({
             modalVisible: visible,
-            selectedFullImagePicObject: imageObj
+            selectedImageToPreview: imageObj.uri
         })
 
     }
@@ -126,7 +127,7 @@ export default class GalleryScreen extends React.Component {
 
         const { navigate } = this.props.navigation
         let images = this.getImagesPaths()
-        let fullImage = this.getFullImageView(this.state.selectedFullImagePicObject)
+        let fullImage = this.getFullImageView(this.state.selectedImageToPreview)
 
         console.log("Gallery mode")
         return (
