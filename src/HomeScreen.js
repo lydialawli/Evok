@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, View, Button, TouchableOpacity, TouchableHighlight, TextInput, Icon, Dimensions, ImageBackground, Modal, Alert, ScrollView, Image } from 'react-native'
-import { StackNavigator } from 'react-navigation'
+import { NavigationActions } from 'react-navigation'
 import CameraScreen from '../src/CameraScreen.js'
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 import evokStyles from '../src/evokStyles.js'
@@ -49,12 +49,13 @@ export default class HomeScreen extends React.Component {
         newEvokFileSystem.createImagesDirectoryIfDoesnotExist()
     }
 
+
     onStorageReady = () => {
         this.setState({
             elements: newEvokFileSystem.getArrayOfElements(),
         })
-        console.log("..elements: " + JSON.stringify(this.state.elements,null,2))
-        
+        console.log("..elements: " + JSON.stringify(this.state.elements, null, 2))
+
     }
 
     getListElementCards = () => {
@@ -106,8 +107,14 @@ export default class HomeScreen extends React.Component {
         })
     }
 
-    navigateToELement = (elementID,elementName) => {
-        this.props.navigation.navigate('Element', { elementID: elementID,elementName })
+    navigateToELement = (elementID, elementName) => {
+       /* const setParamsAction = NavigationActions.setParams({
+            params: { elementID: elementID, elementName },
+            key: 'Gallery',
+        })
+        this.props.navigation.dispatch(setParamsAction)*/
+        this.props.navigation.navigate('Tabs', { elementID: elementID, elementName })
+
     }
 
     _getListCards = () => {
@@ -158,15 +165,15 @@ export default class HomeScreen extends React.Component {
         })
     }
 
-   _safePic = (uri, elementID, callback1, callback2) => {
+    _safePic = (uri, elementID, callback1, callback2) => {
         newEvokFileSystem._downloadImage(uri, elementID, this._setImageHistoryObj, callback1, callback2)
     }
 
     _displayElementID = (elementID) => {
-        console.log('elementID: ',elementID)
+        console.log('elementID: ', elementID)
     }
 
-    _consoleImagePath = (imagePath) =>{
+    _consoleImagePath = (imagePath) => {
         console.log('imagePath is:', JSON.stringify(imagePath))
     }
     //-------------------------------------------------------------------------
@@ -193,7 +200,9 @@ export default class HomeScreen extends React.Component {
     }
 
     render() {
-        const { navigate } = this.props.navigation;
+        const { navigate } = this.props.navigation
+
+
         //console.log("homescreen mode")
         let textInput = this.elementTitleInput()
         let projectImage = <Text>Image goes here</Text>
@@ -213,16 +222,16 @@ export default class HomeScreen extends React.Component {
                             {this.getListElementCards()}
                         </View>
 
-                        <TouchableOpacity style={styles.card} onPress={() => 
-                            this._safePic ('http://www.bleaq.com/wp-content/uploads/kate-macdowell-01.jpg',
-                            1554655385269,
-                            this._displayElementID,
-                            this._consoleImagePath
+                        <TouchableOpacity style={styles.card} onPress={() =>
+                            this._safePic('http://www.bleaq.com/wp-content/uploads/kate-macdowell-01.jpg',
+                                1554655385269,
+                                this._displayElementID,
+                                this._consoleImagePath
 
                             )}>
                             <Text style={evokStyles.topBarText}> Add a pic </Text>
                         </TouchableOpacity>
-    
+
                     </ScrollView>
 
                     <Modal

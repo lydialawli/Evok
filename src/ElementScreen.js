@@ -16,7 +16,7 @@ import TimeLine from '../src/timeline/TimeLine.js'
 export default class ElementScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
-            title: navigation.state.params.elementName,
+            title: 'Element',
             headerStyle: {
                 backgroundColor: 'grey',
             },
@@ -25,7 +25,14 @@ export default class ElementScreen extends React.Component {
                 fontWeight: 'bold',
                 color: 'white',
             },
-            
+            headerRight: <Ionicons
+                name="md-settings"
+                size={30}
+                color="white"
+                style={{paddingRight:20}}
+                onPress={() => navigation.navigate('Settings')}
+            ></Ionicons>
+
         }
     }
 

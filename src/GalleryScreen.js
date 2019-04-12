@@ -8,17 +8,42 @@ import HomeScreen from '../App.js'
 import evokFileSystem from '../src/oldEvokFilesystem.js'
 
 export default class GalleryScreen extends React.Component {
-    static navigationOptions = {
-        header: null,
-        title: 'Gallery',
+
+    static navigationOptions = ({ navigation }) => {
+        return {
+            title: 'Gallery',
+            headerStyle: {
+                backgroundColor: 'grey',
+            },
+            headerTintColor: 'white',
+            headerTitleStyle: {
+                fontWeight: 'bold',
+                color: 'white',
+            },
+            headerRight: <Ionicons
+                name="md-settings"
+                size={30}
+                color="white"
+                style={{ paddingRight: 20 }}
+                onPress={() => navigation.navigate('Settings')}
+            ></Ionicons>
+        }
     }
 
+    state={
+        elementID:this.props.navigation.state.params.elementID
+    }
+
+
     render() {
+
         const { navigate } = this.props.navigation
+
         console.log("Gallery mode")
+        console.log('elementID:',this.state.elementID)
         return (
             <View style={evokStyles.galleryView}>
-                <Text>I am gallery screen</Text>
+                <Text style={{ color: 'white' }}>I am gallery screen</Text>
             </View>
         )
     }
