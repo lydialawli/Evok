@@ -48,7 +48,7 @@ export default class GalleryScreen extends React.Component {
             elementObj: newEvokFileSystem.getElementObj(elementID),
             imageHistory: newEvokFileSystem.getElementObj(elementID).imageHistory,
         })
-        console.log('imageHistory: ' + JSON.stringify(this.state.imageHistory,null,2))
+        console.log('imageHistory: ' + JSON.stringify(this.state.imageHistory, null, 2))
     }
 
     getImagesPaths = () => {
@@ -56,8 +56,9 @@ export default class GalleryScreen extends React.Component {
             (imageObj) => {
 
                 let onPressPic = () => {
-                    console.log('pressed img is:',imageObj)
+                    console.log('pressed img is:', imageObj)
                     this.setModalVisible(true, imageObj)
+
                 }
                 let uri = imageObj.uri
 
@@ -91,14 +92,15 @@ export default class GalleryScreen extends React.Component {
 
     getFullImageView = (uri) => {
 
-        //console.log('viewFullImage', imageObj)
-       
         let fullPath = newEvokFileSystem.getImagePath(uri)
-
-        if (!imageObj)
+        //console.log('viewFullImage', uri)
+        
+        if (uri=='')
             return (
                 <View style={{ flex: 1 }}>
-                    <Text> No imageObj   </Text>
+                    <Text style={{ color: 'white', fontSize: 20 }}>
+                        No imageObj
+                     </Text>
                 </View>
             )
 
@@ -113,7 +115,7 @@ export default class GalleryScreen extends React.Component {
         )
     }
 
-    setModalVisible =(visible, imageObj) => {
+    setModalVisible = (visible, imageObj) => {
         //console.log('modalview', visible, imageObj)
         this.setState({
             modalVisible: visible,
@@ -138,16 +140,16 @@ export default class GalleryScreen extends React.Component {
                 <Modal
                     visible={this.state.modalVisible}
                     onRequestClose={() => { alert('Modal has been closed.') }}
-                    animationType= {'slide'}
-                    transparent = {true}
-                   >
+                    animationType={'slide'}
+                    transparent={true}
+                >
 
                     <View style={evokStyles.modalWindow}>
                         {fullImage}
 
                         <TouchableHighlight style={evokStyles.buttonHideModal}
                             onPress={() => {
-                                this.setModalVisible(!this.state.modalVisible)
+                                this.setModalVisible(!this.state.modalVisible, '')
                             }}>
                             <Text>Hide Picture</Text>
                         </TouchableHighlight>
