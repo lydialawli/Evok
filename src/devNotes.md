@@ -31,7 +31,8 @@ WHAT DO I NEED TO MAKE THE TIMELINE WORK:
     - [x] when currentTimestamp changes (given through parent as prop) the bar changes position (left-right)
 
 - [ ] create a placeholder if element has no item yet (in flatlist component)
-- [ ] fix Gallery screen
+- [x] fix Gallery screen
+- [ ] make timeline date work
 - [ ] make sure switching screens works well
 - [ ] add drawer to SettingScreen (create setting screen with one button (switch))
 
