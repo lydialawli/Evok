@@ -21,7 +21,7 @@ storageExists = (callback1, callback) => {
     let fileUri = rootDirectory + storageFileName
 
     FileSystem.getInfoAsync(fileUri).then((obj) => {
-        console.log(obj)
+        //console.log(obj)
         callback1(obj.exists, callback)
     })
 }

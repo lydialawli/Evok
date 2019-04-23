@@ -35,7 +35,7 @@ WHAT DO I NEED TO MAKE THE TIMELINE WORK:
 - [ ] make timeline date work
 - [ ] make sure switching screens works well
 - [ ] add drawer to SettingScreen (create setting screen with one button (switch))
-
+- [ ] make element card items display in row - fix error
 
 
 

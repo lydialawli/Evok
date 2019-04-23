@@ -38,7 +38,8 @@ export default class HomeScreen extends React.Component {
             modalVisible: false,
             placeholderElementName: 'enter title',
             newTextInput: '',
-            imageHistory: {}
+            imageHistory: {},
+            placeHolderImage: 'https://i.pinimg.com/564x/e1/2a/9e/e12a9ed7c61da354c6cfdaf811cf6c3c.jpg'
         }
 
     }
@@ -54,7 +55,7 @@ export default class HomeScreen extends React.Component {
         this.setState({
             elements: newEvokFileSystem.getArrayOfElements(),
         })
-        console.log("..elements: " + JSON.stringify(this.state.elements, null, 2))
+        //console.log("..elements: " + JSON.stringify(this.state.elements, null, 2))
 
     }
 
@@ -67,6 +68,8 @@ export default class HomeScreen extends React.Component {
                 id={e.id}
                 onCardPressed={this.alertCardOptions}
                 onLongPressed={this.alertLongPressed}
+                data={e}
+                placeHolderImage={this.state.placeHolderImage}
             />
         })
         return listOfElementCards
