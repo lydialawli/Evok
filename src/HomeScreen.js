@@ -39,7 +39,7 @@ export default class HomeScreen extends React.Component {
             placeholderElementName: 'enter title',
             newTextInput: '',
             imageHistory: {},
-            placeHolderImage: 'https://i.pinimg.com/564x/e1/2a/9e/e12a9ed7c61da354c6cfdaf811cf6c3c.jpg'
+            placeHolderImage: 'https://i.pinimg.com/564x/e1/2a/9e/e12a9ed7c61da354c6cfdaf811cf6c3c.jpg',
         }
 
     }
@@ -48,12 +48,14 @@ export default class HomeScreen extends React.Component {
         //this._getArrayOfDirectories()
         newEvokFileSystem.startStorage(this.onStorageReady)
         newEvokFileSystem.createImagesDirectoryIfDoesnotExist()
+        
     }
 
 
     onStorageReady = () => {
         this.setState({
             elements: newEvokFileSystem.getArrayOfElements(),
+            elementCardSize: {width:300, height: 100}
         })
         //console.log("..elements: " + JSON.stringify(this.state.elements, null, 2))
 
@@ -70,6 +72,8 @@ export default class HomeScreen extends React.Component {
                 onLongPressed={this.alertLongPressed}
                 data={e}
                 placeHolderImage={this.state.placeHolderImage}
+                cardWidth= {this.state.elementCardSize.width}
+                cardHeight= {this.state.elementCardSize.height}
             />
         })
         return listOfElementCards
@@ -284,6 +288,7 @@ styles = StyleSheet.create({
         width: 300,
         height: 100,
         borderColor: '#ffb84d',
+        flexDirection: 'row',
         justifyContent: 'center',
         backgroundColor: 'lightblue',
         alignItems: 'center',

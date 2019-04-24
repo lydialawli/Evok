@@ -42,49 +42,85 @@ export default class ElementCard extends React.Component {
         return (
             <Image
                 style={{
-                    width: 90, height: 90,
+                    width: this.props.cardHeight, height: this.props.cardHeight, borderRadius: 5,
                 }}
                 source={{ uri: filePath }}>
             </Image>
         )
     }
 
+    getTotalSnaps = () => {
+        if (!this.props.data.imageHistory) {
+            return 0
+        }
+        else {
+            //console.log('elements imageHistory>', this.props.data.imageHistory)
+            return this.props.data.imageHistory.length
+        }
+    }
+
     render() {
         let imageDisplayed = this.getImageToDisplay()
+        let snaps = this.getTotalSnaps()
+
         return (
-            <View sthyle={{ flexDirection: 'row' }}>
-                <TouchableOpacity
-                    style={styles.card}
-                    onPress={this.onPressed}
-                    onLongPress={this.onLongPressed}
-                >
-                    <View style={styles.objectsInCard}>
-                        {imageDisplayed}
-                        <Text> {this.props.name}</Text>
+
+            <TouchableOpacity
+                style={cardStyle.card}
+                onPress={this.onPressed}
+                onLongPress={this.onLongPressed}
+            >
+                <View style={cardStyle.objectsInCard}>
+                    {imageDisplayed}
+                    <View style={cardStyle.textCard}>
+                        <Text style={cardStyle.title}> {this.props.name}</Text>
+                        <Text style={cardStyle.text}> {snaps} snaps </Text>
                     </View>
-                </TouchableOpacity>
-            </View>
+                </View>
+            </TouchableOpacity>
+
         )
     }
 }
 
 
-styles = StyleSheet.create({
+cardStyle = StyleSheet.create({
     card: {
         width: 300,
         height: 100,
         backgroundColor: 'lightblue',
-        alignItems: 'flex-start',
+        //alignItems: 'flex-start',
         margin: 10,
         borderRadius: 10,
         borderColor: '#ffb84d',
         elevation: 3,
     },
     objectsInCard: {
-        display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'center',
-        alignSelf: 'center',
-    }
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+
+    textCard: {
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+
+    title: {
+        textAlign: 'center',
+        color: 'black',
+        textShadowRadius: 2,
+        fontWeight: 'bold',
+        fontSize: 25,
+    },
+
+    text: {
+        textAlign: 'center',
+        color: 'grey',
+        textShadowRadius: 2,
+        fontWeight: 'bold',
+        fontSize: 15,
+    },
 })
 
