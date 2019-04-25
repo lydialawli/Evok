@@ -15,9 +15,11 @@ import TimeLine from '../src/timeline/TimeLine.js'
 
 export default class ElementScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
+        const {params} = navigation.state
         return {
             //header: 'false',
-            title: 'Element',
+            headerTitle: params.elementName,
+        
             headerStyle: {
                 backgroundColor: 'grey',
             },

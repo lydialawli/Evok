@@ -36,7 +36,7 @@ export const Tabs = TabNavigator(
       activeBackgroundColor: '#666699',
       inactiveBackgroundColor: 'yellow',
       labelStyle: {
-        fontSize: 15,
+        fontSize: 12,
       },
       style: {
         backgroundColor: 'grey',
@@ -84,10 +84,12 @@ export const Root = StackNavigator({
   Tabs: {
     screen: Tabs,
     navigationOptions: {
-      title: 'Element Screen',
+      title: 'Element name',
       headerStyle: {
         backgroundColor: 'grey', 
         elevation: 0,
+        height: 50,
+        
       },
       headerTitleStyle: {
         fontWeight: 'bold',
