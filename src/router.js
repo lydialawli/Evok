@@ -15,7 +15,7 @@ export const Tabs = TabNavigator(
       screen: ElementScreen,
       navigationOptions: {
         title: 'Timeline',
-        tabBarIcon: <Ionicons name="md-settings" size={20} color="white"></Ionicons>
+        tabBarIcon: <Ionicons name="ios-more-outline" size={20} color="white"></Ionicons>
       },
 
     },
@@ -24,10 +24,7 @@ export const Tabs = TabNavigator(
       screen: GalleryScreen,
       navigationOptions: {
         title: 'Gallery',
-      },
-      navigationOptions: {
-        title: 'Gallery',
-        tabBarIcon: <Ionicons name="md-settings" size={20} color="white"></Ionicons>
+        tabBarIcon: <Ionicons name="md-images" size={20} color="white"></Ionicons>
       },
     },
   },
@@ -44,7 +41,7 @@ export const Tabs = TabNavigator(
       style: {
         backgroundColor: 'grey',
       },
-
+      showIcon: 'true'
       //showLabel: false
     },
   },
@@ -91,8 +88,6 @@ export const Root = StackNavigator({
       headerStyle: {
         backgroundColor: 'grey', 
         elevation: 0,
-    
-
       },
       headerTitleStyle: {
         fontWeight: 'bold',

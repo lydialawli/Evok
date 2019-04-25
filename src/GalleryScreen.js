@@ -29,6 +29,7 @@ export default class GalleryScreen extends React.Component {
                 style={{paddingRight:20}}
                 onPress={() => navigation.navigate('Settings')}
             ></Ionicons>,
+            //tabBarIcon: <Ionicons name="md-settings" size={20} color="white"></Ionicons>
 
         }
     }
