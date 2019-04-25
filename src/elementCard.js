@@ -42,7 +42,7 @@ export default class ElementCard extends React.Component {
         return (
             <Image
                 style={{
-                    width: this.props.cardHeight, height: this.props.cardHeight, borderRadius: 5,
+                    width: this.props.cardHeight, height: this.props.cardHeight, borderRadius: 5, 
                 }}
                 source={{ uri: filePath }}>
             </Image>

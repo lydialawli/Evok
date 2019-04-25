@@ -34,6 +34,7 @@ WHAT DO I NEED TO MAKE THE TIMELINE WORK:
 - [x] fix Gallery screen
 - [ ] make timeline date work
 - [ ] make sure switching screens works well
+- [ ] make element screen header visible + tabs too
 - [ ] add drawer to SettingScreen (create setting screen with one button (switch))
 - [ ] make element card items display in row - fix error
 

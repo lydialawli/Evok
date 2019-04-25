@@ -8,7 +8,7 @@ import evokFileSystem from '../src/oldEvokFilesystem.js'
 
 export default class SettingsScreen extends React.Component {
 
-    static navigationOptions = ({ navigation }) => {
+    /*static navigationOptions = ({ navigation }) => {
         return {
             title: 'Settings',
             headerStyle: {
@@ -27,7 +27,7 @@ export default class SettingsScreen extends React.Component {
                 onPress={() => navigation.navigate('Home')}
             ></Ionicons>
         }
-    }
+    }*/
 
     render() {
         const { navigate } = this.props.navigation

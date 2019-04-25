@@ -11,11 +11,12 @@ export default class GalleryScreen extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
         return {
-            header: 'true',
+            //header: 'false',
             title: 'Gallery',
             headerStyle: {
                 backgroundColor: 'grey',
             },
+          
             headerTintColor: 'white',
             headerTitleStyle: {
                 fontWeight: 'bold',
@@ -25,9 +26,10 @@ export default class GalleryScreen extends React.Component {
                 name="md-settings"
                 size={30}
                 color="white"
-                style={{ paddingRight: 20 }}
+                style={{paddingRight:20}}
                 onPress={() => navigation.navigate('Settings')}
-            ></Ionicons>
+            ></Ionicons>,
+
         }
     }
 

@@ -15,25 +15,37 @@ export const Tabs = TabNavigator(
       screen: ElementScreen,
       navigationOptions: {
         title: 'Timeline',
-        tabBarIcon: <Ionicons name="md-settings" size={10} color="white"></Ionicons>
+        tabBarIcon: <Ionicons name="md-settings" size={20} color="white"></Ionicons>
       },
 
     },
+
     Gallery: {
       screen: GalleryScreen,
       navigationOptions: {
         title: 'Gallery',
       },
+      navigationOptions: {
+        title: 'Gallery',
+        tabBarIcon: <Ionicons name="md-settings" size={20} color="white"></Ionicons>
+      },
     },
   },
+
   {
     tabBarOptions: {
       activeTintColor: 'white',
-      inactiveTintColor: 'gray',
+      inactiveTintColor: 'black',
       activeBackgroundColor: '#666699',
       inactiveBackgroundColor: 'yellow',
-      //showLabel: false
+      labelStyle: {
+        fontSize: 15,
+      },
+      style: {
+        backgroundColor: 'grey',
+      },
 
+      //showLabel: false
     },
   },
   {
@@ -41,44 +53,6 @@ export const Tabs = TabNavigator(
   }
 )
 
-export const HomeStack = StackNavigator(
-  {
-    Home: { screen: HomeScreen },
-    Tab: { screen: Tabs, navigationOptions: { title: 'Header title' } },
-    Camera: { screen: CameraScreen },
-    // Gallery: { screen: GalleryScreen },
-    //Element: { screen: ElementScreen }
-  },
-
-  {
-    initialRouteName: 'Home',
-  },
-
-  {
-    navigationOptions: {
-      headerStyle: {
-        backgroundColor: '#999966',
-
-      },
-      headerTintColor: 'blue',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-        color: 'white',
-      },
-
-      navigationOptions: ({ navigation }) => ({ header: true })
-    }
-  }
-)
-
-export const SettingsStack = StackNavigator({
-  Settings: {
-    screen: SettingsScreen,
-    navigationOptions: {
-      title: 'Settings',
-    },
-  },
-})
 
 export const GalleryStack = StackNavigator(
   {
@@ -97,25 +71,55 @@ export const GalleryStack = StackNavigator(
 
 export const Root = StackNavigator({
   Home: {
-    screen: HomeStack
+    screen: HomeScreen,
+    navigationOptions: {
+      title: 'Home Screen',
+      headerStyle: {
+        backgroundColor: 'grey',
+      },
+      headerTitleStyle: {
+        fontWeight: 'bold',
+        color: 'white',
+      },
+      headerRight: <Ionicons name="md-settings" size={30} color="white"></Ionicons>,
+    }
   },
   Tabs: {
     screen: Tabs,
     navigationOptions: {
-      title: 'Header title', headerStyle: {
-        backgroundColor: '#999966',
-      }
+      title: 'Element Screen',
+      headerStyle: {
+        backgroundColor: 'grey', 
+        elevation: 0,
+    
+
+      },
+      headerTitleStyle: {
+        fontWeight: 'bold',
+        color: 'white',
+      },
+
+      //tabBarIcon: <Ionicons name="md-settings" size={10} color="white"></Ionicons>,
     }
   },
   Settings: {
-    screen: SettingsStack
+    screen: SettingsScreen,
+    navigationOptions: {
+      title: 'Setting Screen',
+      headerStyle: {
+        backgroundColor: 'grey',
+      },
+      headerTitleStyle: {
+        fontWeight: 'bold',
+        color: 'white',
+      },
+      headerRight: <Ionicons name="md-settings" size={30} color="white"></Ionicons>,
+    }
   },
-  Gallery: {
-    screen: GalleryStack
-  },
+
 },
   {
-    headerMode: 'none',
+    headerMode: 'float',
   },
 
 )

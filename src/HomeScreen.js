@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, View, Button, TouchableOpacity, TouchableHighlight, TextInput, Icon, Dimensions, ImageBackground, Modal, Alert, ScrollView, Image } from 'react-native'
-import { NavigationActions } from 'react-navigation'
+import { NavigationActions, TabNavigator } from 'react-navigation'
 import CameraScreen from '../src/CameraScreen.js'
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 import evokStyles from '../src/evokStyles.js'
@@ -14,17 +14,18 @@ import readWrite from '../src/readWrite.js'
 
 
 export default class HomeScreen extends React.Component {
-    static navigationOptions = {
+    /*static navigationOptions = {
         title: 'Home',
         headerStyle: {
             backgroundColor: 'grey',
         },
-        headerTintColor: 'blue',
+        headerTintColor: 'blue',s
         headerTitleStyle: {
             fontWeight: 'bold',
             color: 'white',
-        }
-    }
+        },
+        headerRight: <Ionicons name="md-settings" size={30} color="white"></Ionicons>
+    }*/
 
     constructor(props) {
         super(props)
