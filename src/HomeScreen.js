@@ -200,7 +200,7 @@ export default class HomeScreen extends React.Component {
     }
 
     navigateToCamera = (projectName, elementID) => {
-        this.props.navigation.navigate('Camera', { projectID: projectName, elementID: elementID })
+        this.props.navigation.navigate('Camera', { projectID: projectName, elementID: elementID,})
     }
 
     render() {

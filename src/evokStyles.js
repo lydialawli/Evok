@@ -31,11 +31,12 @@ const evokStyles = StyleSheet.create({
     },
 
     galleryView: {
-        backgroundColor: '#002233',
+        backgroundColor: 'white',
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        paddingTop: 20
     },
 
     camScreenView: {

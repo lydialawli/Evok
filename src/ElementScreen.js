@@ -35,7 +35,7 @@ export default class ElementScreen extends React.Component {
                 size={30}
                 color="white"
                 style={{ paddingRight: 20 }}
-                onPress={() => navigation.navigate('Settings')}
+                onPress={() => navigation.navigate('Settings',)}
             ></Ionicons>,
 
         }
@@ -58,7 +58,7 @@ export default class ElementScreen extends React.Component {
         currentImage: '',
         nextImage: '',
         isHalfway: false,
-        switchValue: false,
+        switchValue: this.props.navigation.state.params.switchValue,
     }
 
     async componentWillMount() {
@@ -126,7 +126,7 @@ export default class ElementScreen extends React.Component {
 
         return (
             <View style={{ justifyContent: 'space-evenly', alignItems: 'center', paddingTop: 20 }}>
-                <Switch onValueChange={this.toggleSwitch} value={this.state.switchValue} />
+                
 
                 <View style={evokStyles.projectCard}>
                     <CurrentPic
@@ -161,7 +161,7 @@ export default class ElementScreen extends React.Component {
         )
 
     }
-
+   // <Switch onValueChange={this.toggleSwitch} value={this.state.switchValue} />
     _render() {
         const { navigate } = this.props.navigation
         //console.log("Element mode")
