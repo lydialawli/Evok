@@ -15,6 +15,8 @@ export default class GalleryScreen extends React.Component {
             //header: 'false',
             headerTitle: params.elementName,
             title: 'Gallery',
+            tabBarIcon: ({ tintColor }) => {
+                return  <Ionicons name="md-images" size={20} color={tintColor}></Ionicons>},
             headerStyle: {
                 backgroundColor: 'grey',
             },

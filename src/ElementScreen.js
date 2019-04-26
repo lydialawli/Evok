@@ -19,7 +19,8 @@ export default class ElementScreen extends React.Component {
         return {
             //header: 'false',
             headerTitle: params.elementName,
-
+            tabBarIcon: ({ tintColor }) => {
+                return  <Ionicons name="ios-code-working" size={20} color={tintColor}></Ionicons>},
             headerStyle: {
                 backgroundColor: 'grey',
             },

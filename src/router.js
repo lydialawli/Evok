@@ -15,7 +15,6 @@ export const Tabs = TabNavigator(
       screen: ElementScreen,
       navigationOptions: {
         title: 'Timeline',
-        tabBarIcon: <Ionicons name="ios-more-outline" size={20} color='white'></Ionicons>
       }
     },
 
@@ -23,7 +22,6 @@ export const Tabs = TabNavigator(
       screen: GalleryScreen,
       navigationOptions: {
         title: 'Gallery',
-        tabBarIcon: <Ionicons name="md-images" size={20} color="black"></Ionicons>
       },
     },
   },
