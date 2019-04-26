@@ -49,14 +49,14 @@ export default class HomeScreen extends React.Component {
         //this._getArrayOfDirectories()
         newEvokFileSystem.startStorage(this.onStorageReady)
         newEvokFileSystem.createImagesDirectoryIfDoesnotExist()
-        
+
     }
 
 
     onStorageReady = () => {
         this.setState({
             elements: newEvokFileSystem.getArrayOfElements(),
-            elementCardSize: {width:300, height: 100}
+            elementCardSize: { width: 300, height: 100 }
         })
         //console.log("..elements: " + JSON.stringify(this.state.elements, null, 2))
 
@@ -73,8 +73,8 @@ export default class HomeScreen extends React.Component {
                 onLongPressed={this.alertLongPressed}
                 data={e}
                 placeHolderImage={this.state.placeHolderImage}
-                cardWidth= {this.state.elementCardSize.width}
-                cardHeight= {this.state.elementCardSize.height}
+                cardWidth={this.state.elementCardSize.width}
+                cardHeight={this.state.elementCardSize.height}
             />
         })
         return listOfElementCards
@@ -178,6 +178,7 @@ export default class HomeScreen extends React.Component {
 
     _consoleImagePath = (imagePath) => {
         console.log('imagePath is:', JSON.stringify(imagePath))
+        newEvokFileSystem.startStorage(this.onStorageReady)
     }
     //-------------------------------------------------------------------------
 
@@ -224,7 +225,6 @@ export default class HomeScreen extends React.Component {
                         <View>
                             {this.getListElementCards()}
                         </View>
-
                         <TouchableOpacity style={styles.card} onPress={() =>
                             this._safePic('http://www.bleaq.com/wp-content/uploads/kate-macdowell-01.jpg',
                                 1554655385269,
@@ -269,6 +269,16 @@ export default class HomeScreen extends React.Component {
         )
     }
 }
+/*
+                    <TouchableOpacity style={styles.card} onPress={() =>
+                            this._safePic('http://www.bleaq.com/wp-content/uploads/kate-macdowell-01.jpg',
+                                1554655385269,
+                                this._displayElementID,
+                                this._consoleImagePath
+
+                            )}>
+                            <Text style={evokStyles.topBarText}> Add a pic </Text>
+                        </TouchableOpacity>*/
 
 styles = StyleSheet.create({
     two: {

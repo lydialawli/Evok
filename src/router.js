@@ -15,16 +15,15 @@ export const Tabs = TabNavigator(
       screen: ElementScreen,
       navigationOptions: {
         title: 'Timeline',
-        tabBarIcon: <Ionicons name="ios-more-outline" size={20} color="white"></Ionicons>
-      },
-
+        tabBarIcon: <Ionicons name="ios-more-outline" size={20} color='white'></Ionicons>
+      }
     },
 
     Gallery: {
       screen: GalleryScreen,
       navigationOptions: {
         title: 'Gallery',
-        tabBarIcon: <Ionicons name="md-images" size={20} color="white"></Ionicons>
+        tabBarIcon: <Ionicons name="md-images" size={20} color="black"></Ionicons>
       },
     },
   },
@@ -51,20 +50,6 @@ export const Tabs = TabNavigator(
 )
 
 
-export const GalleryStack = StackNavigator(
-  {
-    Settings: {
-      screen: GalleryScreen,
-      navigationOptions: {
-        title: 'Gallery',
-      },
-    }
-  },
-  {
-    initialRouteName: 'Gallery',
-  }
-
-)
 
 export const Root = StackNavigator({
   Home: {
@@ -86,10 +71,10 @@ export const Root = StackNavigator({
     navigationOptions: {
       title: 'Element name',
       headerStyle: {
-        backgroundColor: 'grey', 
+        backgroundColor: 'grey',
         elevation: 0,
         height: 50,
-        
+
       },
       headerTitleStyle: {
         fontWeight: 'bold',

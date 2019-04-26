@@ -93,7 +93,7 @@ updateJsonFromElementIndexObj = (currentElementIndex, callback) => {
     readWrite.saveText(storageSTR, storageFileName, () => {
         //console.log("..text saved " )
         readWrite.readText(fileUri, (result) => {
-            console.log("..updated json as: " + result)
+            console.log("..updated json as: " + JSON.stringify(result))
             callback()
         })
     })
@@ -131,15 +131,28 @@ deleteAllImagesFromElementObj = (elementID, ind) => {
 
     for (var i = 0; i < imagesArray.length; i++) {
         imageToDelete = imagesArray[i].uri
-        deleteImageFromFileSystem(imageToDelete)
+        newEvokFileSystem.deleteImageFromFileSystem(imageToDelete, i, elementID)
     }
     console.log('directory "' + elementIndex.elements[ind].name + '" deleted')
 }
 
-deleteImageFromFileSystem = (fileUri) => {
+newEvokFileSystem.deleteImageFromFileSystem = (fileUri) => {
     var fileToDelete = rootDirectory + 'images/' + fileUri
-    readWrite.delete(fileToDelete,
-        console.log("image [" + fileUri + "] is deleted from fileSystem"))
+    readWrite.delete(fileToDelete, console.log("image [" + fileUri + "] is deleted from fileSystem"))
+
+}
+
+newEvokFileSystem.deleteImage = (fileUri, i, elementID) => {
+
+    newEvokFileSystem.deleteImageFromFileSystem(fileUri)
+
+    var eIndex = newEvokFileSystem.getIndexfromElementID(elementID)
+
+    elementIndex.elements[eIndex].imageHistory.splice(i, 1)
+    console.log('new element Index>', elementIndex)
+
+    updateJsonFromElementIndexObj(elementIndex, readImagesDirectory)
+
 }
 
 newEvokFileSystem.getElementObj = (elementID) => {

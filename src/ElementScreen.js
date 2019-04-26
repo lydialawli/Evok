@@ -15,11 +15,11 @@ import TimeLine from '../src/timeline/TimeLine.js'
 
 export default class ElementScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
-        const {params} = navigation.state
+        const { params } = navigation.state
         return {
             //header: 'false',
             headerTitle: params.elementName,
-        
+
             headerStyle: {
                 backgroundColor: 'grey',
             },
@@ -28,11 +28,12 @@ export default class ElementScreen extends React.Component {
                 fontWeight: 'bold',
                 color: 'white',
             },
+
             headerRight: <Ionicons
                 name="md-settings"
                 size={30}
                 color="white"
-                style={{paddingRight:20}}
+                style={{ paddingRight: 20 }}
                 onPress={() => navigation.navigate('Settings')}
             ></Ionicons>,
 
@@ -94,48 +95,6 @@ export default class ElementScreen extends React.Component {
         )
     }
 
-    _alertDeleteWarning = (picObject) =>
-        Alert.alert(
-            'Delete ' + picObject.fileName,
-            'Are you sure?',
-            [
-                { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
-                { text: 'OK', onPress: () => { evokFileSystem.deleteFile(picObject.fileUri, this.getList), console.log('pic deleted') } }
-            ],
-            { cancelable: false }
-        )
-
-    _getFullImageView = (picObject) => {
-
-        console.log('viewFullImage', picObject)
-
-        if (!picObject)
-            return (
-                <View style={{ flex: 1 }}>
-                    <Text> No picObject   </Text>
-                </View>
-            )
-
-        return (
-            <View style={{ width: '90%', height: '90%', alignItems: 'center', backgroundColor: 'transparent' }}>
-                <Image
-                    style={{ width: '100%', height: '100%' }}
-                    source={{ uri: picObject.fileUri }}
-                    resizeMode="contain"
-                />
-            </View>
-        )
-    }
-
-    _setModalVisible(visible, picObject) {
-        console.log('modalview', visible, picObject)
-        this.setState({
-            modalVisible: visible,
-            selectedFullImagePicObject: picObject
-        })
-
-    }
-
     _onCameraPressed = (projectName) => {
         this.props.navigation.navigate('Camera', { projectID: projectName })
     }
@@ -161,11 +120,11 @@ export default class ElementScreen extends React.Component {
 
     render() {
         const { navigate } = this.props.navigation
-        console.log("Element mode")   
+        console.log("Element mode")
 
 
         return (
-            <View style={{ justifyContent: 'space-evenly', alignItems: 'center' }}>
+            <View style={{ justifyContent: 'space-evenly', alignItems: 'center', paddingTop: 20 }}>
                 <Switch onValueChange={this.toggleSwitch} value={this.state.switchValue} />
 
                 <View style={evokStyles.projectCard}>

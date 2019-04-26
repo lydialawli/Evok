@@ -10,8 +10,10 @@ import newEvokFileSystem from '../src/newEvokFileSystem.js'
 export default class GalleryScreen extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
+        const {params} = navigation.state
         return {
             //header: 'false',
+            headerTitle: params.elementName,
             title: 'Gallery',
             headerStyle: {
                 backgroundColor: 'grey',
@@ -56,7 +58,7 @@ export default class GalleryScreen extends React.Component {
 
     getImagesPaths = () => {
         let images = this.state.imageHistory.map(
-            (imageObj) => {
+            (imageObj, i) => {
 
                 let onPressPic = () => {
                     console.log('pressed img is:', imageObj)
@@ -69,7 +71,7 @@ export default class GalleryScreen extends React.Component {
                 let t = imageObj.timestamp
 
                 return (
-                    <TouchableOpacity key={t} onPress={onPressPic} onLongPress={() => this.alertDeleteWarning(imageObj)}>
+                    <TouchableOpacity key={t} onPress={onPressPic} onLongPress={() => this.alertDeleteWarning(imageObj, i)}>
                         <ImageBackground
                             style={{ width: 100, height: 100, margin: 1 }}
                             source={{ uri: fileUri }}>
@@ -81,17 +83,19 @@ export default class GalleryScreen extends React.Component {
         return images
     }
 
-    alertDeleteWarning = (imageObj) => {
+    alertDeleteWarning = (imageObj, i) => {
         Alert.alert(
             'Delete ' + imageObj.uri,
             'Are you sure?',
             [
                 { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
-                //{ text: 'OK', onPress: () => {'delete image permanently', this.getImagesPaths) } }
+                { text: 'OK', onPress: () => {newEvokFileSystem.deleteImage(imageObj.uri, i, this.state.elementID ), this.onOpenGallery(this.state.elementID) } }
             ],
             { cancelable: false }
         )
     }
+
+ 
 
     getFullImageView = (uri) => {
 
