@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, StyleSheet, View, TouchableOpacity, Switch, Button, TouchableHighlight, ScrollView, Text, Alert, ImageBackground, Modal, Slider } from 'react-native'
+import { Image, StyleSheet, View, TouchableOpacity, Switch, Button, Dimensions, TouchableHighlight, ScrollView, Text, Alert, ImageBackground, Modal, Slider } from 'react-native'
 import { StackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation'
 import EvokCamera from '../src/CameraScreen.js'
 import TimeLine_ from '../src/_TimeLine.js'
@@ -20,7 +20,8 @@ export default class ElementScreen extends React.Component {
             //header: 'false',
             headerTitle: params.elementName,
             tabBarIcon: ({ tintColor }) => {
-                return  <Ionicons name="ios-code-working" size={20} color={tintColor}></Ionicons>},
+                return <Ionicons name="ios-code-working" size={20} color={tintColor}></Ionicons>
+            },
             headerStyle: {
                 backgroundColor: 'grey',
             },
@@ -35,7 +36,7 @@ export default class ElementScreen extends React.Component {
                 size={30}
                 color="white"
                 style={{ paddingRight: 20 }}
-                onPress={() => navigation.navigate('Settings',)}
+                onPress={() => navigation.navigate('Settings')}
             ></Ionicons>,
 
         }
@@ -59,6 +60,7 @@ export default class ElementScreen extends React.Component {
         nextImage: '',
         isHalfway: false,
         switchValue: this.props.navigation.state.params.switchValue,
+        cardWidth: 300
     }
 
     async componentWillMount() {
@@ -118,15 +120,41 @@ export default class ElementScreen extends React.Component {
         }
     }
 
+    timelineSeparator = (text) => {
+        return (
+            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                <View style={{
+                    //alignSelf: 'center',
+                    height: 1.5,
+                    borderColor: 'grey',
+                    backgroundColor: 'grey',
+                    width: this.state.cardWidth * 0.3,
+                    alignSelf: 'center'
+                }} />
+                <Text style={{ alignSelf: 'center', fontSize: 20, color: 'grey', padding: 10 }}>{text}</Text>
+                <View style={{
+                    //alignSelf: 'center',
+                    height: 1.5,
+                    borderColor: 'grey',
+                    backgroundColor: 'grey',
+                    width: this.state.cardWidth * 0.3,
+                    alignSelf: 'center'
+                }} />
+            </View>
+
+        )
+    }
+
 
     render() {
         const { navigate } = this.props.navigation
         console.log("Element mode")
-
+        let separatorTimeline = this.timelineSeparator("Timeline")
+        let separatorMeta = this.timelineSeparator("Meta info")
 
         return (
             <View style={{ justifyContent: 'space-evenly', alignItems: 'center', paddingTop: 20 }}>
-                
+
 
                 <View style={evokStyles.projectCard}>
                     <CurrentPic
@@ -142,7 +170,7 @@ export default class ElementScreen extends React.Component {
 
 
                 <View style={evokStyles.sliderCard}>
-                    <Text style={{ alignSelf: 'center', fontSize: 30, color: 'grey' }}>|</Text>
+                    {separatorTimeline}
                     <TimeLine
                         data={this.state.imageHistory}
                         timestamp={this.state.imageHistory[0].timestamp}
@@ -150,18 +178,19 @@ export default class ElementScreen extends React.Component {
                         width={300}
                         scale={1 / 3600}
                         mode={'horizontal'}
-                        cardWidth={300}
+                        cardWidth={this.state.cardWidth}
                         onPositionChanged={this.getItemImage}
                         styles={{ justifyContent: 'center', alignSelf: 'center' }}
                         objWidth={100}
                     />
+                    {separatorMeta}
 
                 </View>
             </View>
         )
 
     }
-   // <Switch onValueChange={this.toggleSwitch} value={this.state.switchValue} />
+    // <Switch onValueChange={this.toggleSwitch} value={this.state.switchValue} />
     _render() {
         const { navigate } = this.props.navigation
         //console.log("Element mode")
@@ -214,7 +243,7 @@ export default class ElementScreen extends React.Component {
         }
 
         return (
-            <View style={{ justifyContent: 'space-evenly', alignItems: 'center' }}>
+            <ScrollView contentContaistylenerStyle={timelineCardStyle.screenContainer}>
                 <Switch onValueChange={this.toggleSwitch} value={this.state.switchValue} />
 
                 <View style={evokStyles.projectCard}>
@@ -230,7 +259,7 @@ export default class ElementScreen extends React.Component {
                 </View>
 
 
-                <View style={evokStyles.sliderCard}>
+                <View style={timelineCardStyle.sliderCard}>
                     <Text style={{ alignSelf: 'center', fontSize: 30, color: 'grey' }}>|</Text>
                     <TimeLine
                         data={this.state.imageHistory}
@@ -247,7 +276,7 @@ export default class ElementScreen extends React.Component {
                     />
 
                 </View>
-            </View>
+            </ScrollView>
         )
 
     }
@@ -255,3 +284,28 @@ export default class ElementScreen extends React.Component {
 
 
 }
+
+timelineCardStyle = StyleSheet.create({
+    screenContainer: {
+        width: Dimensions.get('window').width,
+        height: Dimensions.get('window').height,
+        backgroundColor: 'pink',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+
+    sliderCard: {
+        width: 300,
+        height: 200,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        borderColor: '#ffb84d',
+        backgroundColor: 'lightblue',
+        alignItems: 'center',
+        borderRadius: 10,
+        paddingTop: 100,
+        margin: 10,
+        elevation: 3,
+    },
+}
+)
