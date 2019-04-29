@@ -30,10 +30,12 @@ WHAT DO I NEED TO MAKE THE TIMELINE WORK:
     - [x] create proper array example
     - [x] when currentTimestamp changes (given through parent as prop) the bar changes position (left-right)
 
-- [ ] create a placeholder if element has no item yet (in flatlist component)
+- [x] create a placeholder if element has no item/image yet 
+- [ ] design a better placeholder component when user first created an element
 - [x] fix Gallery screen
 - [ ] make timeline date work
 - [ ] make sure switching screens works well
+- [ ] add take pic both in element screen and in gallery screen > redirect to camera screen
 - [x] make element screen header visible + tabs too
 - [ ] add drawer to SettingScreen (create setting screen with one button (switch))
 - [x] make element card items display in row - fix error

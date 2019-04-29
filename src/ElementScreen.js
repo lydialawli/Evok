@@ -314,7 +314,7 @@ elementScreenStyle = StyleSheet.create({
         backgroundColor: 'transparent',
         alignItems: 'center',
         borderRadius: 10,
-        paddingTop: 100,
+        //paddingTop: 100,
         //margin: 10,
         //elevation: 3,
     },
