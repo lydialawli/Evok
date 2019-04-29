@@ -7,7 +7,6 @@ export default class CurrentPic extends Component {
 
 
     getImageDisplayed = () => {
-        var firstImageOfArray = this.props.imagesFolder + this.props.data[0].uri
         if (this.props.data.length <= 0) {
             return (
                 <TouchableOpacity >
@@ -20,6 +19,8 @@ export default class CurrentPic extends Component {
         }
 
         else if (this.props.currentImage == '') {
+            var firstImageOfArray = this.props.imagesFolder + this.props.data[0].uri
+            
             return (
                 <TouchableOpacity >
                     <ImageBackground

@@ -166,7 +166,7 @@ export default class TimeLine extends React.Component {
     isHalfWay = (n) => {
         var decimal = n - Math.floor(n)
 
-        if (decimal >= 0.5 && n<this.state.barWidth-this.props.objWidth)
+        if (decimal >= 0.5 && n < this.state.barWidth - this.props.objWidth)
             return true
         else { return false }
 
@@ -199,17 +199,14 @@ export default class TimeLine extends React.Component {
         }
 
         console.log('ind:', ind, ' ind2:', ind2)
-        this.props.onPositionChanged(ind, ind2,isHalfway)
+        this.props.onPositionChanged(ind, ind2, isHalfway)
     }
 
 
     render() {
         //let TlDisplay = this._getTimelineDisplay()
-
         return (
             <View style={timelineStyles.timeLineElementsInside}>
-
-
                 <DisplayFlatlist
                     data={this.props.data}
                     style={timelineStyles.timelineDisplayBar}
@@ -220,11 +217,9 @@ export default class TimeLine extends React.Component {
                     objWidth={this.props.objWidth}
                 >
                 </DisplayFlatlist>
-
-
-
             </View>
         )
+
     }
 
     /* <TimelineScroll

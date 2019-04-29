@@ -63,7 +63,7 @@ updateElementIndexFromJson = (callback) => {
     var fileUri = rootDirectory + storageFileName
     readWrite.readText(fileUri, (result) => {
         elementIndex = JSON.parse(result)
-        //console.log("..elementIndex updated: " + JSON.stringify(elementIndex))
+        console.log("..elementIndex updated: " + JSON.stringify(elementIndex))
         callback()
     })
 }
@@ -93,7 +93,7 @@ updateJsonFromElementIndexObj = (currentElementIndex, callback) => {
     readWrite.saveText(storageSTR, storageFileName, () => {
         //console.log("..text saved " )
         readWrite.readText(fileUri, (result) => {
-            console.log("..updated json as: " + JSON.stringify(result))
+            //console.log("..updated json as: " + JSON.stringify(result))
             callback()
         })
     })

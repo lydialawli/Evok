@@ -15,7 +15,7 @@ export default class ElementCard extends React.Component {
     }
 
     getImageUri = () => {
-        if (!this.props.data.imageHistory) {
+        if (!this.props.data.imageHistory || this.props.data.imageHistory.length==0) {
             return 0
         }
         else {

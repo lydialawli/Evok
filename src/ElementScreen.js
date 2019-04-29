@@ -142,6 +142,28 @@ export default class ElementScreen extends React.Component {
 
         )
     }
+    getTimeline = () => {
+        if (this.state.imageHistory.length == 0) {
+            return (
+                <Text>no images yet</Text>
+            )
+        }
+        else {
+            return (
+                <TimeLine
+                    data={this.state.imageHistory}
+                    timestamp={this.state.imageHistory[0].timestamp}
+                    currentImageTimestamp={this.state.currentImageTimestamp}
+                    width={this.state.cardWidth}
+                    scale={1 / 3600}
+                    mode={'horizontal'}
+                    cardWidth={this.state.cardWidth}
+                    onPositionChanged={this.getItemImage}
+                    styles={{ justifyContent: 'center', }}
+                    objWidth={100}
+                />)
+        }
+    }
 
 
     render() {
@@ -149,6 +171,7 @@ export default class ElementScreen extends React.Component {
         console.log("Element mode")
         let separatorTimeline = this.timelineSeparator("Timeline")
         let separatorMeta = this.timelineSeparator("Meta info")
+        let timelineBar = this.getTimeline()
 
         return (
             <ScrollView contentContainerStyle={elementScreenStyle.screenContainer} scrollEnabled={true}>
@@ -169,20 +192,7 @@ export default class ElementScreen extends React.Component {
 
                 <View style={elementScreenStyle.timelineContainer}>
                     {separatorTimeline}
-                    <View style={{height: 100}}>
-                        <TimeLine
-                            data={this.state.imageHistory}
-                            timestamp={this.state.imageHistory[0].timestamp}
-                            currentImageTimestamp={this.state.currentImageTimestamp}
-                            width={this.state.cardWidth}
-                            scale={1 / 3600}
-                            mode={'horizontal'}
-                            cardWidth={this.state.cardWidth}
-                            onPositionChanged={this.getItemImage}
-                            styles={{ justifyContent: 'center', }}
-                            objWidth={100}
-                        />
-                    </View>
+                    {timelineBar}
                     {separatorMeta}
 
                 </View>
