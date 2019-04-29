@@ -124,7 +124,6 @@ export default class ElementScreen extends React.Component {
         return (
             <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
                 <View style={{
-                    //alignSelf: 'center',
                     height: 1.5,
                     borderColor: 'grey',
                     backgroundColor: 'grey',
@@ -133,7 +132,6 @@ export default class ElementScreen extends React.Component {
                 }} />
                 <Text style={{ alignSelf: 'center', fontSize: 20, color: 'grey', padding: 10 }}>{text}</Text>
                 <View style={{
-                    //alignSelf: 'center',
                     height: 1.5,
                     borderColor: 'grey',
                     backgroundColor: 'grey',
@@ -153,10 +151,10 @@ export default class ElementScreen extends React.Component {
         let separatorMeta = this.timelineSeparator("Meta info")
 
         return (
-            <View style={{ justifyContent: 'space-evenly', alignItems: 'center', paddingTop: 20 }}>
+            <ScrollView contentContainerStyle={elementScreenStyle.screenContainer} scrollEnabled={true}>
 
 
-                <View style={evokStyles.projectCard}>
+                <View style={elementScreenStyle.imageCard}>
                     <CurrentPic
                         data={this.state.imageHistory}
                         imagesFolder={FileSystem.documentDirectory + 'images/'}
@@ -169,29 +167,31 @@ export default class ElementScreen extends React.Component {
                 </View>
 
 
-                <View style={evokStyles.sliderCard}>
+                <View style={elementScreenStyle.timelineContainer}>
                     {separatorTimeline}
-                    <TimeLine
-                        data={this.state.imageHistory}
-                        timestamp={this.state.imageHistory[0].timestamp}
-                        currentImageTimestamp={this.state.currentImageTimestamp}
-                        width={300}
-                        scale={1 / 3600}
-                        mode={'horizontal'}
-                        cardWidth={this.state.cardWidth}
-                        onPositionChanged={this.getItemImage}
-                        styles={{ justifyContent: 'center', alignSelf: 'center' }}
-                        objWidth={100}
-                    />
+                    <View style={{height: 100}}>
+                        <TimeLine
+                            data={this.state.imageHistory}
+                            timestamp={this.state.imageHistory[0].timestamp}
+                            currentImageTimestamp={this.state.currentImageTimestamp}
+                            width={this.state.cardWidth}
+                            scale={1 / 3600}
+                            mode={'horizontal'}
+                            cardWidth={this.state.cardWidth}
+                            onPositionChanged={this.getItemImage}
+                            styles={{ justifyContent: 'center', }}
+                            objWidth={100}
+                        />
+                    </View>
                     {separatorMeta}
 
                 </View>
-            </View>
+            </ScrollView>
         )
 
     }
     // <Switch onValueChange={this.toggleSwitch} value={this.state.switchValue} />
-    _render() {
+    /*_render() {
         const { navigate } = this.props.navigation
         //console.log("Element mode")
         // console.log('width is: ' + this.state.timelineWidth)
@@ -243,10 +243,10 @@ export default class ElementScreen extends React.Component {
         }
 
         return (
-            <ScrollView contentContaistylenerStyle={timelineCardStyle.screenContainer}>
+        <ScrollView contentContaistylenerStyle={timelineCardStyle.screenContainer} >
                 <Switch onValueChange={this.toggleSwitch} value={this.state.switchValue} />
 
-                <View style={evokStyles.projectCard}>
+                <View style={timelineCardStyle.imageCard}>
                     <CurrentPic
                         data={this.state.imageHistory}
                         imagesFolder={FileSystem.documentDirectory + 'images/'}
@@ -279,33 +279,45 @@ export default class ElementScreen extends React.Component {
             </ScrollView>
         )
 
-    }
+    }*/
 
 
 
 }
 
-timelineCardStyle = StyleSheet.create({
+elementScreenStyle = StyleSheet.create({
     screenContainer: {
         width: Dimensions.get('window').width,
         height: Dimensions.get('window').height,
-        backgroundColor: 'pink',
-        justifyContent: 'center',
-        alignItems: 'center'
+        backgroundColor: 'white',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        //paddingTop: 5
     },
 
-    sliderCard: {
+    timelineContainer: {
         width: 300,
         height: 200,
         flexDirection: 'column',
         justifyContent: 'center',
         borderColor: '#ffb84d',
-        backgroundColor: 'lightblue',
+        backgroundColor: 'transparent',
         alignItems: 'center',
         borderRadius: 10,
         paddingTop: 100,
-        margin: 10,
+        //margin: 10,
+        //elevation: 3,
+    },
+
+    imageCard: {
+        height: 300,
+        width: 300,
+        borderColor: '#ffb84d',
+        backgroundColor: 'lightblue',
+        alignItems: 'flex-start',
+        borderRadius: 10,
         elevation: 3,
+        margin: 10
     },
 }
 )

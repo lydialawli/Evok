@@ -266,7 +266,7 @@ timelineStyles = StyleSheet.create({
 
     timeLineElementsInside: {
         width: 300,
-        height: 200,
+        height: 100,
         backgroundColor: 'transparent',
         justifyContent: 'center',
         alignItems: 'center',
