@@ -40,6 +40,7 @@ WHAT DO I NEED TO MAKE THE TIMELINE WORK:
 - [ ] add drawer to SettingScreen (create setting screen with one button (switch))
 - [x] make element card items display in row - fix error
 - [ ] fix timeline separator bug
+- [ ] add go to Camera button
 
 
 

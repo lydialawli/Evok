@@ -97,6 +97,12 @@ export const Root = StackNavigator({
     }
   },
 
+  Camera: {
+    screen: CameraScreen,
+    navigationOptions: {
+      title: 'Camera Screen',
+    }
+  },
 },
   {
     headerMode: 'float',

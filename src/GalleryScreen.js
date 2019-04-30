@@ -10,17 +10,18 @@ import newEvokFileSystem from '../src/newEvokFileSystem.js'
 export default class GalleryScreen extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
-        const {params} = navigation.state
+        const { params } = navigation.state
         return {
             //header: 'false',
             headerTitle: params.elementName,
             title: 'Gallery',
             tabBarIcon: ({ tintColor }) => {
-                return  <Ionicons name="md-images" size={20} color={tintColor}></Ionicons>},
+                return <Ionicons name="md-images" size={20} color={tintColor}></Ionicons>
+            },
             headerStyle: {
                 backgroundColor: 'grey',
             },
-          
+
             headerTintColor: 'white',
             headerTitleStyle: {
                 fontWeight: 'bold',
@@ -30,7 +31,7 @@ export default class GalleryScreen extends React.Component {
                 name="md-settings"
                 size={30}
                 color="white"
-                style={{paddingRight:20}}
+                style={{ paddingRight: 20 }}
                 onPress={() => navigation.navigate('Settings')}
             ></Ionicons>,
             //tabBarIcon: <Ionicons name="md-settings" size={20} color="white"></Ionicons>
@@ -91,20 +92,20 @@ export default class GalleryScreen extends React.Component {
             'Are you sure?',
             [
                 { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
-                { text: 'OK', onPress: () => {newEvokFileSystem.deleteImage(imageObj.uri, i, this.state.elementID ), this.onOpenGallery(this.state.elementID) } }
+                { text: 'OK', onPress: () => { newEvokFileSystem.deleteImage(imageObj.uri, i, this.state.elementID), this.onOpenGallery(this.state.elementID) } }
             ],
             { cancelable: false }
         )
     }
 
- 
+
 
     getFullImageView = (uri) => {
 
         let fullPath = newEvokFileSystem.getImagePath(uri)
         //console.log('viewFullImage', uri)
-        
-        if (uri=='')
+
+        if (uri == '')
             return (
                 <View style={{ flex: 1 }}>
                     <Text style={{ color: 'white', fontSize: 20 }}>
@@ -133,19 +134,38 @@ export default class GalleryScreen extends React.Component {
 
     }
 
+    goToCameraButton = () => {
+        return (
+            <TouchableOpacity onPress= {this.navigateToCamera(this.state.elementID)}>
+                <Ionicons name="ios-add-circle"
+                    size={50}
+                    style={{ alignSelf: 'center', justifyContent: 'center', padding: 20 }}
+                    color={'black'}
+                > </Ionicons>
+            </TouchableOpacity>)
+    }
+
+    navigateToCamera = (elementID) => {
+        this.props.navigation.navigate('Camera', { elementID: elementID })
+
+    }
+
 
     render() {
 
         const { navigate } = this.props.navigation
         let images = this.getImagesPaths()
         let fullImage = this.getFullImageView(this.state.selectedImageToPreview)
+        let goToCamera = this.goToCameraButton()
 
         console.log("Gallery mode")
         return (
             <View style={evokStyles.galleryView}>
                 <ScrollView contentContainerStyle={evokStyles.imagesWrapper}>
                     {images}
+                    {goToCamera}
                 </ScrollView>
+
                 <Modal
                     visible={this.state.modalVisible}
                     onRequestClose={() => { alert('Modal has been closed.') }}
