@@ -17,7 +17,7 @@ export default class CameraScreen extends React.Component {
     }
 
     state = {
-        camerasCurrentProjectID: this.props.navigation.state.params.projectID,
+        //camerasCurrentProjectID: this.props.navigation.state.params.projectID,
         elementID: this.props.navigation.state.params.elementID
     }
 

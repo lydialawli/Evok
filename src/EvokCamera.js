@@ -19,7 +19,6 @@ export default class EvokCamera extends React.Component {
         ratio: '16:9',
         lastImagePath: '',
         lastPicOpacity: 0.5,
-        onionSkin: '',
     }
 
     async componentWillMount() {
@@ -32,9 +31,11 @@ export default class EvokCamera extends React.Component {
         this.setState({
             imageHistory: newEvokFileSystem.getElementObj(elementID).imageHistory,
         })
-        this.setState({
-            lastImagePath: newEvokFileSystem.getImagePath(this.state.imageHistory[this.state.imageHistory.length - 1].uri)
-        })
+        if (this.state.lastImageUri != '') {
+            this.setState({
+                lastImageFullPath: newEvokFileSystem.getImagePath(this.state.lastImageUri)
+            })
+        }
     }
 
     takePicture = async () => {
@@ -94,13 +95,19 @@ export default class EvokCamera extends React.Component {
     }
 
     getOnionSkin = () => {
-        return (
-            <ImageBackground
-                style={{ width: '100%', height: '100%', justifyContent: 'center', opacity: this.state.lastPicOpacity, position: 'absolute' }}
-                resizeMode="contain"
-                source={{ uri: this.state.lastImagePath }}>
-            </ImageBackground>
-        )
+        console.log('......',this.props.lastImageUri)
+        if (this.props.lastImageUri == '') {
+            console.log('no image for onionskin yet')
+        }
+        else {
+            return (
+                <ImageBackground
+                    style={{ width: '100%', height: '100%', justifyContent: 'center', opacity: this.state.lastPicOpacity, position: 'absolute' }}
+                    resizeMode="contain"
+                    source={{ uri: this.state.lastImageFullPath }}>
+                </ImageBackground>
+            )
+        }
     }
 
 
@@ -140,7 +147,7 @@ export default class EvokCamera extends React.Component {
 
                         {onionSkin}
 
-                        <View style={{ width: '100%', height: '100%',position: 'absolute', flexDirection: 'column', justifyContent: 'flex-end'}}>
+                        <View style={{ width: '100%', height: '100%', position: 'absolute', flexDirection: 'column', justifyContent: 'flex-end' }}>
                             {opacitySlider}
                             <TouchableOpacity style={evokStyles.snapCamButton} onPress={this.takePicture.bind(this)}>
                                 <Ionicons name="md-aperture" size={50} color="white" />

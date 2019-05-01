@@ -44,7 +44,8 @@ export default class GalleryScreen extends React.Component {
         elementObj: {},
         imageHistory: {},
         modalVisible: false,
-        selectedImageToPreview: ''
+        selectedImageToPreview: '',
+        lastImageUri: ''
     }
 
     async componentWillMount() {
@@ -56,9 +57,9 @@ export default class GalleryScreen extends React.Component {
             elementObj: newEvokFileSystem.getElementObj(elementID),
             imageHistory: newEvokFileSystem.getElementObj(elementID).imageHistory,
         })
-        console.log('imageHistory: ' + JSON.stringify(this.state.imageHistory, null, 2))
     }
 
+   
     getImagesPaths = () => {
         let images = this.state.imageHistory.map(
             (imageObj, i) => {
@@ -145,9 +146,20 @@ export default class GalleryScreen extends React.Component {
             </TouchableOpacity>)
     }
 
+    getLastImage = () => {
+        console.log('>>>', this.state.imageHistory[5].uri)
+        if (this.state.imageHistory.length > 0) {
+            let uri = this.state.imageHistory[this.state.imageHistory.length - 1].uri
+            console.log('>>>', uri)
+            this.setState({
+                lastImageUri: uri
+            })
+        }
+    }
+
     navigateToCamera = () => {
         //console.log('camera pressed')
-        this.props.navigation.navigate('Camera', { elementID: this.state.elementID })
+        this.props.navigation.navigate('Camera', { elementID: this.state.elementID, lastImageUri: this.state.lastImageUri })
 
     }
 

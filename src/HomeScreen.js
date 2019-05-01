@@ -52,7 +52,6 @@ export default class HomeScreen extends React.Component {
 
     }
 
-
     onStorageReady = () => {
         this.setState({
             elements: newEvokFileSystem.getArrayOfElements(),
