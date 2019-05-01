@@ -136,7 +136,7 @@ export default class GalleryScreen extends React.Component {
 
     goToCameraButton = () => {
         return (
-            <TouchableOpacity onPress= {this.navigateToCamera(this.state.elementID)}>
+            <TouchableOpacity onPress={this.navigateToCamera}>
                 <Ionicons name="ios-add-circle"
                     size={50}
                     style={{ alignSelf: 'center', justifyContent: 'center', padding: 20 }}
@@ -145,8 +145,9 @@ export default class GalleryScreen extends React.Component {
             </TouchableOpacity>)
     }
 
-    navigateToCamera = (elementID) => {
-        this.props.navigation.navigate('Camera', { elementID: elementID })
+    navigateToCamera = () => {
+        //console.log('camera pressed')
+        this.props.navigation.navigate('Camera', { elementID: this.state.elementID })
 
     }
 
