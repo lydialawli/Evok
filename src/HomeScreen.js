@@ -40,7 +40,7 @@ export default class HomeScreen extends React.Component {
             placeholderElementName: 'enter title',
             newTextInput: '',
             imageHistory: {},
-            placeHolderImage: 'https://i.pinimg.com/564x/e1/2a/9e/e12a9ed7c61da354c6cfdaf811cf6c3c.jpg',
+            placeHolderImage: 'https://www.l-nutra.com/wp-content/uploads/2018/07/placeholder.png',
         }
 
     }
@@ -198,8 +198,15 @@ export default class HomeScreen extends React.Component {
         );
     }
 
+    getLastImage = () => {
+        if (this.state.imageHistory.length > 0) {
+            console.log('>>>', this.state.imageHistory[5].uri)
+            return this.state.imageHistory[this.state.imageHistory.length - 1].uri
+        }
+    }
+
     navigateToCamera = (projectName, elementID) => {
-        this.props.navigation.navigate('Camera', { projectID: projectName, elementID: elementID,})
+        this.props.navigation.navigate('Camera', { projectID: projectName, elementID: elementID})
     }
 
     render() {

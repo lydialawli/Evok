@@ -55,7 +55,7 @@ export default class ElementScreen extends React.Component {
         sliderValue: 0.5,
         imageDisplayed: 0,
         currentImageTimestamp: 0,
-        placeholderImage: 'https://facebook.github.io/react-native/docs/assets/favicon.png',
+        placeholderImage: 'https://www.l-nutra.com/wp-content/uploads/2018/07/placeholder.png',
         currentImage: '',
         nextImage: '',
         isHalfway: false,

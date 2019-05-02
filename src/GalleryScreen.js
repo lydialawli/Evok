@@ -154,7 +154,7 @@ export default class GalleryScreen extends React.Component {
 
     navigateToCamera = () => {
         //console.log('camera pressed')
-        this.props.navigation.navigate('Camera', { elementID: this.state.elementID, lastImageUri: this.getLastImage() })
+        this.props.navigation.navigate('Camera', { elementID: this.state.elementID,})
 
     }
 
