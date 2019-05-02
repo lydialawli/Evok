@@ -35,24 +35,32 @@ export default class CameraScreen extends React.Component {
         }
     }
 
+    navigateToHome = () => {
+        //console.log('home pressed')
+        this.props.navigation.navigate('Home')
+    }
+
     render() {
         const { navigate } = this.props.navigation
         console.log("Camera mode")
         let lastImageUri = this.getLastImage()
+
         return (
             <View style={evokStyles.camScreenView}>
-                <EvokCamera elementID={this.state.elementID} lastImageUri={lastImageUri}></EvokCamera>
-                <View style={evokStyles.bottomBar}>
-                    <TouchableOpacity style={evokStyles.homeButton} onPress={() => navigate('Home')}>
-                        <Ionicons name="ios-home-outline" size={40} color="white" />
-                    </TouchableOpacity>
-                    <TouchableOpacity style={evokStyles.homeButton} onPress={() => navigate('Gallery')}>
-                        <Ionicons name="md-images" size={40} color="white" />
-                    </TouchableOpacity>
-                </View>
+                <EvokCamera elementID={this.state.elementID} lastImageUri={lastImageUri} ></EvokCamera>
             </View>
         )
     }
 }
 
+/*
+<View style={evokStyles.bottomBar}>
+<TouchableOpacity style={evokStyles.homeButton} onPress={() => navigate('Home')}>
+    <Ionicons name="ios-home-outline" size={40} color="white" />
+</TouchableOpacity>
+<TouchableOpacity style={evokStyles.homeButton} onPress={() => navigate('Gallery')}>
+    <Ionicons name="md-images" size={40} color="white" />
+</TouchableOpacity>
+</View>
+*/
 

@@ -14,7 +14,7 @@ export default class EvokCamera extends React.Component {
         imageHistory: {},
         isPreviewMode: false,
         imageToPreview: '',
-        type: 'back',
+        type: 'front',
         flashMode: 'off',
         ratio: '16:9',
         lastPicOpacity: 0.5,
@@ -89,9 +89,9 @@ export default class EvokCamera extends React.Component {
     }
 
     getOnionSkin = () => {
-        console.log('......',this.props.lastImageUri)
+        //console.log('......',this.props.lastImageUri)
         if (!this.props.lastImageUri) {
-            console.log('no image for onionskin yet')
+            console.log('no onionskin img yet')
         }
         else {
             let fullPath = newEvokFileSystem.getImagePath(this.props.lastImageUri)
@@ -132,11 +132,12 @@ export default class EvokCamera extends React.Component {
         let opacitySlider = this.getOpacitySlider()
 
         return (
-            <View style={styles.view}>
+            <View style={cameraStyles.view}>
                 <Camera
                     ref={ref => { this.camera = ref }}
                     style={evokStyles.cameraView}
                     ratio={this.state.ratio}
+                    type={this.state.type}
                 >
                     <View style={{ width: '100%', height: '100%', backgroundColor: 'transparent' }}>
 
@@ -144,7 +145,7 @@ export default class EvokCamera extends React.Component {
 
                         <View style={{ width: '100%', height: '100%', position: 'absolute', flexDirection: 'column', justifyContent: 'flex-end' }}>
                             {opacitySlider}
-                            <TouchableOpacity style={evokStyles.snapCamButton} onPress={this.takePicture.bind(this)}>
+                            <TouchableOpacity style={cameraStyles.snapCamButton} onPress={this.takePicture.bind(this)}>
                                 <Ionicons name="md-aperture" size={50} color="white" />
                             </TouchableOpacity>
                         </View>
@@ -177,7 +178,7 @@ export default class EvokCamera extends React.Component {
     }
 }
 
-styles = StyleSheet.create({
+cameraStyles = StyleSheet.create({
     view: {
         width: '100%',
         height: '100%',
@@ -193,5 +194,17 @@ styles = StyleSheet.create({
         textShadowRadius: 2,
         fontWeight: 'bold',
         fontSize: 25,
+    },
+
+    snapCamButton: {
+        width: 60,
+        height: 60,
+        backgroundColor: 'transparent',
+        borderRadius: 100,
+        alignSelf: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
+        elevation: 5,
+     
     },
 })

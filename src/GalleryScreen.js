@@ -50,6 +50,7 @@ export default class GalleryScreen extends React.Component {
     async componentWillMount() {
         this.onOpenGallery(this.state.elementID)
     }
+    
 
     onOpenGallery = (elementID) => {
         this.setState({

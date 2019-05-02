@@ -68,6 +68,8 @@ export default class ElementScreen extends React.Component {
         //this._getList()
     }
 
+   
+
     toggleSwitch = (value) => {
         this.setState({ switchValue: value })
         console.log('Switch is: ' + value)

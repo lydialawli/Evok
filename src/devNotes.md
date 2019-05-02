@@ -35,11 +35,13 @@ WHAT DO I NEED TO MAKE THE TIMELINE WORK:
 - [x] fix Gallery screen
 - [ ] make timeline date work
 - [ ] make sure switching screens works well
+- [ ] improve Camera Screen 
 - [x] make element screen header visible + tabs too
 - [ ] add drawer to SettingScreen (create setting screen with one button (switch))
 - [x] make element card items display in row - fix error
 - [ ] fix timeline separator bug
-- [ ] add go to Camera button
+- [x] add go to Camera button
+- [ ] make sure when created/deleting images will update when navigating through screens (use componentDidMount)
 
 
 
