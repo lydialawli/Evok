@@ -17,7 +17,6 @@ export default class EvokCamera extends React.Component {
         type: 'back',
         flashMode: 'off',
         ratio: '16:9',
-        lastImagePath: '',
         lastPicOpacity: 0.5,
     }
 
@@ -31,11 +30,6 @@ export default class EvokCamera extends React.Component {
         this.setState({
             imageHistory: newEvokFileSystem.getElementObj(elementID).imageHistory,
         })
-        if (this.state.lastImageUri != '') {
-            this.setState({
-                lastImageFullPath: newEvokFileSystem.getImagePath(this.state.lastImageUri)
-            })
-        }
     }
 
     takePicture = async () => {
@@ -96,15 +90,16 @@ export default class EvokCamera extends React.Component {
 
     getOnionSkin = () => {
         console.log('......',this.props.lastImageUri)
-        if (this.props.lastImageUri == '') {
+        if (!this.props.lastImageUri) {
             console.log('no image for onionskin yet')
         }
         else {
+            let fullPath = newEvokFileSystem.getImagePath(this.props.lastImageUri)
             return (
                 <ImageBackground
                     style={{ width: '100%', height: '100%', justifyContent: 'center', opacity: this.state.lastPicOpacity, position: 'absolute' }}
                     resizeMode="contain"
-                    source={{ uri: this.state.lastImageFullPath }}>
+                    source={{ uri: fullPath }}>
                 </ImageBackground>
             )
         }

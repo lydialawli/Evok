@@ -45,7 +45,6 @@ export default class GalleryScreen extends React.Component {
         imageHistory: {},
         modalVisible: false,
         selectedImageToPreview: '',
-        lastImageUri: ''
     }
 
     async componentWillMount() {
@@ -147,19 +146,15 @@ export default class GalleryScreen extends React.Component {
     }
 
     getLastImage = () => {
-        console.log('>>>', this.state.imageHistory[5].uri)
         if (this.state.imageHistory.length > 0) {
-            let uri = this.state.imageHistory[this.state.imageHistory.length - 1].uri
-            console.log('>>>', uri)
-            this.setState({
-                lastImageUri: uri
-            })
+            console.log('>>>', this.state.imageHistory[5].uri)
+            return this.state.imageHistory[this.state.imageHistory.length - 1].uri
         }
     }
 
     navigateToCamera = () => {
         //console.log('camera pressed')
-        this.props.navigation.navigate('Camera', { elementID: this.state.elementID, lastImageUri: this.state.lastImageUri })
+        this.props.navigation.navigate('Camera', { elementID: this.state.elementID, lastImageUri: this.getLastImage() })
 
     }
 
