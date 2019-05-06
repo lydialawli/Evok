@@ -142,7 +142,7 @@ newEvokFileSystem.deleteImageFromFileSystem = (fileUri) => {
 
 }
 
-newEvokFileSystem.deleteImage = (fileUri, i, elementID) => {
+newEvokFileSystem.deleteImage = (fileUri, i, elementID, callback) => {
 
     newEvokFileSystem.deleteImageFromFileSystem(fileUri)
 
@@ -152,7 +152,7 @@ newEvokFileSystem.deleteImage = (fileUri, i, elementID) => {
     console.log('new element Index>', elementIndex)
 
     updateJsonFromElementIndexObj(elementIndex, readImagesDirectory)
-
+   callback(elementID)
 }
 
 newEvokFileSystem.getElementObj = (elementID) => {

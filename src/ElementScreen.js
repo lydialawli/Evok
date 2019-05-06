@@ -68,7 +68,10 @@ export default class ElementScreen extends React.Component {
         //this._getList()
     }
 
-   
+    async componentDidMount() {
+        this.onOpenedElementScreen(this.state.elementID)
+        //this._getList()
+    }
 
     toggleSwitch = (value) => {
         this.setState({ switchValue: value })

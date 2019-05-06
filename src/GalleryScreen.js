@@ -39,18 +39,23 @@ export default class GalleryScreen extends React.Component {
         }
     }
 
+    async componentWillMount() {
+        this.onOpenGallery(this.state.elementID)
+    }
+
+    async componentDidMount() {
+        this.onOpenGallery(this.state.elementID)
+    }
+    
+
     state = {
         elementID: this.props.navigation.state.params.elementID,
+        elementName: this.props.navigation.state.params.elementName,
         elementObj: {},
         imageHistory: {},
         modalVisible: false,
         selectedImageToPreview: '',
     }
-
-    async componentWillMount() {
-        this.onOpenGallery(this.state.elementID)
-    }
-    
 
     onOpenGallery = (elementID) => {
         this.setState({
@@ -93,7 +98,7 @@ export default class GalleryScreen extends React.Component {
             'Are you sure?',
             [
                 { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
-                { text: 'OK', onPress: () => { newEvokFileSystem.deleteImage(imageObj.uri, i, this.state.elementID), this.onOpenGallery(this.state.elementID) } }
+                { text: 'OK', onPress: () => { newEvokFileSystem.deleteImage(imageObj.uri, i, this.state.elementID,this.onOpenGallery) } }
             ],
             { cancelable: false }
         )
@@ -135,9 +140,9 @@ export default class GalleryScreen extends React.Component {
 
     }
 
-    goToCameraButton = () => {
+    goToCameraButton = (state) => {
         return (
-            <TouchableOpacity onPress={this.navigateToCamera}>
+            <TouchableOpacity onPress={()=>{this.props.navigation.navigate('Camera', { elementID: this.state.elementID, elementName:this.state.elementName, goBackKey: state.key })}}>
                 <Ionicons name="ios-add-circle"
                     size={50}
                     style={{ alignSelf: 'center', justifyContent: 'center', padding: 20 }}
@@ -155,17 +160,17 @@ export default class GalleryScreen extends React.Component {
 
     navigateToCamera = () => {
         //console.log('camera pressed')
-        this.props.navigation.navigate('Camera', { elementID: this.state.elementID,})
+        this.props.navigation.navigate('Camera', { elementID: this.state.elementID, elementName:this.state.elementName })
 
     }
 
 
     render() {
 
-        const { navigate } = this.props.navigation
+        const { state, navigate } = this.props.navigation
         let images = this.getImagesPaths()
         let fullImage = this.getFullImageView(this.state.selectedImageToPreview)
-        let goToCamera = this.goToCameraButton()
+        let goToCamera = this.goToCameraButton(state)
 
         console.log("Gallery mode")
         return (

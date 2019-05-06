@@ -25,6 +25,7 @@ export default class CameraScreen extends React.Component {
         this.setState({
             elementID: ID,
             imageHistory: newEvokFileSystem.getElementObj(ID).imageHistory,
+            
         })
     }
 
@@ -41,13 +42,21 @@ export default class CameraScreen extends React.Component {
     }
 
     render() {
-        const { navigate } = this.props.navigation
+        const { state, goBack, navigate } = this.props.navigation
+        const params = state.params || {}
         console.log("Camera mode")
         let lastImageUri = this.getLastImage()
 
         return (
             <View style={evokStyles.camScreenView}>
                 <EvokCamera elementID={this.state.elementID} lastImageUri={lastImageUri} ></EvokCamera>
+                <Ionicons
+                name="md-settings"
+                size={30}
+                color="white"
+                style={{ paddingRight: 20 }}
+                onPress={() => goBack(params.goBackKey)}
+            ></Ionicons>
             </View>
         )
     }
